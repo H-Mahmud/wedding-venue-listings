@@ -35,7 +35,7 @@ class WVL_Seller_Account
     {
 
         ob_start();
-        include_once WVl_PLUGIN_DIR . 'view/login.php';
+        include_once WVL_PLUGIN_DIR . 'view/login.php';
         return ob_get_clean();
     }
 
@@ -45,7 +45,7 @@ class WVL_Seller_Account
     {
 
         ob_start();
-        include_once WVl_PLUGIN_DIR . 'view/register.php';
+        include_once WVL_PLUGIN_DIR . 'view/register.php';
         return ob_get_clean();
     }
 
@@ -55,7 +55,7 @@ class WVL_Seller_Account
     {
 
         ob_start();
-        include_once WVl_PLUGIN_DIR . 'view/forgot-password.php';
+        include_once WVL_PLUGIN_DIR . 'view/forgot-password.php';
 
         return ob_get_clean();
     }
@@ -81,7 +81,7 @@ class WVL_Seller_Account
 
         // Display the reset password form
         ob_start();
-        include_once WVl_PLUGIN_DIR . 'view/reset-password.php';
+        include_once WVL_PLUGIN_DIR . 'view/reset-password.php';
         return ob_get_clean();
     }
 
@@ -90,7 +90,7 @@ class WVL_Seller_Account
     {
 
         ob_start();
-        include_once WVl_PLUGIN_DIR . 'view/dashboard.php';
+        include_once WVL_PLUGIN_DIR . 'view/dashboard.php';
         return ob_get_clean();
     }
 
