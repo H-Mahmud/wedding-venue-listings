@@ -14,3 +14,8 @@
  * Domain Path:       /languages
  */
 defined('ABSPATH') || exit;
+
+// Define plugin constants
+defined('WVl_PLUGIN_FILE') || define('WVl_PLUGIN_FILE', __FILE__);
+defined('WVl_PLUGIN_DIR') || define('WVl_PLUGIN_DIR', plugin_dir_path(__FILE__));
+defined('WVl_PLUGIN_URL') || define('WVl_PLUGIN_URL', plugin_dir_url(__FILE__));
