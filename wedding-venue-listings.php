@@ -22,3 +22,4 @@ defined('WVl_PLUGIN_URL') || define('WVl_PLUGIN_URL', plugin_dir_url(__FILE__));
 
 // dependencies
 require_once WVl_PLUGIN_DIR . 'includes/class-account.php';
+require_once WVl_PLUGIN_DIR . 'includes/class-venue.php';
