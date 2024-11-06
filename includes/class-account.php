@@ -25,6 +25,7 @@ class WVL_Seller_Account
         add_shortcode('wvl-register', array($this, 'register_form_shortcode'));
         add_shortcode('wvl-forgot-password', array($this, 'forgot_password_form_shortcode'));
         add_shortcode('wvl-reset-password', array($this, 'reset_password_form_shortcode'));
+        add_shortcode('wvl-dashboard', array($this, 'dashboard_shortcode'));
     }
 
 
@@ -81,6 +82,15 @@ class WVL_Seller_Account
         // Display the reset password form
         ob_start();
         include_once WVl_PLUGIN_DIR . 'view/reset-password.php';
+        return ob_get_clean();
+    }
+
+
+    public function dashboard_shortcode()
+    {
+
+        ob_start();
+        include_once WVl_PLUGIN_DIR . 'view/dashboard.php';
         return ob_get_clean();
     }
 
