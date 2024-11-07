@@ -26,6 +26,8 @@ class WVL_Seller_Account
         add_shortcode('wvl-forgot-password', array($this, 'forgot_password_form_shortcode'));
         add_shortcode('wvl-reset-password', array($this, 'reset_password_form_shortcode'));
         add_shortcode('wvl-dashboard', array($this, 'dashboard_shortcode'));
+
+        add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'));
     }
 
 
@@ -94,6 +96,12 @@ class WVL_Seller_Account
         return ob_get_clean();
     }
 
+
+
+    public function enqueue_scripts()
+    {
+        wp_enqueue_script('main.bundle', WVL_PLUGIN_URL . '/dist/main.bundle.js', array('jquery'), '1.0', true);
+    }
 
 
     /**
