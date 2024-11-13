@@ -23,37 +23,43 @@ class WVL_Venue
     private final function __construct()
     {
         add_action('init', array($this, 'register_venue_post_type'));
+        add_action('init', array($this, 'create_venue_type_taxonomy'), 0);
+        add_action('init', array($this, 'create_venue_service_taxonomy'), 0);
+        add_action('init', array($this, 'create_venue_setting_taxonomy'), 0);
     }
 
-
-
+    /**
+     * Registers the 'venue' post type.
+     *
+     * @since 0.1.0
+     */
     public function register_venue_post_type()
     {
         $labels = array(
-            'name'                  => _x('Venues', 'Post type general name', 'textdomain'),
-            'singular_name'         => _x('Venue', 'Post type singular name', 'textdomain'),
-            'menu_name'             => _x('Venues', 'Admin Menu text', 'textdomain'),
-            'name_admin_bar'        => _x('Venue', 'Add New on Toolbar', 'textdomain'),
-            'add_new'               => __('Add New', 'textdomain'),
-            'add_new_item'          => __('Add New Venue', 'textdomain'),
-            'new_item'              => __('New Venue', 'textdomain'),
-            'edit_item'             => __('Edit Venue', 'textdomain'),
-            'view_item'             => __('View Venue', 'textdomain'),
-            'all_items'             => __('All Venues', 'textdomain'),
-            'search_items'          => __('Search Venues', 'textdomain'),
-            'parent_item_colon'     => __('Parent Venues:', 'textdomain'),
-            'not_found'             => __('No venues found.', 'textdomain'),
-            'not_found_in_trash'    => __('No venues found in Trash.', 'textdomain'),
-            'featured_image'        => _x('Venue Cover Image', 'Overrides the “Featured Image” phrase for this post type.', 'textdomain'),
-            'set_featured_image'    => _x('Set cover image', 'Overrides the “Set featured image” phrase.', 'textdomain'),
-            'remove_featured_image' => _x('Remove cover image', 'Overrides the “Remove featured image” phrase.', 'textdomain'),
-            'use_featured_image'    => _x('Use as cover image', 'Overrides the “Use as featured image” phrase.', 'textdomain'),
-            'archives'              => _x('Venue archives', 'The post type archive label', 'textdomain'),
-            'insert_into_item'      => _x('Insert into venue', 'Overrides the “Insert into post” phrase.', 'textdomain'),
-            'uploaded_to_this_item' => _x('Uploaded to this venue', 'Overrides the “Uploaded to this post” phrase.', 'textdomain'),
-            'filter_items_list'     => _x('Filter venues list', 'Screen reader text for the filter links', 'textdomain'),
-            'items_list_navigation' => _x('Venues list navigation', 'Screen reader text for pagination', 'textdomain'),
-            'items_list'            => _x('Venues list', 'Screen reader text for the items list', 'textdomain'),
+            'name'                  => _x('Venues', 'Post type general name', 'wedding-venue-listings'),
+            'singular_name'         => _x('Venue', 'Post type singular name', 'wedding-venue-listings'),
+            'menu_name'             => _x('Venues', 'Admin Menu text', 'wedding-venue-listings'),
+            'name_admin_bar'        => _x('Venue', 'Add New on Toolbar', 'wedding-venue-listings'),
+            'add_new'               => __('Add New', 'wedding-venue-listings'),
+            'add_new_item'          => __('Add New Venue', 'wedding-venue-listings'),
+            'new_item'              => __('New Venue', 'wedding-venue-listings'),
+            'edit_item'             => __('Edit Venue', 'wedding-venue-listings'),
+            'view_item'             => __('View Venue', 'wedding-venue-listings'),
+            'all_items'             => __('All Venues', 'wedding-venue-listings'),
+            'search_items'          => __('Search Venues', 'wedding-venue-listings'),
+            'parent_item_colon'     => __('Parent Venues:', 'wedding-venue-listings'),
+            'not_found'             => __('No venues found.', 'wedding-venue-listings'),
+            'not_found_in_trash'    => __('No venues found in Trash.', 'wedding-venue-listings'),
+            'featured_image'        => _x('Venue Cover Image', 'Overrides the “Featured Image” phrase for this post type.', 'wedding-venue-listings'),
+            'set_featured_image'    => _x('Set cover image', 'Overrides the “Set featured image” phrase.', 'wedding-venue-listings'),
+            'remove_featured_image' => _x('Remove cover image', 'Overrides the “Remove featured image” phrase.', 'wedding-venue-listings'),
+            'use_featured_image'    => _x('Use as cover image', 'Overrides the “Use as featured image” phrase.', 'wedding-venue-listings'),
+            'archives'              => _x('Venue archives', 'The post type archive label', 'wedding-venue-listings'),
+            'insert_into_item'      => _x('Insert into venue', 'Overrides the “Insert into post” phrase.', 'wedding-venue-listings'),
+            'uploaded_to_this_item' => _x('Uploaded to this venue', 'Overrides the “Uploaded to this post” phrase.', 'wedding-venue-listings'),
+            'filter_items_list'     => _x('Filter venues list', 'Screen reader text for the filter links', 'wedding-venue-listings'),
+            'items_list_navigation' => _x('Venues list navigation', 'Screen reader text for pagination', 'wedding-venue-listings'),
+            'items_list'            => _x('Venues list', 'Screen reader text for the items list', 'wedding-venue-listings'),
         );
 
         $args = array(
@@ -76,6 +82,103 @@ class WVL_Venue
 
         register_post_type('venue', $args);
     }
+
+    /**
+     * Registers the 'venue_type' taxonomy for the 'venue' post type.
+     *
+     * @since 0.1.0
+     */
+    public  function create_venue_type_taxonomy()
+    {
+        $labels = array(
+            'name'              => _x('Venue Types', 'taxonomy general name', 'wedding-venue-listings'),
+            'singular_name'     => _x('Venue Type', 'taxonomy singular name', 'wedding-venue-listings'),
+            'search_items'      => __('Search Venue Types', 'wedding-venue-listings'),
+            'all_items'         => __('All Venue Types', 'wedding-venue-listings'),
+            'parent_item'       => null, // Remove parent item to disable hierarchy
+            'parent_item_colon' => null,
+            'edit_item'         => __('Edit Venue Type', 'wedding-venue-listings'),
+            'update_item'       => __('Update Venue Type', 'wedding-venue-listings'),
+            'add_new_item'      => __('Add New Venue Type', 'wedding-venue-listings'),
+            'new_item_name'     => __('New Venue Type Name', 'wedding-venue-listings'),
+            'menu_name'         => __('Venue Types', 'wedding-venue-listings'),
+        );
+
+        $args = array(
+            'hierarchical'      => false,
+            'labels'            => $labels,
+            'show_ui'           => true,
+            'show_admin_column' => true,
+            'query_var'         => true,
+            'rewrite'           => array('slug' => 'venue-type'),
+        );
+        register_taxonomy('venue_type', array('venue'), $args);
+    }
+
+    /**
+     * Registers the 'venue_service' taxonomy for the 'venue' post type.
+     *
+     * @since 0.1.0
+     */
+    public function create_venue_service_taxonomy()
+    {
+        $labels = array(
+            'name'              => _x('Venue Services', 'taxonomy general name', 'wedding-venue-listings'),
+            'singular_name'     => _x('Venue Service', 'taxonomy singular name', 'wedding-venue-listings'),
+            'search_items'      => __('Search Venue Services', 'wedding-venue-listings'),
+            'all_items'         => __('All Venue Services', 'wedding-venue-listings'),
+            'parent_item'       => null, // Remove parent item to disable hierarchy
+            'parent_item_colon' => null,
+            'edit_item'         => __('Edit Venue Service', 'wedding-venue-listings'),
+            'update_item'       => __('Update Venue Service', 'wedding-venue-listings'),
+            'add_new_item'      => __('Add New Venue Service', 'wedding-venue-listings'),
+            'new_item_name'     => __('New Venue Service Name', 'wedding-venue-listings'),
+            'menu_name'         => __('Venue Services', 'wedding-venue-listings'),
+        );
+
+        $args = array(
+            'hierarchical'      => false,
+            'labels'            => $labels,
+            'show_ui'           => true,
+            'show_admin_column' => true,
+            'query_var'         => true,
+            'rewrite'           => array('slug' => 'venue-type'),
+        );
+        register_taxonomy('venue_service', array('venue'), $args);
+    }
+
+    /**
+     * Registers the 'venue_setting' taxonomy for the 'venue' post type.
+     *
+     * @since 0.1.0
+     */
+    public function create_venue_setting_taxonomy()
+    {
+        $labels = array(
+            'name'              => _x('Venue Settings', 'taxonomy general name', 'wedding-venue-listings'),
+            'singular_name'     => _x('Venue Setting', 'taxonomy singular name', 'wedding-venue-listings'),
+            'search_items'      => __('Search Venue Settings', 'wedding-venue-listings'),
+            'all_items'         => __('All Venue Settings', 'wedding-venue-listings'),
+            'parent_item'       => null, // Remove parent item to disable hierarchy
+            'parent_item_colon' => null,
+            'edit_item'         => __('Edit Venue Setting', 'wedding-venue-listings'),
+            'update_item'       => __('Update Venue Setting', 'wedding-venue-listings'),
+            'add_new_item'      => __('Add New Venue Setting', 'wedding-venue-listings'),
+            'new_item_name'     => __('New Venue Setting Name', 'wedding-venue-listings'),
+            'menu_name'         => __('Venue Settings', 'wedding-venue-listings'),
+        );
+
+        $args = array(
+            'hierarchical'      => false,
+            'labels'            => $labels,
+            'show_ui'           => true,
+            'show_admin_column' => true,
+            'query_var'         => true,
+            'rewrite'           => array('slug' => 'venue-type'),
+        );
+        register_taxonomy('venue_setting', array('venue'), $args);
+    }
+
 
 
     /**
