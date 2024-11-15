@@ -23,6 +23,7 @@ defined('WVL_PLUGIN_URL') || define('WVL_PLUGIN_URL', plugin_dir_url(__FILE__));
 // dependencies
 require_once WVL_PLUGIN_DIR . 'includes/class-account.php';
 require_once WVL_PLUGIN_DIR . 'includes/class-venue.php';
+require_once WVL_PLUGIN_DIR . 'includes/class-listing.php';
 
 
 // echo '<!-- Modal Trigger -->
