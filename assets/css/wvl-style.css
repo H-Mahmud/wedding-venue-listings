@@ -1,0 +1,39 @@
+.wvl-dashboard .dashboard-wrapper {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    display: flex;
+}
+
+.wvl-dashboard .dashboard-wrapper .sidebar {
+    width: 320px;
+    border: 1px;
+}
+
+.wvl-dashboard .dashboard-wrapper .sidebar ul {
+    list-style-type: none;
+    border: 1px solid #d3d3d3;
+}
+
+.wvl-dashboard .dashboard-wrapper .sidebar ul li {
+    padding: 8px 12px;
+    border-bottom: 1px solid #d3d3d3;
+}
+
+.wvl-dashboard .dashboard-wrapper .sidebar ul li:last-child {
+    border: none;
+}
+
+.wvl-dashboard .dashboard-wrapper .sidebar ul li a {
+    display: inline-block;
+    text-decoration: none;
+    color: var(--pico-color);
+}
+
+.wvl-dashboard .dashboard-wrapper .sidebar ul li.logout button {
+    width: 100%;
+}
+
+.wvl-dashboard .dashboard-wrapper .content {
+    width: calc(100% - 320px);
+    padding-left: 12px;
+}

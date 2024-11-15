@@ -1,5 +1,5 @@
 <div class="dashboard-wrapper">
-    <div class="dashboard-sidebar">
+    <div class="sidebar">
         <ul>
             <li>
                 <a href="<?php echo site_url('dashboard'); ?>">Dashboard</a>
@@ -16,12 +16,12 @@
             <li>
                 <a href="<?php echo site_url('dashboard/account'); ?>">Account</a>
             </li>
-            <li>
-                <a href="<?php echo site_url('logout'); ?>">Logout</a>
+            <li class="logout">
+                <button><a href="<?php echo site_url('logout'); ?>"><?php _e('Logout', 'wedding-venue-listings'); ?></a></button>
             </li>
         </ul>
     </div>
-    <div class="dashboard-content">
+    <div class="content">
         <?php
         $subpage = get_query_var('subpage');
 
