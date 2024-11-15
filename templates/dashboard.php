@@ -18,6 +18,7 @@
             if (!count($post_ids) || (get_post_status($post_ids[0]) !== 'publish')):
                 require_once WVL_PLUGIN_DIR . 'template-parts/venue-application.php';
             else:
+                $venue_id = $post_ids[0];
                 require_once WVL_PLUGIN_DIR . 'template-parts/dashboard-content.php';
             endif;
             ?>
