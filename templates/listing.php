@@ -77,14 +77,44 @@ get_header(); ?>
         </div>
 
         <div class="wvl-content">
+            <?php
 
-        </div>
-        <?php while (have_posts()) : the_post(); ?>
+            $args = array(
+                'post_type' => 'venue',
+                'posts_per_page' => -1,
+            );
+            $query = new WP_Query($args);
+            ?>
 
-            <?php get_template_part('template-parts/content', 'page'); ?>
+            <p class="total-result"><?php echo $query->found_posts; ?> Results</p>
+            <div class="wvl-list">
+                <?php
+                while ($query->have_posts()) {
+                    $query->the_post(); ?>
 
-        <?php endwhile; // End of the loop. 
-        ?>
+                    <div class="wvl-list-item">
+                        <div class="thumbnail">
+                            <img src="<?php echo get_the_post_thumbnail_url(); ?>" alt="Venue Image">
+                        </div>
+                        <div class="wvl-list-item-content">
+                            <h3 class="wvl-list-item-title">
+                                <a href="<?php the_permalink(); ?>">Wedding place name goes here</a>
+                            </h3>
+                            <p>
+                                <span>Location Icon</span>
+                                1901 Thornridge Cir. Shiloh, Hawaii 81063
+                            </p>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a </p>
+                            <div class="meta">
+                                <p>Price Range: $1000 - $5000</p>
+                                <p>Rating: 4.7</p>
+                            </div>
+                            <button>Request a Pricing</button>
+                        <?php
+                    }
+                        ?>
+                        </div>
+                    </div>
     </main>
 </div>
 
