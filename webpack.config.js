@@ -47,7 +47,9 @@ module.exports = {
             },
         ],
     },
-
+    resolve: {
+        extensions: [".jsx", ".js"],
+    },
     plugins: [
         ...(isProduction ? [new MiniCssExtractPlugin({ filename: "styles.min.css" })] : []),
     ],
