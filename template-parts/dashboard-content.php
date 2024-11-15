@@ -14,6 +14,9 @@
                 <a href="<?php echo site_url('dashboard/availability'); ?>">Availability</a>
             </li>
             <li>
+                <a href="<?php echo site_url('dashboard/analytics'); ?>">Analytics</a>
+            </li>
+            <li>
                 <a href="<?php echo site_url('dashboard/account'); ?>">Account</a>
             </li>
             <li class="logout">
@@ -41,6 +44,10 @@
 
                 case 'account':
                     require_once WVL_PLUGIN_DIR . '/template-parts/dashboard/account.php';
+                    break;
+
+                case 'analytics':
+                    require_once WVL_PLUGIN_DIR . '/template-parts/dashboard/analytics.php';
                     break;
 
                 default:
