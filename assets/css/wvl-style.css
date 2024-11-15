@@ -37,3 +37,9 @@
     width: calc(100% - 320px);
     padding-left: 12px;
 }
+
+.wvl-field input,
+.wvl-field select {
+    width: 100%;
+    margin-bottom: 1rem;
+}

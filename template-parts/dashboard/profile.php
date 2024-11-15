@@ -13,34 +13,6 @@
     </div>
 
     <div class="wvl-field">
-        <label for="location">
-            Location <br>
-            <input type="text" name="location" id="location">
-        </label>
-    </div>
-
-    <div class="wvl-field">
-        <label for="phone">
-            Phone <br>
-            <input type="number" name="phone" id="phone">
-        </label>
-    </div>
-
-    <div class="wvl-field">
-        <label for="email">
-            Email <br>
-            <input type="text" name="email" id="email">
-        </label>
-    </div>
-
-    <div class="wvl-field">
-        <label for="description">
-            Description
-            <textarea name="description" id=""></textarea>
-        </label>
-    </div>
-
-    <div class="wvl-field">
         <label for="venue_type">
             Venue Type <br>
             <select name="venue_type" id="venue_type">
@@ -89,6 +61,34 @@
             echo '<option name="' . $venue_setting->slug . '">' . $venue_setting->name . '</option>';
         }; ?>
         </select>
+    </div>
+
+    <div class="wvl-field">
+        <label for="phone">
+            Phone <br>
+            <input type="number" name="phone" id="phone">
+        </label>
+    </div>
+
+    <div class="wvl-field">
+        <label for="email">
+            Email <br>
+            <input type="text" name="email" id="email">
+        </label>
+    </div>
+
+    <div class="wvl-field">
+        <label for="description">
+            Description
+            <textarea name="description" id=""></textarea>
+        </label>
+    </div>
+
+    <div class="wvl-field">
+        <label for="location">
+            Location <br>
+            <input type="text" name="location" id="location">
+        </label>
     </div>
 
     <button type="submit">Submit</button>
