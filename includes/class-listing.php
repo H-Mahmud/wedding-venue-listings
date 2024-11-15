@@ -24,6 +24,7 @@ class WVL_Listing
     {
         add_filter('page_template', array($this, 'listing_page_template'));
         add_filter('template_include', array($this, 'venue_single_template'));
+        add_action('init', array($this, 'update_venue_profile'));
     }
 
 
@@ -57,6 +58,14 @@ class WVL_Listing
             }
         }
         return $template;
+    }
+
+    public function update_venue_profile()
+    {
+        if (!isset($_POST['action']) || $_POST['action'] != 'venue-profile-update-action' || !is_user_logged_in()) return;
+
+        var_dump(wvl_get_venue_id());
+        // var_dump($_POST);
     }
 
     /**

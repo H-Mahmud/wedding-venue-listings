@@ -1,4 +1,5 @@
 <form method="post">
+    <input type="hidden" name="action" value="venue-profile-update-action">
     <div class="wvl-cover-photo-field">
         <label for="cover_photo">
             Cover Photo
