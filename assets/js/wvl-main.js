@@ -1,11 +1,12 @@
 jQuery(document).ready(function ($) {
-    $('#imageUpload').on('change', function () {
+    $('#uploadCoverPhoto').on('change', function () {
         var file = this.files[0];
         if (file) {
             var reader = new FileReader();
-
             reader.onload = function (e) {
-                $('#previewImage').attr('src', e.target.result).show();
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                $('label[for="uploadCoverPhoto"]').html(img);
             };
 
             reader.readAsDataURL(file);
