@@ -8,6 +8,9 @@
                 <a href="<?php echo site_url('dashboard/profile'); ?>">Profile</a>
             </li>
             <li>
+                <a href="<?php echo site_url('dashboard/social-accounts'); ?>">Social Accounts</a>
+            </li>
+            <li>
                 <a href="<?php echo site_url('dashboard/gallery'); ?>">Gallery</a>
             </li>
             <li>
@@ -32,6 +35,10 @@
             switch ($subpage) {
                 case 'profile':
                     require_once WVL_PLUGIN_DIR . '/template-parts/dashboard/profile.php';
+                    break;
+
+                case 'social-accounts':
+                    require_once WVL_PLUGIN_DIR . '/template-parts/dashboard/social-accounts.php';
                     break;
 
                 case 'gallery':
