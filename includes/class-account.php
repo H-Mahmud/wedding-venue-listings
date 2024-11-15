@@ -100,7 +100,7 @@ class WVL_Seller_Account
 
     public function enqueue_scripts()
     {
-        wp_enqueue_script('main.bundle', WVL_PLUGIN_URL . '/dist/main.bundle.js', array('jquery'), '1.0', true);
+        wp_enqueue_script('main.bundle', WVL_PLUGIN_URL . '/assets/dist/main.bundle.js', array('jquery'), '1.0', true);
     }
 
 

@@ -23,3 +23,18 @@ defined('WVL_PLUGIN_URL') || define('WVL_PLUGIN_URL', plugin_dir_url(__FILE__));
 // dependencies
 require_once WVL_PLUGIN_DIR . 'includes/class-account.php';
 require_once WVL_PLUGIN_DIR . 'includes/class-venue.php';
+
+
+// echo '<!-- Modal Trigger -->
+//   <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
+
+//   <!-- Modal Structure -->
+//   <div id="modal1" class="modal">
+//     <div class="modal-content">
+//       <h4>Modal Header</h4>
+//       <p>A bunch of text</p>
+//     </div>
+//     <div class="modal-footer">
+//       <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+//     </div>
+//   </div>';

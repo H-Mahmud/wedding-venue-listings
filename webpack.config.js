@@ -9,7 +9,7 @@ module.exports = {
     entry: "./src/index.js",
     output: {
         filename: isProduction ? "main.bundle.min.js" : "main.bundle.js",
-        path: path.resolve(__dirname, "dist"),
+        path: path.resolve(__dirname, "assets/dist"),
         clean: true,
     },
 
@@ -17,6 +17,13 @@ module.exports = {
 
     module: {
         rules: [
+            {
+                test: /\.(?:js|mjs|cjs|jsx)$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: "babel-loader",
+                },
+            },
             {
                 test: /\.s[ac]ss$/i,
                 use: [
@@ -59,47 +66,3 @@ module.exports = {
 
     devtool: isProduction ? "source-map" : "eval-source-map",
 };
-
-
-/*
-
-const path = require("path");
-
-module.exports = {
-    entry: "./src/index.js",
-    output: {
-        filename: "main.bundle.js",
-        path: path.resolve(__dirname, "dist"),
-    },
-
-    module: {
-        rules: [
-            {
-                test: /\.s[ac]ss$/i,
-                use: [
-                    {
-                        loader: 'style-loader',
-                    },
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            sourceMap: true,
-                        },
-                    },
-                    {
-                        loader: 'sass-loader',
-                        options: {
-                            sourceMap: true,
-                            sassOptions: {
-                                quietDeps: true,
-                            },
-                        },
-                    },
-                ],
-            },
-        ],
-
-    },
-
-};
-*/
