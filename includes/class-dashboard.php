@@ -22,6 +22,8 @@ class WVL_Dashboard
     private final function __construct()
     {
         add_filter('page_template', array($this, 'dashboard_page_template'));
+        add_action('init', array($this, 'dashboard_rewrite_rules'));
+        add_filter('query_vars', array($this, 'dashboard_query_vars'));
     }
 
 
@@ -32,6 +34,42 @@ class WVL_Dashboard
         }
         return $page_template;
     }
+
+
+
+    /**
+     * Adds custom rewrite rules for the dashboard subpages.
+     *
+     * This function registers a rewrite rule to handle URLs of the form
+     * 'dashboard/{subpage}', mapping them to the 'dashboard' page with the
+     * 'subpage' query variable set to the specified subpage value.
+     *
+     * The rewrite rule is added to the top of the rules list, ensuring that
+     * it takes precedence over other rules.
+     */
+    public function dashboard_rewrite_rules()
+    {
+        add_rewrite_rule('^dashboard/([^/]*)/?', 'index.php?pagename=dashboard&subpage=$matches[1]', 'top');
+    }
+
+
+    /**
+     * Add 'subpage' as a query variable.
+     *
+     * The 'subpage' query variable is used to identify the sub-page of the
+     * Dashboard page. For example, 'dashboard/profile' will use 'profile' as
+     * the value of 'subpage'.
+     *
+     * @param array $vars The list of query variables.
+     *
+     * @return array The updated list of query variables.
+     */
+    public function dashboard_query_vars($vars)
+    {
+        $vars[] = 'subpage';
+        return $vars;
+    }
+
 
     /**
      * Gets the singleton instance of the class.
