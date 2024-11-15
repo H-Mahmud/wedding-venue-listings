@@ -1,3 +1,19 @@
+<form id="uploadForm">
+    <input type="file" id="imageUpload" accept="image/*" />
+    <img id="previewImage" style="display:none; width: 200px; height: auto;" alt="Image Preview" />
+
+    <div id="progressContainer" style="display:none; margin-top: 10px;">
+        <div style="width: 100%; background-color: #f3f3f3; border-radius: 5px; overflow: hidden;">
+            <div id="progressBar" style="width: 0; height: 20px; background-color: #4caf50;"></div>
+        </div>
+        <span id="progressText" style="display: block; text-align: center; margin-top: 5px;">0%</span>
+    </div>
+
+    <button type="submit">Upload</button>
+</form>
+
+
+
 <form method="post">
     <input type="hidden" name="action" value="venue-profile-update-action">
     <div class="wvl-cover-photo-field">

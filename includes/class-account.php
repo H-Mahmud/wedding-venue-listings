@@ -101,7 +101,12 @@ class WVL_Seller_Account
     public function enqueue_scripts()
     {
         wp_enqueue_style('wvl-style', WVL_PLUGIN_URL . '/assets/css/wvl-style.css');
-        wp_enqueue_script('main.bundle', WVL_PLUGIN_URL . '/assets/dist/main.bundle.js', array('jquery'), '1.0', true);
+        wp_enqueue_script('wvl-main', WVL_PLUGIN_URL . '/assets/js/wvl-main.js', array('jquery'), '1.0', true);
+
+        wp_localize_script('wvl-main', 'ajax_object', [
+            'ajax_url' => admin_url('admin-ajax.php'),
+            'ajax_nonce' => wp_create_nonce('upload_image_nonce')
+        ]);
     }
 
 
@@ -119,8 +124,45 @@ class WVL_Seller_Account
     }
 }
 WVL_Seller_Account::get_instance();
-// Login, Register, Forgot Password
 
-// Category, location, bio, thumbnail, gallery, videos, and social media
+add_action('wp_ajax_upload_image', function () {
+    check_ajax_referer('upload_image_nonce', 'security');
+    if (empty($_FILES['file'])) {
+        wp_send_json_error('No file uploaded.');
+    }
 
-// Manage booking availability through a calender.
+    if (!is_user_logged_in()) {
+        wp_send_json_error('You have no permission.');
+    }
+
+    $file = $_FILES['file'];
+    $uploaded = wp_handle_upload($file, ['test_form' => false]);
+    $parent_id = wvl_get_venue_id();
+
+    if (isset($uploaded['error'])) {
+        wp_send_json_error($uploaded['error']);
+    }
+
+    $attachment_id = wp_insert_attachment([
+        'guid'           => $uploaded['url'],
+        'post_mime_type' => $uploaded['type'],
+        'post_title'     => sanitize_file_name($file['name']),
+        'post_content'   => '',
+        'post_status'    => 'inherit',
+        'post_parent'    => $parent_id,
+    ], $uploaded['file']);
+
+    if (is_wp_error($attachment_id) || !$attachment_id) {
+        wp_send_json_error('Failed to create attachment.');
+    }
+
+    require_once ABSPATH . 'wp-admin/includes/image.php';
+    $attach_data = wp_generate_attachment_metadata($attachment_id, $uploaded['file']);
+    wp_update_attachment_metadata($attachment_id, $attach_data);
+
+    wp_send_json_success([
+        'attachment_id' => $attachment_id,
+        'url'           => $uploaded['url'],
+        'parent_id'     => $parent_id,
+    ]);
+});
