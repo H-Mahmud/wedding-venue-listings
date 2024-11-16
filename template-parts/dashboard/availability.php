@@ -1820,7 +1820,7 @@ be a descendant of the grid when it is being dragged.
                 // header
                 header: {
                     left: 'title',
-                    center: 'month,agendaWeek,agendaDay',
+                    // center: 'month,agendaWeek,agendaDay',
                     right: 'today prev,next'
                 },
                 events: [{
