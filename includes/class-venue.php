@@ -26,6 +26,8 @@ class WVL_Venue
         add_action('init', array($this, 'create_venue_type_taxonomy'), 0);
         add_action('init', array($this, 'create_venue_service_taxonomy'), 0);
         add_action('init', array($this, 'create_venue_setting_taxonomy'), 0);
+
+        add_action('admin_enqueue_scripts', array($this, 'admin_scripts'));
     }
 
     /**
@@ -179,6 +181,13 @@ class WVL_Venue
         register_taxonomy('venue_setting', array('venue'), $args);
     }
 
+    public function admin_scripts()
+    {
+        if (is_admin()) {
+            wp_enqueue_script('wvl-admin', WVL_PLUGIN_URL . '/assets/admin/wvl-admin.js', [], '1.0', true);
+            wp_enqueue_style('wvl-admin', WVL_PLUGIN_URL . '/assets/admin/wvl-admin.css', [], '1.0');
+        }
+    }
 
 
     /**
@@ -196,3 +205,14 @@ class WVL_Venue
 }
 
 WVL_Venue::get_instance();
+
+
+function remove_post_and_venue_admin_menu()
+{
+    // Remove "Posts"
+    remove_menu_page('edit.php');
+
+    // Remove "Venue" (custom post type)
+    remove_menu_page('edit.php?post_type=venue');
+}
+// add_action('admin_menu', 'remove_post_and_venue_admin_menu', 999);

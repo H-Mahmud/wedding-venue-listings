@@ -1,0 +1,7 @@
+#menu-posts-venue a[href="post-new.php?post_type=venue"] {
+    display: none !important;
+}
+
+body.post-type-venue .page-title-action {
+    display: none !important;
+}
