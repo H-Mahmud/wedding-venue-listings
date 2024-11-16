@@ -61,3 +61,28 @@
 .wvl-cover-photo-field label .upload-icon {
     display: block;
 }
+
+
+.single-venue .cover-photo {
+    width: 100%;
+    min-height: 380px;
+    border-bottom: 2px solid #f2f2f2;
+}
+
+.single-venue main .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.single-venue main .header .links {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.single-venue main .header .links .social {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}

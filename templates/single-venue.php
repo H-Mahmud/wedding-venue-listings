@@ -1,15 +1,15 @@
 <?php get_header(); ?>
-<div id="primary" class="listings">
+<div id="primary" class="single-venue">
     <div class="cover-photo">
-        The Cover Photo
+        <!-- <img src="http://koumparos.local/wp-content/uploads/2024/11/মির্জা-গালিব.png" alt=""> -->
     </div>
     <main id="main" class="site-main site-container" role="main">
         <?php
         while (have_posts()) {
             the_post(); ?>
-            <header>
+            <div class="header">
                 <div class="entry">
-                    <?php the_title('<h1 class="entry-title">', '</h1>'); ?>
+                    <?php the_title('<h1 class="title">', '</h1>'); ?>
                     <div class="meta">
                         <div class="location"></div>
                         <div class="reviews"></div>
@@ -21,7 +21,7 @@
                     </ul>
                     <button>Contact Now</button>
                 </div>
-            </header>
+            </div>
 
             <div class="wvl-content">
                 <ul class="tabs">
