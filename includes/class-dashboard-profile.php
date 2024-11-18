@@ -20,6 +20,7 @@ class WVL_Dashboard_Profile
     private final function __construct()
     {
         add_action('wvl_dashboard', array($this, 'render_wvl_dashboard_menu'));
+        add_action('wp_ajax_upload_cover_photo', array($this, 'upload_cover_photo'));
     }
 
 
@@ -54,6 +55,61 @@ class WVL_Dashboard_Profile
         require_once WVL_PLUGIN_DIR . '/template-parts/dashboard/profile.php';
     }
 
+
+    /**
+     * Handles the AJAX request for uploading a cover photo for the current user's venue.
+     *
+     * @uses check_ajax_referer
+     * @uses wp_handle_upload
+     * @uses wp_insert_attachment
+     * @uses wp_update_attachment_metadata
+     * @uses wp_send_json_error
+     * @uses wp_send_json_success
+     *
+     * @return void
+     */
+    public function upload_cover_photo()
+    {
+        check_ajax_referer('upload_image_nonce', 'security');
+        if (empty($_FILES['file'])) {
+            wp_send_json_error('No file uploaded.');
+        }
+
+        if (!is_user_logged_in()) {
+            wp_send_json_error('You have no permission.');
+        }
+
+        $file = $_FILES['file'];
+        $uploaded = wp_handle_upload($file, ['test_form' => false]);
+        $parent_id = wvl_get_venue_id();
+
+        if (isset($uploaded['error'])) {
+            wp_send_json_error($uploaded['error']);
+        }
+
+        $attachment_id = wp_insert_attachment([
+            'guid'           => $uploaded['url'],
+            'post_mime_type' => $uploaded['type'],
+            'post_title'     => sanitize_file_name($file['name']),
+            'post_content'   => '',
+            'post_status'    => 'inherit',
+            'post_parent'    => $parent_id,
+        ], $uploaded['file']);
+
+        if (is_wp_error($attachment_id) || !$attachment_id) {
+            wp_send_json_error('Failed to create attachment.');
+        }
+
+        require_once ABSPATH . 'wp-admin/includes/image.php';
+        $attach_data = wp_generate_attachment_metadata($attachment_id, $uploaded['file']);
+        wp_update_attachment_metadata($attachment_id, $attach_data);
+
+        wp_send_json_success([
+            'attachment_id' => $attachment_id,
+            'url'           => $uploaded['url'],
+            'parent_id'     => $parent_id,
+        ]);
+    }
 
     /**
      * Gets the singleton instance of the class.

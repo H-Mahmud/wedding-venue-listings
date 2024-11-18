@@ -36,6 +36,11 @@ class WVL_Dashboard
             wp_enqueue_style('wvl-style', WVL_PLUGIN_URL . '/assets/dist/style.min.css', array(), '1.0');
             wp_enqueue_script('wvl-main', WVL_PLUGIN_URL . '/assets/dist/main.bundle.min.js', array('jquery'), '1.0', true);
         }
+
+        wp_localize_script('wvl-main', 'WVL_DATA', [
+            'ajax_url' => admin_url('admin-ajax.php'),
+            'ajax_nonce' => wp_create_nonce('upload_image_nonce')
+        ]);
     }
 
     /**
