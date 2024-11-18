@@ -25,23 +25,14 @@ module.exports = {
                 },
             },
             {
-                test: /\.s[ac]ss$/i,
+                test: /\.css$/i,
                 use: [
                     isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
                     {
                         loader: "css-loader",
-                        options: {
-                            sourceMap: !isProduction,
-                        },
                     },
                     {
-                        loader: "sass-loader",
-                        options: {
-                            sourceMap: !isProduction,
-                            sassOptions: {
-                                quietDeps: true,
-                            },
-                        },
+                        loader: "postcss-loader"
                     },
                 ],
             },
