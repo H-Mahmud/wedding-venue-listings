@@ -42,7 +42,7 @@ module.exports = {
         extensions: [".jsx", ".js"],
     },
     plugins: [
-        ...(isProduction ? [new MiniCssExtractPlugin({ filename: "styles.min.css" })] : []),
+        ...(isProduction ? [new MiniCssExtractPlugin({ filename: "style.min.css" })] : []),
     ],
 
     optimization: {

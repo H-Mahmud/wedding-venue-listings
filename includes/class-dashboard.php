@@ -21,11 +21,21 @@ class WVL_Dashboard
      */
     private final function __construct()
     {
+        add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'));
         add_filter('page_template', array($this, 'dashboard_page_template'));
         add_action('init', array($this, 'dashboard_rewrite_rules'));
         add_filter('query_vars', array($this, 'dashboard_query_vars'));
     }
 
+    public function enqueue_scripts()
+    {
+        if (defined('WVL_DEVELOPMENT') && WVL_DEVELOPMENT) {
+            wp_enqueue_script('wvl-main', WVL_PLUGIN_URL . '/assets/dist/main.bundle.js', array('jquery'), time(), true);
+        } else {
+            wp_enqueue_style('wvl-style', WVL_PLUGIN_URL . '/assets/dist/style.min.css', array(), '1.0');
+            wp_enqueue_script('wvl-main', WVL_PLUGIN_URL . '/assets/dist/main.bundle.min.js', array('jquery'), '1.0', true);
+        }
+    }
 
     public function dashboard_page_template($page_template)
     {
