@@ -21,10 +21,11 @@ class WVL_Dashboard
      */
     private final function __construct()
     {
-        add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'));
+        add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'), 1000);
         add_filter('page_template', array($this, 'dashboard_page_template'));
         add_action('init', array($this, 'dashboard_rewrite_rules'));
         add_filter('query_vars', array($this, 'dashboard_query_vars'));
+        add_action('wvl_dashboard', array($this,  'render_wvl_dashboard_menu'));
     }
 
     public function enqueue_scripts()
@@ -37,6 +38,16 @@ class WVL_Dashboard
         }
     }
 
+    /**
+     * Modifies the page template for the 'dashboard' page.
+     *
+     * If the current page is the 'dashboard' page, this function modifies the
+     * $page_template variable to point to the custom dashboard template
+     * located in the 'templates' directory of the plugin.
+     *
+     * @param string $page_template The current page template.
+     * @return string The modified page template.
+     */
     public function dashboard_page_template($page_template)
     {
         if (is_page('dashboard')) {
@@ -78,6 +89,61 @@ class WVL_Dashboard
     {
         $vars[] = 'subpage';
         return $vars;
+    }
+
+    public function render_wvl_dashboard_menu()
+    {
+        global $wvl_menus;
+
+        if (!isset($wvl_menus) || empty($wvl_menus)) {
+            return;
+        }
+?>
+        <div class="wvl-dashboard py-6 md:flex gap-4">
+            <div class="sidebar bg-white w-full md:w-3/12 p-8 rounded-xl h-fit ">
+                <ul>
+                    <?php foreach ($wvl_menus as $menu) :
+                        $url = site_url('dashboard/' . $menu['slug']);
+                        $is_active = $menu['slug'] === get_query_var('subpage') ? true : false;
+                        $class = $is_active ? 'bg-slate-200 text-gray-800 font-semibold' : 'text-slate-700';
+                        $active_class = $is_active ? 'active' : '';
+                        echo <<<HTML
+                        <li class="mb-3 $active_class">
+                            <a class="hover:bg-slate-100 p-3 rounded-md flex items-center {$class}" href="$url">
+                                <span class="icon inline-block w-6 h-6 pr-2 overflow-hidden">{$menu['icon']}</span>
+                                <span class="text-sm capitalize inline-block">{$menu['name']}</span>
+                            </a>
+                        </li>
+                        HTML;
+                    endforeach; ?>
+                    <li class="logout">
+                        <a class="block text-center py-2 mt-4 text-white bg-gray-800 hover:text-gray-100 rounded-md" href="<?php echo site_url('logout'); ?>">
+                            <?php _e('Logout', 'wedding-venue-listings'); ?>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="content w-full md:w-9/12 p-8 bg-white rounded-xl">
+                <?php
+                $subpage = get_query_var('subpage');
+                $matched = false;
+                if ($subpage) {
+                    foreach ($wvl_menus as $menu) {
+                        if ($menu['slug'] === $subpage) {
+                            call_user_func($menu['callback']);
+                            $matched = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (!$matched) {
+                    require_once WVL_PLUGIN_DIR . '/template-parts/dashboard/dashboard.php';
+                }
+                ?>
+            </div>
+        </div>
+<?php
     }
 
 
