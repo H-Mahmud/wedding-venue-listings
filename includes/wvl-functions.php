@@ -22,6 +22,7 @@ function add_wvl_menu($args)
         'name'     => '',
         'slug'     => '',
         'icon'     => '',
+        'premium'  => false,
         'priority' => 10,
         'callback' => '',
     ];

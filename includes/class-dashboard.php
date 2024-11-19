@@ -119,11 +119,14 @@ class WVL_Dashboard
                         $is_active = $menu['slug'] === get_query_var('subpage') ? true : false;
                         $class = $is_active ? 'bg-slate-200 text-gray-800 font-semibold' : 'text-slate-700';
                         $active_class = $is_active ? 'active' : '';
+
+                        $premium_badge = $menu['premium'] ? '<span class="inline-block ml-2 bg-amber-100 text-amber-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">' . __('Premium', 'wedding-venue-listings') . '</span>' : '';
                         echo <<<HTML
                         <li class="mb-3 $active_class">
                             <a class="hover:bg-slate-100 p-3 rounded-md flex items-center {$class}" href="$url">
                                 <span class="icon inline-block w-6 h-6 mr-2 overflow-hidden">{$menu['icon']}</span>
                                 <span class="text-sm capitalize inline-block">{$menu['name']}</span>
+                                $premium_badge
                             </a>
                         </li>
                         HTML;
@@ -131,6 +134,7 @@ class WVL_Dashboard
                     <li class="logout">
                         <a class="block text-center py-2 mt-4 text-white bg-gray-800 hover:text-gray-100 rounded-md" href="<?php echo site_url('logout'); ?>">
                             <?php _e('Logout', 'wedding-venue-listings'); ?>
+
                         </a>
                     </li>
                 </ul>
