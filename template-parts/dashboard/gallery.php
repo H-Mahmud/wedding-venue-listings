@@ -1,3 +1,51 @@
+<div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+    <div class="flex justify-center items-center flex-col gap-3 border border-gray-200 rounded-lg hover:border-dashed hover:border-blue-600 cursor-pointer">
+        <i class="fa-regular fa-image  text-gray-600 text-4xl"></i>
+        <p class="text-center">
+            Upload a Photo <br>
+            <span class="text-xs text-gray-400">JPG, PNG, GIF</span><br>
+            <span class="text-blue-600">Browse</span>
+        </p>
+    </div>
+    <div>
+        <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image.jpg" alt="">
+    </div>
+    <div>
+        <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg" alt="">
+    </div>
+    <div>
+        <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-2.jpg" alt="">
+    </div>
+    <div>
+        <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-3.jpg" alt="">
+    </div>
+    <div>
+        <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-4.jpg" alt="">
+    </div>
+    <div>
+        <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-5.jpg" alt="">
+    </div>
+    <div>
+        <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-6.jpg" alt="">
+    </div>
+    <div>
+        <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-7.jpg" alt="">
+    </div>
+    <div>
+        <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-8.jpg" alt="">
+    </div>
+    <div>
+        <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-9.jpg" alt="">
+    </div>
+    <div>
+        <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-10.jpg" alt="">
+    </div>
+    <div>
+        <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-11.jpg" alt="">
+    </div>
+</div>
+
+<?php /*
 <style>
     div.gallery {
         margin: 5px;
@@ -57,66 +105,36 @@
     <input type="file" name="upload_gallery" id="upload_gallery">
 </div>
 
-<div class="galleries">
 
-    <div class="gallery">
-        <div class="delete"></div>
-        <img src="http://koumparos.local/wp-content/uploads/2024/11/মির্জা-গালিব.png" alt="Cinque Terre" width="600" height="400">
-        <div class="desc">Add a description of the image here</div>
-    </div>
+<script>
+    jQuery('.upload-gallery #upload_gallery').on('change', function() {
 
-    <div class="gallery">
-        <div class="delete"></div>
-        <img src="http://koumparos.local/wp-content/uploads/2024/11/মির্জা-গালিব.png" alt="Forest" width="600" height="400">
+        console.log('changed')
+        var file = this.files[0];
+        if (file) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                const gallery = document.createElement('div');
+                gallery.classList.add('gallery');
 
-        <div class="desc">Add a description of the image here</div>
-    </div>
+                const deleteButton = document.createElement('div');
+                deleteButton.classList.add('delete');
+                gallery.appendChild(deleteButton);
 
-    <div class="gallery">
-        <div class="delete"></div>
-        <img src="http://koumparos.local/wp-content/uploads/2024/11/মির্জা-গালিব.png" alt="Northern Lights" width="600" height="400">
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                gallery.appendChild(img);
 
-        <div class="desc">Add a description of the image here</div>
-    </div>
+                const desc = document.createElement('div');
+                desc.classList.add('desc');
+                desc.innerHTML = 'Add a description of the image here';
+                gallery.appendChild(desc);
 
-    <div class="gallery">
-        <div class="delete"></div>
-        <img src="http://koumparos.local/wp-content/uploads/2024/11/মির্জা-গালিব.png" alt="Mountains" width="600" height="400">
+                jQuery('.galleries').prepend(gallery);
+            };
 
-        <div class="desc">Add a description of the image here</div>
-    </div
-
-        </div>
-
-
-    <script>
-        jQuery('.upload-gallery #upload_gallery').on('change', function() {
-
-            console.log('changed')
-            var file = this.files[0];
-            if (file) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    const gallery = document.createElement('div');
-                    gallery.classList.add('gallery');
-
-                    const deleteButton = document.createElement('div');
-                    deleteButton.classList.add('delete');
-                    gallery.appendChild(deleteButton);
-
-                    const img = document.createElement('img');
-                    img.src = e.target.result;
-                    gallery.appendChild(img);
-
-                    const desc = document.createElement('div');
-                    desc.classList.add('desc');
-                    desc.innerHTML = 'Add a description of the image here';
-                    gallery.appendChild(desc);
-
-                    jQuery('.galleries').prepend(gallery);
-                };
-
-                reader.readAsDataURL(file);
-            }
-        });
-    </script>
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
+*/
