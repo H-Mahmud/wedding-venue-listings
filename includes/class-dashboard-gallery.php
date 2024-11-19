@@ -38,7 +38,7 @@ class WVL_Dashboard_Gallery
         add_wvl_menu([
             'name'     => 'Gallery',
             'slug'     => 'gallery',
-            'icon'     => '<i class="fa-brands fa-envira" width="24px" height="24px" style="color: #1f72b2;"></i>',
+            'icon'     => '<i class="fa-brands fa-envira text-xl" style="color: #1f72b2;"></i>',
             'premium'  => false,
             'priority' => 40,
             'callback' => array($this, 'gallery_page_cb'),
