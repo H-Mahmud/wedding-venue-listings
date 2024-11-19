@@ -29,7 +29,7 @@ class WVL_Dashboard_Home
 
         add_wvl_menu([
             'name'     => 'Dashboard',
-            'slug'     => 'dashboard',
+            'slug'     => 'home',
             'icon'     => '<i class="fa-solid fa-house text-xl" style="color: #1f72b2;"></i>',
             'premium'  => false,
             'priority' => 10,

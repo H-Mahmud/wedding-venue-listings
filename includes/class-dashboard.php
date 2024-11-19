@@ -154,7 +154,7 @@ class WVL_Dashboard
                 }
 
                 if (!$matched) {
-                    require_once WVL_PLUGIN_DIR . '/template-parts/dashboard/dashboard.php';
+                    require_once WVL_PLUGIN_DIR . '/template-parts/dashboard/home.php';
                 }
                 ?>
             </div>
