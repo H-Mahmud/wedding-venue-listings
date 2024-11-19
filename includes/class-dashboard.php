@@ -37,10 +37,17 @@ class WVL_Dashboard
             wp_enqueue_script('wvl-main', WVL_PLUGIN_URL . '/assets/dist/main.bundle.min.js', array('jquery'), '1.0', true);
         }
 
-        wp_localize_script('wvl-main', 'WVL_DATA', [
-            'ajax_url' => admin_url('admin-ajax.php'),
-            'ajax_nonce' => wp_create_nonce('upload_image_nonce')
-        ]);
+        wp_enqueue_script('choices.js', WVL_PLUGIN_URL . '/assets/lib/choices.js/js/choices.min.js', array('jquery'), null, true);
+        wp_enqueue_style('choices.js', WVL_PLUGIN_URL . '/assets/lib/choices.js/css/choices.min.css');
+
+        $data = [
+            'ajax_url'      => admin_url('admin-ajax.php'),
+            'ajax_nonce'    => wp_create_nonce('upload_image_nonce'),
+            'vendorTypes'   => get_wvl_terms_options('vendor_type'),
+            'eventTypes'   => get_wvl_terms_options('event_type')
+        ];
+
+        wp_localize_script('wvl-main', 'WVL_DATA', $data);
     }
 
     /**

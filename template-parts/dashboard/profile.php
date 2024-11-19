@@ -22,83 +22,51 @@
             <input type="hidden" name="cover_photo_hash" value="">
         </label>
 
-        <label class="w-full text-gray-600" for="venue_name">
-            Venue Name <br>
-            <input class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg !bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 " type="text" name="venue_name" value="<?php echo get_the_title($post_id); ?>" id="venue_name">
-        </label>
+        <div class="wvl-field">
+            <label for="venue_name">
+                Venue Name <br>
+                <input type="text" name="venue_name" value="<?php echo get_the_title($post_id); ?>" id="venue_name">
+            </label>
+        </div>
     </div>
 
+    <div class="wvl-field-row mt-3">
+        <div class="wvl-field">
+            <label for="vendor_type">
+                Vendor Type <br>
+                <select name="vendor_type" id="vendor_type"></select>
+            </label>
+        </div>
 
-
-    <div class="wvl-field">
-        <label for="venue_type">
-            Venue Type <br>
-            <select name="venue_type" id="venue_type">
-                <?php
-                $venue_types = get_terms(array(
-                    'taxonomy' => 'venue_type',
-                    'hide_empty' => false,
-                ));
-                foreach ($venue_types as $venue_type) {
-                    echo '<option name="' . $venue_type->slug . '">' . $venue_type->name . '</option>';
-                };
-                ?>
-            </select>
-        </label>
+        <div class="wvl-field">
+            <label for="event_type">
+                Event Type <br>
+                <select name="event_type" id="event_type"></select>
+            </label>
+        </div>
     </div>
 
-    <div class="wvl-field">
-        <label for="venue_service">
-            Venue Service <br>
-            <select name="venue_service" id="venue_service">
-                <?php
-                $venue_services = get_terms(array(
-                    'taxonomy' => 'venue_service',
-                    'hide_empty' => false,
-                ));
+    <div class="wvl-field-row">
+        <div class="wvl-field">
+            <label for="phone">
+                Phone <br>
+                <input type="number" name="phone" id="phone">
+            </label>
+        </div>
 
-                foreach ($venue_services as $venue_service) {
-                    echo '<option name="' . $venue_service->slug . '">' . $venue_service->name . '</option>';
-                }; ?>
-            </select>
-        </label>
-    </div>
+        <div class="wvl-field">
+            <label for="email">
+                Email <br>
+                <input type="text" name="email" id="email">
+            </label>
+        </div>
 
-    <div class="wvl-field">
-        <label for="venue_setting">Venue Settings
-            <br>
-            <select name="venue_setting" id="venue_setting">
-        </label>
-        <?php
-        $venue_settings = get_terms(array(
-            'taxonomy' => 'venue_setting',
-            'hide_empty' => false,
-        ));
-
-        foreach ($venue_settings as $venue_setting) {
-            echo '<option name="' . $venue_setting->slug . '">' . $venue_setting->name . '</option>';
-        }; ?>
-        </select>
-    </div>
-
-    <div class="wvl-field">
-        <label for="phone">
-            Phone <br>
-            <input type="number" name="phone" id="phone">
-        </label>
-    </div>
-
-    <div class="wvl-field">
-        <label for="email">
-            Email <br>
-            <input type="text" name="email" id="email">
-        </label>
     </div>
 
     <div class="wvl-field">
         <label for="description">
             Description
-            <textarea name="description" id=""></textarea>
+            <textarea name="description" rows="6" id=""></textarea>
         </label>
     </div>
 
@@ -109,24 +77,5 @@
         </label>
     </div>
 
-    <button type="submit">Submit</button>
-</form>
-
-
-
-
-
-<form class="max-w-sm mx-auto">
-    <div class="mb-5">
-        <label for="large-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Large input</label>
-        <input type="text" id="large-input" class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-    </div>
-    <div class="mb-5">
-        <label for="base-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Base input</label>
-        <input type="text" id="base-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-    </div>
-    <div>
-        <label for="small-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Small input</label>
-        <input type="text" id="small-input" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-    </div>
+    <button type="submit" class="wvl-btn-primary">Submit</button>
 </form>

@@ -42,3 +42,34 @@ function add_wvl_menu($args)
         return $a['priority'] - $b['priority'];
     });
 }
+
+
+/**
+ * Retrieves terms of a specified taxonomy.
+ *
+ * This function fetches terms for the given taxonomy and returns them
+ * as an associative array where the keys are the term slugs and the 
+ * values are the term names.
+ *
+ * @param string $taxonomy The taxonomy from which to retrieve terms.
+ * @param bool $hide_empty Optional. Whether to hide terms not assigned to any posts. Default false.
+ *
+ * @return array Associative array of terms with slugs as keys and names as values.
+ */
+function get_wvl_terms_options($taxonomy, $hide_empty = false)
+{
+    $vendor_types_object = get_terms(array(
+        'taxonomy' => $taxonomy,
+        'hide_empty' => $hide_empty,
+    ));
+
+    $vendor_types = [];
+
+    foreach ($vendor_types_object as $vendor_type) {
+
+        $term = ['value' => $vendor_type->slug, 'slug' => $vendor_type->name];
+        $vendor_types[] = $term;
+    };
+
+    return $vendor_types;
+}
