@@ -5,7 +5,23 @@ const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
 const isProduction = process.env.NODE_ENV === "production";
 
+
 module.exports = {
+    devServer: {
+        static: path.resolve(__dirname, "assets"),
+        open: true,
+        port: 3000,
+        hot: true,
+        watchFiles: ['includes', 'templates', 'template-parts'],
+        proxy: [
+            {
+                context: () => true,
+                target: 'http://koumparos.local',
+                changeOrigin: true,
+            },
+        ],
+
+    },
     entry: "./src/index.js",
     output: {
         filename: isProduction ? "main.bundle.min.js" : "main.bundle.js",

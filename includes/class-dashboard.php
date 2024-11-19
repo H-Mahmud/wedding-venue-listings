@@ -31,7 +31,7 @@ class WVL_Dashboard
     public function enqueue_scripts()
     {
         if (defined('WVL_DEVELOPMENT') && WVL_DEVELOPMENT) {
-            wp_enqueue_script('wvl-main', WVL_PLUGIN_URL . '/assets/dist/main.bundle.js', array('jquery'), time(), true);
+            wp_enqueue_script('wvl-main', 'http://localhost:3000/main.bundle.js', array('jquery'), time(), true);
         } else {
             wp_enqueue_style('wvl-style', WVL_PLUGIN_URL . '/assets/dist/style.min.css', array(), '1.0');
             wp_enqueue_script('wvl-main', WVL_PLUGIN_URL . '/assets/dist/main.bundle.min.js', array('jquery'), '1.0', true);

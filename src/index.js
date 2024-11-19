@@ -1,3 +1,5 @@
-import "./style.css";
+import './dev-env'; // Development only
+import './profile/upload-cover-photo'
 
-import './profile/upload-cover-photo';
+// Styles
+import "./style.css";;
