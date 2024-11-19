@@ -37,7 +37,7 @@ class WVL_Dashboard_Contact
         add_wvl_menu([
             'name'     => 'Contact Info',
             'slug'     => 'contact-info',
-            'icon'     => '<i class="fa-solid fa-address-card" style="color: #1f72b2;"></i>',
+            'icon'     => '<i class="fa-solid fa-address-card" width="24px" height="24px" style="color: #1f72b2;"></i>',
             'premium'  => true,
             'priority' => 30,
             'callback' => array($this, 'contact_info_page_cb'),

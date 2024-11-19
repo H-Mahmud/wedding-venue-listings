@@ -122,7 +122,7 @@ class WVL_Dashboard
                         echo <<<HTML
                         <li class="mb-3 $active_class">
                             <a class="hover:bg-slate-100 p-3 rounded-md flex items-center {$class}" href="$url">
-                                <span class="icon inline-block w-6 h-6 pr-2 overflow-hidden">{$menu['icon']}</span>
+                                <span class="icon inline-block w-6 h-6 mr-2 overflow-hidden">{$menu['icon']}</span>
                                 <span class="text-sm capitalize inline-block">{$menu['name']}</span>
                             </a>
                         </li>

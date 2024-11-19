@@ -36,7 +36,7 @@ class WVL_Dashboard_Profile
         add_wvl_menu([
             'name'     => 'Profile',
             'slug'     => 'profile',
-            'icon'     => '<i class="fa-solid fa-user" width="20px" height="20px" style="color: #74C0FC;"></i>',
+            'icon'     => '<i class="fa-solid fa-user" width="24px" height="24px" style="color: #1f72b2;"></i>',
             'priority' => 20,
             'callback' => array($this, 'profile_page_cb'),
         ]);
