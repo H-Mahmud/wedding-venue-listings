@@ -27,21 +27,6 @@
 Single Venue
 ============= */
 
-.single-venue .site-main {
-    padding-top: 16px;
-}
-
-
-.single-venue .cover-photo {
-    width: 100%;
-    min-height: 380px;
-}
-
-.single-venue .cover-photo img {
-    max-height: 520px;
-    object-fit: cover;
-}
-
 .single-venue .site-main .header {
     display: flex;
     justify-content: space-between;
