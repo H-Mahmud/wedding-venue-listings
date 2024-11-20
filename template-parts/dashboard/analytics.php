@@ -1,9 +1,31 @@
 <div>
-    <button class="time-frame-btn" data-timeframe="last_week">Last Week</button>
-    <button class="time-frame-btn" data-timeframe="last_14_days">Last 14 Days</button>
-    <button class="time-frame-btn" data-timeframe="last_month">Last Month</button>
-    <button class="time-frame-btn" data-timeframe="last_2_months">Last 2 Months</button>
-    <button class="time-frame-btn" data-timeframe="last_3_months">Last 3 Months</button>
+    <form method="get">
+        <div class="wvl-field-row items-center">
+            <div class="wvl-field">
+                <select name="timeframe" id="timeframe">
+                    <option value="last_week">Last Week</option>
+                    <option value="last_14_days">Last 14 Days</option>
+                    <option value="last_month">Last Month</option>
+                    <option value="last_2_months">Last 2 Months</option>
+                    <option value="last_3_months">Last 3 Months</option>
+                </select>
+            </div>
+
+            <div class="wvl-field">
+                <select name="metric" id="metric">
+                    <option value="impressions">Impressions</option>
+                    <option value="profile_views">Profile Views</option>
+                    <option value="unique_profile_views">Unique Profile Views</option>
+                    <option value="contact_info_views">Contact Info Views</option>
+                    <option value="leads">Leads</option>
+                </select>
+            </div>
+
+            <div class="wvl-field mb-2">
+                <button class="wvl-btn-primary">Filter</button>
+            </div>
+        </div>
+    </form>
 </div>
 <canvas id="myLineChart" width="800" height="400"></canvas>
 
@@ -86,7 +108,6 @@
             });
         }
 
-        // Render initial chart
         renderChart(activeTimeFrame);
 
         // Add event listeners for changing time frames
