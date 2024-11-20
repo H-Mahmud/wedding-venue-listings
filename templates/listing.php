@@ -1,77 +1,48 @@
 <?php
 get_header(); ?>
 
-<div id="primary" class="venue-listing">
-    <main id="main" class="site-main site-container" role="main">
+<div id="primary" class="venue-listing bg-white">
+    <main id="main" class="site-main site-container " role="main">
         <div class="wvl-sidebar">
 
             <form action="<?php echo site_url('listing'); ?>">
                 <div class="wvl-search-form">
-                    <input type="text" name="s" placeholder="Search for a venue" value="<?php echo get_search_query(); ?>">
-                    <input type="submit" value="Search">
+                    <input class="!bg-white" type="text" name="s" placeholder="Search for a venue" value="<?php echo get_search_query(); ?>">
+                    <input class="wlv-btn-primary" type="submit" value="Search">
                 </div>
             </form>
 
-
             <div class="wlv-filter">
-                <div class="filter venue-types">
-                    <h3>Venue Types</h3>
+                <div class="filter vendor-types">
+                    <h3>vendor Types</h3>
                     <?php
-                    $venue_types = get_terms(array(
-                        'taxonomy' => 'venue_type',
-                        'hide_empty' => false,
-                    ));
-
-                    foreach ($venue_types as $venue_type) { ?>
-
+                    $vendor_types = get_wvl_terms_options('vendor_type');
+                    foreach ($vendor_types as $vendor_type) { ?>
                         <label>
-                            <input type="checkbox" name="venue_type[]" value="<?php echo $venue_type->slug; ?>" aria-invalid="false" />
-                            <?php echo $venue_type->name; ?>
+                            <input type="checkbox" name="vendor-types[]" value="<?php echo $vendor_type['value']; ?>" />
+                            <?php echo $vendor_type['label']; ?>
                         </label>
                         <br>
                     <?php
                     }; ?>
                 </div>
 
-                <div class="filter venue-services">
-                    <h3>Venue Services</h3>
+                <div class="filter event-types">
+                    <h3>Event Types</h3>
                     <?php
-                    $venue_services = get_terms(array(
-                        'taxonomy' => 'venue_service',
-                        'hide_empty' => false,
-                    ));
-
-                    foreach ($venue_services as $venue_service) { ?>
+                    $event_types = get_wvl_terms_options('event_type');
+                    foreach ($event_types as $event_type) { ?>
 
                         <label>
-                            <input type="checkbox" name="venue_service[]" value="<?php echo $venue_service->slug; ?>" aria-invalid="false" />
-                            <?php echo $venue_service->name; ?>
+                            <input type="checkbox" name="event_types[]" value="<?php echo $event_type['value']; ?>" />
+                            <?php echo $event_type['label']; ?>
                         </label>
                         <br>
                     <?php
                     }; ?>
                 </div>
 
-                <div class="filter venue-setting">
-                    <h3>Venue Settings</h3>
-                    <?php
-                    $venue_settings = get_terms(array(
-                        'taxonomy' => 'venue_setting',
-                        'hide_empty' => false,
-                    ));
-
-                    foreach ($venue_settings as $venue_setting) { ?>
-
-                        <label>
-                            <input type="checkbox" name="venue_setting[]" value="<?php echo $venue_setting->slug; ?>" aria-invalid="false" />
-                            <?php echo $venue_setting->name; ?>
-                        </label>
-                        <br>
-                    <?php
-                    }; ?>
-                </div>
-
-                <div class="filter availability">
+                <div class="filter wvl-field availability">
                     <h3>Availability</h3>
                     <input type="date">
                 </div>
