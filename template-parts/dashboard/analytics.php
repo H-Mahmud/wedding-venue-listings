@@ -21,7 +21,7 @@
                 </select>
             </div>
 
-            <div class="wvl-field mb-2">
+            <div class="wvl-field mb-6">
                 <button class="wvl-btn-primary">Filter</button>
             </div>
         </div>
