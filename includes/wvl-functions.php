@@ -68,7 +68,7 @@ function get_wvl_terms_options($taxonomy, $hide_empty = false)
 
     foreach ($vendor_types_object as $vendor_type) {
 
-        $term = ['value' => $vendor_type->slug, 'slug' => $vendor_type->name];
+        $term = ['value' => $vendor_type->slug, 'label' => $vendor_type->name];
         $vendor_types[] = $term;
     };
 
