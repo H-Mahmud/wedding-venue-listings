@@ -22,12 +22,12 @@ class WVL_Account_Auth
     private final function __construct()
     {
         add_action('template_redirect', array($this, 'restrict_logged_user'), 100);
-        add_shortcode('wvl-login', array($this, 'login_form_shortcode'));
-        add_shortcode('wvl-register', array($this, 'register_form_shortcode'));
         add_action('init', array($this, 'user_logging'));
         add_action('init', array($this, 'user_register'));
         add_action('init', array($this, 'user_password_forgot'));
         add_action('init', array($this, 'user_password_reset'), 10);
+        add_shortcode('wvl-login', array($this, 'login_form_shortcode'));
+        add_shortcode('wvl-register', array($this, 'register_form_shortcode'));
         add_shortcode('wvl-forgot-password', array($this, 'forgot_password_form_shortcode'));
         add_shortcode('wvl-reset-password', array($this, 'reset_password_form_shortcode'));
         add_shortcode('wvl-dashboard', array($this, 'dashboard_shortcode'));
@@ -36,6 +36,13 @@ class WVL_Account_Auth
     }
 
 
+    /**
+     * Redirects logged-in users away from specific pages.
+     * 
+     * This function checks if a user is logged in and not an admin. If they
+     * attempt to access the 'register', 'login', or 'forgot-password' pages,
+     * they are redirected to the home page.
+     */
     public function restrict_logged_user()
     {
         if (!is_user_logged_in() || is_admin()) return;
@@ -46,6 +53,15 @@ class WVL_Account_Auth
     }
 
 
+    /**
+     * Login form shortcode
+     *
+     * This function will include the login.php template file which contains
+     * the HTML for the login form. The function will return the contents of the
+     * file as a string.
+     *
+     * @return string The login form HTML
+     */
     public function login_form_shortcode()
     {
 
@@ -55,6 +71,16 @@ class WVL_Account_Auth
     }
 
 
+    /**
+     * Handles the login form submission.
+     *
+     * Checks if the current user is logged in and if the login form nonce is valid.
+     * If the login form has been submitted, it will verify the user credentials and
+     * log the user in if they are valid. If the login is successful, the user is redirected
+     * to the home page. If the login fails, an error message is set in the session.
+     *
+     * @return void
+     */
     public function user_logging()
     {
         if (!isset($_POST['_wvl_login_nonce']) || !wp_verify_nonce($_POST['_wvl_login_nonce'], 'wvl_login_nonce')) {
@@ -82,9 +108,17 @@ class WVL_Account_Auth
     }
 
 
+    /**
+     * Generates the registration form HTML.
+     *
+     * This function will include the register.php template file which contains
+     * the HTML for the registration form. The function will return the contents
+     * of the file as a string.
+     *
+     * @return string The registration form HTML
+     */
     public function register_form_shortcode()
     {
-
         ob_start();
         include_once WVL_PLUGIN_DIR . 'shortcodes/register.php';
         return ob_get_clean();
@@ -127,18 +161,35 @@ class WVL_Account_Auth
     }
 
 
+    /**
+     * Generates the forgot password form HTML.
+     *
+     * This function includes the forgot-password.php template file,
+     * which contains the HTML for the forgot password form. The function
+     * returns the contents of the file as a string.
+     *
+     * @return string The forgot password form HTML.
+     */
     public function forgot_password_form_shortcode()
     {
-
         ob_start();
         include_once WVL_PLUGIN_DIR . 'shortcodes/forgot-password.php';
 
         return ob_get_clean();
     }
 
+
+    /**
+     * Handles the password forgot process.
+     *
+     * This function checks whether the `forgot_password` form was submitted, and if so,
+     * it generates a password reset key for the user, sends the user an email with
+     * a link to reset their password, and redirects the user to the login page.
+     * If there is an error during the forgot password process, it will be stored in the
+     * session and can be displayed to the user.
+     */
     public function user_password_forgot()
     {
-
         if (!isset($_POST['_wvl_forgot_password_nonce']) || !wp_verify_nonce($_POST['_wvl_forgot_password_nonce'], 'wvl_forgot_password_nonce')) {
             return;
         }
@@ -170,11 +221,19 @@ class WVL_Account_Auth
     }
 
 
-
+    /**
+     * Generates the password reset form HTML.
+     *
+     * This function verifies the password reset link in the URL, and if it is valid,
+     * it includes the reset-password.php template file which contains the HTML for
+     * the password reset form. The function returns the contents of the file as a
+     * string. If the password reset link is invalid, it returns an error message as
+     * a string.
+     *
+     * @return string The password reset form HTML.
+     */
     public function reset_password_form_shortcode()
     {
-
-        // Get the key and login from URL parameters
         $reset_key = isset($_GET['key']) ? sanitize_text_field($_GET['key']) : '';
         $user_login = isset($_GET['login']) ? sanitize_text_field($_GET['login']) : '';
 
@@ -182,7 +241,6 @@ class WVL_Account_Auth
             return '<p class="error">Invalid password reset link.</p>';
         }
 
-        // Verify the reset key and login
         $user = check_password_reset_key($reset_key, $user_login);
         if (is_wp_error($user)) {
             return '<p class="error">' . $user->get_error_message() . '</p>';
@@ -193,6 +251,15 @@ class WVL_Account_Auth
         return ob_get_clean();
     }
 
+    /**
+     * Handles the password reset process.
+     *
+     * This function verifies the password reset link in the URL, and if it is valid,
+     * it checks whether the `reset_password` form was submitted, and if so, it validates
+     * the new and confirm passwords, and if they are valid, it resets the user's password
+     * and redirects the user to the home page. If there is an error during the password
+     * reset process, it will be stored in the session and can be displayed to the user.
+     */
     public function user_password_reset()
     {
 
@@ -200,24 +267,20 @@ class WVL_Account_Auth
             !isset($_POST['_wvl_reset_password_nonce']) ||
             !wp_verify_nonce($_POST['_wvl_reset_password_nonce'], 'wvl_reset_password_nonce')
         ) return;
-        // Sanitize inputs
+
         $new_password = sanitize_text_field($_POST['new_password']);
         $confirm_password = sanitize_text_field($_POST['confirm_password']);
 
-        // Retrieve the reset key and login from the URL
         $key = isset($_GET['key']) ? sanitize_text_field($_GET['key']) : '';
         $login = isset($_GET['login']) ? sanitize_text_field($_GET['login']) : '';
 
-        // Validate the key and login to fetch the user
         $user = check_password_reset_key($key, $login);
-
         if (is_wp_error($user)) {
             $_SESSION['wvl_reset_password_error'] = 'Invalid or expired reset link.';
             wp_redirect(home_url('/reset-password'));
             exit;
         }
 
-        // Validate passwords
         if ($new_password !== $confirm_password) {
             $_SESSION['wvl_reset_password_error'] = 'Passwords do not match.';
         } elseif (empty($new_password) || strlen($new_password) < 6) {
@@ -229,15 +292,6 @@ class WVL_Account_Auth
             exit;
         }
     }
-
-    public function dashboard_shortcode()
-    {
-
-        ob_start();
-        include_once WVL_PLUGIN_DIR . 'view/dashboard.php';
-        return ob_get_clean();
-    }
-
 
 
     public function enqueue_scripts()
