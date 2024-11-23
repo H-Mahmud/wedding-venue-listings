@@ -47,7 +47,7 @@ class WVL_Account_Auth
     {
 
         ob_start();
-        include_once WVL_PLUGIN_DIR . 'view/register.php';
+        include_once WVL_PLUGIN_DIR . 'shortcodes/register.php';
         return ob_get_clean();
     }
 
