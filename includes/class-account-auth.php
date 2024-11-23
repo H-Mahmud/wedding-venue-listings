@@ -24,6 +24,7 @@ class WVL_Account_Auth
         add_action('template_redirect', array($this, 'restrict_logged_user'), 100);
         add_shortcode('wvl-login', array($this, 'login_form_shortcode'));
         add_shortcode('wvl-register', array($this, 'register_form_shortcode'));
+        add_action('init', array($this, 'user_logging'));
         add_action('init', array($this, 'user_register'));
         add_shortcode('wvl-forgot-password', array($this, 'forgot_password_form_shortcode'));
         add_shortcode('wvl-reset-password', array($this, 'reset_password_form_shortcode'));
@@ -36,7 +37,7 @@ class WVL_Account_Auth
     public function restrict_logged_user()
     {
         if (!is_user_logged_in() || is_admin()) return;
-        if (is_page('register')) {
+        if (is_page('register') || is_page('login')) {
             wp_redirect(home_url());
             exit;
         }
@@ -47,10 +48,36 @@ class WVL_Account_Auth
     {
 
         ob_start();
-        include_once WVL_PLUGIN_DIR . 'view/login.php';
+        include_once WVL_PLUGIN_DIR . 'shortcodes/login.php';
         return ob_get_clean();
     }
 
+
+    public function user_logging()
+    {
+        if (!isset($_POST['_wvl_login_nonce']) || !wp_verify_nonce($_POST['_wvl_login_nonce'], 'wvl_login_nonce')) {
+            return;
+        }
+        if (isset($_POST['login'])) {
+            $is_remember = isset($_POST['remember']) ? true : false;
+            $creds = array(
+                'user_login'    => $_POST['username'],
+                'user_password' => $_POST['password'],
+                'remember'      => false
+            );
+            if ($is_remember) {
+                $creds['remember'] = true;
+            }
+
+            $user = wp_signon($creds, false);
+            if (is_wp_error($user)) {
+                $_SESSION['wvl_login_error'] = $user->get_error_message();
+            } else {
+                wp_redirect(home_url());
+                exit;
+            }
+        }
+    }
 
 
     public function register_form_shortcode()
