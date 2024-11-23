@@ -21,8 +21,10 @@ class WVL_Account_Auth
      */
     private final function __construct()
     {
+        add_action('template_redirect', array($this, 'restrict_logged_user'), 100);
         add_shortcode('wvl-login', array($this, 'login_form_shortcode'));
         add_shortcode('wvl-register', array($this, 'register_form_shortcode'));
+        add_action('init', array($this, 'user_register'));
         add_shortcode('wvl-forgot-password', array($this, 'forgot_password_form_shortcode'));
         add_shortcode('wvl-reset-password', array($this, 'reset_password_form_shortcode'));
         add_shortcode('wvl-dashboard', array($this, 'dashboard_shortcode'));
@@ -31,6 +33,14 @@ class WVL_Account_Auth
     }
 
 
+    public function restrict_logged_user()
+    {
+        if (!is_user_logged_in() || is_admin()) return;
+        if (is_page('register')) {
+            wp_redirect(home_url());
+            exit;
+        }
+    }
 
 
     public function login_form_shortcode()
@@ -51,6 +61,41 @@ class WVL_Account_Auth
         return ob_get_clean();
     }
 
+
+    /**
+     * Handles the user registration process.
+     *
+     * This function checks whether the `register` form was submitted, and if so,
+     * it creates a new user, sets the user's password, and redirects the user
+     * to the home page. If there is an error during the registration process,
+     * it will be stored in the session and can be displayed to the user.
+     */
+    public function user_register()
+    {
+        if (!isset($_POST['_wvl_register_nonce']) || !wp_verify_nonce($_POST['_wvl_register_nonce'], 'wvl_register_nonce')) {
+            return;
+        }
+
+        if (isset($_POST['register'])) {
+            $username = sanitize_user($_POST['username']);
+            $email = sanitize_email($_POST['email']);
+            $password = sanitize_text_field($_POST['password']);
+
+            $user = register_new_user($username, $email);
+
+            if (is_wp_error($user)) {
+                $_SESSION['wvl_register_error'] = $user->get_error_message();
+            } else {
+                wp_set_password($password, $user);
+
+                wp_set_current_user($user);
+                wp_set_auth_cookie($user);
+
+                wp_redirect(home_url());
+                exit;
+            }
+        }
+    }
 
 
     public function forgot_password_form_shortcode()

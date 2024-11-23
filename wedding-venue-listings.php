@@ -22,6 +22,12 @@ defined('WVL_PLUGIN_URL') || define('WVL_PLUGIN_URL', plugin_dir_url(__FILE__));
 
 defined('WVL_DEVELOPMENT') || define('WVL_DEVELOPMENT', true);
 
+add_action('init', function () {
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+}, 1);
+
 // dependencies
 require_once WVL_PLUGIN_DIR . 'template-tags.php';
 require_once WVL_PLUGIN_DIR . 'includes/wvl-functions.php';
