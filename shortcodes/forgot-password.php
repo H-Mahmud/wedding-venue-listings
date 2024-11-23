@@ -5,7 +5,7 @@
                 <?php _e('Forgot Password', 'wedding-venue-listings'); ?>
             </h1>
             <form class="space-y-4 md:space-y-6" method="post">
-                <?php wp_nonce_field('wvl_login_nonce', '_wvl_login_nonce'); ?>
+                <?php wp_nonce_field('wvl_forgot_password_nonce', '_wvl_forgot_password_nonce'); ?>
                 <div class="wvl-field">
                     <label for="user_login"><?php _e('Username or Email', 'wedding-venue-listings'); ?></label>
                     <input type="username" name="user_login" id="user_login" class="wvl-input" placeholder="john" value="<?php echo isset($_POST['user_login']) ? $_POST['user_login'] : ''; ?>" required="">
