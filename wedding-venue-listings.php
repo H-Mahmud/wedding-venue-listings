@@ -32,7 +32,7 @@ require_once WVL_PLUGIN_DIR . 'includes/class-dashboard-gallery.php';
 require_once WVL_PLUGIN_DIR . 'includes/class-dashboard-availability.php';
 require_once WVL_PLUGIN_DIR . 'includes/class-dashboard-analytics.php';
 require_once WVL_PLUGIN_DIR . 'includes/class-dashboard-account.php';
-require_once WVL_PLUGIN_DIR . 'includes/class-account.php';
+require_once WVL_PLUGIN_DIR . 'includes/class-account-auth.php';
 require_once WVL_PLUGIN_DIR . 'includes/class-dashboard.php';
 require_once WVL_PLUGIN_DIR . 'includes/class-venue.php';
 require_once WVL_PLUGIN_DIR . 'includes/class-listing.php';

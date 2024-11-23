@@ -1,14 +1,14 @@
 <?php
 defined('ABSPATH') || exit;
 /**
- * WVL_Seller_Account class
+ * WVL_Account_Auth class
  */
-class WVL_Seller_Account
+class WVL_Account_Auth
 {
     /**
      * The single instance of the class.
      * 
-     * @var WVL_Seller_Account
+     * @var WVL_Account_Auth
      * @access private
      */
     private static $_instance = null;
@@ -120,7 +120,7 @@ class WVL_Seller_Account
     /**
      * Gets the singleton instance of the class.
      *
-     * @return WVL_Seller_Account The singleton instance.
+     * @return WVL_Account_Auth The singleton instance.
      */
     public static function get_instance()
     {
@@ -130,4 +130,4 @@ class WVL_Seller_Account
         return self::$_instance;
     }
 }
-WVL_Seller_Account::get_instance();
+WVL_Account_Auth::get_instance();
