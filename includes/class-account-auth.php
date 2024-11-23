@@ -26,6 +26,7 @@ class WVL_Account_Auth
         add_shortcode('wvl-register', array($this, 'register_form_shortcode'));
         add_action('init', array($this, 'user_logging'));
         add_action('init', array($this, 'user_register'));
+        add_action('init', array($this, 'user_password_forgot'));
         add_shortcode('wvl-forgot-password', array($this, 'forgot_password_form_shortcode'));
         add_shortcode('wvl-reset-password', array($this, 'reset_password_form_shortcode'));
         add_shortcode('wvl-dashboard', array($this, 'dashboard_shortcode'));
@@ -37,7 +38,7 @@ class WVL_Account_Auth
     public function restrict_logged_user()
     {
         if (!is_user_logged_in() || is_admin()) return;
-        if (is_page('register') || is_page('login')) {
+        if (is_page('register') || is_page('login') || is_page('forgot-password')) {
             wp_redirect(home_url());
             exit;
         }
@@ -129,9 +130,38 @@ class WVL_Account_Auth
     {
 
         ob_start();
-        include_once WVL_PLUGIN_DIR . 'view/forgot-password.php';
+        include_once WVL_PLUGIN_DIR . 'shortcodes/forgot-password.php';
 
         return ob_get_clean();
+    }
+
+    public function user_password_forgot()
+    {
+
+        if (isset($_POST['forgot_password'])) {
+            $user_login = sanitize_text_field($_POST['user_login']);
+            $user = get_user_by('email', $user_login);
+
+            if (!$user) {
+                $user = get_user_by('login', $user_login);
+            }
+
+            if ($user) {
+                $reset_key = get_password_reset_key($user);
+                $reset_page_link = site_url('reset-password');
+                $reset_link = add_query_arg(array('key' => $reset_key, 'login' => $user->user_login, 'action' => 'rp'), $reset_page_link);
+
+
+                $to = $user->user_email;
+                $subject = "Password Reset";
+                $message = "Click the following link to reset your password: $reset_link";
+                wp_mail($to, $subject, $message);
+
+                $_SESSION['wvl_password_forgot_success'] = 'Check your email for the password reset link.';
+            } else {
+                $_SESSION['wvl_password_forgot_error'] = 'Invalid username or email.';
+            }
+        }
     }
 
 
