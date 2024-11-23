@@ -27,6 +27,7 @@ class WVL_Account_Auth
         add_action('init', array($this, 'user_logging'));
         add_action('init', array($this, 'user_register'));
         add_action('init', array($this, 'user_password_forgot'));
+        add_action('init', array($this, 'user_password_reset'));
         add_shortcode('wvl-forgot-password', array($this, 'forgot_password_form_shortcode'));
         add_shortcode('wvl-reset-password', array($this, 'reset_password_form_shortcode'));
         add_shortcode('wvl-dashboard', array($this, 'dashboard_shortcode'));
@@ -183,12 +184,53 @@ class WVL_Account_Auth
             return '<p class="error">' . $user->get_error_message() . '</p>';
         }
 
-        // Display the reset password form
         ob_start();
-        include_once WVL_PLUGIN_DIR . 'view/reset-password.php';
+        include_once WVL_PLUGIN_DIR . 'shortcodes/reset-password.php';
         return ob_get_clean();
     }
 
+    public function user_password_reset()
+    {
+
+        if (!isset($_POST['_wvl_reset_password_nonce']) || !wp_verify_nonce($_POST['_wvl_reset_password_nonce'], 'wvl_reset_password_nonce')) {
+            return;
+        }
+
+        if (isset($_POST['register'])) {
+            $username = sanitize_user($_POST['username']);
+            $email = sanitize_email($_POST['email']);
+            $password = sanitize_text_field($_POST['password']);
+
+            $user = register_new_user($username, $email);
+
+            if (is_wp_error($user)) {
+                $_SESSION['wvl_register_error'] = $user->get_error_message();
+            } else {
+                wp_set_password($password, $user);
+
+                wp_set_current_user($user);
+                wp_set_auth_cookie($user);
+
+                wp_redirect(home_url());
+                exit;
+            }
+        }
+
+
+        if (isset($_POST['reset_password'])) {
+            $new_password = $_POST['new_password'];
+            $confirm_password = $_POST['confirm_password'];
+
+            if ($new_password !== $confirm_password) {
+                $_SESSION['wvl_reset_password_error'] = 'passwords do not match.';
+            } elseif (empty($new_password) || strlen($new_password) < 6) {
+                $_SESSION['wvl_reset_password_error'] = 'Password must be at least 6 characters.';
+            } else {
+                reset_password($user, $new_password);
+                $_SESSION['wvl_reset_password_success'] = '<p class="success text-green-700">Your password has been reset successfully. <a href="' . site_url('login') . '">Log in</a>.</p>';
+            }
+        }
+    }
 
     public function dashboard_shortcode()
     {
