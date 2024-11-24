@@ -1,4 +1,55 @@
 <?php $post_id = wvl_get_venue_id(); ?>
+<div class="wvl-profile-steps">
+    <div class="steps">
+        <div class="steps__step" data-step="0">
+            <div class="steps__step-number">1</div>
+            <div class="steps__step-name">Personal Info</div>
+        </div>
+        <div class="steps__connector"></div>
+        <div class="steps__step" data-step="1">
+            <div class="steps__step-number">2</div>
+            <div class="steps__step-name">Service Info</div>
+        </div>
+        <div class="steps__connector"></div>
+        <div class="steps__step" data-step="2">
+            <div class="steps__step-number">3</div>
+            <div class="steps__step-name">Contact Info</div>
+        </div>
+        <div class="steps__connector"></div>
+        <div class="steps__step" data-step="3">
+            <div class="steps__step-number">4</div>
+            <div class="steps__step-name"> Your Story</div>
+        </div>
+        <div class="steps__connector"></div>
+        <div class="steps__step" data-step="4">
+            <div class="steps__step-number">5</div>
+            <div class="steps__step-name"> Photographs</div>
+        </div>
+        <div class="steps__connector"></div>
+        <div class="steps__step" data-step="5">
+            <div class="steps__step-number">6</div>
+            <div class="steps__step-name"> Photographs</div>
+        </div>
+    </div>
+
+
+    <form class="profile-step-forms active" data-step="0">
+        <h1>Hello Step 1</h1>
+    </form>
+
+    <form class="profile-step-forms" data-step="1">
+        <h1>Hello Step 2</h1>
+    </form>
+
+
+    <div class="btn-group">
+        <button class="wvl-btn-primary" type="button" data-action="prev" disabled>Previous</button>
+        <button class="wvl-btn-primary" type="button" data-action="next">Next</button>
+    </div>
+</div>
+
+
+
 <form method="post">
     <input type="hidden" name="action" value="venue-profile-update-action">
 

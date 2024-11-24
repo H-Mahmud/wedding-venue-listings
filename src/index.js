@@ -1,5 +1,6 @@
 import './dev-env'; // Development only
-import './profile/upload-cover-photo'
+import './profile/upload-cover-photo';
+import './profile/steps';
 
 // Styles
 import "./style.css";

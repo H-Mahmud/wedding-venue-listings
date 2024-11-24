@@ -3,3 +3,4 @@
 @tailwind utilities;
 
 @import './styles/auth-pages.css';
+@import './profile/steps.css';
