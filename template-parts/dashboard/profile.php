@@ -1,9 +1,11 @@
-<?php $post_id = wvl_get_venue_id(); ?>
+<?php $post_id = wvl_get_venue_id();
+$author_id = get_current_user_id();
+?>
 <div class="wvl-profile-steps">
     <div class="steps">
         <div class="steps__step" data-step="0">
             <div class="steps__step-number">1</div>
-            <div class="steps__step-name">Personal Info</div>
+            <div class="steps__step-name"><?php _e('Personal Info', 'wedding-venue-listings'); ?></div>
         </div>
         <div class="steps__connector"></div>
         <div class="steps__step" data-step="1">
@@ -33,18 +35,30 @@
     </div>
 
 
-    <form class="profile-step-forms active" data-step="0">
-        <h1>Hello Step 1</h1>
+    <form class=" mt-14 profile-step-forms active" id="profileInfoForm" data-step="0">
+        <fieldset class="p-5 rounded-xl border-gray-200">
+            <legend class="mb-2 text-center"><?php _e('Personal Information', 'wedding-venue-listings'); ?></legend>
+            <div class="wvl-field">
+                <label for="firstName">First Name</label>
+                <input type="text" id="firstName" name="first_name" placeholder="John" value="<?php echo get_user_meta($author_id, 'first_name', true); ?>" required>
+            </div>
+
+            <div class="wvl-field">
+                <label for="lastName">Last Name</label>
+                <input type="text" id="lastName" name="last_name" placeholder="Doe" value="<?php echo get_user_meta($author_id, 'last_name', true); ?>" required>
+            </div>
+        </fieldset>
     </form>
 
     <form class="profile-step-forms" data-step="1">
         <h1>Hello Step 2</h1>
     </form>
 
+    <p class="text-red-700 profile-form-error pt-3"></p>
 
     <div class="btn-group">
         <button class="wvl-btn-primary" type="button" data-action="prev" disabled>Previous</button>
-        <button class="wvl-btn-primary" type="button" data-action="next">Next</button>
+        <button class="wvl-btn-primary" id="profileFormNext" type="button" data-action="next">Next</button>
     </div>
 </div>
 

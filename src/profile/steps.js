@@ -1,18 +1,27 @@
+import handleProfileInfoForm from "./handleProfileInfoForm";
+
 jQuery(document).ready(function ($) {
-    const steps = new StepIndicator(".steps");
+
+
+    function handleNext(step) {
+        if (step === 0) {
+            return handleProfileInfoForm();
+        }
+    }
+
+    const steps = new StepIndicator(".steps", handleNext);
 });
 
 class StepIndicator {
     /**
      * @param el CSS selector of the step indicator element
      */
-    constructor(el) {
-        /** Number of steps */
+    constructor(el, handleNext = () => { }, currentStep = 0) {
         this.steps = 6;
-        this._step = 0;
+        this._step = currentStep;
         this.$el = jQuery(el);
+        this.handleNext = handleNext;
 
-        // Bind click events using jQuery to prevent duplication
         jQuery(document).on("click", '[data-action="prev"]', this.prev.bind(this));
         jQuery(document).on("click", '[data-action="next"]', this.next.bind(this));
 
@@ -39,23 +48,12 @@ class StepIndicator {
 
     /** Go to the next step. */
     next() {
+        if (!this.handleNext(this.step)) return;
         if (this.step < this.steps - 1) {
             this.step += 1;
         }
     }
 
-    /** Disable the Previous or Next button if hitting the first or last step. */
-    checkExtremes() {
-        const $prevBtn = jQuery('[data-action="prev"]');
-        const $nextBtn = jQuery('[data-action="next"]');
-        $prevBtn.prop("disabled", this.step <= 0);
-        $nextBtn.prop("disabled", this.step >= this.steps - 1);
-    }
-
-    /**
-     * Update the indicator for a targeted step.
-     * @param targetStep Index of the step
-     */
     displayStep(targetStep) {
         const currentClass = "steps__step--current";
         const doneClass = "steps__step--done";
@@ -73,5 +71,17 @@ class StepIndicator {
                 $stepEl.addClass(currentClass);
             }
         }
+    }    /** Disable the Previous or Next button if hitting the first or last step. */
+    checkExtremes() {
+        const $prevBtn = jQuery('[data-action="prev"]');
+        const $nextBtn = jQuery('[data-action="next"]');
+        $prevBtn.prop("disabled", this.step <= 0);
+        $nextBtn.prop("disabled", this.step >= this.steps - 1);
     }
+
+    /**
+     * Update the indicator for a targeted step.
+     * @param targetStep Index of the step
+     */
+
 }
