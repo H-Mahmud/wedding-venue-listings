@@ -7,6 +7,8 @@ jQuery(document).ready(function ($) {
         if (step === 0) {
             return handleProfileInfoForm();
         }
+
+        return true;
     }
 
     const steps = new StepIndicator(".steps", handleNext);

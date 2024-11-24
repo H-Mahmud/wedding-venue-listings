@@ -50,10 +50,67 @@ $author_id = get_current_user_id();
         </fieldset>
     </form>
 
-    <form class="profile-step-forms" data-step="1">
-        <h1>Hello Step 2</h1>
+    <form class="mt-14 profile-step-forms" id="profileServiceForm" data-step="1">
+        <fieldset class="p-5 rounded-xl border-gray-200">
+            <legend class="mb-2 text-center"><?php _e('Service Information', 'wedding-venue-listings'); ?></legend>
+            <div class="wvl-field">
+                <label for="venue_name">
+                    Venue Name <br>
+                    <input type="text" name="venue_name" value="<?php echo get_the_title($post_id); ?>" id="venue_name">
+                </label>
+            </div>
+
+
+            <div class="wvl-field-row mt-3">
+                <div class="wvl-field">
+                    <label for="vendor_type">
+                        Vendor Type <br>
+                        <select name="vendor_type" id="vendor_type"></select>
+                    </label>
+                </div>
+
+                <div class="wvl-field">
+                    <label for="event_type">
+                        Event Type <br>
+                        <select name="event_type" id="event_type"></select>
+                    </label>
+                </div>
+            </div>
+        </fieldset>
     </form>
 
+
+    <form class="mt-14 profile-step-forms" id="profileContactForm" data-step="2">
+        <fieldset class="p-5 rounded-xl border-gray-200">
+            <legend class="mb-2 text-center"><?php _e('Contact Information', 'wedding-venue-listings'); ?></legend>
+
+            <div class="wvl-field-row">
+                <div class="wvl-field">
+                    <label for="phone">
+                        Phone <br>
+                        <input type="number" name="phone" id="phone">
+                    </label>
+                </div>
+
+                <div class="wvl-field">
+                    <label for="email">
+                        Email <br>
+                        <input type="text" name="email" id="email">
+                    </label>
+                </div>
+
+            </div>
+
+            <div class="wvl-field">
+                <label for="location">
+                    Location <br>
+                    <input type="text" name="location" id="location">
+                </label>
+            </div>
+
+
+        </fieldset>
+    </form>
     <p class="text-red-700 profile-form-error pt-3"></p>
 
     <div class="btn-group">
@@ -87,46 +144,10 @@ $author_id = get_current_user_id();
             <input type="hidden" name="cover_photo_hash" value="">
         </label>
 
-        <div class="wvl-field">
-            <label for="venue_name">
-                Venue Name <br>
-                <input type="text" name="venue_name" value="<?php echo get_the_title($post_id); ?>" id="venue_name">
-            </label>
-        </div>
-    </div>
-
-    <div class="wvl-field-row mt-3">
-        <div class="wvl-field">
-            <label for="vendor_type">
-                Vendor Type <br>
-                <select name="vendor_type" id="vendor_type"></select>
-            </label>
-        </div>
-
-        <div class="wvl-field">
-            <label for="event_type">
-                Event Type <br>
-                <select name="event_type" id="event_type"></select>
-            </label>
-        </div>
-    </div>
-
-    <div class="wvl-field-row">
-        <div class="wvl-field">
-            <label for="phone">
-                Phone <br>
-                <input type="number" name="phone" id="phone">
-            </label>
-        </div>
-
-        <div class="wvl-field">
-            <label for="email">
-                Email <br>
-                <input type="text" name="email" id="email">
-            </label>
-        </div>
 
     </div>
+
+
 
     <div class="wvl-field">
         <label for="description">
@@ -135,12 +156,7 @@ $author_id = get_current_user_id();
         </label>
     </div>
 
-    <div class="wvl-field">
-        <label for="location">
-            Location <br>
-            <input type="text" name="location" id="location">
-        </label>
-    </div>
+
 
     <button type="submit" class="wvl-btn-primary">Submit</button>
 </form>
