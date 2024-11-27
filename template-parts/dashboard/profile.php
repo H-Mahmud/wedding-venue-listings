@@ -1,5 +1,6 @@
-<?php $post_id = wvl_get_venue_id();
+<?php $venue_id = wvl_get_venue_id();
 $author_id = get_current_user_id();
+$venue = get_post($venue_id);
 ?>
 <div class="wvl-profile-steps">
     <div class="steps">
@@ -56,7 +57,7 @@ $author_id = get_current_user_id();
             <div class="wvl-field">
                 <label for="venue_name">
                     Venue Name <br>
-                    <input type="text" name="venue_name" value="<?php echo get_the_title($post_id); ?>" id="venue_name">
+                    <input type="text" name="venue_name" value="<?php echo $venue->post_title; ?>" id="venue_name">
                 </label>
             </div>
 
