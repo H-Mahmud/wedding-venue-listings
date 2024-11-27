@@ -1,9 +1,15 @@
 <?php
 defined('ABSPATH') || exit();
 
-function wvl_get_venue_id()
+function wvl_get_venue_id($user_id = null)
 {
-    $current_user_id = get_current_user_id();
+    if ($user_id) {
+        $current_user_id = $user_id;
+    } else if (is_user_logged_in()) {
+        $current_user_id = get_current_user_id();
+    } else {
+        return false;
+    }
     $args = [
         'post_type'      => 'venue',
         'author'         => $current_user_id,
