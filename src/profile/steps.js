@@ -3,9 +3,9 @@ import handleProfileInfoForm from "./handleProfileInfoForm";
 jQuery(document).ready(function ($) {
 
 
-    function handleNext(step) {
+    async function handleNext(step) {
         if (step === 0) {
-            return handleProfileInfoForm();
+            return await handleProfileInfoForm();
         }
 
         return true;
@@ -18,7 +18,7 @@ class StepIndicator {
     /**
      * @param el CSS selector of the step indicator element
      */
-    constructor(el, handleNext = () => { }, currentStep = 0) {
+    constructor(el, handleNext = async () => { }, currentStep = 0) {
         this.steps = 6;
         this._step = currentStep;
         this.$el = jQuery(el);
@@ -49,8 +49,8 @@ class StepIndicator {
     }
 
     /** Go to the next step. */
-    next() {
-        if (!this.handleNext(this.step)) return;
+    async next() {
+        if (! await this.handleNext(this.step)) return;
         if (this.step < this.steps - 1) {
             this.step += 1;
         }

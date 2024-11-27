@@ -64,14 +64,14 @@ class WVL_Dashboard_Profile
     public function handle_profile_info()
     {
         if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'dashboard_nonce')) {
-            wp_send_json_error(['message' => 'Invalid request.'], 400);
+            wp_send_json_error(['message' => 'Invalid request.']);
         }
 
         $first_name = sanitize_text_field($_POST['first_name'] ?? '');
         $last_name = sanitize_text_field($_POST['last_name'] ?? '');
 
         if (empty($first_name) || empty($last_name)) {
-            wp_send_json_error(['message' => 'First name and last name are required.'], 400);
+            wp_send_json_error(['message' => 'First name and last name are required.']);
         }
 
         if (is_user_logged_in()) {
@@ -80,7 +80,7 @@ class WVL_Dashboard_Profile
             update_user_meta($user_id, 'last_name', $last_name);
             wp_send_json_success(['message' => 'Profile information updated successfully.']);
         } else {
-            wp_send_json_error(['message' => 'You must be logged in to update your profile.'], 401);
+            wp_send_json_error(['message' => 'You must be logged in to update your profile.']);
         }
     }
 

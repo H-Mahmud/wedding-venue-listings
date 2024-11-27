@@ -1,3 +1,5 @@
+import { hideProfileNextSpinner, showProfileNextSpinner } from "./helper";
+
 export default function handleProfileInfoForm() {
     const $form = jQuery('form#profileInfoForm');
     const $profileFormError = jQuery('.profile-form-error')
@@ -15,6 +17,7 @@ export default function handleProfileInfoForm() {
         return false;
     }
 
+    showProfileNextSpinner();
     return new Promise((resolve, reject) => {
         jQuery.ajax({
             url: WVL_DATA.ajax_url,
@@ -32,13 +35,16 @@ export default function handleProfileInfoForm() {
                     resolve(true);
                 } else {
                     $profileFormError.html(response.data.message || "An error occurred.");
-                    reject(false);
+                    resolve(false);
                 }
             },
             error: function (xhr, status, error) {
                 console.error("AJAX Error: ", status, error);
                 $profileFormError.html("Something went wrong. Please try again later.");
-                reject(false);
+                resolve(false);
+            },
+            complete: function (data) {
+                hideProfileNextSpinner();
             }
         });
     });
