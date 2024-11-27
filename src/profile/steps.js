@@ -1,4 +1,6 @@
+import handleGalleryUpload from "./handleGalleryUpload";
 import handleProfileInfoForm from "./handleProfileInfoForm";
+import handleProfilePhotographsForm from "./handleProfilePhotographsForm";
 import handleYourStoryForm from "./handleYourStory";
 
 jQuery(document).ready(function ($) {
@@ -9,12 +11,16 @@ jQuery(document).ready(function ($) {
             return await handleProfileInfoForm();
         } else if (step === 3) {
             return await handleYourStoryForm();
+        } else if (step === 4) {
+            return await handleProfilePhotographsForm($);
         }
 
         return true;
     }
 
-    const steps = new StepIndicator(".steps", handleNext, 3);
+    handleGalleryUpload($);
+
+    const steps = new StepIndicator(".steps", handleNext, 4);
 });
 
 class StepIndicator {

@@ -112,6 +112,7 @@ $venue = get_post($venue_id);
     </form>
 
     <?php include_once WVL_PLUGIN_DIR . 'template-parts/dashboard/profile/your-story.php'; ?>
+    <?php include_once WVL_PLUGIN_DIR . 'template-parts/dashboard/profile/photographs.php'; ?>
 
     <p class="text-red-700 profile-form-error pt-3"></p>
 
