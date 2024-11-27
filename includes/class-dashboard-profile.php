@@ -24,6 +24,9 @@ class WVL_Dashboard_Profile
 
         add_action('wp_ajax_submit_profile_info', array($this, 'handle_profile_info'));
         add_action('wp_ajax_nopriv_submit_profile_info', array($this, 'handle_profile_info'));
+
+        add_action('wp_ajax_submit_profile_your_story', array($this, 'handle_profile_your_story'));
+        add_action('wp_ajax_nopriv_submit_profile_your_story', array($this, 'handle_profile_your_story'));
     }
 
 
@@ -78,6 +81,31 @@ class WVL_Dashboard_Profile
             $user_id = get_current_user_id();
             update_user_meta($user_id, 'first_name', $first_name);
             update_user_meta($user_id, 'last_name', $last_name);
+            wp_send_json_success(['message' => 'Profile information updated successfully.']);
+        } else {
+            wp_send_json_error(['message' => 'You must be logged in to update your profile.']);
+        }
+    }
+
+
+    public function handle_profile_your_story()
+    {
+        if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'dashboard_nonce')) {
+            wp_send_json_error(['message' => 'Invalid request.']);
+        }
+
+        $your_story = sanitize_text_field($_POST['your_story'] ?? '');
+
+        if (empty($your_story)) {
+            wp_send_json_error(['message' => 'Your Story field is required.']);
+        }
+
+        $venue_id = wvl_get_venue_id();
+        if ($venue_id) {
+            wp_update_post([
+                'ID' => $venue_id,
+                'post_content' => $your_story
+            ]);
             wp_send_json_success(['message' => 'Profile information updated successfully.']);
         } else {
             wp_send_json_error(['message' => 'You must be logged in to update your profile.']);

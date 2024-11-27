@@ -1,4 +1,5 @@
 import handleProfileInfoForm from "./handleProfileInfoForm";
+import handleYourStoryForm from "./handleYourStory";
 
 jQuery(document).ready(function ($) {
 
@@ -6,12 +7,14 @@ jQuery(document).ready(function ($) {
     async function handleNext(step) {
         if (step === 0) {
             return await handleProfileInfoForm();
+        } else if (step === 3) {
+            return await handleYourStoryForm();
         }
 
         return true;
     }
 
-    const steps = new StepIndicator(".steps", handleNext);
+    const steps = new StepIndicator(".steps", handleNext, 3);
 });
 
 class StepIndicator {
