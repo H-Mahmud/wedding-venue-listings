@@ -2,6 +2,14 @@
     <fieldset class="p-5 rounded-xl mb-8 border-gray-200">
         <legend class="mb-2 text-center"><?php _e('Cover Photo', 'wedding-venue-listings'); ?></legend>
 
+        <label for="upload_cover" class="cover-upload block text-center border border-gray-200 rounded-lg hover:border-dashed hover:border-blue-600 cursor-pointer">
+            <p class="text-center my-10">
+                Upload a Cover Photo <br>
+                <span class="text-xs text-gray-400">JPG, PNG, GIF</span><br>
+                <span class="text-blue-600">Browse</span>
+            </p>
+            <input type="file" name="upload_cover" id="upload_cover" class="hidden" accept="image/*">
+        </label>
     </fieldset>
 
     <fieldset class="p-5 rounded-xl mb-8 border-gray-200">
