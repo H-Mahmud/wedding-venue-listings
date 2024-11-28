@@ -51,35 +51,7 @@ $venue = get_post($venue_id);
         </fieldset>
     </form>
 
-    <form class="mt-14 profile-step-forms" id="profileServiceForm" data-step="1">
-        <fieldset class="p-5 rounded-xl border-gray-200">
-            <legend class="mb-2 text-center"><?php _e('Service Information', 'wedding-venue-listings'); ?></legend>
-            <div class="wvl-field">
-                <label for="venue_name">
-                    Venue Name <br>
-                    <input type="text" name="venue_name" value="<?php echo $venue->post_title; ?>" id="venue_name">
-                </label>
-            </div>
-
-
-            <div class="wvl-field-row mt-3">
-                <div class="wvl-field">
-                    <label for="vendor_type">
-                        Vendor Type <br>
-                        <select name="vendor_type" id="vendor_type"></select>
-                    </label>
-                </div>
-
-                <div class="wvl-field">
-                    <label for="event_type">
-                        Event Type <br>
-                        <select name="event_type" id="event_type"></select>
-                    </label>
-                </div>
-            </div>
-        </fieldset>
-    </form>
-
+    <?php include_once WVL_PLUGIN_DIR . 'template-parts/dashboard/profile/service-info.php'; ?>
 
     <form class="mt-14 profile-step-forms" id="profileContactForm" data-step="2">
         <fieldset class="p-5 rounded-xl border-gray-200">
