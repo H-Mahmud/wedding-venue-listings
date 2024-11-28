@@ -34,7 +34,6 @@ require_once WVL_PLUGIN_DIR . 'includes/wvl-functions.php';
 require_once WVL_PLUGIN_DIR . 'includes/class-dashboard-home.php';
 require_once WVL_PLUGIN_DIR . 'includes/class-dashboard-profile.php';
 require_once WVL_PLUGIN_DIR . 'includes/class-dashboard-contact.php';
-require_once WVL_PLUGIN_DIR . 'includes/class-dashboard-gallery.php';
 require_once WVL_PLUGIN_DIR . 'includes/class-dashboard-availability.php';
 require_once WVL_PLUGIN_DIR . 'includes/class-dashboard-analytics.php';
 require_once WVL_PLUGIN_DIR . 'includes/class-dashboard-account.php';
