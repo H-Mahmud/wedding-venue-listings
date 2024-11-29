@@ -31,7 +31,7 @@ $venue = get_post($venue_id);
         <div class="steps__connector"></div>
         <div class="steps__step" data-step="5">
             <div class="steps__step-number">6</div>
-            <div class="steps__step-name"> Photographs</div>
+            <div class="steps__step-name"> Payment (Optional)</div>
         </div>
     </div>
 

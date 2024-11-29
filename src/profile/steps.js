@@ -1,7 +1,7 @@
 import handleContactInfoForm from "./handleContactInfoForm";
 import handleGalleryUpload from "./handleGalleryUpload";
 import handleProfileInfoForm from "./handleProfileInfoForm";
-import handleProfilePhotographsForm from "./handleProfilePhotographsForm";
+import handlePhotographsForm from "./handlePhotographsForm";
 import handleServiceInfoForm from "./handleServiceInfoForm";
 import handleYourStoryForm from "./handleYourStory";
 
@@ -18,15 +18,15 @@ jQuery(document).ready(function ($) {
         } else if (step === 3) {
             return await handleYourStoryForm();
         } else if (step === 4) {
-            return await handleProfilePhotographsForm($);
+            return await handlePhotographsForm($);
         }
 
         return true;
     }
 
-    handleGalleryUpload($);
+    handlePhotographsForm($);
 
-    const steps = new StepIndicator(".steps", handleNext, 2);
+    const steps = new StepIndicator(".steps", handleNext, 4);
 });
 
 class StepIndicator {
