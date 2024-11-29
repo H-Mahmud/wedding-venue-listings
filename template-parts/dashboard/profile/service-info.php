@@ -33,6 +33,22 @@
         }
 
         $categories_json = json_encode($categories_by_parent);
+
+
+        // Current Venue category and subcategory ids
+        $categories = get_the_category($venue_id);
+
+        $category = 0;
+        $subcategory = 0;
+        if (!empty($categories)) {
+            foreach ($categories as $cat) {
+                if ($cat->parent == 0) {
+                    $category = $cat->term_id;
+                } else {
+                    $subcategory = $cat->term_id;
+                }
+            }
+        }
         ?>
         <div class="wvl-field-row mt-3">
             <div class="wvl-field">
@@ -40,13 +56,24 @@
                     Category <br>
                     <select name="category" id="category">
                         <option value="">Select a category</option>
-                        <?php if (!empty($categories_by_parent[0])) : ?>
-                            <?php foreach ($categories_by_parent[0] as $parent) : ?>
-                                <option value="<?php echo esc_attr($parent->term_id); ?>">
-                                    <?php echo esc_html($parent->name); ?>
-                                </option>
-                            <?php endforeach; ?>
-                        <?php endif; ?>
+                        <?php if (!empty($categories_by_parent[0])) :
+                            foreach ($categories_by_parent[0] as $parent) :
+                                if ($parent->term_id == $category) {
+                                    echo <<<HTML
+                                    <option value="$parent->term_id" selected="selected">
+                                        $parent->name
+                                    </option>
+                                HTML;
+                                } else {
+                                    echo <<<HTML
+                                    <option value="$parent->term_id">
+                                        $parent->name
+                                    </option>
+                                HTML;
+                                }
+
+                            endforeach;
+                        endif; ?>
                     </select>
                 </label>
             </div>
@@ -72,17 +99,29 @@
             const selectedCategory = this.value;
 
             if (selectedCategory) {
-                const subcategories = categoriesData[selectedCategory];
-                subcategory.empty();
-
-                if (subcategories) {
-                    subcategories.forEach(category => {
-                        subcategory.append(`<option value="${category.term_id}">${category.name}</option>`);
-                    });
-                }
+                subcategoryOptions(selectedCategory);
             } else {
                 subcategory.empty();
             }
+
         })
+        subcategoryOptions(<?php echo $category; ?>);
+
+        function subcategoryOptions(selectedCategory) {
+            const subcategories = categoriesData[selectedCategory];
+            subcategory.empty();
+
+            const selectedSubcategory = <?php echo $subcategory; ?>;
+
+            if (subcategories) {
+                subcategories.forEach(category => {
+                    if (selectedSubcategory && selectedSubcategory === category.term_id) {
+                        subcategory.append(`<option value="${category.term_id}" selected="selected">${category.name}</option>`);
+                    } else {
+                        subcategory.append(`<option value="${category.term_id}">${category.name}</option>`);
+                    }
+                });
+            }
+        }
     })
 </script>
