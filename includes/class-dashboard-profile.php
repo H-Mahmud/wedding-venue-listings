@@ -29,6 +29,10 @@ class WVL_Dashboard_Profile
         add_action('wp_ajax_submit_profile_service_info', array($this, 'handle_profile_service_info'));
         add_action('wp_ajax_nopriv_submit_profile_service_info', array($this, 'handle_profile_service_info'));
 
+
+        add_action('wp_ajax_submit_profile_contact_info', array($this, 'handle_profile_contact_info'));
+        add_action('wp_ajax_nopriv_submit_profile_contact_info', array($this, 'handle_profile_contact_info'));
+
         add_action('wp_ajax_submit_profile_your_story', array($this, 'handle_profile_your_story'));
         add_action('wp_ajax_nopriv_submit_profile_your_story', array($this, 'handle_profile_your_story'));
     }
@@ -151,6 +155,40 @@ class WVL_Dashboard_Profile
             wp_send_json_error(['message' => 'You must be logged in to update your profile.']);
         }
     }
+
+    public function handle_profile_contact_info()
+    {
+        if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'dashboard_nonce')) {
+            wp_send_json_error(['message' => 'Invalid request.']);
+        }
+
+        // const formData = {
+        //     action: 'submit_profile_contact_info',
+        //     nonce: WVL_DATA.ajax_nonce,
+        //     phone: phone,
+        //     email: email,
+        //     location: location
+        // }
+
+        $phone = sanitize_text_field($_POST['phone'] ?? '');
+        $email = sanitize_text_field($_POST['email'] ?? '');
+        $location = sanitize_text_field($_POST['location'] ?? '');
+
+        if (empty($phone) || empty($email) || empty($location)) {
+            wp_send_json_error(['message' => 'All fields are required.']);
+        }
+
+        $venue_id = wvl_get_venue_id();
+        if ($venue_id) {
+            update_post_meta($venue_id, 'phone', $phone);
+            update_post_meta($venue_id, 'email', $email);
+            update_post_meta($venue_id, 'location', $location);
+            wp_send_json_success(['message' => 'Profile information updated successfully.']);
+        } else {
+            wp_send_json_error(['message' => 'You must be logged in to update your profile.']);
+        }
+    }
+
 
 
     /**

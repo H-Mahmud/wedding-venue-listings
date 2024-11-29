@@ -52,37 +52,7 @@ $venue = get_post($venue_id);
     </form>
 
     <?php include_once WVL_PLUGIN_DIR . 'template-parts/dashboard/profile/service-info.php'; ?>
-
-    <form class="mt-14 profile-step-forms" id="profileContactForm" data-step="2">
-        <fieldset class="p-5 rounded-xl border-gray-200">
-            <legend class="mb-2 text-center"><?php _e('Contact Information', 'wedding-venue-listings'); ?></legend>
-
-            <div class="wvl-field-row">
-                <div class="wvl-field">
-                    <label for="phone">
-                        Phone <br>
-                        <input type="number" name="phone" id="phone">
-                    </label>
-                </div>
-
-                <div class="wvl-field">
-                    <label for="email">
-                        Email <br>
-                        <input type="text" name="email" id="email">
-                    </label>
-                </div>
-
-            </div>
-
-            <div class="wvl-field">
-                <label for="location">
-                    Location <br>
-                    <input type="text" name="location" id="location">
-                </label>
-            </div>
-        </fieldset>
-    </form>
-
+    <?php include_once WVL_PLUGIN_DIR . 'template-parts/dashboard/profile/contact-info.php'; ?>
     <?php include_once WVL_PLUGIN_DIR . 'template-parts/dashboard/profile/your-story.php'; ?>
     <?php include_once WVL_PLUGIN_DIR . 'template-parts/dashboard/profile/photographs.php'; ?>
 
