@@ -4,7 +4,7 @@
         <div class="wvl-field">
             <label for="venue_name">
                 Venue Name <br>
-                <input type="text" name="venue_name" value="<?php echo $venue->post_title; ?>" id="venue_name">
+                <input type="text" name="venue_name" value="<?php echo $venue->post_title; ?>" id="venue_name" required>
             </label>
         </div>
 

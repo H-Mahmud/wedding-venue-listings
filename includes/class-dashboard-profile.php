@@ -22,8 +22,12 @@ class WVL_Dashboard_Profile
         add_action('wvl_dashboard', array($this, 'render_wvl_dashboard_menu'));
         add_action('wp_ajax_upload_cover_photo', array($this, 'upload_cover_photo'));
 
+
         add_action('wp_ajax_submit_profile_info', array($this, 'handle_profile_info'));
         add_action('wp_ajax_nopriv_submit_profile_info', array($this, 'handle_profile_info'));
+
+        add_action('wp_ajax_submit_profile_service_info', array($this, 'handle_profile_service_info'));
+        add_action('wp_ajax_nopriv_submit_profile_service_info', array($this, 'handle_profile_service_info'));
 
         add_action('wp_ajax_submit_profile_your_story', array($this, 'handle_profile_your_story'));
         add_action('wp_ajax_nopriv_submit_profile_your_story', array($this, 'handle_profile_your_story'));
@@ -112,6 +116,41 @@ class WVL_Dashboard_Profile
         }
     }
 
+    public function handle_profile_service_info()
+    {
+        if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'dashboard_nonce')) {
+            wp_send_json_error(['message' => 'Invalid request.']);
+        }
+
+        $venue_name = sanitize_text_field($_POST['venue_name'] ?? '');
+        $vendor_type = sanitize_text_field($_POST['vendor_type'] ?? '');
+        $event_type = sanitize_text_field($_POST['event_type'] ?? '');
+        $category = sanitize_text_field($_POST['category'] ?? '');
+        $sub_category = sanitize_text_field($_POST['sub_category'] ?? '');
+
+        if (empty($venue_name) || empty($vendor_type) || empty($event_type) || empty($category) || empty($sub_category)) {
+            wp_send_json_error(['message' => 'All fields are required.']);
+        }
+
+        $venue_id = wvl_get_venue_id();
+        if ($venue_id) {
+            wp_update_post([
+                'ID' => $venue_id,
+                'post_title' => $venue_name,
+            ]);
+
+
+            wp_set_post_terms($venue_id, $vendor_type, 'vendor_type', false);
+            wp_set_post_terms($venue_id, $event_type, 'event_type', false);
+
+            $categories = [$category, $sub_category];
+            wp_set_post_terms($venue_id, $categories, 'category', false);
+
+            wp_send_json_success(['message' => 'Profile information updated successfully.']);
+        } else {
+            wp_send_json_error(['message' => 'You must be logged in to update your profile.']);
+        }
+    }
 
 
     /**
