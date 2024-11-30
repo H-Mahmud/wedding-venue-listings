@@ -33,25 +33,29 @@ class WVL_Dashboard
         if (defined('WVL_DEVELOPMENT') && WVL_DEVELOPMENT) {
             // wp_enqueue_script('wvl-main', 'http://localhost:3000/main.bundle.js', array('jquery'), time(), true);
             wp_enqueue_script('wvl-main',  WVL_PLUGIN_URL . '/assets/dist/main.bundle.js', array('jquery'), time(), true);
+            wp_enqueue_script('wvl-dashboard',  WVL_PLUGIN_URL . '/assets/dist/dashboard.bundle.js', array('jquery'), time(), true);
         } else {
             wp_enqueue_style('wvl-style', WVL_PLUGIN_URL . '/assets/dist/style.min.css', array(), '1.0');
             wp_enqueue_script('wvl-main', WVL_PLUGIN_URL . '/assets/dist/main.bundle.min.js', array('jquery'), '1.0', true);
+            wp_enqueue_script('wvl-dashboard', WVL_PLUGIN_URL . '/assets/dist/dashboard.bundle.min.js', array('jquery'), '1.0', true);
         }
 
-        wp_enqueue_script('choices.js', WVL_PLUGIN_URL . '/assets/lib/choices.js/js/choices.min.js', array('jquery'), null, true);
-        wp_enqueue_style('choices.js', WVL_PLUGIN_URL . '/assets/lib/choices.js/css/choices.min.css');
+        if (is_page('dashboard')) {
+            wp_enqueue_script('choices.js', WVL_PLUGIN_URL . '/assets/lib/choices.js/js/choices.min.js', array('jquery'), null, true);
+            wp_enqueue_style('choices.js', WVL_PLUGIN_URL . '/assets/lib/choices.js/css/choices.min.css');
 
-        wp_enqueue_script('moment', WVL_PLUGIN_URL . '/assets/lib/moment/moment.min.js', [], null, true);
-        wp_enqueue_script('fullcalendar', WVL_PLUGIN_URL . '/assets/lib/fullcalendar/fullcalendar.min.js', ['jquery', 'moment'], null, true);
+            wp_enqueue_script('moment', WVL_PLUGIN_URL . '/assets/lib/moment/moment.min.js', [], null, true);
+            wp_enqueue_script('fullcalendar', WVL_PLUGIN_URL . '/assets/lib/fullcalendar/fullcalendar.min.js', ['jquery', 'moment'], null, true);
 
-        $data = [
-            'ajax_url'      => admin_url('admin-ajax.php'),
-            'ajax_nonce'    => wp_create_nonce('dashboard_nonce'),
-            'vendorTypes'   => get_wvl_terms_options('vendor_type'),
-            'eventTypes'   => get_wvl_terms_options('event_type')
-        ];
+            $data = [
+                'ajax_url'      => admin_url('admin-ajax.php'),
+                'ajax_nonce'    => wp_create_nonce('dashboard_nonce'),
+                'vendorTypes'   => get_wvl_terms_options('vendor_type'),
+                'eventTypes'   => get_wvl_terms_options('event_type')
+            ];
 
-        wp_localize_script('wvl-main', 'WVL_DATA', $data);
+            wp_localize_script('wvl-dashboard', 'WVL_DATA', $data);
+        }
     }
 
     /**

@@ -22,9 +22,12 @@ module.exports = {
         ],
 
     },
-    entry: "./src/index.js",
+    entry: {
+        main: "./src/index.js",
+        dashboard: "./src/dashboard.js",
+    },
     output: {
-        filename: isProduction ? "main.bundle.min.js" : "main.bundle.js",
+        filename: isProduction ? "[name].bundle.min.js" : "[name].bundle.js",
         path: path.resolve(__dirname, "assets/dist"),
         clean: true,
     },

@@ -1,7 +1,4 @@
-import './dev-env'; // Development only
-import './profile/upload-cover-photo';
-import './profile/steps';
-import './full-calendar';
+// import './dev-env'; // Development only
 
 // Styles
 import "./style.css";
