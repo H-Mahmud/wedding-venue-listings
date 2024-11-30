@@ -304,7 +304,6 @@ class WVL_Account_Auth
         // wp_enqueue_script('wvl-main', WVL_PLUGIN_URL . '/assets/js/wvl-main.js', array('jquery'), '1.0', true);
 
         // Fontawesom Todo: move to separate file
-        wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css', [], '5.15.3');
 
         wp_localize_script('wvl-main', 'ajax_object', [
             'ajax_url' => admin_url('admin-ajax.php'),

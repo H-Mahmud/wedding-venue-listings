@@ -1,18 +1,19 @@
 <?php
 get_header(); ?>
 
-<div id="primary" class="venue-listing bg-white">
-    <main id="main" class="site-main site-container " role="main">
-        <div class="wvl-sidebar">
+<div id="primary" class="listing-archive">
+    <main id="main" class="site-main site-container md:flex md:gap-8 md:justify-between items-start block" role="main">
+        <div class="wvl-sidebar md:w-[310px] w-full">
 
-            <form action="<?php echo site_url('listing'); ?>">
-                <div class="wvl-search-form">
-                    <input class="!bg-white" type="text" name="s" placeholder="Search for a venue" value="<?php echo get_search_query(); ?>">
-                    <input class="wlv-btn-primary" type="submit" value="Search">
+            <form action="<?php echo site_url('listing'); ?>" class="mb-6">
+                <div class="flex justify-between items-center border border-quaternary rounded-md p-1">
+                    <input class="!bg-white !border-0" type="text" name="s" placeholder="Search for a venue" value="<?php echo get_query_var('location'); ?>">
+                    <button type="button" class="search-icon"><i class="fa-solid fa-magnifying-glass p-3 rounded-lg inline-block bg-primary text-white"></i></button>
                 </div>
             </form>
 
-            <div class="wlv-filter">
+            <div class="wvl-widgets border-quaternary border px-5 py-6 rounded-md">
+
                 <div class="filter vendor-types">
                     <h3>vendor Types</h3>
                     <?php
@@ -46,10 +47,11 @@ get_header(); ?>
                     <h3>Availability</h3>
                     <input type="date">
                 </div>
+
             </div>
         </div>
 
-        <div class="wvl-content">
+        <div class="wvl-content w-full">
             <?php
 
             $args = array(
@@ -71,7 +73,7 @@ get_header(); ?>
                                 <img src="<?php echo get_the_post_thumbnail_url(); ?>" alt="Venue Image">
                             </div>
                             <div class="item-content">
-                                <h2 class="item-title">
+                                <h2 class="item-title text-4xl">
                                     <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
                                 </h2>
                                 <div>

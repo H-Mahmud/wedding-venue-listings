@@ -1,0 +1,69 @@
+.listing-archive {
+
+}
+.venue-listing .site-main {
+    padding-top: 16px;
+    display: flex;
+    gap: 24px;
+}
+/**
+* Sidebar
+*/
+.venue-listing .wvl-sidebar {
+    /* width: 310px; */
+}
+
+/**
+* Main Content
+*/
+.listing-archive .wvl-content {
+    /* width: calc(100% - (310px + 24px)); */
+}
+
+
+
+.venue-listing .site-main .wlv-filter {
+    @apply border border-gray-200 rounded-xl p-4;
+}
+
+.venue-listing .site-main .wlv-filter .filter h3 {
+    @apply font-bold mt-0 mb-2;
+
+}
+
+.venue-listing .site-main .wlv-filter .filter {
+    @apply mb-6;
+}
+
+.venue-listing .site-main .wlv-filter input[type="checkbox"] {
+    @apply mb-2 inline-block;
+}
+
+
+
+.venue-listing .site-main .wvl-content .total-result {
+    font-size: 22px;
+    font-weight: 600;
+
+}
+
+.venue-listing .site-main .wvl-content .wvl-list .wvl-list-item {
+    display: flex;
+    gap: 24px;
+}
+
+.venue-listing .site-main .wvl-content .wvl-list .wvl-list-item .thumbnail {
+    width: 320px;
+    height: auto;
+}
+
+.venue-listing .site-main .wvl-content .wvl-list .wvl-list-item .item-content {
+    width: calc(100% - (320px + 24px));
+}
+
+.venue-listing .site-main .wvl-content .wvl-list .wvl-list-item .item-content .meta {
+    display: flex;
+    justify-content: flex-start;
+    gap: 32px;
+    margin-bottom: 12px;
+}
