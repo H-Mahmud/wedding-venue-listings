@@ -1,26 +1,10 @@
 .listing-archive {
 
 }
-.venue-listing .site-main {
-    padding-top: 16px;
-    display: flex;
-    gap: 24px;
-}
+
 /**
 * Sidebar
 */
-.venue-listing .wvl-sidebar {
-    /* width: 310px; */
-}
-
-/**
-* Main Content
-*/
-.listing-archive .wvl-content {
-    /* width: calc(100% - (310px + 24px)); */
-}
-
-
 
 .venue-listing .site-main .wlv-filter {
     @apply border border-gray-200 rounded-xl p-4;
@@ -40,6 +24,9 @@
 }
 
 
+/**
+* Listing archive content
+*/
 
 .venue-listing .site-main .wvl-content .total-result {
     font-size: 22px;

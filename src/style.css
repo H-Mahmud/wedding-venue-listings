@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+
+@layer components {
+    .wvl-btn-primary {
+        @apply focus:ring-1 focus:ring-blue-300 font-bold rounded-md text-sm px-5 py-4 me-2 mb-2 focus:z-10 inline-block text-center mt-4 text-white bg-primary hover:text-gray-100;
+
+    }
+}
+
+
+@import "./styles/components.css";
+
 @import './styles/auth-pages.css';
 @import './profile/steps.css';
 @import './styles/full-calendar.css';

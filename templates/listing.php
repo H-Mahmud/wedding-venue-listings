@@ -2,7 +2,7 @@
 get_header(); ?>
 
 <div id="primary" class="listing-archive">
-    <main id="main" class="site-main site-container md:flex md:gap-8 md:justify-between items-start block" role="main">
+    <main id="main" class="site-main site-container md:flex md:gap-10 md:justify-between items-start block" role="main">
         <div class="wvl-sidebar md:w-[310px] w-full">
 
             <form action="<?php echo site_url('listing'); ?>" class="mb-6">
@@ -62,39 +62,46 @@ get_header(); ?>
 
             if ($query->have_posts()):
             ?>
-                <p class="total-result"><?php echo $query->found_posts; ?> Venues Found</p>
+                <p class="total-result font-semibold text-2xl mb-8 mt-2"><span><?php echo $query->found_posts; ?></span> Search Result</p>
                 <div class="wvl-list">
                     <?php
                     while ($query->have_posts()) :
                         $query->the_post(); ?>
 
-                        <div class="wvl-list-item">
-                            <div class="thumbnail">
-                                <img src="<?php echo get_the_post_thumbnail_url(); ?>" alt="Venue Image">
+                        <div class="wvl-list-item grid grid-cols-[320px_1fr] gap-8">
+                            <div class="thumbnail h-full max-w-80">
+                                <?php the_post_thumbnail('full', array('class' => 'w-full h-full block object-cover rounded-md'));
+                                ?>
+
                             </div>
-                            <div class="item-content">
-                                <h2 class="item-title text-4xl">
-                                    <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                            <div class="item-content flex-1">
+                                <h2 class="item-title">
+                                    <a class=" font-semibold text-2xl" href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
                                 </h2>
-                                <div>
-                                    <i class="fa-solid fa-location-dot"></i>
+                                <p class="text-secondary py-2 text-sm">
+                                    <i class="fa-solid fa-location-dot text-primary"></i>
                                     1901 Thornridge Cir. Shiloh, Hawaii 81063
-                                </div>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a </p>
-                                <div class="meta">
-                                    <span>Price Range: <b>$1000 - $5000</b></span>
-                                    <span>
-                                        <span class="stars">
+                                </p>
+                                <p class="text-secondary text-sm mt-1">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a </p>
+                                <div class="meta flex mt-5 gap-4">
+                                    <span class="inline-block text-secondary text-sm">Price Range: <b class="text-primary">$1000 - $5000</b></span>
+
+                                    <span class="h-6 w-[1.5px] bg-quaternary inline-block"></span>
+
+                                    <span class="inline-flex">
+                                        <span class="stars inline-flex justify-start gap-1">
                                             <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
                                             <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
                                             <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
                                             <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
                                             <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
                                         </span>
-                                        <span class="amount">(1.8 k+ Reviews)</span>
+                                        <span class="text-secondary text-sm">(1.8 k+ Reviews)</span>
                                     </span>
                                 </div>
-                                <a href="<?php the_permalink(); ?>"><button>Request a Pricing</button></a>
+                                <div class="mt-4">
+                                    <a class="wvl-btn-primary " href="<?php the_permalink(); ?>">Request a Pricing</a>
+                                </div>
                         <?php
                     endwhile;
                 else:
