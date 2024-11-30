@@ -1,5 +1,8 @@
 // import './dev-env'; // Development only
 
+// Components
+import './components/calendar';
+
 // Styles
 import "./style.css";
 import "./styles/forms.css";
