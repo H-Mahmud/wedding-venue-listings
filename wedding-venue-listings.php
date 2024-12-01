@@ -41,3 +41,23 @@ require_once WVL_PLUGIN_DIR . 'includes/class-account-auth.php';
 require_once WVL_PLUGIN_DIR . 'includes/class-dashboard.php';
 require_once WVL_PLUGIN_DIR . 'includes/class-venue.php';
 require_once WVL_PLUGIN_DIR . 'includes/class-listing.php';
+
+add_action('wvl_notice', function () {
+    if (isset($_SESSION['wvl_notice'])) {
+        $notification = $_SESSION['wvl_notice'];
+
+        if ($_SESSION['wvl_notice']['type'] == 'success') {
+            echo '<div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+                <span class="block sm:inline">' . $notification['message'] . '</span>
+                <span class="absolute top-0 bottom-0 right-0 px-4 py-3"></span>
+            </div>';
+            unset($_SESSION['wvl_notice']);
+        } else if ($_SESSION['wvl_notice']['type'] == 'error') {
+            echo '<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                <span class="block sm:inline">' . $notification['message'] . '</span>
+                <span class="absolute top-0 bottom-0 right-0 px-4 py-3"></span>
+            </div>';
+            unset($_SESSION['wvl_notice']);
+        }
+    }
+});

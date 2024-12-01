@@ -75,3 +75,21 @@ function get_wvl_terms_options($taxonomy, $hide_empty = false)
 
     return $vendor_types;
 }
+
+/**
+ * Adds a notice to the session for displaying later.
+ *
+ * This function stores a notice message with a specified type
+ * in the session, which can be rendered on the frontend using
+ * the 'wvl_notice' action hook.
+ *
+ * @param string $message The message to be displayed in the notice.
+ * @param string $type    Optional. The type of the notice. Either 'success' or 'error'. Default 'success'.
+ */
+function wvl_add_notice($message, $type = 'success')
+{
+    $_SESSION['wvl_notice'] = [
+        'message' => $message,
+        'type' => $type
+    ];
+}
