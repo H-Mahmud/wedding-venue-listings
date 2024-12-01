@@ -1,18 +1,21 @@
-<form class=" mb-14">
+<?php $wvl_user_id = get_current_user_id(); ?>
+
+<form class=" mb-14" method="post">
+    <?php wp_nonce_field('update_account', '_update_account'); ?>
     <fieldset class="p-5 rounded-xl border-gray-200">
         <legend class="mb-2"><?php _e('Account Information', 'wedding-venue-listings'); ?></legend>
 
 
         <label for="user_avatar" class="cursor-pointer h-28 w-28 mb-2 inline-block relative group text-center">
             <?php
-            $local_avatar = get_user_meta(get_current_user_id(), 'simple_local_avatar', true);
+            $local_avatar = get_user_meta($wvl_user_id, 'simple_local_avatar', true);
             if ($local_avatar) {
                 echo wp_get_attachment_image($local_avatar, 'thumbnail', '', ['class' => 'rounded-full h-full w-full object-cover userAvatarPreview']);
             } else {
-                echo get_avatar(get_current_user_id(), 112, '', __('Upload Avatar'), ['class' => 'rounded-full h-full w-full object-cover userAvatarPreview']);
+                echo get_avatar($wvl_user_id, 112, '', __('Upload Avatar'), ['class' => 'rounded-full h-full w-full object-cover userAvatarPreview']);
             }
             ?>
-            <input type="file" class="hidden" name="user_avatar" id="user_avatar" accept="image/*">
+            <input type="file" class="hidden" id="user_avatar" accept="image/*">
 
             <span
                 class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full">
@@ -61,20 +64,20 @@
             });
         </script>
 
-
         <div class="wvl-field-row">
             <div class="wvl-field">
-                <label for="fistName">First Name:</label>
-                <input type="text" id="fistName" name="first_name" placeholder="John" required>
+                <label for="fistName"><?php _e('First Name', 'wedding-venue-listings'); ?></label>
+                <input type="text" id="fistName" name="first_name" value="<?php echo get_user_meta($wvl_user_id, 'first_name', true); ?>" placeholder="John" required>
             </div>
 
             <div class="wvl-field">
-                <label for="lastName">Last Name:</label>
-                <input type="text" id="lastName" name="last_name" placeholder="Doe" required>
+                <label for="lastName"><?php _e('Last Name', 'wedding-venue-listings'); ?></label>
+                <input type="text" id="lastName" name="last_name" value="<?php echo get_user_meta($wvl_user_id, 'last_name', true); ?>" placeholder="Doe" required>
             </div>
         </div>
+        <?php do_action('wvl_notice', 'wvl_update_account'); ?>
     </fieldset>
-    <button type="submit" class="wvl-btn-primary">Save</button>
+    <button type="submit" name="wvl_account_info" class="wvl-btn-primary"><?php _e('Save Changes', 'wedding-venue-listings'); ?></button>
 </form>
 
 <form method="post">

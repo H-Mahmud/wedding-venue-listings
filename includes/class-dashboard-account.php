@@ -21,12 +21,24 @@ class WVL_Dashboard_Account
     {
         add_action('wvl_dashboard', array($this, 'render_wvl_dashboard_menu'));
         add_action('init', array($this, 'change_account_password'));
+        add_action('init', array($this, 'update_account_info'));
 
         add_action('wp_ajax_wvl_upload_avatar', array($this, 'handle_avatar_upload'));
         add_action('wp_ajax_nopriv_wvl_upload_avatar', array($this, 'handle_avatar_upload'));
     }
 
-
+    /**
+     * Gets the singleton instance of the class.
+     *
+     * @return WVL_Dashboard_Account The singleton instance.
+     */
+    public static function get_instance()
+    {
+        if (! self::$_instance) {
+            self::$_instance = new self();
+        }
+        return self::$_instance;
+    }
 
     /**
      * Renders the Account menu item in the Wedding Venue Listings dashboard menu.
@@ -60,21 +72,17 @@ class WVL_Dashboard_Account
         require_once WVL_PLUGIN_DIR . '/template-parts/dashboard/account.php';
     }
 
-
     /**
-     * Gets the singleton instance of the class.
+     * Handles the account password change request for the current user.
      *
-     * @return WVL_Dashboard_Account The singleton instance.
+     * This function checks if the password change form has been submitted, verifies the nonce,
+     * and ensures the current user has the required capability to change the account password.
+     * If the new password and confirmation password match, it updates the user's password and
+     * sets the appropriate authentication cookies. Success or error notices are added based on
+     * the outcome, and the user is redirected to the account page.
+     *
+     * @return void
      */
-    public static function get_instance()
-    {
-        if (! self::$_instance) {
-            self::$_instance = new self();
-        }
-        return self::$_instance;
-    }
-
-
     public function change_account_password()
     {
         if (isset($_POST['wvl_change_password'])) {
@@ -106,6 +114,42 @@ class WVL_Dashboard_Account
         }
     }
 
+    /**
+     * Updates the user's account information, including their first name and last name.
+     *
+     * Requires the user to have the manage_account capability.
+     *
+     * @return void
+     */
+    public function update_account_info()
+    {
+        if (isset($_POST['wvl_account_info'])) {
+            if (!isset($_POST['_update_account']) || !wp_verify_nonce($_POST['_update_account'], 'update_account')) {
+                return;
+            }
+            if (!current_user_can('manage_account')) {
+                wvl_add_notice(__('You do not have permission to update your account information.', 'wedding-venue-listings'), 'error', 'wvl_update_account');
+                wp_safe_redirect(site_url('dashboard/account/'));
+                exit;
+            }
+            $user_id = get_current_user_id();
+            $first_name = sanitize_text_field($_POST['first_name']);
+            $last_name = sanitize_text_field($_POST['last_name']);
+
+            if (empty($first_name) || empty($last_name)) {
+                wvl_add_notice(__('First name and last name are required.', 'wedding-venue-listings'), 'error', 'wvl_update_account');
+                wp_safe_redirect(site_url('dashboard/account/'));
+                exit;
+            }
+
+            update_user_meta($user_id, 'first_name', $first_name);
+            update_user_meta($user_id, 'last_name', $last_name);
+
+            wvl_add_notice(__('Account information updated successfully.', 'wedding-venue-listings'), 'success', 'wvl_update_account');
+            wp_safe_redirect(site_url('dashboard/account/'));
+            exit;
+        }
+    }
 
     /**
      * Handles the avatar upload via AJAX.
