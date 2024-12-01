@@ -20,6 +20,7 @@ class WVL_Dashboard_Account
     private final function __construct()
     {
         add_action('wvl_dashboard', array($this, 'render_wvl_dashboard_menu'));
+        add_action('init', array($this, 'change_account_password'));
     }
 
 
@@ -42,7 +43,6 @@ class WVL_Dashboard_Account
             'callback' => array($this, 'account_page_cb'),
         ]);
     }
-
 
 
     /**
@@ -69,6 +69,38 @@ class WVL_Dashboard_Account
             self::$_instance = new self();
         }
         return self::$_instance;
+    }
+
+
+    public function change_account_password()
+    {
+        if (isset($_POST['wvl_change_password'])) {
+            if (!isset($_POST['_change_password']) || !wp_verify_nonce($_POST['_change_password'], 'change_password')) {
+                return;
+            }
+            if (!current_user_can('manage_account')) {
+                $_SESSION['wvl_change_password_error'] = __('You do not have permission to change your account password.', 'wedding-venue-listings');
+                wp_safe_redirect(site_url('dashboard/account/'));
+                exit;
+            }
+
+            $new_password = sanitize_text_field($_POST['new_password']);
+            $confirm_password = sanitize_text_field($_POST['confirm_password']);
+
+            if ($new_password === $confirm_password) {
+                $user_id = get_current_user_id();
+                wp_set_password($new_password, $user_id);
+                wp_set_current_user($user_id);
+                wp_set_auth_cookie($user_id);
+                wvl_add_notice(__('Password changed successfully.', 'wedding-venue-listings'), 'success');
+                wp_safe_redirect(site_url('dashboard/account/'));
+                exit;
+            } else {
+                wvl_add_notice(__('Passwords do not match.', 'wedding-venue-listings'), 'error');
+                wp_safe_redirect(site_url('dashboard/account/'));
+                exit;
+            }
+        }
     }
 }
 WVL_Dashboard_Account::get_instance();
