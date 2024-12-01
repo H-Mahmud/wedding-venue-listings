@@ -23,6 +23,8 @@ class WVL_Account_Auth
     {
         add_action('template_redirect', array($this, 'restrict_logged_user'), 100);
         add_action('init', array($this, 'register_roles_vendor_customer'));
+        add_action('init', array($this, 'add_vendor_capabilities'));
+
         add_action('admin_init', array($this, 'redirect_vendor_and_customer_from_dashboard'));
         add_action('after_setup_theme', array($this, 'remove_admin_bar_for_vendor_and_customer'));
 
@@ -96,6 +98,26 @@ class WVL_Account_Auth
         );
     }
 
+    /**
+     * Adds the 'manage_venue' capability to the 'vendor' and 'administrator' roles.
+     *
+     * The 'vendor' and 'administrator' roles are granted the capability to manage venues.
+     * This allows them to perform venue management tasks within the application.
+     *
+     * @since 1.0.0
+     */
+    public function add_vendor_capabilities()
+    {
+        $vendor_role = get_role('vendor');
+        $admin_role = get_role('administrator');
+
+        if ($vendor_role) {
+            $vendor_role->add_cap('manage_venue');
+        }
+        if ($admin_role) {
+            $admin_role->add_cap('manage_venue');
+        }
+    }
 
     /**
      * Redirects 'vendor' and 'customer' roles from the admin dashboard to the homepage.
