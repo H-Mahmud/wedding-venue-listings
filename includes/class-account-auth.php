@@ -261,22 +261,22 @@ class WVL_Account_Auth
             return;
         }
 
-        if (isset($_POST['register'])) {
+        if (isset($_POST['register_vendor'])) {
             $username = sanitize_user($_POST['username']);
             $email = sanitize_email($_POST['email']);
             $password = sanitize_text_field($_POST['password']);
+            $venue_name = sanitize_text_field($_POST['venue_name']);
 
             $user_id = wp_create_user($username, $password, $email);
 
             if (is_wp_error($user_id)) {
                 $_SESSION['wvl_register_error'] = $user_id->get_error_message();
             } else {
-                $$u = new WP_User($user_id);
+                $u = new WP_User($user_id);
                 $u->set_role('vendor');
 
                 wp_insert_post(array(
-                    'post_title'    => sanitize_text_field($_POST['venue_name']),
-                    'post_content'  => '',
+                    'post_title'    => $venue_name,
                     'post_status'   => 'draft',
                     'post_type'     => 'venue',
                     'post_author'   => $user_id
