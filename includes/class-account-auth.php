@@ -22,6 +22,11 @@ class WVL_Account_Auth
     private final function __construct()
     {
         add_action('template_redirect', array($this, 'restrict_logged_user'), 100);
+        add_action('init', array($this, 'register_roles_vendor_customer'));
+        add_action('admin_init', array($this, 'redirect_vendor_and_customer_from_dashboard'));
+        add_action('after_setup_theme', array($this, 'remove_admin_bar_for_vendor_and_customer'));
+
+
         add_action('init', array($this, 'user_logging'));
         add_action('init', array($this, 'user_register'));
         add_action('init', array($this, 'user_password_forgot'));
@@ -52,6 +57,74 @@ class WVL_Account_Auth
         }
     }
 
+
+    /**
+     * Registers 'vendor' and 'customer' roles.
+     *
+     * 'vendor' and 'customer' roles are created with limited capabilities.
+     * They are only able to read posts and cannot edit, delete, publish, or upload files.
+     *
+     * @since 1.0.0
+     */
+    public function register_roles_vendor_customer()
+    {
+        add_role(
+            'vendor',
+            'Vendor',
+            array(
+                'read'              => true,
+                'edit_posts'        => false,
+                'delete_posts'      => false,
+                'publish_posts'     => false,
+                'upload_files'      => false,
+            )
+        );
+
+        add_role(
+            'customer',
+            'Customer',
+            array(
+                'read'              => true,
+                'edit_posts'        => false,
+                'delete_posts'      => false,
+                'publish_posts'     => false,
+                'upload_files'      => false,
+            )
+        );
+    }
+
+
+    /**
+     * Redirects 'vendor' and 'customer' roles from the admin dashboard to the homepage.
+     *
+     * This function checks if the current user is in the admin panel and not performing an AJAX request.
+     * If the user has the 'vendor' or 'customer' role, it redirects them to the homepage.
+     *
+     * @since 1.0.0
+     */
+    public function redirect_vendor_and_customer_from_dashboard()
+    {
+        if (is_admin() && !defined('DOING_AJAX') && (current_user_can('vendor') || current_user_can('customer'))) {
+            wp_redirect(home_url());
+            exit;
+        }
+    }
+
+
+    /**
+     * Hides the admin bar for users with the 'vendor' or 'customer' roles.
+     *
+     * This function checks if the current user is in the 'vendor' or 'customer' role and
+     * hides the admin bar if true.
+     *
+     * @since 1.0.0
+     */
+    public function remove_admin_bar_for_vendor_and_customer()
+    {
+        if (current_user_can('vendor') || current_user_can('customer')) {
+            show_admin_bar(false);
+        }
+    }
 
     /**
      * Login form shortcode
