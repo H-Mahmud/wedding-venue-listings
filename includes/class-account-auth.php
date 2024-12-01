@@ -42,8 +42,6 @@ class WVL_Account_Auth
         add_shortcode('wvl-forgot-password', array($this, 'forgot_password_form_shortcode'));
         add_shortcode('wvl-reset-password', array($this, 'reset_password_form_shortcode'));
         add_shortcode('wvl-dashboard', array($this, 'dashboard_shortcode'));
-
-        add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'));
     }
 
 
@@ -468,24 +466,6 @@ class WVL_Account_Auth
             wp_redirect(home_url());
             exit;
         }
-    }
-
-
-    public function enqueue_scripts()
-    {
-        // wp_enqueue_style('nepali-date-picker', WVL_PLUGIN_URL . '/assets/css/nepali-date-picker.css');
-        // wp_enqueue_style('wvl-style', WVL_PLUGIN_URL . '/assets/css/wvl-style.css');
-
-        wp_enqueue_script('chart-js', WVL_PLUGIN_URL . '/assets/js/chart.js', array(), null, true);
-        wp_enqueue_script('nepali-date-picker', WVL_PLUGIN_URL . '/assets/js/nepali-date-picker.js', ['jquery'], false, true);
-        // wp_enqueue_script('wvl-main', WVL_PLUGIN_URL . '/assets/js/wvl-main.js', array('jquery'), '1.0', true);
-
-        // Fontawesom Todo: move to separate file
-
-        wp_localize_script('wvl-main', 'ajax_object', [
-            'ajax_url' => admin_url('admin-ajax.php'),
-            'ajax_nonce' => wp_create_nonce('upload_image_nonce')
-        ]);
     }
 
 
