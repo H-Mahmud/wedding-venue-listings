@@ -21,6 +21,9 @@ class WVL_Dashboard_Account
     {
         add_action('wvl_dashboard', array($this, 'render_wvl_dashboard_menu'));
         add_action('init', array($this, 'change_account_password'));
+
+        add_action('wp_ajax_wvl_upload_avatar', array($this, 'handle_avatar_upload'));
+        add_action('wp_ajax_nopriv_wvl_upload_avatar', array($this, 'handle_avatar_upload'));
     }
 
 
@@ -101,6 +104,64 @@ class WVL_Dashboard_Account
                 exit;
             }
         }
+    }
+
+
+    /**
+     * Handles the avatar upload via AJAX.
+     *
+     * This function checks if the user is logged in, if the security nonce is valid, and if a file has been uploaded.
+     * It then handles the upload of the avatar via the WordPress built-in functions wp_handle_upload and wp_insert_attachment.
+     * Finally, it updates the user meta with the new avatar ID and sends a JSON response back to the client.
+     *
+     * @return void
+     */
+    public function handle_avatar_upload()
+    {
+        if (!is_user_logged_in()) {
+            wp_send_json_error(['message' => __('You must be logged in to upload an avatar.', 'wedding-venue-listings')]);
+        }
+
+        if (!isset($_POST['security']) || !wp_verify_nonce($_POST['security'], 'wvl_upload_avatar')) {
+            wp_send_json_error(['message' => __('Invalid security token.', 'wedding-venue-listings')]);
+        }
+
+        if (!isset($_FILES['file']) || empty($_FILES['file']['tmp_name'])) {
+            wp_send_json_error(['message' => __('No file uploaded.', 'wedding-venue-listings')]);
+        }
+
+        $file = $_FILES['file'];
+        $upload = wp_handle_upload($file, ['test_form' => false]);
+        if (!empty($upload['error'])) {
+            wp_send_json_error(['message' => $upload['error']], 500);
+        }
+
+        $user_id = get_current_user_id();
+        $attachment = [
+            'post_mime_type' => $upload['type'],
+            'post_title'     => sanitize_file_name($file['name']),
+            'post_content'   => '',
+            'post_status'    => 'inherit',
+        ];
+
+        $attachment_id = wp_insert_attachment($attachment, $upload['file']);
+        if (is_wp_error($attachment_id) || !$attachment_id) {
+            wp_send_json_error(['message' => 'Failed to save the avatar in the media library.'], 500);
+        }
+
+        require_once ABSPATH . 'wp-admin/includes/image.php';
+        wp_update_attachment_metadata($attachment_id, wp_generate_attachment_metadata($attachment_id, $upload['file']));
+
+        $current_avatar_id = get_user_meta($user_id, 'simple_local_avatar', true);
+        if ($current_avatar_id) {
+            wp_delete_attachment($current_avatar_id, true);
+        }
+
+        update_user_meta($user_id, 'simple_local_avatar', $attachment_id);
+
+        // wp_send_json_success(['message' => 'Avatar updated successfully.', 'attachment_id' => $attachment_id]);
+
+        wp_send_json_success(['message' => 'Avatar uploaded successfully!']);
     }
 }
 WVL_Dashboard_Account::get_instance();
