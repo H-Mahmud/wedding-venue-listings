@@ -86,10 +86,11 @@ function get_wvl_terms_options($taxonomy, $hide_empty = false)
  * @param string $message The message to be displayed in the notice.
  * @param string $type    Optional. The type of the notice. Either 'success' or 'error'. Default 'success'.
  */
-function wvl_add_notice($message, $type = 'success')
+function wvl_add_notice($message, $type = 'success', $source = '')
 {
     $_SESSION['wvl_notice'] = [
         'message' => $message,
-        'type' => $type
+        'type' => $type,
+        'source' => $source
     ];
 }

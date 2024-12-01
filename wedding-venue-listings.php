@@ -42,9 +42,13 @@ require_once WVL_PLUGIN_DIR . 'includes/class-dashboard.php';
 require_once WVL_PLUGIN_DIR . 'includes/class-venue.php';
 require_once WVL_PLUGIN_DIR . 'includes/class-listing.php';
 
-add_action('wvl_notice', function () {
+add_action('wvl_notice', function ($source) {
     if (isset($_SESSION['wvl_notice'])) {
         $notification = $_SESSION['wvl_notice'];
+
+        if ($notification['source'] != $source) {
+            return;
+        }
 
         if ($_SESSION['wvl_notice']['type'] == 'success') {
             echo '<div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
