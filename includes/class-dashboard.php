@@ -52,9 +52,7 @@ class WVL_Dashboard
         if (is_page('dashboard')) {
             wp_enqueue_script('choices.js', WVL_PLUGIN_URL . '/assets/lib/choices.js/js/choices.min.js', array('jquery'), null, true);
             wp_enqueue_style('choices.js', WVL_PLUGIN_URL . '/assets/lib/choices.js/css/choices.min.css');
-
-            wp_enqueue_script('moment', WVL_PLUGIN_URL . '/assets/lib/moment/moment.min.js', [], null, true);
-            wp_enqueue_script('fullcalendar', WVL_PLUGIN_URL . '/assets/lib/fullcalendar/fullcalendar.min.js', ['jquery', 'moment'], null, true);
+            wp_enqueue_script('fullcalendar', WVL_PLUGIN_URL . '/assets/lib/fullcalendar/index.global.min.js', [], '6.1.15', true);
 
             $data = [
                 'ajax_url'      => admin_url('admin-ajax.php'),
