@@ -54,7 +54,7 @@ class WVL_Account_Auth
     public function restrict_logged_user()
     {
         if (!is_user_logged_in() || is_admin()) return;
-        if (is_page('register') || is_page('login') || is_page('forgot-password')) {
+        if (is_page('register') || is_page('login') || is_page('vendor-register') || is_page('forgot-password')) {
             wp_redirect(home_url());
             exit;
         }
