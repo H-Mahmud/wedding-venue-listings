@@ -32,7 +32,7 @@ class WVL_Dashboard
     public function protect_pages()
     {
         if (is_page('dashboard') && !is_user_logged_in()) {
-            wp_redirect(home_url());
+            wp_redirect(home_url('login'));
             exit;
         }
     }
