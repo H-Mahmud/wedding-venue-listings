@@ -8,6 +8,10 @@
         @apply focus:ring-1 focus:ring-blue-300 font-bold rounded-md text-sm px-5 py-4 me-2 mb-2 focus:z-10 inline-block text-center mt-4 text-white bg-primary hover:text-gray-100;
 
     }
+
+    .wvl-field-row {
+        @apply block md:flex justify-between gap-4 mb-4;
+    }
 }
 
 
