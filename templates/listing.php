@@ -13,14 +13,13 @@ get_header(); ?>
             </form>
 
             <div class="wvl-widgets border-quaternary border px-5 py-6 rounded-md">
-
-                <div class="filter vendor-types mb-4">
+                <div class="filter vendor-types mb-5">
                     <h3 class="text-lg font-bold">vendor Types</h3>
                     <?php
                     $vendor_types = get_wvl_terms_options('vendor_type');
                     foreach ($vendor_types as $vendor_type) { ?>
-                        <label class="my-2 inline-block">
-                            <input class="mr-2" type="checkbox" name="vendor-types[]" value="<?php echo $vendor_type['value']; ?>" />
+                        <label class="my-2 inline-block cursor-pointer">
+                            <input class="mr-2 w-4 h-4" type="checkbox" name="vendor-types[]" value="<?php echo $vendor_type['value']; ?>" />
                             <?php echo $vendor_type['label']; ?>
                         </label>
                         <br>
@@ -28,14 +27,14 @@ get_header(); ?>
                     }; ?>
                 </div>
 
-                <div class="filter event-types mb-4">
+                <div class="filter event-types mb-5">
                     <h3 class="text-lg font-bold">Event Types</h3>
                     <?php
                     $event_types = get_wvl_terms_options('event_type');
                     foreach ($event_types as $event_type) { ?>
 
-                        <label class="my-2 inline-block">
-                            <input class="mr-2" type="checkbox" name="event_types[]" value="<?php echo $event_type['value']; ?>" />
+                        <label class="my-2 inline-block cursor-pointer">
+                            <input class="mr-2 w-4 h-4" type="checkbox" name="event_types[]" value="<?php echo $event_type['value']; ?>" />
                             <?php echo $event_type['label']; ?>
                         </label>
                         <br>
