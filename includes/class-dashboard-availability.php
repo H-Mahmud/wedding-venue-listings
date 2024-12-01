@@ -39,6 +39,7 @@ class WVL_Dashboard_Availability
         add_wvl_menu([
             'name'     => 'Availability',
             'slug'     => 'availability',
+            'capability' => 'manage_venue',
             'icon'     => '<i class="fa-solid fa-calendar-days text-xl" style="color: #1f72b2;"></i>',
             'premium'  => false,
             'priority' => 50,
