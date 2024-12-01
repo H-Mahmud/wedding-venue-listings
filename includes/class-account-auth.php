@@ -28,11 +28,14 @@ class WVL_Account_Auth
 
 
         add_action('init', array($this, 'user_logging'));
-        add_action('init', array($this, 'user_register'));
+        add_action('init', array($this, 'user_register'), 10);
+        add_action('init', array($this, 'vendor_user_register'), 10);
         add_action('init', array($this, 'user_password_forgot'));
         add_action('init', array($this, 'user_password_reset'), 10);
+
         add_shortcode('wvl-login', array($this, 'login_form_shortcode'));
         add_shortcode('wvl-register', array($this, 'register_form_shortcode'));
+        add_shortcode('wvl-vendor-register', array($this, 'vendor_register_form_shortcode'));
         add_shortcode('wvl-forgot-password', array($this, 'forgot_password_form_shortcode'));
         add_shortcode('wvl-reset-password', array($this, 'reset_password_form_shortcode'));
         add_shortcode('wvl-dashboard', array($this, 'dashboard_shortcode'));
@@ -199,6 +202,23 @@ class WVL_Account_Auth
 
 
     /**
+     * Generates the vendor registration form HTML.
+     *
+     * This function will include the vendor-register.php template file
+     * which contains the HTML for the vendor registration form.
+     * The function will return the contents of the file as a string.
+     *
+     * @return string The vendor registration form HTML.
+     */
+    public function vendor_register_form_shortcode()
+    {
+        ob_start();
+        include_once WVL_PLUGIN_DIR . 'shortcodes/vendor-register.php';
+        return ob_get_clean();
+    }
+
+
+    /**
      * Handles the user registration process.
      *
      * This function checks whether the `register` form was submitted, and if so,
@@ -217,15 +237,53 @@ class WVL_Account_Auth
             $email = sanitize_email($_POST['email']);
             $password = sanitize_text_field($_POST['password']);
 
-            $user = register_new_user($username, $email);
+            $user_id = wp_create_user($username, $password, $email);
 
-            if (is_wp_error($user)) {
-                $_SESSION['wvl_register_error'] = $user->get_error_message();
+            if (is_wp_error($user_id)) {
+                $_SESSION['wvl_register_error'] = $user_id->get_error_message();
             } else {
-                wp_set_password($password, $user);
+                $u = new WP_User($user_id);
+                $u->set_role('customer');
 
-                wp_set_current_user($user);
-                wp_set_auth_cookie($user);
+                wp_set_current_user($user_id);
+                wp_set_auth_cookie($user_id);
+
+                wp_redirect(home_url());
+                exit;
+            }
+        }
+    }
+
+
+    public function vendor_user_register()
+    {
+        if (!isset($_POST['_wvl_register_nonce']) || !wp_verify_nonce($_POST['_wvl_register_nonce'], 'wvl_register_nonce')) {
+            return;
+        }
+
+        if (isset($_POST['register'])) {
+            $username = sanitize_user($_POST['username']);
+            $email = sanitize_email($_POST['email']);
+            $password = sanitize_text_field($_POST['password']);
+
+            $user_id = wp_create_user($username, $password, $email);
+
+            if (is_wp_error($user_id)) {
+                $_SESSION['wvl_register_error'] = $user_id->get_error_message();
+            } else {
+                $$u = new WP_User($user_id);
+                $u->set_role('vendor');
+
+                wp_insert_post(array(
+                    'post_title'    => sanitize_text_field($_POST['venue_name']),
+                    'post_content'  => '',
+                    'post_status'   => 'draft',
+                    'post_type'     => 'venue',
+                    'post_author'   => $user_id
+                ));
+
+                wp_set_current_user($user_id);
+                wp_set_auth_cookie($user_id);
 
                 wp_redirect(home_url());
                 exit;
