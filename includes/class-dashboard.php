@@ -21,11 +21,20 @@ class WVL_Dashboard
      */
     private final function __construct()
     {
+        add_action('template_redirect', array($this, 'protect_pages'));
         add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'), 1000);
         add_filter('page_template', array($this, 'dashboard_page_template'));
         add_action('init', array($this, 'dashboard_rewrite_rules'));
         add_filter('query_vars', array($this, 'dashboard_query_vars'));
         add_action('wvl_dashboard', array($this,  'render_wvl_dashboard_menu'));
+    }
+
+    public function protect_pages()
+    {
+        if (is_page('dashboard') && !is_user_logged_in()) {
+            wp_redirect(home_url());
+            exit;
+        }
     }
 
     public function enqueue_scripts()
