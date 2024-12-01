@@ -151,10 +151,13 @@ class WVL_Dashboard
                         HTML;
                     endforeach; ?>
                     <li class="logout">
-                        <a class="block text-center py-2 mt-4 text-white bg-primary hover:text-gray-100 rounded-md" href="<?php echo site_url('logout'); ?>">
-                            <?php _e('Logout', 'wedding-venue-listings'); ?>
+                        <form method="post">
+                            <?php wp_nonce_field('wvl_logout_nonce', '_wvl_logout_nonce'); ?>
+                            <button type="submit" class="wvl-btn-primary w-full">
+                                <?php _e('Logout', 'wedding-venue-listings'); ?>
 
-                        </a>
+                            </button>
+                        </form>
                     </li>
                 </ul>
             </div>

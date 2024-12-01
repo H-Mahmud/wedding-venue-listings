@@ -35,6 +35,7 @@ class WVL_Account_Auth
         add_action('init', array($this, 'vendor_user_register'), 10);
         add_action('init', array($this, 'user_password_forgot'));
         add_action('init', array($this, 'user_password_reset'), 10);
+        add_action('init', array($this, 'user_logout'), 10);
 
         add_shortcode('wvl-login', array($this, 'login_form_shortcode'));
         add_shortcode('wvl-register', array($this, 'register_form_shortcode'));
@@ -468,6 +469,20 @@ class WVL_Account_Auth
         }
     }
 
+    /**
+     * Handles the logout process.
+     *
+     * This function checks whether the `logout` form was submitted, and if so, it
+     * logs the user out and redirects the user to the home page.
+     */
+    public function user_logout()
+    {
+        if (isset($_POST['_wvl_logout_nonce']) && wp_verify_nonce($_POST['_wvl_logout_nonce'], 'wvl_logout_nonce')) {
+            wp_logout();
+            wp_redirect(home_url());
+            exit;
+        }
+    }
 
     /**
      * Gets the singleton instance of the class.
