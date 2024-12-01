@@ -21,6 +21,7 @@ function add_wvl_menu($args)
     $defaults = [
         'name'     => '',
         'slug'     => '',
+        'capability' => '',
         'icon'     => '',
         'premium'  => false,
         'priority' => 10,
