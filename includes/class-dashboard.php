@@ -135,6 +135,8 @@ class WVL_Dashboard
             <div class="sidebar bg-white w-full md:w-3/12 p-8 rounded-xl h-fit ">
                 <ul>
                     <?php foreach ($wvl_menus as $menu) :
+                        if (!current_user_can($menu['capability'])) continue;
+
                         $url = site_url('dashboard/' . $menu['slug']);
                         $is_active = $menu['slug'] === get_query_var('subpage') ? true : false;
                         $class = $is_active ? 'bg-slate-200 text-gray-800 font-semibold' : 'text-slate-700';
@@ -165,6 +167,8 @@ class WVL_Dashboard
                 $matched = false;
                 if ($subpage) {
                     foreach ($wvl_menus as $menu) {
+                        if (!current_user_can($menu['capability'])) continue;
+
                         if ($menu['slug'] === $subpage) {
                             call_user_func($menu['callback']);
                             $matched = true;
