@@ -24,6 +24,7 @@ class WVL_Account_Auth
         add_action('template_redirect', array($this, 'restrict_logged_user'), 100);
         add_action('init', array($this, 'register_roles_vendor_customer'));
         add_action('init', array($this, 'add_vendor_capabilities'));
+        add_action('init', array($this, 'add_customer_capabilities'));
 
         add_action('admin_init', array($this, 'redirect_vendor_and_customer_from_dashboard'));
         add_action('after_setup_theme', array($this, 'remove_admin_bar_for_vendor_and_customer'));
@@ -116,6 +117,29 @@ class WVL_Account_Auth
         }
         if ($admin_role) {
             $admin_role->add_cap('manage_venue');
+        }
+    }
+
+
+    /**
+     * Adds the 'manage_account' capability to all roles.
+     *
+     * This is required so that users can edit their account information from the frontend.
+     *
+     * @since 1.0.0
+     */
+    public function add_customer_capabilities()
+    {
+        global $wp_roles;
+        if (! isset($wp_roles)) {
+            $wp_roles = new WP_Roles();
+        }
+
+        foreach ($wp_roles->roles as $role_name => $role_info) {
+            $role = get_role($role_name);
+            if ($role) {
+                $role->add_cap('manage_account');
+            }
         }
     }
 
