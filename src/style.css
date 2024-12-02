@@ -9,6 +9,10 @@
 
     }
 
+    .wvl-btn {
+        @apply py-2.5 px-5 me-2 mb-2 text-sm font-medium text-primary focus:outline-none bg-white rounded-lg border border-gray-200 focus:z-10 focus:ring-4 focus:ring-gray-100 cursor-pointer;
+    }
+
     .wvl-field-row {
         @apply block md:flex justify-between gap-4 mb-4;
     }

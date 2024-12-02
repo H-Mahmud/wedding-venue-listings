@@ -37,18 +37,16 @@
             </div>
 
             <div class="wvl-content">
-                <ul class="tabs">
-                    <li class="tab-link active"><a href="">About The Place</a></li>
-                </ul>
+                <h3 class="text-lg font-semibold mt-2"><?php _e('Our Story', 'wedding-venue-listings'); ?></h3>
 
-                <p class="description py-10 text-gray-500">
+                <p class="description pb-10 pt-6 text-gray-500">
                     Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
                 </p>
 
                 <div class="wvl-gallery">
                     <div class="entry mb-3 mt-6 flex justify-between items-center">
                         <h3 class="text-2xl font-semibold">Recent Events Gallery</h3>
-                        <a class="view-all font-medium">
+                        <a class="wvl-btn">
                             View All
                         </a>
                     </div>
@@ -84,7 +82,13 @@
 
                 <div class="wvl-reviews mt-9">
                     <div class="entry mb-3">
-                        <h3 class="text-2xl font-semibold">Review</h3>
+
+                        <div class="entry mb-3 mt-6 flex justify-between items-center">
+                            <h3 class="text-2xl font-semibold"><?php _e('Reviews', 'wedding-venue-listings'); ?></h3>
+                            <a class="wvl-btn">
+                                <?php _e('Write a Review', 'wedding-venue-listings'); ?>
+                            </a>
+                        </div>
                     </div>
 
                     <div class="review-list mb-7">
