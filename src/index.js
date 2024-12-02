@@ -2,6 +2,7 @@
 
 // Components
 import './components/calendar';
+import './components/star-rating';
 
 // Styles
 import "./style.css";
