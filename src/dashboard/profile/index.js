@@ -1,5 +1,6 @@
 import handlePackageForm from './handlePackageForm';
 import handlePersonalInfoForm from './handlePersonalInfoForm';
+import handleServiceInfoForm from './handleServiceInfoForm';
 import './style.css';
 
 jQuery(document).ready(function ($) {
@@ -9,11 +10,13 @@ jQuery(document).ready(function ($) {
             return handlePackageForm($);
         } else if (step === 1) {
             return await handlePersonalInfoForm($);
+        } else if (step === 2) {
+            return await handleServiceInfoForm($);
         }
 
         return false;
     }
-    const steps = new StepIndicator(".steps", handleNext);
+    const steps = new StepIndicator(".steps", handleNext, 2);
 
 });
 

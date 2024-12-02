@@ -133,5 +133,5 @@ add_action('wvl_social_links', function () {
 
 function wvl_get_terms_limit($taxonomy)
 {
-    return 1;
+    return 2;
 }

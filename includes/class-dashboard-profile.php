@@ -128,12 +128,21 @@ class WVL_Dashboard_Profile
         }
 
         $venue_name = sanitize_text_field($_POST['venue_name'] ?? '');
-        $vendor_type = sanitize_text_field($_POST['vendor_type'] ?? '');
-        $event_type = sanitize_text_field($_POST['event_type'] ?? '');
         $category = sanitize_text_field($_POST['category'] ?? '');
         $sub_category = sanitize_text_field($_POST['sub_category'] ?? '');
 
-        if (empty($venue_name) || empty($vendor_type) || empty($event_type) || empty($category) || empty($sub_category)) {
+        if (!isset($_POST['vendor_type']) || !is_array($_POST['vendor_type'])) {
+            wp_send_json_error(['message' => 'Vendor type is required.']);
+        }
+        $vendor_type = array_map('sanitize_text_field', $_POST['vendor_type']);
+
+
+        if (!isset($_POST['event_type']) || !is_array($_POST['event_type'])) {
+            wp_send_json_error(['message' => 'Event type is required.']);
+        }
+        $event_type = array_map('sanitize_text_field', $_POST['event_type']);
+
+        if (empty($venue_name) || empty($category) || empty($sub_category)) {
             wp_send_json_error(['message' => 'All fields are required.']);
         }
 
