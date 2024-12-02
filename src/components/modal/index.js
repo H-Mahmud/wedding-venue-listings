@@ -1,3 +1,5 @@
+import './style.css';
+
 jQuery(document).ready(function ($) {
 
     $('[data-component-type="wlval-modal-trigger"]').on('click', function () {
