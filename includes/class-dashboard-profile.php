@@ -172,14 +172,6 @@ class WVL_Dashboard_Profile
             wp_send_json_error(['message' => 'Invalid request.']);
         }
 
-        // const formData = {
-        //     action: 'submit_profile_contact_info',
-        //     nonce: WVL_DATA.ajax_nonce,
-        //     phone: phone,
-        //     email: email,
-        //     location: location
-        // }
-
         $phone = sanitize_text_field($_POST['phone'] ?? '');
         $email = sanitize_text_field($_POST['email'] ?? '');
         $location = sanitize_text_field($_POST['location'] ?? '');
