@@ -1,43 +1,4 @@
-.single-venue .site-main .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
 
-.single-venue .site-.site-main .header .meta {
-    display: flex;
-    justify-content: flex-start;
-    gap: 32px;
-    margin-top: 8px;
-}
-
-.single-venue .site-main .header .links {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-}
-
-.single-venue .site-main .header .links .social {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    list-style-type: none;
-    gap: 12px;
-    margin: 0;
-    margin-right: 24px;
-}
-
-.single-venue .site-main .header .links .social a {
-    background-color: #F1F1F1;
-    border-radius: 50%;
-    display: inline-block;
-    width: 44px;
-    height: 44px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-}
 
 .single-venue .site-main .wvl-content {
     border: 1px solid #D9D9D9;

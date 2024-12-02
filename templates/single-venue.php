@@ -7,16 +7,21 @@
             <?php the_post_thumbnail('full', array('class' => 'w-full h-auto block object-cover')); ?>
         </div>
         <main id="main" class="site-main site-container pt-4" role="main">
-            <div class="header">
-                <div class="entry">
+            <div class="header flex justify-between items-center">
+                <div class="entry-header">
                     <?php the_title('<h1 class="title text-4xl font-bold">', '</h1>'); ?>
                     <style>
                         .meta star-rating {
                             --font-size: 18px;
                         }
                     </style>
-                    <div class="meta">
-                        <span>Price Range: <b>$1000 - $5000</b></span>
+                    <div class="meta flex mt-2 gap-4 text-secondary py-2 text-sm">
+                        <span class="">
+                            <i class="fa-solid fa-location-dot text-primary"></i>
+                            <?php echo wvl_get_venue_location(get_the_ID()); ?>
+                        </span>
+                        <span class="h-6 w-[1.5px] bg-quaternary inline-block"></span>
+
                         <span>
                             <star-rating min="0" max="5" value="<?php get_post_meta(get_the_ID(), 'average_rating', true); ?>"></star-rating>
                             <span class="amount">
@@ -33,15 +38,11 @@
                         </span>
                     </div>
                 </div>
-                <div class="links">
-                    <ul class="social">
-                        <li><a href=""><i class="fa-brands fa-facebook-f"></i></a></li>
-                        <li><a href=""><i class="fa-brands fa-x-twitter"></i></a></li>
-                        <li><a href=""><i class="fa-brands fa-instagram"></i></a></li>
-                        <li><a href=""><i class="fa-brands fa-square-youtube"></i></a></li>
-                        <li><a href=""><i class="fa-brands fa-linkedin-in"></i></a></li>
+                <div class="links flex justify-end items-center">
+                    <ul class="social flex justify-end items-center gap-3 m-0 mr-6">
+                        <?php do_action('wvl_social_links'); ?>
                     </ul>
-                    <button class="wvl-btn-primary" id="contactFormOpen">Contact Now</button>
+                    <button class="wvl-btn-primary" id="contactFormOpen"><?php _e('Contact Us', 'wedding-venue-listings'); ?></button>
                 </div>
             </div>
 
