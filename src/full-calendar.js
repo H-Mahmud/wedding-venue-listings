@@ -1,12 +1,12 @@
 jQuery(document).ready(function () {
-    jQuery('.datetimepicker').datepicker({
-        timepicker: false,
-        language: 'en',
-        range: true,
-        multipleDates: true,
-        multipleDatesSeparator: " - ",
-        minDate: new Date(new Date().setDate(new Date().getDate() + 1))
-    });
+    // jQuery('.datetimepicker').datepicker({
+    //     timepicker: false,
+    //     language: 'en',
+    //     range: true,
+    //     multipleDates: true,
+    //     multipleDatesSeparator: " - ",
+    //     minDate: new Date(new Date().setDate(new Date().getDate() + 1))
+    // });
     jQuery("#add-event").submit(function () {
         alert("Submitted");
         var values = {};
