@@ -3,6 +3,7 @@
 // Components
 import './components/calendar';
 import './components/star-rating';
+import './components/modal';
 
 // Styles
 import "./style.css";
