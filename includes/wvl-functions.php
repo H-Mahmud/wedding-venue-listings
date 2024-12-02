@@ -94,3 +94,18 @@ function wvl_add_notice($message, $type = 'success', $source = '')
         'source' => $source
     ];
 }
+
+
+function wvl_get_excerpt_content($post_id, $length = 180)
+{
+    // Get the post content
+    $content = get_post_field('post_content', $post_id);
+
+    $content = strip_tags(strip_shortcodes($content));
+
+    if (strlen($content) > $length) {
+        $content = substr($content, 0, $length) . '...';
+    }
+
+    return $content;
+}

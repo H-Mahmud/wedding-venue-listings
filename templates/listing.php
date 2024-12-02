@@ -147,7 +147,7 @@ get_header(); ?>
                                     <i class="fa-solid fa-location-dot text-primary"></i>
                                     1901 Thornridge Cir. Shiloh, Hawaii 81063
                                 </p>
-                                <p class="text-secondary text-sm mt-1">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a </p>
+                                <p class="text-secondary text-sm mt-1"><?php echo wvl_get_excerpt_content(get_the_ID()); ?></p>
                                 <div class="meta flex mt-5 gap-4">
                                     <span class="inline-block text-secondary text-sm">Price Range: <b class="text-primary">$1000 - $5000</b></span>
 
