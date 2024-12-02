@@ -1,8 +1,8 @@
-import { hideProfileNextSpinner, showProfileNextSpinner } from "./helper";
+import { hideProfileNextSpinner, showProfileNextSpinner } from "./utils";
 
-export default function handleYourStoryForm() {
-    const $form = jQuery('form#profileYourStoryForm');
-    const $profileFormError = jQuery('.profile-form-error')
+export default function handleYourStoryForm($) {
+    const $form = $('form#profileYourStoryForm');
+    const $profileFormError = $('.profile-form-error')
 
     if (!$form.get(0).checkValidity()) {
         $form.get(0).reportValidity();
@@ -18,7 +18,7 @@ export default function handleYourStoryForm() {
 
     showProfileNextSpinner();
     return new Promise((resolve, reject) => {
-        jQuery.ajax({
+        $.ajax({
             url: WVL_DATA.ajax_url,
             type: 'POST',
             dataType: 'json',

@@ -27,7 +27,7 @@ $venue = get_post($venue_id);
         <div class="steps__connector"></div>
         <div class="steps__step" data-step="4">
             <div class="steps__step-number">5</div>
-            <div class="steps__step-name"> Your Story</div>
+            <div class="steps__step-name"><?php _e('Your Story', 'wedding-venue-listings'); ?></div>
         </div>
         <div class="steps__connector"></div>
         <div class="steps__step" data-step="5">
@@ -40,8 +40,8 @@ $venue = get_post($venue_id);
     <?php include_once WVL_PLUGIN_DIR . 'template-parts/dashboard/profile/personal-info.php'; ?>
     <?php include_once WVL_PLUGIN_DIR . 'template-parts/dashboard/profile/service-info.php'; ?>
     <?php include_once WVL_PLUGIN_DIR . 'template-parts/dashboard/profile/contact-info.php'; ?>
-    <?php /*    <?php include_once WVL_PLUGIN_DIR . 'template-parts/dashboard/profile/your-story.php'; ?>
-    <?php include_once WVL_PLUGIN_DIR . 'template-parts/dashboard/profile/photographs.php'; */ ?>
+    <?php include_once WVL_PLUGIN_DIR . 'template-parts/dashboard/profile/your-story.php'; ?>
+    <?php /*   <?php include_once WVL_PLUGIN_DIR . 'template-parts/dashboard/profile/photographs.php'; */ ?>
 
     <p class="text-red-700 profile-form-error pt-3"></p>
 
