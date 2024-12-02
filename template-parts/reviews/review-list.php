@@ -27,7 +27,7 @@ if ($comments) {
                 ?>
             </div>
             <div class="flex-1">
-                <div class="content  bg-gray-100 p-4 rounded-lg">
+                <div class="content bg-gray-100 p-4 rounded-lg">
                     <div class="meta flex justify-between mb-2">
                         <div class="info"><span class="name font-medium"><?php echo $comment->comment_author; ?></span> -
                             <span class="date"><?php echo get_comment_date('F j, Y', $comment->comment_ID); ?></span>
