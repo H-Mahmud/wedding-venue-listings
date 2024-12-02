@@ -20,9 +20,10 @@ jQuery(document).ready(function ($) {
             return await handleYourStoryForm($);
         }
 
+        handleContactInfoForm($);
         return false;
     }
-    const steps = new StepIndicator(".steps", handleNext, 4);
+    const steps = new StepIndicator(".steps", handleNext, 5);
 
 });
 

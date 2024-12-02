@@ -1,9 +1,8 @@
 export default function handlePhotographsForm($) {
-    // profileGalleryFormHandle($);
-    profileCoverPhotoHandle($);
+    handleCoverPhotoUpload($);
 }
 
-function profileCoverPhotoHandle($) {
+function handleCoverPhotoUpload($) {
     $('#upload_cover').on('change', function () {
         var file = this.files[0];
         if (file) {
