@@ -10,17 +10,26 @@
             <div class="header">
                 <div class="entry">
                     <?php the_title('<h1 class="title text-4xl font-bold">', '</h1>'); ?>
+                    <style>
+                        .meta star-rating {
+                            --font-size: 18px;
+                        }
+                    </style>
                     <div class="meta">
                         <span>Price Range: <b>$1000 - $5000</b></span>
                         <span>
-                            <span class="stars">
-                                <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                                <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                                <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                                <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                                <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                            <star-rating min="0" max="5" value="<?php get_post_meta(get_the_ID(), 'average_rating', true); ?>"></star-rating>
+                            <span class="amount">
+                                <?php
+                                $rating_count = get_post_meta(get_the_ID(), 'rating_count', true);
+                                if ($rating_count) {
+                                    $count = number_format($rating_count, 0, '.', ',');
+                                    printf(_n('(%s Review)', '(%s Reviews)', $rating_count, 'wedding-venue-listings'), $count);
+                                } else {
+                                    _e('(0 Review)', 'wedding-venue-listings');
+                                }
+                                ?>
                             </span>
-                            <span class="amount">(1.8 k+ Reviews)</span>
                         </span>
                     </div>
                 </div>
