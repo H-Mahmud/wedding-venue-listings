@@ -27,61 +27,7 @@ function wvl_get_venue_id($user_id = null)
 
 function custom_comments_display($page_id)
 {
-    $args = array(
-        'post_id' => $page_id, // The ID of the page you want to fetch comments for
-        'status' => 'approve', // Only approved comments
-        'parent' => 0, // Only top-level comments (no replies)
-        'number' => 10, // Number of comments per page
-    );
-
-    // Fetch the comments
-    $comments = get_comments($args);
-
-    if ($comments) {
-        echo '<ul class="comment-list">';
-        foreach ($comments as $comment) {
-            echo '<li id="comment-' . $comment->comment_ID . '" class="comment-item">';
-            echo '<div class="comment-author">' . get_comment_author_link($comment) . '</div>';
-            echo '<h3 class="title text-2xl">' . get_comment_meta($comment->comment_ID, 'title', true) . '</h3>';
-            echo '<star-rating min="0" max="5" value="' . get_comment_meta($comment->comment_ID, 'rating', true) . '"></star-rating>';
-            echo '<div class="comment-content">' . get_comment_text($comment) . '</div>';
-
-            // Get and display replies (single depth)
-            $args_replies = array(
-                'post_id' => $page_id,
-                'status' => 'approve',
-                'parent' => $comment->comment_ID, // Get replies to this comment
-            );
-            $replies = get_comments($args_replies);
-
-            if ($replies) {
-                echo '<ul class="reply-list">';
-                foreach ($replies as $reply) {
-                    echo '<li id="comment-' . $reply->comment_ID . '" class="reply-item">';
-                    echo '<div class="comment-author">' . get_comment_author_link($reply) . '</div>';
-                    echo '<div class="comment-content">' . get_comment_text($reply) . '</div>';
-                    echo '</li>';
-                }
-                echo '</ul>';
-            }
-
-            echo '</li>';
-        }
-        echo '</ul>';
-
-        // Pagination for comments
-        echo '<div class="comment-pagination">';
-        paginate_comments_links(array(
-            'type' => 'list', // This will generate a list of pagination links
-            'prev_text' => '&laquo; Previous',
-            'next_text' => 'Next &raquo;',
-            'total' => ceil(count($comments) / 10), // Total pages
-            'current' => 1, // Start at the first page
-        ));
-        echo '</div>';
-    } else {
-        echo '<p>No comments yet.</p>';
-    }
+    include_once WVL_PLUGIN_DIR . 'template-parts/reviews/review-list.php';
 }
 
 // Usage: Call the function for the specific page (replace 42 with your page ID)
@@ -110,3 +56,16 @@ function save_comment_title_and_rating($comment_id)
     }
 }
 add_action('comment_post', 'save_comment_title_and_rating');
+
+
+function wlv_get_review_page_link($page_number = 1)
+{
+    $url = get_the_permalink();
+    if (isset($_GET) && count($_GET) > 0) {
+        $new_query_params = $_GET;
+        $new_query_params['cpage'] = $page_number;
+        return add_query_arg($new_query_params, $url);
+    } else {
+        return add_query_arg('cpage', $page_number, $url);
+    }
+}

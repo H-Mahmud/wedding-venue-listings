@@ -101,65 +101,8 @@
                         </div>
                     </div>
 
-                    <div class="review-list mb-7">
-                        <div class="review-item flex gap-8">
-                            <div class="avatar w-20 h-20 max-w-20 rounded-lg border flex-1"></div>
-                            <div class="content flex-1 bg-gray-100 p-4 rounded-lg">
-                                <div class="meta flex justify-between mb-2">
-                                    <div class="info"><span class="name font-medium">John Doe</span> -
-                                        <span class="date"><?php the_date('F j, Y'); ?></span>
-                                    </div>
-                                    <div class="rating">
-                                        <span class="stars">
-                                            <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                                            <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                                            <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                                            <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                                            <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                                <h4 class="font-semibold">Best speaker I’ve ever used!</h4>
-                                <p>
-                                    I’ve been using this speaker for a few months now, and I’m absolutely in love with it. The sound quality is amazing, and the battery life is incredible. I can easily get 20 hours of use on a single charge, which is more than enough for a day at the beach or a weekend trip.
-                                    The MEGABOOM 3 is also very durable. I’ve dropped it a few times, and it’s never been damaged. It’s also waterproof, so I can take it to the pool, beach, while I take a shower without having to worry about it getting wet.</p>
-
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="text-center mb-8">
-                        <ul class="inline-flex -space-x-px text-sm">
-                            <li>
-                                <a href="#" class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 ">Previous</a>
-                            </li>
-                            <li>
-                                <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 ">1</a>
-                            </li>
-                            <li>
-                                <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 ">2</a>
-                            </li>
-                            <li>
-                                <a href="#" aria-current="page" class="flex items-center justify-center px-3 h-8 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">3</a>
-                            </li>
-                            <li>
-                                <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 ">4</a>
-                            </li>
-                            <li>
-                                <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 ">5</a>
-                            </li>
-                            <li>
-                                <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 ">Next</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-
-
-                <?php custom_comment_form();
-                custom_comments_display(get_the_ID()); ?>
+                    <?php custom_comment_form();
+                    custom_comments_display(get_the_ID()); ?>
         </main>
 
 

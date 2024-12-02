@@ -24,6 +24,13 @@
     .wvl-field input {
         @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5;
     }
+
+    .wvl-comments-pagination .page-links{
+            @apply flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700
+    }
+    .wvl-comments-pagination .page-links.current {
+        @apply bg-gray-300;
+    }
 }
 
 
