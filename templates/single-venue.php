@@ -95,9 +95,9 @@
 
                         <div class="entry mb-3 mt-6 flex justify-between items-center">
                             <h3 class="text-2xl font-semibold"><?php _e('Reviews', 'wedding-venue-listings'); ?></h3>
-                            <a class="wvl-btn">
+                            <span class="wvl-btn" data-component-type="wlval-modal-trigger" data-target-modal="#review-modal">
                                 <?php _e('Write a Review', 'wedding-venue-listings'); ?>
-                            </a>
+                            </span>
                         </div>
                     </div>
 
@@ -155,6 +155,11 @@
                         </ul>
                     </div>
                 </div>
+
+
+
+                <?php custom_comment_form();
+                custom_comments_display(get_the_ID()); ?>
         </main>
 
 
@@ -243,5 +248,6 @@
         </script>
     <?php
     }; ?>
+
 </div>
 <?php get_footer(); ?>
