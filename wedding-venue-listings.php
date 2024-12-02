@@ -87,6 +87,8 @@ function wvl_enqueue_scripts()
         wp_enqueue_script('wvl-main', WVL_PLUGIN_URL . '/assets/dist/main.bundle.min.js', array('jquery'), '1.0', true);
     }
 
+    wp_enqueue_script('lightgallery', WVL_PLUGIN_URL . '/assets/lib/lightgallery/lightgallery-all.min.js', array('jquery'), '1.10.0', true);
+    wp_enqueue_style('lightgallery', WVL_PLUGIN_URL . '/assets/lib/lightgallery/lightgallery.min.css', array(), '1.10.0');
     // wp_localize_script('wvl-main', 'WVL_MAIN', [
     //     'ajax_url' => admin_url('admin-ajax.php'),
     // ]);
