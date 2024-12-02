@@ -38,9 +38,8 @@ $venue = get_post($venue_id);
 
     <?php include_once WVL_PLUGIN_DIR . 'template-parts/dashboard/profile/package.php'; ?>
     <?php include_once WVL_PLUGIN_DIR . 'template-parts/dashboard/profile/personal-info.php'; ?>
-    <?php /*
     <?php include_once WVL_PLUGIN_DIR . 'template-parts/dashboard/profile/service-info.php'; ?>
-    <?php include_once WVL_PLUGIN_DIR . 'template-parts/dashboard/profile/contact-info.php'; ?>
+    <?php /* <?php include_once WVL_PLUGIN_DIR . 'template-parts/dashboard/profile/contact-info.php'; ?>
     <?php include_once WVL_PLUGIN_DIR . 'template-parts/dashboard/profile/your-story.php'; ?>
     <?php include_once WVL_PLUGIN_DIR . 'template-parts/dashboard/profile/photographs.php'; */ ?>
 

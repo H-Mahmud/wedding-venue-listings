@@ -62,8 +62,6 @@ class WVL_Dashboard
             $data = [
                 'ajax_url'      => admin_url('admin-ajax.php'),
                 'ajax_nonce'    => wp_create_nonce('dashboard_nonce'),
-                'vendorTypes'   => get_wvl_terms_options('vendor_type'),
-                'eventTypes'   => get_wvl_terms_options('event_type')
             ];
 
             wp_localize_script('wvl-dashboard', 'WVL_DATA', $data);

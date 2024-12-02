@@ -1,3 +1,19 @@
+.wvl-tags .choices__item {
+    @apply bg-white border border-gray-300 text-primary;
+}
+
+.wvl-tags .choices {
+    @apply mb-2;
+}
+
+.wvl-tags .choices__notice {
+    @apply !bg-gray-300;
+}
+
+.wvl-tags .choices__input {
+    @apply inline-block;
+}
+
 :root {
     --hue: 223;
     --trans-dur: 0.3s;
@@ -147,6 +163,7 @@
 .profile-step-forms {
     display: none;
 }
+
 .profile-step-forms.active {
     display: block !important;
 }

@@ -129,3 +129,9 @@ add_action('wvl_social_links', function () {
 <?php }
     }
 });
+
+
+function wvl_get_terms_limit($taxonomy)
+{
+    return 1;
+}
