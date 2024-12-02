@@ -13,8 +13,9 @@ get_header(); ?>
             </form>
 
             <div class="wvl-widgets border-quaternary border px-5 py-6 rounded-md">
-                <div class="filter vendor-types mb-5">
-                    <h3 class="text-lg font-bold">vendor Types</h3>
+
+                <form class="filter vendor-types mb-5" id="vendorTypesFilter" method="get">
+                    <h3 class="text-lg font-bold"><?php _e('vendor Types', 'wedding-venue-listings'); ?></h3>
                     <?php
                     $vendor_types = get_wvl_terms_options('vendor_type');
                     foreach ($vendor_types as $vendor_type) { ?>
@@ -25,22 +26,22 @@ get_header(); ?>
                         <br>
                     <?php
                     }; ?>
-                </div>
+                </form>
 
-                <div class="filter event-types mb-5">
-                    <h3 class="text-lg font-bold">Event Types</h3>
+                <form class="filter event-types mb-5" id="eventTypesFilter" method="get">
+                    <h3 class="text-lg font-bold"><?php _e('Event Types', 'wedding-venue-listings'); ?></h3>
                     <?php
                     $event_types = get_wvl_terms_options('event_type');
                     foreach ($event_types as $event_type) { ?>
 
                         <label class="my-2 inline-block cursor-pointer">
-                            <input class="mr-2 w-4 h-4" type="checkbox" name="event_types[]" value="<?php echo $event_type['value']; ?>" />
+                            <input class="mr-2 w-4 h-4" type="checkbox" name="event-types[]" value="<?php echo $event_type['value']; ?>" />
                             <?php echo $event_type['label']; ?>
                         </label>
                         <br>
                     <?php
                     }; ?>
-                </div>
+                </form>
 
                 <div class="filter wvl-field availability mb-4">
                     <h3 class="text-lg font-bold">Availability</h3>
@@ -66,6 +67,51 @@ get_header(); ?>
                         </div>
                     </div>
                 </div>
+
+                <script>
+                    jQuery(document).ready(function($) {
+                        // vendor types
+                        $('#vendorTypesFilter input[name="vendor-types[]"]').on('change', function() {
+                            const params = new URLSearchParams(window.location.search);
+                            params.delete('vendor-types[]');
+
+                            $('input[name="vendor-types[]"]:checked').each(function() {
+                                params.append('vendor-types[]', $(this).val());
+                            });
+                            const newUrl = `${window.location.pathname}?${params.toString()}`;
+                            window.history.replaceState({}, '', newUrl);
+                            window.location.href = newUrl;
+                        });
+
+                        const params = new URLSearchParams(window.location.search);
+                        $('#vendorTypesFilter input[name="vendor-types[]"]').each(function() {
+                            if (params.getAll('vendor-types[]').includes($(this).val())) {
+                                $(this).prop('checked', true);
+                            }
+                        });
+
+
+                        // event types
+                        $('#eventTypesFilter input[name="event-types[]"]').on('change', function() {
+                            const params = new URLSearchParams(window.location.search);
+                            params.delete('event-types[]');
+
+                            $('input[name="event-types[]"]:checked').each(function() {
+                                params.append('event-types[]', $(this).val());
+                            });
+                            const newUrl = `${window.location.pathname}?${params.toString()}`;
+                            window.history.replaceState({}, '', newUrl);
+                            window.location.href = newUrl;
+                        });
+
+                        $('#eventTypesFilter input[name="event-types[]"]').each(function() {
+                            if (params.getAll('event-types[]').includes($(this).val())) {
+                                $(this).prop('checked', true);
+                            }
+                        });
+
+                    });
+                </script>
 
             </div>
         </div>
