@@ -109,3 +109,23 @@ function wvl_get_excerpt_content($post_id, $length = 180)
 
     return $content;
 }
+
+function wvl_get_venue_location($venue_id)
+{
+    return '1901 Thornridge Cir. Shiloh, Hawaii 81063';
+}
+
+
+add_action('wvl_social_links', function () {
+    // $get_social_links = unserialize(get_post_meta(get_the_ID(), 'social_links', true));
+    $get_social_links = ['facebook-f' => '', 'x-twitter' => '', 'instagram' => '', 'square-youtube' => '', 'linkedin-in' => ''];
+    if ($get_social_links && count($get_social_links) > 0) {
+        foreach ($get_social_links as $key => $value) { ?>
+            <li>
+                <a class="rounded-full w-11 h-11 flex justify-center items-center no-underline bg-[#F1F1F1]" href="<?php echo $value; ?>">
+                    <i class="fa-brands fa-<?php echo $key; ?>"></i>
+                </a>
+            </li>
+<?php }
+    }
+});
