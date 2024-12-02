@@ -1,11 +1,13 @@
 import handleContactInfoForm from './handleContactInfoForm';
 import handlePackageForm from './handlePackageForm';
 import handlePersonalInfoForm from './handlePersonalInfoForm';
+import handlePhotographsForm from './handlePhotographsForm';
 import handleServiceInfoForm from './handleServiceInfoForm';
 import handleYourStoryForm from './handleYourStoryForm';
 import './style.css';
 
 jQuery(document).ready(function ($) {
+    handlePhotographsForm($);
 
     async function handleNext(step) {
         if (step === 0) {
@@ -19,8 +21,6 @@ jQuery(document).ready(function ($) {
         } else if (step === 4) {
             return await handleYourStoryForm($);
         }
-
-        handleContactInfoForm($);
         return false;
     }
     const steps = new StepIndicator(".steps", handleNext, 5);
