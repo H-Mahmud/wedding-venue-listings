@@ -1,9 +1,14 @@
+import handlePackageForm from './handlePackageForm';
 import './style.css';
 
 jQuery(document).ready(function ($) {
 
     async function handleNext(step) {
-        return true;
+        if (step === 0) {
+            return handlePackageForm($);
+        }
+
+        return false;
     }
     const steps = new StepIndicator(".steps", handleNext);
 
