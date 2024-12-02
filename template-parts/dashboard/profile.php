@@ -1,4 +1,5 @@
-<?php $venue_id = wvl_get_venue_id();
+<?php
+$venue_id = wvl_get_venue_id();
 $author_id = get_current_user_id();
 $venue = get_post($venue_id);
 ?>
@@ -6,32 +7,31 @@ $venue = get_post($venue_id);
     <div class="steps">
         <div class="steps__step" data-step="0">
             <div class="steps__step-number">1</div>
-            <div class="steps__step-name"><?php _e('Personal Info', 'wedding-venue-listings'); ?></div>
+            <div class="steps__step-name"><?php _e('Package', 'wedding-venue-listings'); ?></div>
         </div>
-        <div class="steps__connector"></div>
         <div class="steps__step" data-step="1">
             <div class="steps__step-number">2</div>
-            <div class="steps__step-name">Service Info</div>
+            <div class="steps__step-name"><?php _e('Personal Info', 'wedding-venue-listings'); ?></div>
         </div>
         <div class="steps__connector"></div>
         <div class="steps__step" data-step="2">
             <div class="steps__step-number">3</div>
-            <div class="steps__step-name">Contact Info</div>
+            <div class="steps__step-name">Service Info</div>
         </div>
         <div class="steps__connector"></div>
         <div class="steps__step" data-step="3">
             <div class="steps__step-number">4</div>
-            <div class="steps__step-name"> Your Story</div>
+            <div class="steps__step-name">Contact Info</div>
         </div>
         <div class="steps__connector"></div>
         <div class="steps__step" data-step="4">
             <div class="steps__step-number">5</div>
-            <div class="steps__step-name"> Photographs</div>
+            <div class="steps__step-name"> Your Story</div>
         </div>
         <div class="steps__connector"></div>
         <div class="steps__step" data-step="5">
             <div class="steps__step-number">6</div>
-            <div class="steps__step-name"> Payment (Optional)</div>
+            <div class="steps__step-name"> Photographs</div>
         </div>
     </div>
 

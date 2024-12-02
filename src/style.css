@@ -38,7 +38,6 @@
 @import "./styles/components.css";
 
 @import './styles/auth-pages.css';
-@import './profile/steps.css';
 @import './styles/full-calendar.css';
 
 @import './styles/single-venue.css';
