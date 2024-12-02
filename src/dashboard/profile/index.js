@@ -1,4 +1,5 @@
 import handlePackageForm from './handlePackageForm';
+import handlePersonalInfoForm from './handlePersonalInfoForm';
 import './style.css';
 
 jQuery(document).ready(function ($) {
@@ -6,6 +7,8 @@ jQuery(document).ready(function ($) {
     async function handleNext(step) {
         if (step === 0) {
             return handlePackageForm($);
+        } else if (step === 1) {
+            return await handlePersonalInfoForm($);
         }
 
         return false;

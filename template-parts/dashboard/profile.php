@@ -36,27 +36,13 @@ $venue = get_post($venue_id);
         </div>
     </div>
 
-
-    <form class=" mt-14 profile-step-forms active" id="profileInfoForm" data-step="0">
-        <fieldset class="p-5 rounded-xl border-gray-200">
-            <legend class="mb-2 text-center"><?php _e('Personal Information', 'wedding-venue-listings'); ?></legend>
-            <div class="wvl-field">
-                <label for="firstName">First Name</label>
-                <input type="text" id="firstName" name="first_name" placeholder="John" value="<?php echo get_user_meta($author_id, 'first_name', true); ?>" required>
-            </div>
-
-            <div class="wvl-field">
-                <label for="lastName">Last Name</label>
-                <input type="text" id="lastName" name="last_name" placeholder="Doe" value="<?php echo get_user_meta($author_id, 'last_name', true); ?>" required>
-            </div>
-        </fieldset>
-    </form>
-
     <?php include_once WVL_PLUGIN_DIR . 'template-parts/dashboard/profile/package.php'; ?>
+    <?php include_once WVL_PLUGIN_DIR . 'template-parts/dashboard/profile/personal-info.php'; ?>
+    <?php /*
     <?php include_once WVL_PLUGIN_DIR . 'template-parts/dashboard/profile/service-info.php'; ?>
     <?php include_once WVL_PLUGIN_DIR . 'template-parts/dashboard/profile/contact-info.php'; ?>
     <?php include_once WVL_PLUGIN_DIR . 'template-parts/dashboard/profile/your-story.php'; ?>
-    <?php include_once WVL_PLUGIN_DIR . 'template-parts/dashboard/profile/photographs.php'; ?>
+    <?php include_once WVL_PLUGIN_DIR . 'template-parts/dashboard/profile/photographs.php'; */ ?>
 
     <p class="text-red-700 profile-form-error pt-3"></p>
 

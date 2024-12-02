@@ -1,8 +1,8 @@
-import { hideProfileNextSpinner, showProfileNextSpinner } from "./helper";
+import { hideProfileNextSpinner, showProfileNextSpinner } from "./utils";
 
-export default function handleProfileInfoForm() {
-    const $form = jQuery('form#profileInfoForm');
-    const $profileFormError = jQuery('.profile-form-error')
+export default function handlePersonalInfoForm($) {
+    const $form = $('form#profileInfoForm');
+    const $profileFormError = $('.profile-form-error')
 
     if (!$form.get(0).checkValidity()) {
         $form.get(0).reportValidity();
@@ -19,7 +19,7 @@ export default function handleProfileInfoForm() {
 
     showProfileNextSpinner();
     return new Promise((resolve, reject) => {
-        jQuery.ajax({
+        $.ajax({
             url: WVL_DATA.ajax_url,
             type: 'POST',
             dataType: 'json',
@@ -31,7 +31,6 @@ export default function handleProfileInfoForm() {
             },
             success: function (response) {
                 if (response.success) {
-                    // $profileFormError.html("Profile information saved successfully!");
                     resolve(true);
                 } else {
                     $profileFormError.html(response.data.message || "An error occurred.");
