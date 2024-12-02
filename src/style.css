@@ -10,7 +10,7 @@
     }
 
     .wvl-btn {
-        @apply py-2.5 px-5 me-2 mb-2 text-sm font-medium text-primary focus:outline-none bg-white rounded-lg border border-gray-200 focus:z-10 focus:ring-4 focus:ring-gray-100 cursor-pointer;
+        @apply py-2.5 px-5 me-2 mb-2 text-sm font-medium text-primary focus:outline-none bg-white rounded-lg !border !border-gray-200 focus:z-10 focus:ring-4 focus:ring-gray-100 cursor-pointer hover:bg-transparent hover:text-blue-700 !shadow-none;
     }
 
     .wvl-field-row {
@@ -25,9 +25,10 @@
         @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5;
     }
 
-    .wvl-comments-pagination .page-links{
-            @apply flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700
+    .wvl-comments-pagination .page-links {
+        @apply flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700
     }
+
     .wvl-comments-pagination .page-links.current {
         @apply bg-gray-300;
     }

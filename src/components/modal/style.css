@@ -8,11 +8,11 @@
     }
 
     .wvl-modal .deem {
-        @apply bg-black opacity-65 fixed inset-0 z-40;
+        @apply bg-black opacity-65 fixed inset-0 z-20;
     }
 
     .wvl-modal .modal-box {
-        @apply relative p-4 w-full max-w-lg max-h-full z-50;
+        @apply relative p-4 w-full max-w-lg max-h-full z-30;
     }
 
     .wvl-modal .modal-content {

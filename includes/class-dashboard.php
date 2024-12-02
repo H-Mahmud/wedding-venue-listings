@@ -54,6 +54,11 @@ class WVL_Dashboard
             wp_enqueue_style('choices.js', WVL_PLUGIN_URL . '/assets/lib/choices.js/css/choices.min.css');
             wp_enqueue_script('fullcalendar', WVL_PLUGIN_URL . '/assets/lib/fullcalendar/index.global.min.js', [], '6.1.15', true);
 
+            wp_enqueue_script('air-datepicker', 'https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/js/datepicker.js');
+            wp_enqueue_script('air-datepicker-en', 'https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/js/i18n/datepicker.en.js');
+            wp_enqueue_style('air-datepicker', 'https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/css/datepicker.min.css');
+
+
             $data = [
                 'ajax_url'      => admin_url('admin-ajax.php'),
                 'ajax_nonce'    => wp_create_nonce('dashboard_nonce'),

@@ -22,7 +22,18 @@
             headerToolbar: {
                 left: 'title',
                 right: 'prev,next today',
+                center: 'AddEventButton'
                 // right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+            },
+
+            customButtons: {
+                AddEventButton: {
+                    text: 'Add Booking Event',
+                    click: function() {
+                        jQuery('#modal-event-add').addClass('flex');
+                        jQuery('#modal-event-add').removeClass('hidden');
+                    }
+                }
             },
 
             dateClick: function(info) {
@@ -69,6 +80,27 @@
         });
         calendar.render();
     });
+
+    jQuery(document).ready(function() {
+        jQuery('.datetimepicker').datepicker({
+            timepicker: false,
+            language: 'en',
+            range: true,
+            multipleDates: true,
+            multipleDatesSeparator: " - ",
+            minDate: new Date(new Date().setDate(new Date().getDate() + 1))
+        });
+        // jQuery("#add-event").submit(function () {
+        //     alert("Submitted");
+        //     var values = {};
+        //     $.each($('#add-event').serializeArray(), function (i, field) {
+        //         values[field.name] = field.value;
+        //     });
+        //     console.log(
+        //         values
+        //     );
+        // });
+    });
 </script>
 
 
@@ -104,42 +136,43 @@
     </div>
 </div>
 
-
-<div id="modal-view-event-add" class="modal modal-top fade calendar-modal">
-    <div class="modal-dialog modal-dialog-centered">
+<div id="modal-event-add" data-component-type="wvl-modal" tabindex="-1" class="wvl-modal">
+    <div class="deem"></div>
+    <div class="modal-box">
         <div class="modal-content">
-            <form id="add-event">
-                <div class="modal-body">
-                    <h4>Add Booking Detail</h4>
-                    <div class="form-group">
-                        <label>Title</label>
-                        <input type="text" class="form-control" name="ename">
+            <div class="modal-header">
+                <h3 class="heading">
+                    <span><?php _e('Add Booking Detail', 'wedding-venue-listings'); ?></span>
+                </h3>
+                <span class="close-icon close-btn">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </span>
+            </div>
+
+            <div class="p-4 md:p-5">
+                <form class="space-y-4" method="post">
+                    <div class="wvl-field">
+                        <label for="title"><?php _e('Event Title', 'wedding-venue-listings'); ?></label>
+                        <input type="text" name="title" id="title">
                     </div>
-                    <div class="form-group">
-                        <label>Booked Date</label>
-                        <input type='text' class="datetimepicker form-control" name="edate">
+                    <div class="wvl-field">
+                        <label for="date"><?php _e('Event Date', 'wedding-venue-listings'); ?></label>
+                        <input type='text' class="datetimepicker" name="date" id="date" autocomplete="off">
                     </div>
-                    <div class="form-group">
-                        <label>Description</label>
-                        <textarea class="form-control" name="edesc"></textarea>
+                    <div class="wvl-field">
+                        <label for="location"><?php _e('Event Location', 'wedding-venue-listings'); ?></label>
+                        <textarea class="form-control" name="location" id="location"></textarea>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Save</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                </div>
-            </form>
+
+                    <div class="wvl-field-row">
+                        <button type="submit" class="wvl-btn-primary"><?php _e('Save', 'wedding-venue-listings'); ?></button>
+                        <button type="button" class="wvl-btn close-btn"><?php _e('Close', 'wedding-venue-listings'); ?></button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
-
-
-<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/css/datepicker.css">
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/js/datepicker.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/js/i18n/datepicker.en.js"></script> -->
