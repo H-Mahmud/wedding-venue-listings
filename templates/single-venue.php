@@ -148,9 +148,9 @@
         </main>
 
 
-        <div id="contact-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div id="contact-modal" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
             <div class="bg-black opacity-65 fixed inset-0 z-40"></div>
-            <div class="relative p-4 w-full max-w-lg max-h-ful z-50">
+            <div class="modal-content relative p-4 w-full max-w-lg max-h-ful z-50">
                 <div class="relative bg-white rounded-lg shadow">
                     <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
                         <h3 class="text-xl font-semibold text-gray-900">
@@ -224,7 +224,7 @@
                 });
 
                 $(window).click(function(event) {
-                    if ($(event.target).is('##contact-modal')) {
+                    if ($(event.target).is('#contact-modal .modal-content')) {
                         $('#contact-modal').addClass('hidden');
                         $('#contact-modal').removeClass('flex');
                     }
