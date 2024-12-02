@@ -1,3 +1,4 @@
+import handleContactInfoForm from './handleContactInfoForm';
 import handlePackageForm from './handlePackageForm';
 import handlePersonalInfoForm from './handlePersonalInfoForm';
 import handleServiceInfoForm from './handleServiceInfoForm';
@@ -12,11 +13,13 @@ jQuery(document).ready(function ($) {
             return await handlePersonalInfoForm($);
         } else if (step === 2) {
             return await handleServiceInfoForm($);
+        } else if (step === 3) {
+            return await handleContactInfoForm($);
         }
 
         return false;
     }
-    const steps = new StepIndicator(".steps", handleNext, 2);
+    const steps = new StepIndicator(".steps", handleNext, 3);
 
 });
 

@@ -1,4 +1,4 @@
-import { hideProfileNextSpinner, showProfileNextSpinner } from "./helper";
+import { hideProfileNextSpinner, showProfileNextSpinner } from "./utils";
 
 export default function handleContactInfoForm($) {
     const $form = $('form#profileContactForm');
