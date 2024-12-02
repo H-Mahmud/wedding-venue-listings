@@ -15,7 +15,6 @@ jQuery(document).ready(function ($) {
 
     // Close modal when clicking outside the modal content area
     $(window).click(function (event) {
-        console.log($(event.target).is('[data-component-type="wvl-modal"]'));
         if ($(event.target).is('[data-component-type="wvl-modal"] .modal-content') || $(event.target).is('[data-component-type="wvl-modal"]')) {
             $('[data-component-type="wvl-modal"]').each(function () {
                 $(this).addClass('hidden');
