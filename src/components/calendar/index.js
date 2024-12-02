@@ -29,11 +29,32 @@ jQuery(document).ready(function ($) {
             calendarDates.append('<span></span>');
         }
 
+        const params = new URLSearchParams(window.location.search);
+        const selectedDate = params.get('booking-date');;
+
         // Add the dates of the current month
         for (let i = 1; i <= lastDate; i++) {
-            const dateSpan = $('<span></span>').text(i);
 
-            // Highlight today's date
+            let dateSpan;
+            if (isTodayOrEarlier(i, month, year)) {
+                dateSpan = $('<span></span>').text(i);
+                dateSpan.addClass('disabled');
+
+            } else {
+                const params = new URLSearchParams(window.location.search);
+                params.delete('booking-date');
+
+                params.append('booking-date', `${year}-${month + 1}-${i}`);
+                const newUrl = `${window.location.pathname}?${params.toString()}`
+
+                dateSpan = $('<a></a>').text(i);
+                dateSpan.attr('href', newUrl);
+
+            }
+            if (selectedDate === `${year}-${month + 1}-${i}`) {
+                dateSpan.addClass('selected');
+            }
+
             if (
                 i === today.getDate() &&
                 month === today.getMonth() &&
@@ -45,6 +66,14 @@ jQuery(document).ready(function ($) {
             calendarDates.append(dateSpan);
         }
     }
+
+    const isTodayOrEarlier = (date, month, year) => {
+        const today = new Date();
+        const inputDate = new Date(year, month, date);
+
+        return inputDate <= today;
+    };
+
 
     // Add event listeners for navigation
     $('#prev-month').on('click', function () {

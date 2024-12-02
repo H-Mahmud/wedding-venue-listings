@@ -51,12 +51,24 @@
   gap: 5px;
 }
 
-.wvl-calendar .calendar-dates span {
+.wvl-calendar .calendar-dates span,
+.wvl-calendar .calendar-dates a {
   display: block;
   padding: 10px;
 }
 
-.wvl-calendar .calendar-dates span.today {
-  border: 1px solid #000A0AB2;
+.wvl-calendar .calendar-dates a.selected {
+  background-color: #0056b3;
+  color: #fff;
   border-radius: 20px;
+}
+
+.wvl-calendar .calendar-dates span.today {
+  border: 1px solid #D9D9D9;
+  border-radius: 20px;
+}
+
+.wvl-calendar .calendar-dates span.disabled {
+  color: #D9D9D9;
+  cursor: not-allowed;
 }
