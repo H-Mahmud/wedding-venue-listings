@@ -14,6 +14,28 @@
     @apply inline-block;
 }
 
+.upload-progressbar #progress--circle {
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+    stroke-linecap: round;
+}
+
+.upload-progressbar #progress--number {
+    fill: #FFF;
+    font-weight: 750;
+    font-size: 12px;
+    transform-origin: center;
+    transform: rotate(90deg);
+}
+
+.upload-progressbar #progress--text {
+    fill: #FFF;
+    font-weight: 750;
+    font-size: 8px;
+    transform-origin: center;
+    transform: rotate(90deg);
+}
+
 :root {
     --hue: 223;
     --trans-dur: 0.3s;

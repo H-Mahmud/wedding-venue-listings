@@ -38,6 +38,9 @@ class WVL_Dashboard_Profile
 
         add_action('wp_ajax_wvl_upload_cover_photo', array($this, 'upload_cover_photo'));
         add_action('wp_ajax_nopriv_wvl_upload_cover_photo', array($this, 'upload_cover_photo'));
+
+        add_action('wp_ajax_wvl_upload_gallery_photo', array($this, 'upload_gallery_photo'));
+        add_action('wp_ajax_nopriv_wvl_upload_gallery_photo', array($this, 'upload_gallery_photo'));
     }
 
 
@@ -257,6 +260,60 @@ class WVL_Dashboard_Profile
         set_post_thumbnail($parent_id, $attachment_id);
 
         wp_send_json_success(['message' => 'Cover uploaded successfully!']);
+    }
+
+
+    public function upload_gallery_photo()
+    {
+        check_ajax_referer('dashboard_nonce', 'security');
+
+        if (!is_user_logged_in()) {
+            wp_send_json_error(['message' => __('You must be logged in to upload a Photo.', 'wedding-venue-listings')]);
+        }
+
+
+        if (!isset($_FILES['file']) || empty($_FILES['file']['tmp_name'])) {
+            wp_send_json_error(['message' => __('No file uploaded.', 'wedding-venue-listings')]);
+        }
+
+        $file = $_FILES['file'];
+        $upload = wp_handle_upload($file, ['test_form' => false]);
+        if (!empty($upload['error'])) {
+            wp_send_json_error(['message' => $upload['error']], 500);
+        }
+
+
+        $parent_id = wvl_get_venue_id();
+        $user_id = get_current_user_id();
+
+        $attachment_id = wp_insert_attachment([
+            'guid'           => $upload['url'],
+            'post_mime_type' => $upload['type'],
+            'post_title'     => sanitize_file_name($file['name']),
+            'post_content'   => '',
+            'post_status'    => 'inherit',
+            'post_parent'    => $parent_id,
+            'post_author'      => $user_id
+        ], $upload['file']);
+
+        if (is_wp_error($attachment_id) || !$attachment_id) {
+            wp_send_json_error(['message' => 'Failed to save the photo in the media library.'], 500);
+        }
+
+        require_once ABSPATH . 'wp-admin/includes/image.php';
+        wp_update_attachment_metadata($attachment_id, wp_generate_attachment_metadata($attachment_id, $upload['file']));
+
+        $post_gallery = get_post_meta($parent_id, 'post_gallery', true);
+
+        if (empty($post_gallery)) {
+            $post_gallery = [];
+        }
+
+        $post_gallery[] = $attachment_id;
+
+        update_post_meta($parent_id, 'post_gallery', $post_gallery);
+
+        wp_send_json_success(['message' => 'Image uploaded successfully!']);
     }
 
     /**
