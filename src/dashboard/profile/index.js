@@ -23,7 +23,7 @@ jQuery(document).ready(function ($) {
         }
         return false;
     }
-    const steps = new StepIndicator(".steps", handleNext, 5);
+    const steps = new StepIndicator(".steps", handleNext);
 
 });
 

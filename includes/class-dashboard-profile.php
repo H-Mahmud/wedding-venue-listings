@@ -182,6 +182,14 @@ class WVL_Dashboard_Profile
         $email = sanitize_text_field($_POST['email'] ?? '');
         $location = sanitize_text_field($_POST['location'] ?? '');
 
+        $social_links = [];
+        if (isset($_POST['social_links']) && is_array($_POST['social_links'])) {
+            foreach ($_POST['social_links'] as $key => $value) {
+                $social_links[$key]['value'] = sanitize_text_field($value['value']);
+            }
+        }
+        update_post_meta(wvl_get_venue_id(), 'social_links', $social_links);
+
         if (empty($phone) || empty($email) || empty($location)) {
             wp_send_json_error(['message' => 'All fields are required.']);
         }

@@ -13,6 +13,14 @@ export default function handleContactInfoForm($) {
     const email = $form.find('#email').val();
     const location = $form.find('#location').val();
 
+    let socialLinks = {};
+    $(".social-input").each(function () {
+        let id = $(this).attr("id")
+        let value = $(this).val();
+        socialLinks[id] = { value: value };
+    });
+
+
     if (!phone || !email || !location) {
         $profileFormError.html("All fields are required.");
         return false;
@@ -23,7 +31,8 @@ export default function handleContactInfoForm($) {
         nonce: WVL_DATA.ajax_nonce,
         phone: phone,
         email: email,
-        location: location
+        location: location,
+        social_links: socialLinks
     }
 
     showProfileNextSpinner();
