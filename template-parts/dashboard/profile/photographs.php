@@ -30,22 +30,19 @@
                 </p>
                 <input type="file" name="upload_gallery" id="upload_gallery" class="hidden" multiple accept="image/*">
             </label>
-            <div>
 
-                <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image.jpg" alt="">
-            </div>
-            <div>
-                <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg" alt="">
-            </div>
-            <div>
-                <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-2.jpg" alt="">
-            </div>
-            <div>
-                <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-3.jpg" alt="">
-            </div>
-            <div>
-                <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-4.jpg" alt="">
-            </div>
+            <?php
+            $gallery = get_post_meta($venue->ID, 'venue_gallery', true);
+            if ($gallery) :
+                foreach ($gallery as $image) :
+            ?>
+                    <div>
+                        <?php echo wp_get_attachment_image($image, 'medium', false, ['class' => 'h-auto max-w-full rounded-lg']); ?>
+                    </div>
+            <?php
+                endforeach;
+            endif;
+            ?>
         </div>
     </fieldset>
 

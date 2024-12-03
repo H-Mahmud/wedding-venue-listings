@@ -311,7 +311,7 @@ class WVL_Dashboard_Profile
 
         $post_gallery[] = $attachment_id;
 
-        update_post_meta($parent_id, 'post_gallery', $post_gallery);
+        update_post_meta($parent_id, 'venue_gallery', $post_gallery);
 
         wp_send_json_success(['message' => 'Image uploaded successfully!']);
     }
