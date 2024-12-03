@@ -21,8 +21,7 @@
     </fieldset>
 
     <fieldset class="p-5 rounded-xl border-gray-200 mt-8">
-        <legend class="mb-2 text-center"><?php _e('Social Media Accounts', 'wedding-venue-listings'); ?></legend>
-
+        <legend class="mb-2 text-center"><?php _e('Other Information', 'wedding-venue-listings'); ?></legend>
         <?php
         $social_accounts = [
             'website' => [

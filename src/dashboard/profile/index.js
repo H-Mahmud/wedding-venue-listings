@@ -11,7 +11,7 @@ jQuery(document).ready(function ($) {
 
     async function handleNext(step) {
         if (step === 0) {
-            return handlePackageForm($);
+            return await handlePackageForm($);
         } else if (step === 1) {
             return await handlePersonalInfoForm($);
         } else if (step === 2) {
@@ -21,9 +21,17 @@ jQuery(document).ready(function ($) {
         } else if (step === 4) {
             return await handleYourStoryForm($);
         }
+
         return false;
     }
-    const steps = new StepIndicator(".steps", handleNext);
+
+    const url = new URL(window.location.href);
+    const currentStep = url.searchParams.get("step");
+    if (currentStep) {
+        new StepIndicator(".steps", handleNext, parseInt(currentStep));
+    } else {
+        new StepIndicator(".steps", handleNext);
+    }
 
 });
 
@@ -66,6 +74,10 @@ class StepIndicator {
         if (! await this.handleNext(this.step)) return;
         if (this.step < this.steps - 1) {
             this.step += 1;
+
+            const url = new URL(window.location.href);
+            url.searchParams.set("step", this.step);
+            window.history.pushState({}, '', url.href)
         }
     }
 
