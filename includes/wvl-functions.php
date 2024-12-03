@@ -117,16 +117,78 @@ function wvl_get_venue_location($venue_id)
 
 
 add_action('wvl_social_links', function () {
-    // $get_social_links = unserialize(get_post_meta(get_the_ID(), 'social_links', true));
-    $get_social_links = ['facebook-f' => '', 'x-twitter' => '', 'instagram' => '', 'square-youtube' => '', 'linkedin-in' => ''];
-    if ($get_social_links && count($get_social_links) > 0) {
-        foreach ($get_social_links as $key => $value) { ?>
-            <li>
-                <a class="rounded-full w-11 h-11 flex justify-center items-center no-underline bg-[#F1F1F1]" href="<?php echo $value; ?>">
-                    <i class="fa-brands fa-<?php echo $key; ?>"></i>
-                </a>
-            </li>
-<?php }
+
+    $social_accounts = [
+        'website' => [
+            'label' => __('Website', 'wedding-venue-listings'),
+            'placeholder' => 'https://www.yourwebsite.com',
+            'icon' => 'fa-solid fa-globe',
+            'value' => ''
+        ],
+        'facebook' => [
+            'label' => __('Facebook', 'wedding-venue-listings'),
+            'placeholder' => 'https://www.facebook.com/yourprofile',
+            'icon' => 'fa-brands fa-facebook-f',
+            'value' => ''
+        ],
+        'twitter' => [
+            'label' => __('Twitter', 'wedding-venue-listings'),
+            'placeholder' => 'https://www.twitter.com/yourprofile',
+            'icon' => 'fa-brands fa-x-twitter',
+            'value' => ''
+        ],
+        'instagram' => [
+
+            'label' => __('Instagram', 'wedding-venue-listings'),
+            'placeholder' => 'https://www.instagram.com/yourprofile',
+            'icon' => 'fa-brands fa-instagram',
+            'value' => ''
+        ],
+        'linkedin' => [
+            'label' => __('LinkedIn', 'wedding-venue-listings'),
+            'placeholder' => 'https://www.linkedin.com/in/yourprofile',
+            'icon' => 'fa-brands fa-linkedin-in',
+            'value' => ''
+        ],
+        'youtube' => [
+            'label' => __('YouTube', 'wedding-venue-listings'),
+            'placeholder' => 'https://www.youtube.com/@yourprofile',
+            'icon' => 'fa-brands fa-square-youtube',
+            'value' => ''
+        ],
+        'tiktok' => [
+            'label' => __('TikTok', 'wedding-venue-listings'),
+            'placeholder' => 'https://www.tiktok.com/@yourprofile',
+            'icon' => 'fa-brands fa-tiktok',
+            'value' => ''
+        ],
+    ];
+
+    $get_social_links = get_post_meta(get_the_ID(), 'social_links', true);
+    if (!$get_social_links) {
+        $get_social_links = [];
+    }
+
+    $social_fields = [];
+    foreach ($social_accounts as $key => $value) {
+        $account_value = isset($get_social_links[$key]) && $get_social_links[$key]['value'] ? $get_social_links[$key]['value'] : '';
+        if (!$account_value) continue;
+
+        $social_fields[$key] = [
+            'label' => $value['label'],
+            'placeholder' => $value['placeholder'],
+            'icon' => $value['icon'],
+            'value' => $account_value
+        ];
+    }
+
+    foreach ($social_fields as $key => $value) { ?>
+        <li>
+            <a class="rounded-full w-11 h-11 flex justify-center items-center no-underline bg-[#F1F1F1]" href="<?php echo $value['value']; ?>" target="_blank">
+                <i class="<?php echo $value['icon']; ?>"></i>
+            </a>
+        </li>
+<?php
     }
 });
 
