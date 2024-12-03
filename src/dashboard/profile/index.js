@@ -27,11 +27,16 @@ jQuery(document).ready(function ($) {
 
     const url = new URL(window.location.href);
     const currentStep = url.searchParams.get("step");
+    let indicator
     if (currentStep) {
-        new StepIndicator(".steps", handleNext, parseInt(currentStep));
+        indicator = new StepIndicator(".steps", handleNext, parseInt(currentStep));
     } else {
-        new StepIndicator(".steps", handleNext);
+        indicator = new StepIndicator(".steps", handleNext);
     }
+
+    window.addEventListener('popstate', function (event) {
+        indicator.prev();
+    });
 
 });
 
