@@ -314,7 +314,7 @@ class WVL_Dashboard_Profile
         require_once ABSPATH . 'wp-admin/includes/image.php';
         wp_update_attachment_metadata($attachment_id, wp_generate_attachment_metadata($attachment_id, $upload['file']));
 
-        $post_gallery = get_post_meta($parent_id, 'post_gallery', true);
+        $post_gallery = get_post_meta($parent_id, 'venue_gallery', true);
 
         if (empty($post_gallery)) {
             $post_gallery = [];
