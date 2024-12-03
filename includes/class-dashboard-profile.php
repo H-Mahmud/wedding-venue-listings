@@ -41,6 +41,9 @@ class WVL_Dashboard_Profile
 
         add_action('wp_ajax_wvl_upload_gallery_photo', array($this, 'upload_gallery_photo'));
         add_action('wp_ajax_nopriv_wvl_upload_gallery_photo', array($this, 'upload_gallery_photo'));
+
+        add_action('wp_ajax_wvl_submit_venue_profile', array($this, 'submit_venue_profile'));
+        add_action('wp_ajax_nopriv_wvl_submit_venue_profile', array($this, 'submit_venue_profile'));
     }
 
 
@@ -322,6 +325,31 @@ class WVL_Dashboard_Profile
         update_post_meta($parent_id, 'venue_gallery', $post_gallery);
 
         wp_send_json_success(['message' => 'Image uploaded successfully!']);
+    }
+
+    public function submit_venue_profile()
+    {
+
+        check_ajax_referer('dashboard_nonce', 'security');
+        if (!is_user_logged_in()) {
+            wp_send_json_error(['message' => 'You must be logged in to update your profile.']);
+        }
+        $venue_id = wvl_get_venue_id();
+
+        if (!$venue_id) {
+            wp_send_json_error(['message' => 'You must be logged in to update your profile.']);
+        }
+
+        $venue_id = wvl_get_venue_id();
+        $venue_status = get_post_status($venue_id);
+        if ($venue_status !== 'publish') {
+            wp_update_post([
+                'ID' => $venue_id,
+                'post_status' => 'pending'
+            ]);
+        }
+
+        wp_send_json_success(['message' => __('Your application has been submitted.', 'wedding-venue-listings')]);
     }
 
     /**

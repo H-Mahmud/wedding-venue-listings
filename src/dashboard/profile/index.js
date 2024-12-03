@@ -3,6 +3,7 @@ import handlePackageForm from './handlePackageForm';
 import handlePersonalInfoForm from './handlePersonalInfoForm';
 import handlePhotographsForm from './handlePhotographsForm';
 import handleServiceInfoForm from './handleServiceInfoForm';
+import handleSubmitForm from './handleSubmitForm';
 import handleYourStoryForm from './handleYourStoryForm';
 import './style.css';
 
@@ -20,6 +21,8 @@ jQuery(document).ready(function ($) {
             return await handleContactInfoForm($);
         } else if (step === 4) {
             return await handleYourStoryForm($);
+        } else if (step === 5) {
+            return await handleSubmitForm($);
         }
 
         return false;
@@ -108,7 +111,15 @@ class StepIndicator {
         const $prevBtn = jQuery('[data-action="prev"]');
         const $nextBtn = jQuery('[data-action="next"]');
         $prevBtn.prop("disabled", this.step <= 0);
-        $nextBtn.prop("disabled", this.step >= this.steps - 1);
+        if (WVL_DATA.venue_status === 'publish') {
+            $nextBtn.html(this.step >= this.steps - 1 ? 'Save' : 'Next');
+            // $nextBtn.prop("disabled", this.step >= this.steps - 1);
+        } else if (WVL_DATA.venue_status === 'pending') {
+            $nextBtn.prop("disabled", this.step >= this.steps - 1);
+            $nextBtn.html(this.step >= this.steps - 1 ? 'Submitted' : 'Next');
+        } else {
+            $nextBtn.html(this.step >= this.steps - 1 ? 'Request to Publish' : 'Next');
+        }
     }
 
 }
