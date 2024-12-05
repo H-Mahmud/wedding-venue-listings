@@ -213,7 +213,9 @@
                     </div>
                     <script type="text/javascript">
                         jQuery(document).ready(function($) {
-                            const lightGalleryInstance = $('#recent-gallery').lightGallery();
+                            const lightGalleryInstance = $('#recent-gallery').lightGallery({
+                                download: false
+                            });
                         });
                     </script>
                 </div>
