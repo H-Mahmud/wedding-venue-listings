@@ -204,7 +204,7 @@
                                 $image_url = wp_get_attachment_url($image);
                         ?>
                                 <a href="<?php echo esc_url($image_url); ?>" class="lightgallery-item">
-                                    <?php echo wp_get_attachment_image($image, 'medium', false, ['class' => 'h-auto max-w-full rounded-lg']); ?>
+                                    <?php echo wp_get_attachment_image($image, 'medium', false, ['class' => 'max-h-full h-full w-full object-cover max-w-full rounded-lg']); ?>
                                 </a>
                         <?php
                             endforeach;
