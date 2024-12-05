@@ -38,6 +38,7 @@ class WVL_Dashboard_Analytics
         add_wvl_menu([
             'name'     => 'Analytics',
             'slug'     => 'analytics',
+            'capability' => 'manage_venue',
             'icon'     => '<i class="fa-solid fa-chart-simple text-xl" style="color: #1f72b2;"></i>',
             'premium'  => true,
             'priority' => 60,
