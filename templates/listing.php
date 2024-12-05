@@ -133,7 +133,7 @@ get_header(); ?>
                     while ($query->have_posts()) :
                         $query->the_post(); ?>
 
-                        <div class="wvl-list-item grid grid-cols-[320px_1fr] gap-8">
+                        <div class="wvl-list-item grid grid-cols-[320px_1fr] gap-8 mb-5">
                             <div class="thumbnail h-full max-w-80">
                                 <?php the_post_thumbnail('full', array('class' => 'w-full h-full block object-cover rounded-md'));
                                 ?>
@@ -167,15 +167,17 @@ get_header(); ?>
                                 <div class="mt-4">
                                     <a class="wvl-btn-primary " href="<?php the_permalink(); ?>">Request a Pricing</a>
                                 </div>
-                        <?php
+                            </div>
+                        </div>
+                <?php
                     endwhile;
                 else:
                     echo '<p>No Venues Found</p>';
                 endif;
                 wp_reset_postdata();
-                        ?>
-                            </div>
-                        </div>
+                ?>
+                </div>
+        </div>
     </main>
 </div>
 

@@ -1,6 +1,4 @@
-.listing-archive {
-
-}
+.listing-archive {}
 
 /**
 * Sidebar
@@ -21,36 +19,4 @@
 
 .venue-listing .site-main .wlv-filter input[type="checkbox"] {
     @apply mb-2 inline-block;
-}
-
-
-/**
-* Listing archive content
-*/
-
-.venue-listing .site-main .wvl-content .total-result {
-    font-size: 22px;
-    font-weight: 600;
-
-}
-
-.venue-listing .site-main .wvl-content .wvl-list .wvl-list-item {
-    display: flex;
-    gap: 24px;
-}
-
-.venue-listing .site-main .wvl-content .wvl-list .wvl-list-item .thumbnail {
-    width: 320px;
-    height: auto;
-}
-
-.venue-listing .site-main .wvl-content .wvl-list .wvl-list-item .item-content {
-    width: calc(100% - (320px + 24px));
-}
-
-.venue-listing .site-main .wvl-content .wvl-list .wvl-list-item .item-content .meta {
-    display: flex;
-    justify-content: flex-start;
-    gap: 32px;
-    margin-bottom: 12px;
 }
