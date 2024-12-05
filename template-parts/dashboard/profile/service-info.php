@@ -22,10 +22,11 @@
             // Get current venue selected vendor_types
             $selected_vendor_types = get_the_terms($venue_id, 'vendor_type');
             $selected_vendor_slugs = [];
-            foreach ($selected_vendor_types as $vendor_type) {
-                $selected_vendor_slugs[] = $vendor_type->slug;
+            if ($selected_vendor_types) {
+                foreach ($selected_vendor_types as $vendor_type) {
+                    $selected_vendor_slugs[] = $vendor_type->slug;
+                }
             }
-
             // Get all vendor and event types
             $vendor_types_object = get_terms(array(
                 'taxonomy' => 'vendor_type',
@@ -44,8 +45,10 @@
             // Get current venue selected event_types
             $selected_event_types = get_the_terms($venue_id, 'event_type');
             $selected_event_slugs = [];
-            foreach ($selected_event_types as $event_type) {
-                $selected_event_slugs[] = $event_type->slug;
+            if ($selected_event_types) {
+                foreach ($selected_event_types as $event_type) {
+                    $selected_event_slugs[] = $event_type->slug;
+                }
             }
 
             // Get all vendor and event types

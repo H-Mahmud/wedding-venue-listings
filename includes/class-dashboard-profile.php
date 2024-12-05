@@ -76,6 +76,15 @@ class WVL_Dashboard_Profile
      */
     public function profile_page_cb()
     {
+        if (!wvl_get_venue_id()) {
+            wp_insert_post(array(
+                'post_title'    => 'My Venue',
+                'post_status'   => 'draft',
+                'post_type'     => 'venue',
+                'post_author'   => get_current_user_id()
+            ));
+        }
+
         require_once WVL_PLUGIN_DIR . '/template-parts/dashboard/profile.php';
     }
 
