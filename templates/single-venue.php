@@ -226,9 +226,12 @@
 
                     <div class="entry mb-3 mt-6 flex justify-between items-center">
                         <h3 class="text-2xl font-semibold"><?php _e('Reviews', 'wedding-venue-listings'); ?></h3>
-                        <span class="wvl-btn" data-component-type="wlval-modal-trigger" data-target-modal="#review-modal">
-                            <?php _e('Write a Review', 'wedding-venue-listings'); ?>
-                        </span>
+                        <?php
+                        if (is_user_logged_in()) { ?>
+                            <span class="wvl-btn" data-component-type="wlval-modal-trigger" data-target-modal="#review-modal">
+                                <?php _e('Write a Review', 'wedding-venue-listings'); ?>
+                            </span>
+                        <?php } ?>
                     </div>
                 </div>
 
