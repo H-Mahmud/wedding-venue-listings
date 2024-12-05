@@ -56,9 +56,9 @@
                 <div class="wvl-gallery">
                     <div class="entry mb-3 mt-6 flex justify-between items-center">
                         <h3 class="text-2xl font-semibold">Recent Events Gallery</h3>
-                        <a class="wvl-btn">
+                        <!-- <a id="view-all-btn" class="wvl-btn">
                             View All
-                        </a>
+                        </a> -->
                     </div>
 
                     <style type="text/css">
@@ -196,51 +196,42 @@
                     </style>
 
                     <div id="recent-gallery" class="demo-gallery grid grid-cols-2 md:grid-cols-4 gap-4">
-                        <div data-src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image.jpg">
-                            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image.jpg" alt="">
-                        </div>
-                        <div data-src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg">
-                            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg" alt="">
-                        </div>
-                        <div>
-                            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-2.jpg" alt="">
-                        </div>
-                        <div>
-                            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-3.jpg" alt="">
-                        </div>
-                        <div>
-                            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-4.jpg" alt="">
-                        </div>
-                        <div>
-                            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-5.jpg" alt="">
-                        </div>
-                        <div>
-                            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-6.jpg" alt="">
-                        </div>
-                        <div>
-                            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-7.jpg" alt="">
-                        </div>
+
+                        <?php
+                        $gallery_images = get_post_meta(get_the_ID(), 'venue_gallery', true);
+                        if ($gallery_images && count($gallery_images) > 0) :
+                            foreach ($gallery_images as $image) :
+                                $image_url = wp_get_attachment_url($image);
+                        ?>
+                                <a href="<?php echo esc_url($image_url); ?>" class="lightgallery-item">
+                                    <?php echo wp_get_attachment_image($image, 'medium', false, ['class' => 'h-auto max-w-full rounded-lg']); ?>
+                                </a>
+                        <?php
+                            endforeach;
+                        endif;
+                        ?>
+                    </div>
+                    <script type="text/javascript">
+                        jQuery(document).ready(function($) {
+                            const lightGalleryInstance = $('#recent-gallery').lightGallery();
+                        });
+                    </script>
+                </div>
+            </div>
+
+            <div class="wvl-reviews mt-14">
+                <div class="entry mb-3">
+
+                    <div class="entry mb-3 mt-6 flex justify-between items-center">
+                        <h3 class="text-2xl font-semibold"><?php _e('Reviews', 'wedding-venue-listings'); ?></h3>
+                        <span class="wvl-btn" data-component-type="wlval-modal-trigger" data-target-modal="#review-modal">
+                            <?php _e('Write a Review', 'wedding-venue-listings'); ?>
+                        </span>
                     </div>
                 </div>
 
-                <script type="text/javascript">
-                    jQuery(document).ready(function($) {
-                        $('#recent-gallery').lightGallery();
-                    });
-                </script>
-                <div class="wvl-reviews mt-9">
-                    <div class="entry mb-3">
-
-                        <div class="entry mb-3 mt-6 flex justify-between items-center">
-                            <h3 class="text-2xl font-semibold"><?php _e('Reviews', 'wedding-venue-listings'); ?></h3>
-                            <span class="wvl-btn" data-component-type="wlval-modal-trigger" data-target-modal="#review-modal">
-                                <?php _e('Write a Review', 'wedding-venue-listings'); ?>
-                            </span>
-                        </div>
-                    </div>
-
-                    <?php custom_comment_form();
-                    custom_comments_display(get_the_ID()); ?>
+                <?php custom_comment_form();
+                custom_comments_display(get_the_ID()); ?>
         </main>
 
 
