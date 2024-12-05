@@ -219,24 +219,25 @@
                         });
                     </script>
                 </div>
-            </div>
 
-            <div class="wvl-reviews mt-14">
-                <div class="entry mb-3">
+                <div class="wvl-reviews mt-20">
+                    <div class="mb-3">
 
-                    <div class="entry mb-3 mt-6 flex justify-between items-center">
-                        <h3 class="text-2xl font-semibold"><?php _e('Reviews', 'wedding-venue-listings'); ?></h3>
-                        <?php
-                        if (is_user_logged_in()) { ?>
-                            <span class="wvl-btn" data-component-type="wlval-modal-trigger" data-target-modal="#review-modal">
-                                <?php _e('Write a Review', 'wedding-venue-listings'); ?>
-                            </span>
-                        <?php } ?>
+                        <div class=" mb-3 mt-6 flex justify-between items-center">
+                            <h3 class="text-2xl font-semibold"><?php _e('Reviews', 'wedding-venue-listings'); ?></h3>
+                            <?php
+                            if (is_user_logged_in()) { ?>
+                                <span class="wvl-btn" data-component-type="wlval-modal-trigger" data-target-modal="#review-modal">
+                                    <?php _e('Write a Review', 'wedding-venue-listings'); ?>
+                                </span>
+                            <?php } ?>
+                        </div>
                     </div>
-                </div>
 
-                <?php custom_comment_form();
-                custom_comments_display(get_the_ID()); ?>
+                    <?php custom_comment_form();
+                    custom_comments_display(get_the_ID()); ?>
+                </div>
+            </div>
         </main>
 
 

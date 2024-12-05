@@ -15,7 +15,7 @@ if ($comments) {
     foreach ($comments as $comment) {
 ?>
 
-        <div class="review-item flex gap-8 mb-6" id="comment-<?php echo $comment->comment_ID; ?>">
+        <div class="review-item flex gap-8 mb-6 mt-3" id="comment-<?php echo $comment->comment_ID; ?>">
             <div class="avatar w-20 h-20 max-w-20 rounded-lg border flex-1">
                 <?php
                 $local_avatar = get_user_meta($comment->user_id, 'simple_local_avatar', true);
