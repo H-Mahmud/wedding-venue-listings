@@ -39,7 +39,7 @@ function custom_comment_form()
     if (is_user_logged_in()) {
         include_once WVL_PLUGIN_DIR . 'template-parts/reviews/review-form.php';
     } else {
-        echo '<p>You must be logged in to leave a comment.</p>';
+        echo '<p class="my-2">' . __('You must be logged in to leave a review.', 'wedding-venue-listings') . '</p>';
     }
 }
 

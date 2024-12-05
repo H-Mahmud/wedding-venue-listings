@@ -95,7 +95,7 @@ if ($comments) {
     $current_page = (get_query_var('cpage')) ? absint(get_query_var('cpage')) : 1;
     custom_comments_pagination($total_pages, $current_page);
 } else {
-    echo '<p class="text-center my-8 text-2xl font-medium">No comments yet.</p>';
+    echo '<p class="text-center my-8 text-2xl font-medium">No Reviews yet.</p>';
 }
 ?>
 
