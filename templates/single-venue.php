@@ -23,16 +23,11 @@
                         <span class="h-6 w-[1.5px] bg-quaternary inline-block"></span>
 
                         <span>
-                            <star-rating min="0" max="5" value="<?php get_post_meta(get_the_ID(), 'average_rating', true); ?>"></star-rating>
+                            <star-rating min="0" max="5" value="<?php echo get_post_meta(get_the_ID(), 'average_rating', true); ?>"></star-rating>
                             <span class="amount">
                                 <?php
-                                $rating_count = get_post_meta(get_the_ID(), 'rating_count', true);
-                                if ($rating_count) {
-                                    $count = number_format($rating_count, 0, '.', ',');
-                                    printf(_n('(%s Review)', '(%s Reviews)', $rating_count, 'wedding-venue-listings'), $count);
-                                } else {
-                                    _e('(0 Review)', 'wedding-venue-listings');
-                                }
+                                $comment_count = get_comment_count(get_the_ID());
+                                printf(_n('(%s Review)', '(%s Reviews)', $comment_count['approved'], 'wedding-venue-listings'), $comment_count['approved']);
                                 ?>
                             </span>
                         </span>
@@ -236,6 +231,7 @@
 
                     <?php
                     do_action('wvl_review_form');
+                    do_action('wvl_notice', 'wvl_review_form');
                     custom_comments_display(get_the_ID()); ?>
                 </div>
             </div>
