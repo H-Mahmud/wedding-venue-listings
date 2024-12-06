@@ -15,7 +15,7 @@
             </div>
             <!-- Modal body -->
             <div class="p-4 md:p-5">
-                <form class="space-y-4" id="review-form" action="<?php echo site_url('/wp-comments-post.php'); ?>" method="post">
+                <form class="space-y-4" id="review-form" method="post">
                     <div class="wvl-field">
                         <star-rating min="0" max="5" value="1" name="rating" editable="true"></star-rating>
                         <input type="hidden" name="rating" id="rating" class="hidden">
@@ -23,8 +23,6 @@
                             jQuery(document).ready(function($) {
                                 var rating = $('#review-modal star-rating').on('change', (e) => {
                                     $('#review-modal #rating').val(e.detail.value);
-                                    console.log(e.detail.value);
-
                                 })
                             })
                         </script>
@@ -38,10 +36,10 @@
                         <label for="description"><?php _e('Description', 'wedding-venue-listings'); ?></label>
                         <textarea name="comment" id="description" placeholder="<?php _e('Share your experience with this vendor', 'wedding-venue-listings'); ?>"></textarea>
                     </div>
-                    <?php comment_id_fields(); ?>
-                    <input type="hidden" name="comment_post_ID" value="<?php echo get_the_ID(); ?>" />
+                    <input type="hidden" name="venue_id" value="<?php echo get_the_ID(); ?>" />
+                    <?php wp_nonce_field('wvl_venue_review_nonce', 'wvl_venue_review_nonce'); ?>
                     <div class="text-right">
-                        <button type="submit" class="wvl-btn-primary"><?php _e('Submit', 'wedding-venue-listings'); ?></button>
+                        <button type="submit" name="wvl_venue_review_submit" class="wvl-btn-primary"><?php _e('Submit', 'wedding-venue-listings'); ?></button>
                     </div>
                 </form>
             </div>
