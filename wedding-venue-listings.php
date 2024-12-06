@@ -40,6 +40,7 @@ require_once WVL_PLUGIN_DIR . 'includes/class-dashboard-account.php';
 require_once WVL_PLUGIN_DIR . 'includes/class-account-auth.php';
 require_once WVL_PLUGIN_DIR . 'includes/class-dashboard.php';
 require_once WVL_PLUGIN_DIR . 'includes/class-venue.php';
+require_once WVL_PLUGIN_DIR . 'includes/class-venue-review.php';
 require_once WVL_PLUGIN_DIR . 'includes/class-listing.php';
 
 add_action('wvl_notice', function ($source) {

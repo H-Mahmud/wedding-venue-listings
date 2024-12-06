@@ -234,7 +234,8 @@
                         </div>
                     </div>
 
-                    <?php custom_comment_form();
+                    <?php
+                    do_action('wvl_review_form');
                     custom_comments_display(get_the_ID()); ?>
                 </div>
             </div>

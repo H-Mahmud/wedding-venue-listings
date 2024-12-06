@@ -32,17 +32,6 @@ function custom_comments_display($page_id)
 
 // Usage: Call the function for the specific page (replace 42 with your page ID)
 
-
-// Custom Comment Form for Logged-In Users
-function custom_comment_form()
-{
-    if (is_user_logged_in()) {
-        include_once WVL_PLUGIN_DIR . 'template-parts/reviews/review-form.php';
-    } else {
-        echo '<p class="my-2">' . __('You must be logged in to leave a review.', 'wedding-venue-listings') . '</p>';
-    }
-}
-
 function save_comment_title_and_rating($comment_id)
 {
     if (isset($_POST['rating']) && !empty($_POST['rating'])) {
