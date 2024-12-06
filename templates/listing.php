@@ -127,7 +127,7 @@ get_header(); ?>
 
             if ($query->have_posts()):
             ?>
-                <p class="total-result font-semibold text-2xl mb-8 mt-2"><span><?php echo $query->found_posts; ?></span> Search Result</p>
+                <p class="total-result font-semibold text-2xl mb-8 mt-2"><span><?php echo $query->found_posts; ?></span> <?php _e('Search Result', 'wedding-venue-listings'); ?></p>
                 <div class="wvl-list">
                     <?php
                     while ($query->have_posts()) :
@@ -149,19 +149,24 @@ get_header(); ?>
                                 </p>
                                 <p class="text-secondary text-sm mt-1"><?php echo wvl_get_excerpt_content(get_the_ID()); ?></p>
                                 <div class="meta flex mt-5 gap-4">
-                                    <span class="inline-block text-secondary text-sm">Price Range: <b class="text-primary">$1000 - $5000</b></span>
+                                    <?php /*
+                                    <span class="inline-block text-secondary text-sm">Price Range: <b class="text-primary">$1000 - $5000</b></span> 
 
                                     <span class="h-6 w-[1.5px] bg-quaternary inline-block"></span>
-
-                                    <span class="inline-flex">
-                                        <span class="stars inline-flex justify-start gap-1">
-                                            <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                                            <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                                            <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                                            <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                                            <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+*/ ?>
+                                    <span class="inline-flex items-center">
+                                        <style>
+                                            .meta star-rating {
+                                                --font-size: 18px;
+                                            }
+                                        </style>
+                                        <star-rating min="0" max="5" value="<?php echo get_post_meta(get_the_ID(), 'average_rating', true); ?>"></star-rating>
+                                        <span class="text-secondary text-sm">
+                                            <?php
+                                            $comment_count = get_comment_count(get_the_ID());
+                                            printf(_n('(%s Review)', '(%s Reviews)', $comment_count['approved'], 'wedding-venue-listings'), $comment_count['approved']);
+                                            ?>
                                         </span>
-                                        <span class="text-secondary text-sm">(1.8 k+ Reviews)</span>
                                     </span>
                                 </div>
                                 <div class="mt-4">
