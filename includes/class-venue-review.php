@@ -26,9 +26,14 @@ class WVL_Venue_Review
     }
 
 
-
-    // Custom Comment Form for Logged-In Users
-    function venue_review_form()
+    /**
+     * Displays the venue review form.
+     *
+     * @action wvl_review_form
+     *
+     * @since 1.0.0
+     */
+    public function venue_review_form()
     {
         if (is_user_logged_in()) {
             include_once WVL_PLUGIN_DIR . 'template-parts/reviews/review-form.php';
