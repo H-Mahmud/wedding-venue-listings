@@ -2,14 +2,14 @@
 defined('ABSPATH') || exit;
 
 /**
- * WVL_Venue class
+ * WVL_Venue_Admin class
  */
-class WVL_Venue
+class WVL_Venue_Admin
 {
     /**
      * The single instance of the class.
      * 
-     * @var WVL_Venue
+     * @var WVL_Venue_Admin
      * @access private
      */
     private static $_instance = null;
@@ -161,7 +161,7 @@ class WVL_Venue
     /**
      * Gets the singleton instance of the class.
      *
-     * @return WVL_Venue The singleton instance.
+     * @return WVL_Venue_Admin The singleton instance.
      */
     public static function get_instance()
     {
@@ -172,7 +172,7 @@ class WVL_Venue
     }
 }
 
-WVL_Venue::get_instance();
+WVL_Venue_Admin::get_instance();
 
 
 function remove_post_and_venue_admin_menu()
