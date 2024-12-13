@@ -5,7 +5,6 @@ import handlePhotographsForm from './handlePhotographsForm';
 import handleServiceInfoForm from './handleServiceInfoForm';
 import handleSubmitForm from './handleSubmitForm';
 import handleYourStoryForm from './handleYourStoryForm';
-import './style.css';
 
 jQuery(document).ready(function ($) {
     handlePhotographsForm($);

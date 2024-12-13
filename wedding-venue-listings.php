@@ -22,7 +22,7 @@ defined('WVL_PLUGIN_URL') || define('WVL_PLUGIN_URL', plugin_dir_url(__FILE__));
 
 require_once WVL_PLUGIN_DIR . 'init.php';
 
-defined('WVL_DEVELOPMENT') || define('WVL_DEVELOPMENT', true);
+defined('WVL_DEVELOPMENT') || define('WVL_DEVELOPMENT', false);
 
 add_action('init', function () {
     if (session_status() === PHP_SESSION_NONE) {

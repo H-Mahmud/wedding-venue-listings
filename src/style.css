@@ -34,6 +34,7 @@
     }
 }
 
+@import './dashboard/dashboard-style.css';
 
 @import "./styles/components.css";
 
