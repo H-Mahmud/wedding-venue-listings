@@ -24,7 +24,7 @@ function wvl_create_venue_analytics_table()
             id BIGINT(20) NOT NULL AUTO_INCREMENT,
             venue_id BIGINT(20) NOT NULL,
             event_type VARCHAR(50) NOT NULL,
-            user_id BIGINT(20) DEFAULT NULL,
+            count BIGINT(20) DEFAULT NULL,
             created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
             PRIMARY KEY (id),
             INDEX (venue_id, event_type, created_at)
