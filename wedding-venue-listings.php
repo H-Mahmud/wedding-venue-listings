@@ -22,7 +22,7 @@ defined('WVL_PLUGIN_URL') || define('WVL_PLUGIN_URL', plugin_dir_url(__FILE__));
 
 require_once WVL_PLUGIN_DIR . 'init.php';
 
-defined('WVL_DEVELOPMENT') || define('WVL_DEVELOPMENT', false);
+defined('WVL_DEVELOPMENT') || define('WVL_DEVELOPMENT', true);
 
 add_action('init', function () {
     if (session_status() === PHP_SESSION_NONE) {
@@ -94,10 +94,10 @@ function wvl_enqueue_scripts()
     if (defined('WVL_DEVELOPMENT') && WVL_DEVELOPMENT) {
         wp_enqueue_script('wvl-main',  WVL_PLUGIN_URL . '/assets/dist/main.bundle.js', array('jquery'), time(), true);
     } else {
-        wp_enqueue_style('wvl-style', WVL_PLUGIN_URL . '/assets/dist/style.min.css', array(), '1.0');
         wp_enqueue_script('wvl-main', WVL_PLUGIN_URL . '/assets/dist/main.bundle.min.js', array('jquery'), '1.0', true);
     }
 
+    wp_enqueue_style('wvl-style', WVL_PLUGIN_URL . '/assets/dist/style.min.css', array(), '1.0');
     wp_enqueue_script('lightgallery', WVL_PLUGIN_URL . '/assets/lib/lightgallery/js/lightgallery-all.min.js', array('jquery'), '1.10.0', true);
     wp_enqueue_style('lightgallery', WVL_PLUGIN_URL . '/assets/lib/lightgallery/css/lightgallery.min.css', array(), '1.10.0');
     // wp_localize_script('wvl-main', 'WVL_MAIN', [
