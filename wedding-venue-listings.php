@@ -79,7 +79,7 @@ add_action('wvl_notice', function ($source) {
 
 
 
-add_action('wp_enqueue_scripts', 'wvl_enqueue_scripts');
+add_action('wp_enqueue_scripts', 'wvl_enqueue_scripts', 20);
 
 function wvl_enqueue_scripts()
 {
