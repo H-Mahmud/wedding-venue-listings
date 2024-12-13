@@ -33,6 +33,11 @@ add_action('init', function () {
 // dependencies
 require_once WVL_PLUGIN_DIR . 'template-tags.php';
 require_once WVL_PLUGIN_DIR . 'includes/wvl-functions.php';
+
+require_once WVL_PLUGIN_DIR . 'classes/abstract-wvl-update-venue.php';
+require_once WVL_PLUGIN_DIR . 'classes/abstract-wvl-get-venue.php';
+require_once WVL_PLUGIN_DIR . 'classes/class-wvl-venue.php';
+
 require_once WVL_PLUGIN_DIR . 'includes/class-dashboard-home.php';
 require_once WVL_PLUGIN_DIR . 'includes/class-dashboard-profile.php';
 // require_once WVL_PLUGIN_DIR . 'includes/class-dashboard-contact.php';
@@ -41,7 +46,7 @@ require_once WVL_PLUGIN_DIR . 'includes/class-dashboard-analytics.php';
 require_once WVL_PLUGIN_DIR . 'includes/class-dashboard-account.php';
 require_once WVL_PLUGIN_DIR . 'includes/class-account-auth.php';
 require_once WVL_PLUGIN_DIR . 'includes/class-dashboard.php';
-require_once WVL_PLUGIN_DIR . 'includes/class-venue.php';
+require_once WVL_PLUGIN_DIR . 'includes/class-venue-admin.php';
 require_once WVL_PLUGIN_DIR . 'includes/class-venue-review.php';
 require_once WVL_PLUGIN_DIR . 'includes/class-listing.php';
 require_once WVL_PLUGIN_DIR . 'shortcodes/venue-landing.php';
