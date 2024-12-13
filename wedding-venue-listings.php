@@ -42,6 +42,7 @@ require_once WVL_PLUGIN_DIR . 'includes/class-dashboard.php';
 require_once WVL_PLUGIN_DIR . 'includes/class-venue.php';
 require_once WVL_PLUGIN_DIR . 'includes/class-venue-review.php';
 require_once WVL_PLUGIN_DIR . 'includes/class-listing.php';
+require_once WVL_PLUGIN_DIR . 'shortcodes/venue-landing.php';
 
 add_action('wvl_notice', function ($source) {
     if (isset($_SESSION['wvl_notice'])) {
