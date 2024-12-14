@@ -48,10 +48,9 @@ class WVL_Dashboard
 
         wp_enqueue_style('font-awesome',  WVL_PLUGIN_URL . '/assets/lib/font-awesome/css/all.min.css', [], '6.7.1');
 
-        wp_enqueue_script('air-datepicker', 'https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/js/datepicker.js');
-        wp_enqueue_script('air-datepicker-en', 'https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/js/i18n/datepicker.en.js');
-        wp_enqueue_style('air-datepicker', 'https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/css/datepicker.min.css');
-
+        wp_enqueue_script('air-datepicker', WVL_PLUGIN_URL . '/assets/lib/air-datepicker/datepicker.min.js');
+        wp_enqueue_script('air-datepicker-en', WVL_PLUGIN_URL . '/assets/lib/air-datepicker/i18n/datepicker.en.min.js');
+        wp_enqueue_style('air-datepicker',  WVL_PLUGIN_URL . '/assets/lib/air-datepicker/datepicker.min.css');
 
         if (is_page('dashboard')) {
             wp_enqueue_script('choices.js', WVL_PLUGIN_URL . '/assets/lib/choices.js/js/choices.min.js', array('jquery'), null, true);
