@@ -13,35 +13,47 @@ get_header(); ?>
             </form>
 
             <div class="wvl-widgets border-quaternary border px-5 py-6 rounded-md">
-
-                <form class="filter vendor-types mb-5" id="vendorTypesFilter" method="get">
-                    <h3 class="text-lg font-bold"><?php _e('vendor Types', 'wedding-venue-listings'); ?></h3>
+                <form class="filter category mb-5" id="categoryFilter" method="get">
+                    <h3 class="text-lg font-bold"><?php _e('Category', 'wedding-venue-listings'); ?></h3>
                     <?php
-                    $vendor_types = get_wvl_terms_options('vendor_type');
-                    foreach ($vendor_types as $vendor_type) { ?>
-                        <label class="my-2 inline-block cursor-pointer">
-                            <input class="mr-2 w-4 h-4" type="checkbox" name="vendor-types[]" value="<?php echo $vendor_type['value']; ?>" />
-                            <?php echo $vendor_type['label']; ?>
-                        </label>
-                        <br>
-                    <?php
+                    $categories = get_categories(array('hide_empty' => false));
+                    foreach ($categories as $category) {
+                        if ($category->parent == 0) {
+                            $selected = isset($_GET['category']) && $_GET['category'] == $category->term_id ? 'checked="checked"' : '';
+                            echo <<<HTML
+                                <label class="my-2 inline-block cursor-pointer">
+                                    <input class="mr-2 w-4 h-4"type="radio" name="category" value="$category->term_id" $selected />
+                                    $category->name
+                                </label>
+                                <br>
+                            HTML;
+                        }
                     }; ?>
                 </form>
-
-                <form class="filter event-types mb-5" id="eventTypesFilter" method="get">
-                    <h3 class="text-lg font-bold"><?php _e('Event Types', 'wedding-venue-listings'); ?></h3>
-                    <?php
-                    $event_types = get_wvl_terms_options('event_type');
-                    foreach ($event_types as $event_type) { ?>
-
+                <?php
+                if (isset($_GET['category']) && !empty($_GET['category']) && is_numeric($_GET['category'])):
+                    $parent_id = $_GET['category'];
+                    $args = [
+                        'parent'     => $parent_id,
+                        'hide_empty' => false,
+                        'taxonomy'   => 'category',
+                    ];
+                ?>
+                    <form class="filter subcategory mb-5" id="subcategoryFilter" method="get">
+                        <h3 class="text-lg font-bold"><?php _e('Sub Category', 'wedding-venue-listings'); ?></h3>
+                        <?php
+                        $subcategories = get_terms($args);
+                        foreach ($subcategories as $subcategory) {
+                            echo <<<HTML
                         <label class="my-2 inline-block cursor-pointer">
-                            <input class="mr-2 w-4 h-4" type="checkbox" name="event-types[]" value="<?php echo $event_type['value']; ?>" />
-                            <?php echo $event_type['label']; ?>
+                            <input class="mr-2 w-4 h-4" type="checkbox" name="subcategory[]" value="$subcategory->term_id" />
+                            $subcategory->name
                         </label>
                         <br>
-                    <?php
-                    }; ?>
-                </form>
+                    HTML;
+                        }; ?>
+                    </form>
+                <?php endif; ?>
 
                 <div class="filter wvl-field availability mb-4">
                     <h3 class="text-lg font-bold">Availability</h3>
@@ -70,6 +82,39 @@ get_header(); ?>
 
                 <script>
                     jQuery(document).ready(function($) {
+
+                        $('#categoryFilter input[name="category"]').on('change', function() {
+                            $('#categoryFilter').submit();
+                        });
+
+                        $('#subcategoryFilter input[name="subcategory[]"]').on('change', function() {
+                            const params = new URLSearchParams(window.location.search);
+                            params.delete('subcategory[]');
+
+                            $('input[name="subcategory[]"]:checked').each(function() {
+                                params.append('subcategory[]', $(this).val());
+                            });
+                            const newUrl = `${window.location.pathname}?${params.toString()}`;
+                            window.history.replaceState({}, '', newUrl);
+                            window.location.href = newUrl;
+                        });
+
+                        const params = new URLSearchParams(window.location.search);
+                        $('#subcategoryFilter input[name="subcategory[]"]').each(function() {
+                            if (params.getAll('subcategory[]').includes($(this).val())) {
+                                $(this).prop('checked', true);
+                            }
+                        });
+
+                        // const params = new URLSearchParams(window.location.search);
+                        // $('#categoryFilter input[name="category"]').each(function() {
+                        //     if (params.getAll('category').includes($(this).val())) {
+                        //         $(this).prop('checked', true);
+                        //     }
+                        // });
+
+                        <?php
+                        /*
                         // vendor types
                         $('#vendorTypesFilter input[name="vendor-types[]"]').on('change', function() {
                             const params = new URLSearchParams(window.location.search);
@@ -110,6 +155,8 @@ get_header(); ?>
                             }
                         });
 
+                        */
+                        ?>
                     });
                 </script>
 
