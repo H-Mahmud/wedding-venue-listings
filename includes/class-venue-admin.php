@@ -23,8 +23,8 @@ class WVL_Venue_Admin
     private final function __construct()
     {
         add_action('init', array($this, 'register_venue_post_type'));
-        add_action('init', array($this, 'create_vendor_type_taxonomy'), 0);
-        add_action('init', array($this, 'create_event_type_taxonomy'), 0);
+        // add_action('init', array($this, 'create_vendor_type_taxonomy'), 0);
+        // add_action('init', array($this, 'create_event_type_taxonomy'), 0);
 
         add_action('admin_enqueue_scripts', array($this, 'admin_scripts'));
     }
