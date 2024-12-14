@@ -6,6 +6,8 @@
             <input type="text" name="venue_name" value="<?php echo $venue->post_title; ?>" id="venue_name" required>
         </div>
 
+        <?php
+        /*
         <div class="wvl-field-row mt-3 wvl-tags">
             <div class="wvl-field">
                 <label for="vendor_type"> <?php _e('Vendor Types', 'wedding-venue-listings'); ?></label>
@@ -91,6 +93,8 @@
                 });
             </script>
         </div>
+        */
+        ?>
 
         <?php
         $categories = get_categories(array('hide_empty' => false));
@@ -143,7 +147,7 @@
 
             <div class="wvl-field">
                 <label for="subcategory"><?php _e('Subcategory', 'wedding-venue-listings'); ?></label>
-                <select name="subcategory" id="subcategory"></select>
+                <select name="subcategory" class="wvl-tags" multiple id="subcategory"></select>
             </div>
         </div>
     </fieldset>
@@ -156,33 +160,50 @@
         const category = $('#category');
         const subcategory = $('#subcategory');
 
+        let vendorChoices;
+
+        // Initialize subcategory options on page load
+        subcategoryOptions(<?php echo json_encode($category); ?>);
+
+        // Event listener for category change
         category.on('change', function() {
             const selectedCategory = this.value;
 
+            if (vendorChoices) {
+                vendorChoices.destroy(); // Destroy previous Choices instance
+                subcategory.empty(); // Clear the subcategory select element
+            }
+
             if (selectedCategory) {
                 subcategoryOptions(selectedCategory);
-            } else {
-                subcategory.empty();
             }
+        });
 
-        })
-        subcategoryOptions(<?php echo $category; ?>);
-
+        // Function to populate subcategories
         function subcategoryOptions(selectedCategory) {
-            const subcategories = categoriesData[selectedCategory];
+            const subcategories = categoriesData[selectedCategory] || [];
+            const selectedSubcategory = <?php echo json_encode($subcategory); ?>;
+
+            const choicesList = subcategories.map(subcat => ({
+                value: subcat.term_id,
+                label: subcat.name,
+                selected: selectedSubcategory && selectedSubcategory === subcat.term_id,
+            }));
+
+            // Clear subcategory DOM element to ensure no leftover options
             subcategory.empty();
 
-            const selectedSubcategory = <?php echo $subcategory; ?>;
-
-            if (subcategories) {
-                subcategories.forEach(category => {
-                    if (selectedSubcategory && selectedSubcategory === category.term_id) {
-                        subcategory.append(`<option value="${category.term_id}" selected="selected">${category.name}</option>`);
-                    } else {
-                        subcategory.append(`<option value="${category.term_id}">${category.name}</option>`);
-                    }
-                });
-            }
+            // Reinitialize Choices with new subcategory options
+            vendorChoices = new Choices("#subcategory", {
+                removeItemButton: true,
+                maxItemCount: <?php echo wvl_get_terms_limit('subcategory'); ?>,
+                choices: choicesList,
+                searchResultLimit: 10,
+                searchEnabled: true,
+                maxItemText: (maxItemCount) => {
+                    return `Only ${maxItemCount} vendor types can be added with free plan`;
+                },
+            });
         }
-    })
+    });
 </script>

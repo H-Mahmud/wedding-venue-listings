@@ -10,8 +10,8 @@ export default function handleServiceInfoForm($) {
     }
 
     const $venueName = $form.find('#venue_name').val();
-    const $vendorType = $form.find('#vendor_type').val();
-    const $eventType = $form.find('#event_type').val();
+    // const $vendorType = $form.find('#vendor_type').val();
+    // const $eventType = $form.find('#event_type').val();
     const $category = $form.find('#category').val();
     const $subCategory = $form.find('#subcategory').val();
 
@@ -20,14 +20,14 @@ export default function handleServiceInfoForm($) {
         action: 'submit_profile_service_info',
         nonce: WVL_DATA.ajax_nonce,
         venue_name: $venueName,
-        vendor_type: $vendorType,
-        event_type: $eventType,
+        // vendor_type: $vendorType,
+        // event_type: $eventType,
         category: $category,
         sub_category: $subCategory
     }
 
     console.log(formData);
-    if (!$venueName || !$vendorType || !$eventType || !$category || !$subCategory) {
+    if (!$venueName || !$category || !$subCategory) {
         $profileFormError.html("All fields are required.");
         return false;
     }

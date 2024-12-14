@@ -149,18 +149,23 @@ class WVL_Dashboard_Profile
         $category = sanitize_text_field($_POST['category'] ?? '');
         $sub_category = sanitize_text_field($_POST['sub_category'] ?? '');
 
-        if (!isset($_POST['vendor_type']) || !is_array($_POST['vendor_type'])) {
-            wp_send_json_error(['message' => 'Vendor type is required.']);
+        if (!isset($_POST['sub_category']) || !is_array($_POST['sub_category'])) {
+            wp_send_json_error(['message' => 'Subcategory is required.']);
         }
-        $vendor_type = array_map('sanitize_text_field', $_POST['vendor_type']);
+        $sub_category = array_map('sanitize_text_field', $_POST['sub_category']);
+
+        // if (!isset($_POST['vendor_type']) || !is_array($_POST['vendor_type'])) {
+        //     wp_send_json_error(['message' => 'Vendor type is required.']);
+        // }
+        // $vendor_type = array_map('sanitize_text_field', $_POST['vendor_type']);
 
 
-        if (!isset($_POST['event_type']) || !is_array($_POST['event_type'])) {
-            wp_send_json_error(['message' => 'Event type is required.']);
-        }
-        $event_type = array_map('sanitize_text_field', $_POST['event_type']);
+        // if (!isset($_POST['event_type']) || !is_array($_POST['event_type'])) {
+        //     wp_send_json_error(['message' => 'Event type is required.']);
+        // }
+        // $event_type = array_map('sanitize_text_field', $_POST['event_type']);
 
-        if (empty($venue_name) || empty($category) || empty($sub_category)) {
+        if (empty($venue_name) || empty($category)) {
             wp_send_json_error(['message' => 'All fields are required.']);
         }
 
@@ -172,10 +177,11 @@ class WVL_Dashboard_Profile
             ]);
 
 
-            wp_set_post_terms($venue_id, $vendor_type, 'vendor_type', false);
-            wp_set_post_terms($venue_id, $event_type, 'event_type', false);
+            // wp_set_post_terms($venue_id, $vendor_type, 'vendor_type', false);
+            // wp_set_post_terms($venue_id, $event_type, 'event_type', false);
 
-            $categories = [$category, $sub_category];
+            $categories = $sub_category;
+            $categories[] = $category;
             wp_set_post_terms($venue_id, $categories, 'category', false);
 
             wp_send_json_success(['message' => 'Profile information updated successfully.']);
