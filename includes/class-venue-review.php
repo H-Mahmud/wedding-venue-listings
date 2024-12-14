@@ -71,17 +71,23 @@ class WVL_Venue_Review
         if (empty($comment_data['comment_content'])) {
             wvl_add_notice(__('Please enter a review.', 'wedding-venue-listings'), 'error', 'wvl_review_form');
         } else {
-            $comment_id = wp_insert_comment($comment_data);
+            if (isset($_POST['comment_id']) && !empty($_POST['comment_id'])) {
+                $comment_data['comment_ID'] = $_POST['comment_id'];
+                wp_update_comment($comment_data);
+                $comment_id = $_POST['comment_id'];
+            } else {
+                $comment_id = wp_insert_comment($comment_data);
+            }
 
             if (isset($_POST['rating']) && !empty($_POST['rating'])) {
                 $rating = sanitize_text_field($_POST['rating']);
-                add_comment_meta($comment_id, 'rating', $rating);
+                update_comment_meta($comment_id, 'rating', $rating);
                 update_post_meta($post_id, 'average_rating', $this->calculate_average_rating($post_id));
             }
 
             if (isset($_POST['title']) && !empty($_POST['title'])) {
                 $title = sanitize_text_field($_POST['title']);
-                add_comment_meta($comment_id, 'title', $title);
+                update_comment_meta($comment_id, 'title', $title);
             }
             wvl_add_notice(__('Review submitted successfully.', 'wedding-venue-listings'), 'success', 'wvl_review_form');
         }
