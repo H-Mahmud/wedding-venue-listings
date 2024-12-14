@@ -221,9 +221,23 @@
                         <div class=" mb-3 mt-6 flex justify-between items-center">
                             <h3 class="text-2xl font-semibold"><?php _e('Reviews', 'wedding-venue-listings'); ?></h3>
                             <?php
-                            if (is_user_logged_in()) { ?>
+                            if (is_user_logged_in()) {
+                                $user_id = get_current_user_id();
+                                $user_comments = get_comments([
+                                    'user_id' => $user_id,
+                                    'post_id' => get_the_ID(),
+                                    // 'status'  => 'approve', // Only approved comments
+                                ]);
+
+                                if (!empty($user_comments)) {
+                                    $review_text = __('Edit Your Review', 'wedding-venue-listings');
+                                } else {
+                                    $review_text = __('Write a Review', 'wedding-venue-listings');
+                                }
+
+                            ?>
                                 <span class="wvl-btn" data-component-type="wlval-modal-trigger" data-target-modal="#review-modal">
-                                    <?php _e('Write a Review', 'wedding-venue-listings'); ?>
+                                    <?php echo $review_text ?>
                                 </span>
                             <?php } ?>
                         </div>
