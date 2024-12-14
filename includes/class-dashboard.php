@@ -46,7 +46,7 @@ class WVL_Dashboard
             wp_enqueue_script('wvl-dashboard', WVL_PLUGIN_URL . '/assets/dist/dashboard.bundle.min.js', array('jquery'), '1.0', true);
         }
 
-        wp_enqueue_style('font-awesome',  WVL_PLUGIN_URL . '/assets/lib/font-awesome/css/all.min.css', [], '6.7.1');
+        wp_enqueue_style('font-awesome-v6',  WVL_PLUGIN_URL . '/assets/lib/font-awesome/css/all.min.css', [], '6.7.1');
 
         wp_enqueue_script('air-datepicker', WVL_PLUGIN_URL . '/assets/lib/air-datepicker/datepicker.min.js');
         wp_enqueue_script('air-datepicker-en', WVL_PLUGIN_URL . '/assets/lib/air-datepicker/i18n/datepicker.en.min.js');
