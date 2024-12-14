@@ -3,11 +3,11 @@
     <?php
     while (have_posts()) {
         the_post(); ?>
-        <div class="cover-photo w-full max-h-[520px] overflow-hidden min-h-80">
+        <div class="cover-photo w-full max-h-[520px] overflow-hidden md:min-h-80">
             <?php the_post_thumbnail('full', array('class' => 'w-full h-auto block object-cover')); ?>
         </div>
         <main id="main" class="site-main site-container pt-4" role="main">
-            <div class="header flex justify-between items-center">
+            <div class="header md:flex justify-between items-center">
                 <div class="entry-header">
                     <?php the_title('<h1 class="title text-4xl font-bold">', '</h1>'); ?>
                     <style>
@@ -15,14 +15,14 @@
                             --font-size: 18px;
                         }
                     </style>
-                    <div class="meta flex mt-2 gap-4 text-secondary py-2 text-sm">
-                        <span class="">
+                    <div class="meta flex-col md:flex-row flex mt-2 gap-4 text-secondary py-2 text-sm">
+                        <span class="block">
                             <i class="fa-solid fa-location-dot text-primary"></i>
                             <?php echo wvl_get_venue_location(get_the_ID()); ?>
                         </span>
-                        <span class="h-6 w-[1.5px] bg-quaternary inline-block"></span>
+                        <span class="h-6 w-[1.5px] bg-quaternary hidden md:inline-block"></span>
 
-                        <span>
+                        <span class="block">
                             <star-rating min="0" max="5" value="<?php echo get_post_meta(get_the_ID(), 'average_rating', true); ?>"></star-rating>
                             <span class="amount">
                                 <?php
@@ -33,8 +33,8 @@
                         </span>
                     </div>
                 </div>
-                <div class="links flex justify-end items-center">
-                    <ul class="social flex justify-end items-center gap-3 m-0 mr-6">
+                <div class="links flex justify-end items-center flex-wrap">
+                    <ul class="social flex justify-end flex-wrap items-center gap-3 m-0 mr-6">
                         <?php do_action('wvl_social_links'); ?>
                     </ul>
                     <button class="wvl-btn-primary" id="contactFormOpen"><?php _e('Contact Us', 'wedding-venue-listings'); ?></button>
