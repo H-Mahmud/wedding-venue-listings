@@ -57,6 +57,7 @@ class WVL_Dashboard
             wp_enqueue_style('choices.js', WVL_PLUGIN_URL . '/assets/lib/choices.js/css/choices.min.css');
             wp_enqueue_script('fullcalendar', WVL_PLUGIN_URL . '/assets/lib/fullcalendar/index.global.min.js', [], '6.1.15', true);
 
+            wp_enqueue_script('chart.js',  WVL_PLUGIN_URL . '/assets/lib/chart/chart.umd.js', [], '4.4.7', true);
 
             $venue_id = wvl_get_venue_id();
             $venue_status = get_post_status($venue_id);
