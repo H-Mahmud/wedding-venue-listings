@@ -32,11 +32,44 @@
     .wvl-comments-pagination .page-links.current {
         @apply bg-gray-300;
     }
+
+    .pricing-tables {
+        @apply flex justify-between items-start;
+    }
+    .pricing-card {
+        @apply w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-5;
+    }
+    .pricing-card .heading {
+        @apply mb-4 text-xl font-medium text-gray-500;
+    }
+    .pricing-card .price {
+        @apply flex items-baseline text-primary;
+    }
+    .pricing-card .list {
+        @apply space-y-5 my-7;
+    }
+    .pricing-card .item {
+        @apply flex items-center;
+    }
+    .pricing-card .item .icon {
+        @apply flex-shrink-0 text-lg text-blue-700;
+    }
+    .pricing-card .item .text {
+        @apply text-base font-normal leading-tight text-gray-500 ms-3;
+    }
+    .pricing-card .item.inactive .icon {
+        @apply text-gray-400;
+    }
+    .pricing-card .item.inactive .text {
+        @apply line-through decoration-gray-500;
+    }
+
 }
+
+@import "./styles/components.css";
 
 @import './dashboard/dashboard-style.css';
 
-@import "./styles/components.css";
 
 @import './styles/auth-pages.css';
 @import './styles/full-calendar.css';
