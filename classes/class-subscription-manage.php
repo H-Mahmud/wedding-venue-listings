@@ -21,6 +21,11 @@ class WVL_Subscription_Manage
      */
     private final function __construct() {}
 
+    public function currentPlan()
+    {
+        $user_id = get_current_user_id();
+    }
+
 
     /**
      * Gets the singleton instance of the class.
@@ -36,3 +41,5 @@ class WVL_Subscription_Manage
     }
 }
 WVL_Subscription_Manage::get_instance();
+
+function wvl_current_plan() {};
