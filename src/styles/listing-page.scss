@@ -1,99 +1,99 @@
 .listing-archive {
-    .wvl-sidebar {
-        @apply md:w-[310px] w-full;
+  .wvl-sidebar {
+    @apply w-full md:w-[310px];
 
-        .filter-container {
-            @apply border-quaternary border px-5 py-6 rounded-md;
+    .filter-container {
+      @apply rounded-md border border-quaternary px-5 py-6;
 
-            .filter {
-                @apply mb-5;
+      .filter {
+        @apply mb-5;
 
-                .header {
-                    @apply flex justify-between items-center;
+        .header {
+          @apply flex items-center justify-between;
 
-                    .title {
-                        @apply text-lg font-bold;
-                    }
+          .title {
+            @apply text-lg font-bold;
+          }
 
-                    .toggle-icon {
-                        @apply cursor-pointer inline-block text-primary;
-                    }
-                }
-
-                &.category {
-                    .name {
-                        @apply my-2 inline-block cursor-pointer;
-
-                        .radio {
-                            @apply mr-2 w-4 h-4;
-                        }
-
-                        .checkbox {
-                            @apply mr-2 w-4 h-4;
-                        }
-                    }
-                }
-            }
+          .toggle-icon {
+            @apply inline-block cursor-pointer text-primary;
+          }
         }
+
+        &.category {
+          .name {
+            @apply my-2 inline-block cursor-pointer;
+
+            .radio {
+              @apply mr-2 h-4 w-4;
+            }
+
+            .checkbox {
+              @apply mr-2 h-4 w-4;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .listing-content {
+    .total-result {
+      @apply mb-8 mt-3 text-xl font-semibold text-primary;
     }
 
-    .listing-content {
-        .total-result {
-            @apply font-semibold text-xl mb-8 mt-3 text-primary;
+    .listing-item {
+      @apply mb-5 block grid-cols-[320px_1fr] gap-8 sm:grid;
+
+      .thumbnail {
+        @apply h-full w-full md:max-w-80;
+
+        .thumbnail {
+          @apply block h-full w-full rounded-md object-cover;
+        }
+      }
+
+      .content {
+        @apply flex-1;
+
+        .title {
+          a {
+            @apply text-2xl font-semibold;
+          }
         }
 
-        .listing-item {
-            @apply block sm:grid grid-cols-[320px_1fr] gap-8 mb-5;
+        .location {
+          @apply py-2 text-sm text-secondary;
 
-            .thumbnail {
-                @apply h-full w-full md:max-w-80;
-
-                .thumbnail {
-                    @apply w-full h-full block object-cover rounded-md;
-                }
-            }
-
-            .content {
-                @apply flex-1;
-
-                .title {
-                    a {
-                        @apply font-semibold text-2xl;
-                    }
-                }
-
-                .location {
-                    @apply text-secondary py-2 text-sm;
-
-                    .icon {
-                        @apply text-primary;
-                    }
-                }
-
-                .description {
-                    @apply text-secondary text-sm mt-1;
-                }
-
-                .meta {
-                    @apply flex mt-5 gap-4;
-
-                    .reviews {
-                        @apply inline-flex items-center;
-
-                        star-rating {
-                            --font-size: 18px;
-                        }
-
-                        .count {
-                            @apply text-secondary text-sm;
-                        }
-                    }
-                }
-
-                .actions {
-                    @apply mt-4;
-                }
-            }
+          .icon {
+            @apply text-primary;
+          }
         }
+
+        .description {
+          @apply mt-1 text-sm text-secondary;
+        }
+
+        .meta {
+          @apply mt-5 flex gap-4;
+
+          .reviews {
+            @apply inline-flex items-center;
+
+            star-rating {
+              --font-size: 18px;
+            }
+
+            .count {
+              @apply text-sm text-secondary;
+            }
+          }
+        }
+
+        .actions {
+          @apply mt-4;
+        }
+      }
     }
+  }
 }
