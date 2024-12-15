@@ -95,26 +95,6 @@ function wvl_enqueue_scripts()
     wp_enqueue_style('lightgallery', WVL_PLUGIN_URL . '/assets/lib/lightgallery/css/lightgallery.min.css', array(), '1.10.0');
 
 
-    // Environment Independent scripts
-    if (is_page('dashboard')) {
-        wp_enqueue_script('choices.js', WVL_PLUGIN_URL . '/assets/lib/choices.js/js/choices.min.js', array('jquery'), null, true);
-        wp_enqueue_style('choices.js', WVL_PLUGIN_URL . '/assets/lib/choices.js/css/choices.min.css');
-        wp_enqueue_script('fullcalendar', WVL_PLUGIN_URL . '/assets/lib/fullcalendar/index.global.min.js', [], '6.1.15', true);
-
-        wp_enqueue_script('chart.js',  WVL_PLUGIN_URL . '/assets/lib/chart/chart.umd.js', [], '4.4.7', true);
-
-        $venue_id = wvl_get_venue_id();
-        $venue_status = get_post_status($venue_id);
-        $data = [
-            'ajax_url'      => admin_url('admin-ajax.php'),
-            'ajax_nonce'    => wp_create_nonce('dashboard_nonce'),
-            'venue_status'  => $venue_status
-        ];
-
-        wp_localize_script('wvl-dashboard', 'WVL_DATA', $data);
-    }
-
-
 
 
     if (defined('WVL_DEVELOPMENT') && WVL_DEVELOPMENT) {
@@ -138,6 +118,26 @@ function wvl_enqueue_scripts()
         }
     }
 
+
+
+    // Environment Independent scripts
+    if (is_page('dashboard')) {
+        wp_enqueue_script('choices.js', WVL_PLUGIN_URL . '/assets/lib/choices.js/js/choices.min.js', array('jquery'), null, true);
+        wp_enqueue_style('choices.js', WVL_PLUGIN_URL . '/assets/lib/choices.js/css/choices.min.css');
+        wp_enqueue_script('fullcalendar', WVL_PLUGIN_URL . '/assets/lib/fullcalendar/index.global.min.js', [], '6.1.15', true);
+
+        wp_enqueue_script('chart.js',  WVL_PLUGIN_URL . '/assets/lib/chart/chart.umd.js', [], '4.4.7', true);
+
+        $venue_id = wvl_get_venue_id();
+        $venue_status = get_post_status($venue_id);
+        $data = [
+            'ajax_url'      => admin_url('admin-ajax.php'),
+            'ajax_nonce'    => wp_create_nonce('dashboard_nonce'),
+            'venue_status'  => $venue_status
+        ];
+
+        wp_localize_script('wvl-dashboard', 'WVL_DATA', $data);
+    }
 
 
 
