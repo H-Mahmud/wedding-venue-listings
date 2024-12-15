@@ -9,25 +9,17 @@ get_header(); ?>
 
         <div class="listing-content w-full">
             <?php
-
             $args = array(
                 'post_type' => 'venue',
                 'posts_per_page' => -1,
             );
-
-            // if (isset($_GET['category']) && !empty($_GET['category']) && is_numeric($_GET['category'])) {
-            //     $category_id = intval($_GET['category']);
-            //     $args['category__in'] = array($category_id);
-            // }
 
             if (isset($_GET['subcategory']) && !empty($_GET['subcategory']) && is_array($_GET['subcategory'])) {
                 $subcategories = array_map('intval', $_GET['subcategory']);
                 $args['category__in'] = $subcategories;
             }
 
-
             $query = new WP_Query($args);
-
             if ($query->have_posts()):
             ?>
                 <p class="total-result"><span class="amount"><?php echo $query->found_posts; ?></span> <?php _e('Vendor found', 'wedding-venue-listings'); ?></p>
