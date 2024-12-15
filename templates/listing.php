@@ -7,7 +7,7 @@ get_header(); ?>
             <?php load_template(WVL_PLUGIN_DIR . 'templates/parts/sidebar.php'); ?>
         </div>
 
-        <div class="wvl-content w-full">
+        <div class="listing-content w-full">
             <?php
 
             $args = array(
@@ -30,7 +30,7 @@ get_header(); ?>
 
             if ($query->have_posts()):
             ?>
-                <p class="total-result font-semibold text-2xl mb-8 mt-2"><span><?php echo $query->found_posts; ?></span> <?php _e('Search Result', 'wedding-venue-listings'); ?></p>
+                <p class="total-result"><span class="amount"><?php echo $query->found_posts; ?></span> <?php _e('Vendor found', 'wedding-venue-listings'); ?></p>
                 <div class="wvl-list">
                 <?php
                 while ($query->have_posts()) :
