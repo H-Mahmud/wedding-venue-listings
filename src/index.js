@@ -6,7 +6,7 @@ import './components/star-rating';
 import './components/modal';
 
 // Styles
-import "./style.css";
+import "./style.scss";
 import "./styles/forms.css";
 import './styles/listing-page.css';
 
