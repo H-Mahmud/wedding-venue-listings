@@ -128,6 +128,10 @@ function wvl_enqueue_scripts()
 
         wp_enqueue_script('chart.js',  WVL_PLUGIN_URL . '/assets/lib/chart/chart.umd.js', [], '4.4.7', true);
 
+        wp_enqueue_script('tinymce');
+        wp_enqueue_script('wp-tinymce');
+
+
         $venue_id = wvl_get_venue_id();
         $venue_status = get_post_status($venue_id);
         $data = [

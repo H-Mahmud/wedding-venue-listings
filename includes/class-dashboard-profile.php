@@ -121,7 +121,7 @@ class WVL_Dashboard_Profile
             wp_send_json_error(['message' => 'Invalid request.']);
         }
 
-        $your_story = sanitize_text_field($_POST['your_story'] ?? '');
+        $your_story = wp_kses_post($_POST['your_story'] ?? '');
 
         if (empty($your_story)) {
             wp_send_json_error(['message' => 'Your Story field is required.']);

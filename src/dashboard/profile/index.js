@@ -7,6 +7,17 @@ import handleSubmitForm from './handleSubmitForm';
 import handleYourStoryForm from './handleYourStoryForm';
 
 jQuery(document).ready(function ($) {
+
+    if (typeof tinymce !== 'undefined') {
+        tinymce.init({
+            selector: '#yourStory', // Target the textarea
+            menubar: false, // Hide the menu bar
+            toolbar: 'bold italic underline | alignleft aligncenter alignright | bullist numlist | link', // Custom toolbar
+            plugins: 'lists link', // Load required plugins
+            height: 300
+        });
+    }
+
     handlePhotographsForm($);
 
     async function handleNext(step) {

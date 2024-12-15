@@ -9,7 +9,8 @@ export default function handleYourStoryForm($) {
         return false;
     }
 
-    const yourStory = $form.find('#yourStory').val();
+    // const yourStory = $form.find('#yourStory').val();
+    const yourStory = tinymce.get('yourStory').getContent();
 
     if (!yourStory) {
         $profileFormError.html("Your Story field is required.");
