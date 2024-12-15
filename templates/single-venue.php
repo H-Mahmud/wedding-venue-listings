@@ -42,9 +42,34 @@
             </div>
 
             <div class="wvl-content">
-                <h3 class="text-lg font-semibold mt-2"><?php _e('Our Story', 'wedding-venue-listings'); ?></h3>
 
                 <div class="description pb-10 pt-6 text-gray-500">
+                    <div class="the-btn">
+                        <a href="">Overview</a>
+                        <a href="">Contact Info</a>
+                        <a href="">Photos</a>
+                        <a href="">Videos</a>
+                        <a href="">Supported Locations</a>
+                        <a href="">Reviews</a>
+                    </div>
+                    <style>
+                        .the-btn {
+                            display: flex;
+                            justify-content: start;
+                            gap: 20px;
+                            margin-bottom: 20px;
+                        }
+
+                        .the-btn a {
+                            padding: 10px 20px;
+                            border: 1px solid #ccc;
+                            border-radius: 5px;
+                            text-decoration: none;
+                            color: #333;
+                            font-weight: bold;
+                            display: inline-block;
+                        }
+                    </style>
                     <?php the_content(); ?>
                 </div>
 
