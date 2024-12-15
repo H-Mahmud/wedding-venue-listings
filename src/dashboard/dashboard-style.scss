@@ -1,0 +1,12 @@
+@import "./profile/style.css";
+.wvl-loading {
+  @apply fixed left-0 right-0 top-0 z-50 h-[calc(100%-1rem)] max-h-full w-full items-center justify-center overflow-y-auto overflow-x-hidden md:inset-0;
+
+  .loading-container {
+    @apply flex h-full w-full items-center justify-center bg-[#00000080];
+
+    .content {
+      @apply flex h-56 w-56 items-center justify-center space-y-4 rounded-md bg-white p-4 md:p-5;
+    }
+  }
+}

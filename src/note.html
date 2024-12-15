@@ -1,0 +1,55 @@
+.wvl-loading {
+    @apply fixed left-0 right-0 top-0 z-50 h-[calc(100%-1rem)] max-h-full w-full items-center justify-center overflow-y-auto overflow-x-hidden md:inset-0;
+  
+    .loading-container {
+      @apply flex h-full w-full items-center justify-center bg-[#00000080];
+  
+      .content {
+        @apply min-w-96 space-y-4 rounded-md bg-white p-4 md:p-5;
+  
+        .icon {
+          @apply invisible ml-auto block h-6 w-6 cursor-pointer;
+        }
+  
+        .list {
+          @apply list-none space-y-4;
+  
+          li {
+            @apply relative w-full rounded-full border border-gray-200 bg-gray-100;
+  
+            .message {
+              @apply block px-3 py-1 text-center text-xs font-medium leading-none text-primary;
+  
+              &.loading {
+                @apply animate-pulse rounded-full bg-orange-500;
+              }
+  
+              &.error {
+                @apply bg-red-200 text-red-800;
+              }
+  
+              &.success {
+                @apply bg-green-200 text-green-800;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  <div class="wvl-loading hidden">
+    <div class="loading-container">
+        <div class="content">
+            <p class="close-btn"><i class="fa-solid fa-xmark icon"></i></p>
+
+            <ul class="list">
+                <li>
+                    <p class="message loading w-5 overflow-visible">
+                        <span class="count">uploading...</span>
+                    </p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

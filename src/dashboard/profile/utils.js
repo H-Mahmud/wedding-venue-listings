@@ -11,3 +11,11 @@ export function hideProfileNextSpinner() {
     jQuery('#profileFormNext').find('.next').show();
     jQuery('#profileFormNext').find('.loading').hide();
 }
+
+export function showLoading() {
+    jQuery('.wvl-loading').show();
+}
+
+export function hideLoading() {
+    jQuery('.wvl-loading').hide();    
+}

@@ -1,3 +1,5 @@
+import { showLoading } from "./utils";
+
 export default function handlePhotographsForm($) {
     handleCoverPhotoUpload($);
     handleGalleryUpload($);
@@ -7,6 +9,7 @@ function handleCoverPhotoUpload($) {
     $('#upload_cover').on('change', function () {
         var file = this.files[0];
         if (file) {
+            showLoading();
             var reader = new FileReader();
             reader.onload = function (e) {
                 $('#upload_cover_label').css("background-image", "url('" + e.target.result + "')");
@@ -34,6 +37,9 @@ function handleCoverPhotoUpload($) {
                     } else {
                         $('.cover-upload-notice').html('<p class="text-red-500">' + response.responseText + '</p>');
                     }
+                },
+                complete: function () {
+                    hideLoading();
                 }
             });
 
@@ -46,17 +52,6 @@ function handleCoverPhotoUpload($) {
 
 
 function handleGalleryUpload($) {
-
-    // const $progressElement = `<div id="progress-${i}" class="upload-progressbar  absolute inset-0">
-    //                 <div class="bg-black bg-opacity-30 w-full h-full absolute inset-0 z-10"></div>
-    //                 <div class="flex justify-center items-center w-52 h-52 mx-auto relative z-20">
-    //                     <svg class="-rotate-90" viewBox="0 0 100 100">
-    //                         <circle stroke="#F1F1F1" stroke-width="5.5" cx="50" cy="50" r="30" fill="none" />
-    //                         <circle id="progress--circle" stroke="#1F72B2" stroke-width="5.5" cx="50" cy="50" r="30" fill="none" pathLength="100" />
-    //                         <text id="progress--number" fill="#FFFFFF" x="50" y="48" text-anchor="middle" dominant-baseline="middle">0%</text>
-    //                     </svg>
-    //                 </div>
-    //             </div>`;
 
     $('#upload_gallery').on('change', function () {
         var file = this.files;
@@ -78,6 +73,7 @@ function handleGalleryUpload($) {
 }
 
 function handleGalleryImageUpload(file, $) {
+    showLoading();
     var formData = new FormData();
     formData.append('file', file);
     formData.append('action', 'wvl_upload_gallery_photo');
@@ -89,6 +85,7 @@ function handleGalleryImageUpload(file, $) {
         data: formData,
         processData: false,
         contentType: false,
+        
         success: function (response) {
             $('.cover-upload-notice').html('<p class="text-green-500">' + response.data.message + '</p>');
         },
@@ -98,22 +95,13 @@ function handleGalleryImageUpload(file, $) {
             } else {
                 $('.cover-upload-notice').html('<p class="text-red-500">' + response.responseText + '</p>');
             }
+        },
+        complete: function () {
+            hideLoading();
         }
     });
 }
 
-// const meter = document.getElementById("progress--circle");
-// const insideText = document.getElementById("progress--text");
-
-// meterProgress.innerText = `${rangeValue}%`;
-// insideText.textContent = `${rangeValue}%`;
-// meter.style.strokeDashoffset = 100 - rangeValue;
-
-// if (rangeValue === "0") {
-//     meter.style.stroke = "none";
-// } else {
-//     meter.style.stroke = "#28411B";
-// }
 
 function uploadCoverPhoto() {
 
