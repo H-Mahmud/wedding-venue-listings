@@ -32,13 +32,13 @@
                             <input class="radio" type="radio" name="category" value="$category->term_id" $checked />
                             $category->name
                         </label>
-                        <br>
                     HTML;
                 }
             };
             ?>
         </div>
     </form>
+
     <?php
     if (isset($_GET['category']) && !empty($_GET['category']) && is_numeric($_GET['category'])):
         $parent_id = $_GET['category'];
@@ -67,9 +67,9 @@
                             <input class="checkbox" type="checkbox" name="subcategory[]" value="$subcategory->term_id" $checked />
                             $subcategory->name
                         </label>
-                        <br>
                     HTML;
-                }; ?>
+                };
+                ?>
             </div>
         </form>
     <?php endif; ?>

@@ -41,17 +41,15 @@
           }
         }
 
-        &.category {
-          .name {
-            @apply my-2 inline-block cursor-pointer;
+        .name {
+          @apply my-3 block cursor-pointer;
 
-            .radio {
-              @apply mr-2 h-4 w-4;
-            }
+          .radio {
+            @apply mr-2 h-4 w-4;
+          }
 
-            .checkbox {
-              @apply mr-2 h-4 w-4;
-            }
+          .checkbox {
+            @apply mr-2 h-4 w-4;
           }
         }
       }
