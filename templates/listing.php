@@ -6,7 +6,6 @@ get_header(); ?>
         <div class="wvl-sidebar">
             <?php load_template(WVL_PLUGIN_DIR . 'templates/parts/sidebar.php'); ?>
         </div>
-
         <div class="listing-content w-full">
             <?php
             $args = array(
@@ -24,15 +23,17 @@ get_header(); ?>
             ?>
                 <p class="total-result"><span class="amount"><?php echo $query->found_posts; ?></span> <?php _e('Vendor found', 'wedding-venue-listings'); ?></p>
                 <div class="wvl-list">
+                    <?php
+                    while ($query->have_posts()) :
+                        $query->the_post();
+                        load_template(WVL_PLUGIN_DIR . 'templates/parts/listing-item.php', false);
+                    endwhile;
+                else:
+                    ?>
+                    <p class="no-result"><?php _e('No vendor found', 'wedding-venue-listings'); ?></p>
                 <?php
-                while ($query->have_posts()) :
-                    $query->the_post();
-                    load_template(WVL_PLUGIN_DIR . 'templates/parts/listing-item.php', false);
-                endwhile;
-            else:
-                echo '<p>No Venues Found</p>';
-            endif;
-            wp_reset_postdata();
+                endif;
+                wp_reset_postdata();
                 ?>
                 </div>
         </div>

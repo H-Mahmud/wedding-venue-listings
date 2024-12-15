@@ -20,7 +20,7 @@
             </span>
         </div>
         <div class="actions">
-            <a class="wvl-btn-primary " href="<?php the_permalink(); ?>"><?php _e('Request a Pricing', 'wedding-venue-listings'); ?></a>
+            <a class="wvl-btn-primary" href="<?php the_permalink(); ?>"><?php _e('Request a Pricing', 'wedding-venue-listings'); ?></a>
         </div>
     </div>
 </div>

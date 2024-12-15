@@ -1,4 +1,5 @@
 <script>
+    /** TODO: Refactor */
     jQuery(document).ready(function($) {
         $('.listing-archive .filter .header .toggle-icon').on('click', function() {
             $(this).toggleClass('fa-angle-up');
@@ -73,6 +74,7 @@
         </form>
     <?php endif; ?>
 
+    <!-- TODO: Refactor -->
     <div class="filter wvl-field availability mb-4">
         <div class="header">
             <h3 class="title"><?php _e('Availability', 'wedding-venue-listings'); ?></h3>
