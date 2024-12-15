@@ -58,3 +58,44 @@ function wlv_get_review_page_link($page_number = 1)
         return add_query_arg('cpage', $page_number, $url);
     }
 }
+
+/**
+ * TODO: Make it functional
+ */
+function wvl_get_venue_address($venue_id)
+{
+    return '1901 Thornridge Cir. Shiloh, Hawaii 81063';
+}
+
+
+/**
+ * Retrieves the average rating of a given venue.
+ *
+ * @param int $venue_id The venue ID.
+ *
+ * @return float The average rating of the venue.
+ */
+function wvl_get_venue_average_rating($venue_id)
+{
+    return get_post_meta(get_the_ID(), 'average_rating', true);
+}
+
+/**
+ * Displays the number of reviews for a given venue.
+ *
+ * @since 1.0.0
+ */
+function wvl_venue_review_count()
+{
+    $comment_count = get_comment_count(get_the_ID());
+
+    printf(
+        _n(
+            '(%s Review)',
+            '(%s Reviews)',
+            $comment_count['approved'],
+            'wedding-venue-listings'
+        ),
+        number_format_i18n($comment_count['approved'])
+    );
+}

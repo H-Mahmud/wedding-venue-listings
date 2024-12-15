@@ -1,8 +1,6 @@
 <div class="listing-item" data-id="<?php the_ID(); ?>">
     <div class="thumbnail">
-        <?php the_post_thumbnail('full', array('class' => 'w-full h-full block object-cover rounded-md'));
-        ?>
-
+        <?php the_post_thumbnail('full', array('class' => 'thumbnail-image')); ?>
     </div>
     <div class="content">
         <h2 class="title">
@@ -10,17 +8,14 @@
         </h2>
         <p class="location">
             <i class="fa-solid fa-location-dot icon"></i>
-            1901 Thornridge Cir. Shiloh, Hawaii 81063
+            <?php echo wvl_get_venue_address(get_the_ID()); ?>
         </p>
         <p class="description"><?php echo wvl_get_excerpt_content(get_the_ID()); ?></p>
         <div class="meta">
             <span class="reviews">
-                <star-rating min="0" max="5" value="<?php echo get_post_meta(get_the_ID(), 'average_rating', true); ?>"></star-rating>
+                <star-rating min="0" max="5" value="<?php echo wvl_get_venue_average_rating(get_the_ID()); ?>"></star-rating>
                 <span class="count">
-                    <?php
-                    $comment_count = get_comment_count(get_the_ID());
-                    printf(_n('(%s Review)', '(%s Reviews)', $comment_count['approved'], 'wedding-venue-listings'), $comment_count['approved']);
-                    ?>
+                    <?php wvl_venue_review_count(get_the_ID()); ?>
                 </span>
             </span>
         </div>

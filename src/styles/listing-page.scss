@@ -47,6 +47,10 @@
 
             .thumbnail {
                 @apply h-full w-full md:max-w-80;
+
+                .thumbnail {
+                    @apply w-full h-full block object-cover rounded-md;
+                }
             }
 
             .content {
