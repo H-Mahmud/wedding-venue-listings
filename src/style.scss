@@ -2,123 +2,117 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer components {
-    .wvl-btn-primary {
-        @apply focus:ring-1 focus:ring-blue-300 font-bold rounded-md text-sm px-5 py-3 me-2 mb-2 focus:z-10 inline-block text-center mt-4 text-white bg-primary hover:text-gray-100;
+  .wvl-btn-primary {
+    @apply mb-2 me-2 mt-4 inline-block rounded-md bg-primary px-5 py-3 text-center text-sm font-bold text-white hover:text-gray-100 focus:z-10 focus:ring-1 focus:ring-blue-300;
+  }
 
-    }
+  .wvl-btn {
+    @apply mb-2 me-2 mt-4 inline-block cursor-pointer rounded-lg !border !border-gray-200 bg-white px-5 py-3 text-center text-sm font-medium text-primary !shadow-none hover:bg-transparent hover:text-blue-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100;
+  }
 
-    .wvl-btn {
-        @apply py-3 px-5 me-2 mb-2 text-sm font-medium text-primary focus:outline-none bg-white rounded-lg !border !border-gray-200 focus:z-10 focus:ring-4 focus:ring-gray-100 cursor-pointer hover:bg-transparent hover:text-blue-700 !shadow-none inline-block text-center mt-4;
-    }
+  .wvl-field-row {
+    @apply mb-4 block justify-between gap-4 md:flex;
+  }
 
-    .wvl-field-row {
-        @apply block md:flex justify-between gap-4 mb-4;
-    }
+  .wvl-field {
+    @apply w-full;
+  }
 
-    .wvl-field {
-        @apply w-full;
-    }
+  .wvl-field input {
+    @apply block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500;
+  }
 
-    .wvl-field input {
-        @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5;
-    }
+  .wvl-comments-pagination .page-links {
+    @apply flex h-8 items-center justify-center border border-gray-300 bg-white px-3 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700;
+  }
 
-    .wvl-comments-pagination .page-links {
-        @apply flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700
-    }
+  .wvl-comments-pagination .page-links.current {
+    @apply bg-gray-300;
+  }
 
-    .wvl-comments-pagination .page-links.current {
-        @apply bg-gray-300;
-    }
+  .pricing-tables {
+    @apply flex items-start justify-between;
+  }
 
-    .pricing-tables {
-        @apply flex justify-between items-start;
-    }
+  .pricing-card {
+    @apply w-full max-w-sm rounded-lg border border-gray-200 bg-white p-4 shadow sm:p-5;
+  }
 
-    .pricing-card {
-        @apply w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-5;
-    }
+  .pricing-card .heading {
+    @apply mb-4 text-xl font-medium text-gray-500;
+  }
 
-    .pricing-card .heading {
-        @apply mb-4 text-xl font-medium text-gray-500;
-    }
+  .pricing-card .price {
+    @apply flex items-baseline text-primary;
+  }
 
-    .pricing-card .price {
-        @apply flex items-baseline text-primary;
-    }
+  .pricing-card .list {
+    @apply my-7 space-y-5;
+  }
 
-    .pricing-card .list {
-        @apply space-y-5 my-7;
-    }
+  .pricing-card .item {
+    @apply flex items-center;
+  }
 
-    .pricing-card .item {
-        @apply flex items-center;
-    }
+  .pricing-card .item .icon {
+    @apply flex-shrink-0 text-lg text-blue-700;
+  }
 
-    .pricing-card .item .icon {
-        @apply flex-shrink-0 text-lg text-blue-700;
-    }
+  .pricing-card .item .text {
+    @apply ms-3 text-base font-normal leading-tight text-gray-500;
+  }
 
-    .pricing-card .item .text {
-        @apply text-base font-normal leading-tight text-gray-500 ms-3;
-    }
+  .pricing-card .item.inactive .icon {
+    @apply text-gray-400;
+  }
 
-    .pricing-card .item.inactive .icon {
-        @apply text-gray-400;
-    }
+  .pricing-card .item.inactive .text {
+    @apply line-through decoration-gray-500;
+  }
 
-    .pricing-card .item.inactive .text {
-        @apply line-through decoration-gray-500;
-    }
+  .analytics-summary {
+    @apply flex items-stretch justify-start;
+  }
 
-    .analytics-summary {
-        @apply flex justify-start items-stretch;
-    }
+  .analytics-summary .card {
+    @apply w-full max-w-sm p-4 sm:p-5;
+  }
 
-    .analytics-summary .card {
-        @apply w-full max-w-sm p-4 sm:p-5;
-    }
+  .analytics-summary .card span {
+    @apply text-sm font-light text-white;
+  }
 
-    .analytics-summary .card span {
-        @apply text-sm font-light text-white;
-    }
-
-    .analytics-summary .card h3 {
-        @apply text-2xl font-semibold text-white;
-    }
+  .analytics-summary .card h3 {
+    @apply text-2xl font-semibold text-white;
+  }
 }
 
 .wvl-field input,
 .wvl-field select {
-    width: 100%;
-    margin-bottom: 1rem;
+  width: 100%;
+  margin-bottom: 1rem;
 }
 
 .wvl-cover-photo-field input {
-    display: none;
+  display: none;
 }
 
 .wvl-cover-photo-field label {
-    display: block;
-    width: 100%;
-    min-height: 240px;
-    border: 3px solid gray;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: block;
+  width: 100%;
+  min-height: 240px;
+  border: 3px solid gray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .wvl-cover-photo-field label .upload-icon {
-    display: block;
+  display: block;
 }
 
+@import "./dashboard/dashboard-style.css";
 
-@import './dashboard/dashboard-style.css';
-
-
-@import './styles/auth-pages.css';
-@import './styles/full-calendar.css';
-
-@import './styles/single-venue.css';
+@import "./styles/auth-pages.css";
+@import "./styles/full-calendar.css";

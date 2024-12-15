@@ -1,0 +1,77 @@
+.single-venue {
+  @apply bg-white;
+
+  .cover-photo {
+    @apply max-h-[520px] w-full overflow-hidden md:min-h-80;
+
+    img {
+      @apply block h-auto w-full object-cover;
+    }
+  }
+
+  .site-container {
+    @apply pt-4;
+
+    .header {
+      @apply items-center justify-between md:flex;
+
+      .meta {
+        @apply mt-2 flex flex-col gap-4 py-2 text-sm text-secondary md:flex-row;
+
+        .address {
+          .icon {
+            @apply text-primary;
+          }
+        }
+
+        .separator {
+          @apply hidden h-6 w-[1.5px] bg-quaternary md:inline-block;
+        }
+
+        .reviews {
+          star-rating {
+            --font-size: 18px;
+          }
+        }
+      }
+
+      .links {
+        @apply flex flex-wrap items-center justify-end;
+
+        .social {
+          @apply m-0 mr-6 flex flex-wrap items-center justify-end gap-3;
+        }
+      }
+    }
+
+    .wvl-content {
+      @apply mt-8 rounded-lg px-4 py-2 ring-1 ring-gray-200;
+
+      .nav-tabs {
+        @apply flex items-end justify-between;
+
+        a {
+          @apply block flex-1 rounded-t-lg p-4 text-gray-500 ring-1 ring-gray-200;
+
+          &.active {
+            @apply bg-primary font-semibold text-white;
+          }
+        }
+      }
+    }
+  }
+}
+
+.review-list .content {
+  position: relative;
+}
+
+.review-list .content::before {
+  content: "";
+  position: absolute;
+  top: 20px;
+  left: -39px;
+  border-width: 20px;
+  border-style: solid;
+  border-color: transparent #f3f4f6 transparent transparent;
+}

@@ -1,40 +1,30 @@
 <?php get_header(); ?>
-<div id="primary" class="single-venue bg-white">
+<div id="primary" class="single-venue">
     <?php
     while (have_posts()) {
         the_post(); ?>
-        <div class="cover-photo w-full max-h-[520px] overflow-hidden md:min-h-80">
-            <?php the_post_thumbnail('full', array('class' => 'w-full h-auto block object-cover')); ?>
+        <div class="cover-photo">
+            <?php the_post_thumbnail('full', array('class' => '')); ?>
         </div>
-        <main id="main" class="site-main site-container pt-4" role="main">
-            <div class="header md:flex justify-between items-center">
+        <main id="main" class="site-container" role="main">
+            <div class="header">
                 <div class="entry-header">
                     <?php the_title('<h1 class="title text-4xl font-bold">', '</h1>'); ?>
-                    <style>
-                        .meta star-rating {
-                            --font-size: 18px;
-                        }
-                    </style>
-                    <div class="meta flex-col md:flex-row flex mt-2 gap-4 text-secondary py-2 text-sm">
-                        <span class="block">
-                            <i class="fa-solid fa-location-dot text-primary"></i>
-                            <?php echo wvl_get_venue_location(get_the_ID()); ?>
-                        </span>
-                        <span class="h-6 w-[1.5px] bg-quaternary hidden md:inline-block"></span>
+                    <div class="meta">
+                        <div class="address">
+                            <i class="fa-solid fa-location-dot icon"></i>
+                            <?php echo wvl_get_venue_address(get_the_ID()); ?>
+                        </div>
+                        <span class="separator"></span>
 
-                        <span class="block">
+                        <div class="reviews">
                             <star-rating min="0" max="5" value="<?php echo get_post_meta(get_the_ID(), 'average_rating', true); ?>"></star-rating>
-                            <span class="amount">
-                                <?php
-                                $comment_count = get_comment_count(get_the_ID());
-                                printf(_n('(%s Review)', '(%s Reviews)', $comment_count['approved'], 'wedding-venue-listings'), $comment_count['approved']);
-                                ?>
-                            </span>
-                        </span>
+                            <span class="count"> <?php wvl_venue_review_count(get_the_ID()); ?></span>
+                        </div>
                     </div>
                 </div>
-                <div class="links flex justify-end items-center flex-wrap">
-                    <ul class="social flex justify-end flex-wrap items-center gap-3 m-0 mr-6">
+                <div class="links">
+                    <ul class="social">
                         <?php do_action('wvl_social_links'); ?>
                     </ul>
                     <button class="wvl-btn-primary" id="contactFormOpen"><?php _e('Contact Us', 'wedding-venue-listings'); ?></button>
@@ -43,33 +33,17 @@
 
             <div class="wvl-content">
 
-                <div class="description pb-10 pt-6 text-gray-500">
-                    <div class="the-btn">
-                        <a href="">Overview</a>
-                        <a href="">Contact Info</a>
-                        <a href="">Photos</a>
-                        <a href="">Videos</a>
-                        <a href="">Supported Locations</a>
-                        <a href="">Reviews</a>
-                    </div>
-                    <style>
-                        .the-btn {
-                            display: flex;
-                            justify-content: start;
-                            gap: 20px;
-                            margin-bottom: 20px;
-                        }
+                <div class="nav-tabs">
+                    <a class="active" href="#overview">Overview</a>
+                    <a href="#contact">Contact Info</a>
+                    <a href="#photos">Photos</a>
+                    <a href="#videos">Videos</a>
+                    <a href="#locations">Supported Locations</a>
+                    <a href="#reviews">Reviews</a>
+                </div>
 
-                        .the-btn a {
-                            padding: 10px 20px;
-                            border: 1px solid #ccc;
-                            border-radius: 5px;
-                            text-decoration: none;
-                            color: #333;
-                            font-weight: bold;
-                            display: inline-block;
-                        }
-                    </style>
+                <div class="description pb-10 pt-6 text-gray-500">
+
                     <?php the_content(); ?>
                 </div>
 

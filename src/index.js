@@ -7,6 +7,7 @@ import './components/modal';
 import "./style.scss";
 import "./styles/forms.css";
 import './styles/listing-page.scss';
+import './styles/single-venue.scss';
 
 
 // import './styles/listing-archive.scss';
