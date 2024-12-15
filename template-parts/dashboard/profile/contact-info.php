@@ -15,8 +15,8 @@
         </div>
 
         <div class="wvl-field">
-            <label for="location"><?php _e('Location Support', 'wedding-venue-listings'); ?></label>
-            <input type="text" name="location" id="location" value="<?php echo get_post_meta($venue_id, 'location', true); ?>" required>
+            <label for="address"><?php _e('Full Address', 'wedding-venue-listings'); ?></label>
+            <input type="text" name="address" id="address" value="<?php echo get_post_meta($venue_id, 'address', true); ?>" required>
         </div>
     </fieldset>
 

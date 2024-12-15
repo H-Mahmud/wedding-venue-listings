@@ -198,7 +198,7 @@ class WVL_Dashboard_Profile
 
         $phone = sanitize_text_field($_POST['phone'] ?? '');
         $email = sanitize_text_field($_POST['email'] ?? '');
-        $location = sanitize_text_field($_POST['location'] ?? '');
+        $address = sanitize_text_field($_POST['address'] ?? '');
 
         $social_links = [];
         if (isset($_POST['social_links']) && is_array($_POST['social_links'])) {
@@ -208,7 +208,7 @@ class WVL_Dashboard_Profile
         }
         update_post_meta(wvl_get_venue_id(), 'social_links', $social_links);
 
-        if (empty($phone) || empty($email) || empty($location)) {
+        if (empty($phone) || empty($email) || empty($address)) {
             wp_send_json_error(['message' => 'All fields are required.']);
         }
 
@@ -216,7 +216,7 @@ class WVL_Dashboard_Profile
         if ($venue_id) {
             update_post_meta($venue_id, 'phone', $phone);
             update_post_meta($venue_id, 'email', $email);
-            update_post_meta($venue_id, 'location', $location);
+            update_post_meta($venue_id, 'address', $address);
             wp_send_json_success(['message' => 'Profile information updated successfully.']);
         } else {
             wp_send_json_error(['message' => 'You must be logged in to update your profile.']);

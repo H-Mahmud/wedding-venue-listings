@@ -64,7 +64,7 @@ function wlv_get_review_page_link($page_number = 1)
  */
 function wvl_get_venue_address($venue_id)
 {
-    return '1901 Thornridge Cir. Shiloh, Hawaii 81063';
+    return get_post_meta($venue_id, 'address', true);
 }
 
 
