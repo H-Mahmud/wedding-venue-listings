@@ -42,8 +42,7 @@
                     <a href="#reviews">Reviews</a>
                 </div>
 
-                <div class="description pb-10 pt-6 text-gray-500">
-
+                <div class="description">
                     <?php the_content(); ?>
                 </div>
 

@@ -58,6 +58,10 @@
           }
         }
       }
+
+      .description {
+        @apply pb-10 pt-6 text-gray-500;
+      }
     }
   }
 }
