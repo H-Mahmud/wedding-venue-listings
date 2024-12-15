@@ -31,6 +31,7 @@ add_action('init', function () {
 }, 1);
 
 // dependencies
+require_once WVL_PLUGIN_DIR . 'classes/class-subscription-manage.php';
 require_once WVL_PLUGIN_DIR . 'template-tags.php';
 require_once WVL_PLUGIN_DIR . 'includes/wvl-functions.php';
 
