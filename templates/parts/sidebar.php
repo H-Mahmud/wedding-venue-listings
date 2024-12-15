@@ -5,23 +5,37 @@
     </div>
 </form>
 
-<div class="wvl-widgets border-quaternary border px-5 py-6 rounded-md">
-    <form class="filter category mb-5" id="categoryFilter" method="get">
-        <h3 class="text-lg font-bold"><?php _e('Category', 'wedding-venue-listings'); ?></h3>
-        <?php
-        $categories = get_categories(array('hide_empty' => false));
-        foreach ($categories as $category) {
-            if ($category->parent == 0) {
-                $selected = isset($_GET['category']) && $_GET['category'] == $category->term_id ? 'checked="checked"' : '';
-                echo <<<HTML
-                                <label class="my-2 inline-block cursor-pointer">
-                                    <input class="mr-2 w-4 h-4"type="radio" name="category" value="$category->term_id" $selected />
+<div class="filter-container">
+    <form class="filter category" id="categoryFilter" method="get">
+        <div class="header">
+            <h3 class="title"><?php _e('Category', 'wedding-venue-listings'); ?></h3>
+            <i class="fa-solid fa-angle-up toggle-icon"></i>
+        </div>
+        <div class="content">
+            <?php
+            $categories = get_categories(array('hide_empty' => false));
+            foreach ($categories as $category) {
+                if ($category->parent == 0) {
+                    $checked = isset($_GET['category']) && $_GET['category'] == $category->term_id ? 'checked="checked"' : '';
+                    echo <<<HTML
+                                <label class="name">
+                                    <input class="radio" type="radio" name="category" value="$category->term_id" $checked />
                                     $category->name
                                 </label>
                                 <br>
                             HTML;
-            }
-        }; ?>
+                }
+            }; ?>
+        </div>
+        <script>
+            jQuery(document).ready(function($) {
+                $('.listing-archive .filter .header .toggle-icon').on('click', function() {
+                    $(this).toggleClass('fa-angle-up');
+                    $(this).toggleClass('fa-angle-down');
+                    $('.filter .content').slideToggle();
+                })
+            })
+        </script>
     </form>
     <?php
     if (isset($_GET['category']) && !empty($_GET['category']) && is_numeric($_GET['category'])):

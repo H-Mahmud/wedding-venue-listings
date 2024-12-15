@@ -1,3 +1,35 @@
 .listing-archive .listing-content .total-result {
     @apply font-semibold text-xl mb-8 mt-3 text-primary;
 }
+
+.listing-archive .wvl-sidebar {
+    @apply md:w-[310px] w-full;
+}
+
+.listing-archive .wvl-sidebar .filter-container {
+    @apply border-quaternary border px-5 py-6 rounded-md;
+}
+
+.listing-archive .wvl-sidebar .filter-container .filter {
+    @apply mb-5;
+}
+
+.listing-archive .wvl-sidebar .filter-container .header {
+    @apply flex justify-between items-center;
+}
+
+.listing-archive .wvl-sidebar .filter-container .filter .title {
+    @apply text-lg font-bold;
+}
+
+.listing-archive .wvl-sidebar .filter-container .filter .toggle-icon {
+    @apply cursor-pointer inline-block text-primary;
+}
+
+.listing-archive .wvl-sidebar .filter-container .filter.category .name {
+    @apply my-2 inline-block cursor-pointer;
+}
+
+.listing-archive .wvl-sidebar .filter-container .filter.category .name .radio {
+    @apply mr-2 w-4 h-4;
+}
