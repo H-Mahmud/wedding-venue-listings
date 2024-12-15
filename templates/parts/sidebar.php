@@ -1,7 +1,7 @@
 <form action="<?php echo site_url('listing'); ?>" class="mb-6">
     <div class="flex justify-between items-center border border-quaternary rounded-md p-1">
         <input class="!bg-white !border-0" type="text" name="s" placeholder="Search for a venue" value="<?php echo get_query_var('location'); ?>">
-        <button type="button" class="search-icon"><i class="fa-solid fa-magnifying-glass p-3 rounded-lg inline-block bg-primary text-white"></i></button>
+        <button type="submit" class="search-icon"><i class="fa-solid fa-magnifying-glass p-3 rounded-lg inline-block bg-primary text-white"></i></button>
     </div>
 </form>
 
