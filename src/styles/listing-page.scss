@@ -1,4 +1,7 @@
 .listing-archive {
+  .site-container {
+    @apply block items-start gap-3 md:flex lg:justify-between lg:gap-10;
+  }
   .wvl-sidebar {
     @apply w-full md:w-[310px];
 
@@ -39,11 +42,11 @@
 
   .listing-content {
     .total-result {
-      @apply mb-8 mt-3 text-xl font-semibold text-primary;
+      @apply mb-2 mt-8 text-xl font-semibold text-primary md:mb-8 md:mt-3;
     }
 
     .listing-item {
-      @apply mb-5 block grid-cols-[320px_1fr] gap-8 sm:grid;
+      @apply mb-8 block grid-cols-[320px_1fr] gap-8 sm:grid md:mb-5;
 
       .thumbnail {
         @apply h-full w-full md:max-w-80;
@@ -54,7 +57,7 @@
       }
 
       .content {
-        @apply flex-1;
+        @apply mt-2 flex-1 md:mt-0;
 
         .title {
           a {
@@ -91,7 +94,7 @@
         }
 
         .actions {
-          @apply mt-4;
+          @apply mt-0 md:mt-4;
         }
       }
     }

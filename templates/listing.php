@@ -2,7 +2,7 @@
 get_header(); ?>
 
 <div id="primary" class="listing-archive">
-    <main id="main" class="site-main site-container md:flex md:gap-10 md:justify-between items-start block" role="main">
+    <main id="main" class="site-container" role="main">
         <div class="wvl-sidebar">
             <?php load_template(WVL_PLUGIN_DIR . 'templates/parts/sidebar.php'); ?>
         </div>
