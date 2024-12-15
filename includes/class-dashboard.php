@@ -37,39 +37,7 @@ class WVL_Dashboard
         }
     }
 
-    public function enqueue_scripts()
-    {
-        if (defined('WVL_DEVELOPMENT') && WVL_DEVELOPMENT) {
-            // wp_enqueue_script('wvl-main', 'http://localhost:3000/main.bundle.js', array('jquery'), time(), true);
-            wp_enqueue_script('wvl-dashboard',  WVL_PLUGIN_URL . '/assets/dist/dashboard.bundle.js', array('jquery'), time(), true);
-        } else {
-            wp_enqueue_script('wvl-dashboard', WVL_PLUGIN_URL . '/assets/dist/dashboard.bundle.min.js', array('jquery'), '1.0', true);
-        }
-
-        wp_enqueue_style('font-awesome-v6',  WVL_PLUGIN_URL . '/assets/lib/font-awesome/css/all.min.css', [], '6.7.1');
-
-        wp_enqueue_script('air-datepicker', WVL_PLUGIN_URL . '/assets/lib/air-datepicker/datepicker.min.js');
-        wp_enqueue_script('air-datepicker-en', WVL_PLUGIN_URL . '/assets/lib/air-datepicker/i18n/datepicker.en.min.js');
-        wp_enqueue_style('air-datepicker',  WVL_PLUGIN_URL . '/assets/lib/air-datepicker/datepicker.min.css');
-
-        if (is_page('dashboard')) {
-            wp_enqueue_script('choices.js', WVL_PLUGIN_URL . '/assets/lib/choices.js/js/choices.min.js', array('jquery'), null, true);
-            wp_enqueue_style('choices.js', WVL_PLUGIN_URL . '/assets/lib/choices.js/css/choices.min.css');
-            wp_enqueue_script('fullcalendar', WVL_PLUGIN_URL . '/assets/lib/fullcalendar/index.global.min.js', [], '6.1.15', true);
-
-            wp_enqueue_script('chart.js',  WVL_PLUGIN_URL . '/assets/lib/chart/chart.umd.js', [], '4.4.7', true);
-
-            $venue_id = wvl_get_venue_id();
-            $venue_status = get_post_status($venue_id);
-            $data = [
-                'ajax_url'      => admin_url('admin-ajax.php'),
-                'ajax_nonce'    => wp_create_nonce('dashboard_nonce'),
-                'venue_status'  => $venue_status
-            ];
-
-            wp_localize_script('wvl-dashboard', 'WVL_DATA', $data);
-        }
-    }
+    public function enqueue_scripts() {}
 
     /**
      * Modifies the page template for the 'dashboard' page.
