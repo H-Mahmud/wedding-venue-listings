@@ -11,4 +11,4 @@ import "./styles/forms.css";
 import './styles/listing-page.css';
 
 
-import './styles/listing-archive.css';
+import './styles/listing-archive.scss';

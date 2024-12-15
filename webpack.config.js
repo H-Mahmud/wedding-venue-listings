@@ -47,16 +47,22 @@ module.exports = () => {
                         loader: "babel-loader",
                     },
                 },
+
                 {
-                    test: /\.css$/i,
+                    test: /\.scss$/i,
                     use: [
                         MiniCssExtractPlugin.loader,
-                        {
-                            loader: "css-loader",
-                        },
-                        {
-                            loader: "postcss-loader"
-                        },
+                        'css-loader',   // Process CSS files
+                        'postcss-loader', // Apply PostCSS transformations
+                        'sass-loader',  // Compile Sass to CSS
+                    ],
+                },
+                {
+                    test: /\.css$/i, // Match regular CSS files
+                    use: [
+                        MiniCssExtractPlugin.loader,
+                        'css-loader',
+                        'postcss-loader',
                     ],
                 },
             ],
