@@ -5,6 +5,24 @@
   .wvl-sidebar {
     @apply w-full md:w-[380px];
 
+    .search-container {
+      @apply flex items-center justify-between rounded-md border border-quaternary p-1;
+
+      .search-input {
+        border: unset;
+        background-color: white;
+      }
+
+      .search-btn {
+        &:hover {
+          background-color: transparent;
+        }
+        .icon {
+          @apply inline-block rounded-lg bg-primary p-3 text-white;
+        }
+      }
+    }
+
     .filter-container {
       @apply rounded-md border border-quaternary px-5 py-6;
 
