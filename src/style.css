@@ -90,8 +90,6 @@
     }
 }
 
-@import "./styles/components.css";
-
 @import './dashboard/dashboard-style.css';
 
 
