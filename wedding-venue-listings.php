@@ -118,9 +118,10 @@ function wvl_enqueue_scripts()
 
 
     if (defined('WVL_DEVELOPMENT') && WVL_DEVELOPMENT) {
-        $dev_server_url = 'http://localhost:3000';
+        // $dev_server_url = 'http://localhost:3000';
+        $dev_server_url = WVL_PLUGIN_URL . '/assets/dist';
 
-        wp_enqueue_style('wvl-style', $dev_server_url . '/style.min.css', array(), '1.0');
+        wp_enqueue_style('wvl-style', $dev_server_url . '/style.min.css', array(), time());
 
         wp_enqueue_script('wvl-main', $dev_server_url . '/main.bundle.js', array('jquery'), time(), true);
 
