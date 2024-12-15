@@ -1,0 +1,41 @@
+.listing-archive {
+    .wvl-sidebar {
+        @apply md:w-[310px] w-full;
+
+        .filter-container {
+            @apply border-quaternary border px-5 py-6 rounded-md;
+
+            .filter {
+                @apply mb-5;
+
+                .header {
+                    @apply flex justify-between items-center;
+
+                    .title {
+                        @apply text-lg font-bold;
+                    }
+
+                    .toggle-icon {
+                        @apply cursor-pointer inline-block text-primary;
+                    }
+                }
+
+                &.category {
+                    .name {
+                        @apply my-2 inline-block cursor-pointer;
+
+                        .radio {
+                            @apply mr-2 w-4 h-4;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .listing-content {
+        .total-result {
+            @apply font-semibold text-xl mb-8 mt-3 text-primary;
+        }
+    }
+}
