@@ -20,6 +20,7 @@ class WVL_Dashboard_Analytics
     private final function __construct()
     {
         add_action('wvl_dashboard', array($this, 'render_wvl_dashboard_menu'));
+        add_action('wvl_menu_badge', array($this, 'add_premium_badge'));
     }
 
     /**
@@ -59,6 +60,14 @@ class WVL_Dashboard_Analytics
     public function analytics_page_cb()
     {
         require_once WVL_PLUGIN_DIR . '/template-parts/dashboard/analytics.php';
+    }
+
+
+    public function add_premium_badge($slug)
+    {
+        if ($slug == 'analytics') {
+            echo '<span class="inline-block ml-2 bg-amber-100 text-amber-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">' . __('Premium', 'wedding-venue-listings') . '</span>';
+        }
     }
 
 

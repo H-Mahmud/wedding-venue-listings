@@ -110,17 +110,15 @@ class WVL_Dashboard
                         $is_active = $menu['slug'] === get_query_var('subpage') ? true : false;
                         $class = $is_active ? 'bg-slate-200 text-gray-800 font-semibold' : 'text-slate-700';
                         $active_class = $is_active ? 'active' : '';
-
-                        $premium_badge = $menu['premium'] ? '<span class="inline-block ml-2 bg-amber-100 text-amber-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">' . __('Premium', 'wedding-venue-listings') . '</span>' : '';
-                        echo <<<HTML
-                        <li class="mb-3 $active_class">
-                            <a class="hover:bg-slate-100 p-3 rounded-md flex items-center {$class}" href="$url">
-                                <span class="icon inline-block w-6 h-6 mr-2 overflow-hidden">{$menu['icon']}</span>
-                                <span class="text-sm capitalize inline-block">{$menu['name']}</span>
-                                $premium_badge
+                    ?>
+                        <li class="mb-3 <?php echo $active_class; ?>">
+                            <a class="hover:bg-slate-100 p-3 rounded-md flex items-center <?php echo $class; ?>" href="<?php echo $url; ?>">
+                                <span class="icon inline-block w-6 h-6 mr-2 overflow-hidden"><?php echo $menu['icon']; ?></span>
+                                <span class="text-sm capitalize inline-block"><?php echo $menu['name']; ?></span>
+                                <?php do_action('wvl_menu_badge', $menu['slug']); ?>
                             </a>
                         </li>
-                        HTML;
+                    <?php
                     endforeach; ?>
                     <li class="logout">
                         <form method="post">
