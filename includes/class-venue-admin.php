@@ -25,6 +25,7 @@ class WVL_Venue_Admin
         add_action('init', array($this, 'register_venue_post_type'));
         // add_action('init', array($this, 'create_vendor_type_taxonomy'), 0);
         // add_action('init', array($this, 'create_event_type_taxonomy'), 0);
+        add_action('init', array($this, 'create_location_taxonomy'), 0);
 
         add_action('admin_enqueue_scripts', array($this, 'admin_scripts'));
     }
@@ -146,6 +147,40 @@ class WVL_Venue_Admin
             'rewrite'           => array('slug' => 'event-type'),
         );
         register_taxonomy('event_type', array('venue'), $args);
+    }
+
+
+
+    /**
+     * Registers the 'vendor_type' taxonomy for the 'venue' post type.
+     *
+     * @since 0.1.0
+     */
+    public  function create_location_taxonomy()
+    {
+        $labels = array(
+            'name'              => _x('Support Locations', 'taxonomy general name', 'wedding-venue-listings'),
+            'singular_name'     => _x('Support Location', 'taxonomy singular name', 'wedding-venue-listings'),
+            'search_items'      => __('Search Support Locations', 'wedding-venue-listings'),
+            'all_items'         => __('All Support Locations', 'wedding-venue-listings'),
+            'parent_item'       => null, // Remove parent item to disable hierarchy
+            'parent_item_colon' => null,
+            'edit_item'         => __('Edit Support Location', 'wedding-venue-listings'),
+            'update_item'       => __('Update Support Location', 'wedding-venue-listings'),
+            'add_new_item'      => __('Add New Support Location', 'wedding-venue-listings'),
+            'new_item_name'     => __('New Support Location Name', 'wedding-venue-listings'),
+            'menu_name'         => __('Support Locations', 'wedding-venue-listings'),
+        );
+
+        $args = array(
+            'hierarchical'      => false,
+            'labels'            => $labels,
+            'show_ui'           => true,
+            'show_admin_column' => true,
+            'query_var'         => true,
+            'rewrite'           => array('slug' => 'support-location'),
+        );
+        register_taxonomy('support_location', array('venue'), $args);
     }
 
 
