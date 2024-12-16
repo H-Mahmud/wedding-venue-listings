@@ -1,6 +1,5 @@
 <?php
 get_header(); ?>
-
 <div id="primary" class="listing-archive">
     <main id="main" class="site-container" role="main">
         <div class="wvl-sidebar">

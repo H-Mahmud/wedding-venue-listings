@@ -90,6 +90,17 @@
   .analytics-summary .card h3 {
     @apply text-2xl font-semibold text-white;
   }
+
+  .verified-badge {
+    @apply relative inline-flex items-center justify-center;
+
+    .bg {
+      @apply text-2xl text-[#009EE7];
+    }
+    .mark {
+      @apply absolute text-sm text-white;
+    }
+  }
 }
 
 .wvl-field input,

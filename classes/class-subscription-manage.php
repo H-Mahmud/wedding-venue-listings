@@ -42,4 +42,7 @@ class WVL_Subscription_Manage
 }
 WVL_Subscription_Manage::get_instance();
 
-function wvl_current_plan() {};
+function wvl_current_plan()
+{
+    return 'ultimate';
+};
