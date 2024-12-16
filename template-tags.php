@@ -134,16 +134,18 @@ function wvL_insert_contact_data($data)
     global $wpdb;
 
     $table_name = $wpdb->prefix . 'contact_form';
-    $wpdb->insert(
+    return $wpdb->insert(
         $table_name,
         [
             'user_id' => $data['user_id'],
+            'venue_id' => $data['venue_id'],
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'email' => $data['email'],
             'phone' => $data['phone'],
             'city' => $data['city'],
             'message' => $data['message'],
+            'booking_date' => $data['date']
         ],
         [
             '%s',
