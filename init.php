@@ -5,6 +5,7 @@ register_activation_hook(WVL_PLUGIN_FILE, 'wvl_plugin_activate');
 function wvl_plugin_activate()
 {
     wvl_create_venue_analytics_table();
+    wvl_create_contact_database_table();
 }
 
 /**
@@ -29,6 +30,32 @@ function wvl_create_venue_analytics_table()
             PRIMARY KEY (id),
             INDEX (venue_id, event_type, created_at)
         ) $charset_collate;";
+
+    require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+    dbDelta($sql);
+}
+
+
+function wvl_create_contact_database_table()
+{
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'contact_form';
+    $charset_collate = $wpdb->get_charset_collate();
+
+    $sql = "CREATE TABLE $table_name (
+        id BIGINT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+        user_id BIGINT(20) NOT NULL DEFAULT 0,
+        first_name VARCHAR(255) NOT NULL DEFAULT '',
+        last_name VARCHAR(255) NOT NULL DEFAULT '',
+        email VARCHAR(255) NOT NULL DEFAULT '',
+        phone VARCHAR(20) NOT NULL DEFAULT '',
+        city VARCHAR(255) NOT NULL DEFAULT '',
+        submission_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+        message TEXT NOT NULL DEFAULT '',
+        status VARCHAR(50) DEFAULT 'new',
+        INDEX email_index (email),
+        INDEX submission_date_index (submission_date)
+    ) $charset_collate;";
 
     require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
     dbDelta($sql);
