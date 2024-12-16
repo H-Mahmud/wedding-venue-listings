@@ -1,7 +1,7 @@
 <?php
 $page_id = wvl_get_venue_id();
 $paged = (get_query_var('cpage')) ? absint(get_query_var('cpage')) : 1;
-$comments_per_page = 2;
+$comments_per_page = 5;
 
 $args = array(
     'post_id' => $page_id,
@@ -19,6 +19,10 @@ if ($comments) {
     echo '<div class="review-list mb-7">';
     foreach ($comments as $comment) {
 ?>
+
+        <div class="message my-2">
+            <?php do_action('wvl_notice', 'wvl_review_reply_form'); ?>
+        </div>
 
         <div class="review-item flex gap-8 mb-6 mt-3" id="comment-<?php echo $comment->comment_ID; ?>">
             <div class="avatar w-20 h-20 max-w-20 rounded-lg border flex-1">
@@ -147,7 +151,7 @@ function custom_comments_pagination($total_pages, $current_page)
         echo '<ul class="inline-flex -space-x-px text-sm">';
 
         if ($current_page > 1) {
-            echo '<li><a  class="page-links" href="' . wlv_get_review_page_link($current_page - 1) . '" class="page-numbers arrow-prev"><i class="fa-solid fa-angles-left"></i></a></li>';
+            echo '<li><a  class="page-links" href="' . wlv_get_review_dashboard_page_link($current_page - 1) . '" class="page-numbers arrow-prev"><i class="fa-solid fa-angles-left"></i></a></li>';
         } else {
             echo <<<HTML
              <li class="page-links"><i class="fa-solid fa-angles-left"></i></li>
@@ -155,7 +159,7 @@ function custom_comments_pagination($total_pages, $current_page)
         }
 
         if ($current_page > 3) {
-            echo '<li><a class="page-links page-numbers" href="' . wlv_get_review_page_link(1) . '"> ' . number_format_i18n(1) . '</a></li>';
+            echo '<li><a class="page-links page-numbers" href="' . wlv_get_review_dashboard_page_link(1) . '"> ' . number_format_i18n(1) . '</a></li>';
             echo '<li class="page-dots">...</li>';
         }
 
@@ -163,17 +167,17 @@ function custom_comments_pagination($total_pages, $current_page)
             if ($i === $current_page) {
                 echo '<li><span class="page-links current">' . number_format_i18n($i) . '</span></li>';
             } else {
-                echo '<li><a class="page-links" href="' . wlv_get_review_page_link($i) . '">' . number_format_i18n($i) . '</a></li>';
+                echo '<li><a class="page-links" href="' . wlv_get_review_dashboard_page_link($i) . '">' . number_format_i18n($i) . '</a></li>';
             }
         }
 
         if ($current_page < $total_pages - 2) {
             echo '<li class="page-dots">...</li>';
-            echo '<li><a class="page-links" href="' . wlv_get_review_page_link($total_pages) . '">' . number_format_i18n($total_pages) . '</a></li>';
+            echo '<li><a class="page-links" href="' . wlv_get_review_dashboard_page_link($total_pages) . '">' . number_format_i18n($total_pages) . '</a></li>';
         }
 
         if ($current_page < $total_pages) {
-            echo '<li><a class="page-links" href="' . wlv_get_review_page_link($current_page + 1) . '" class="page-numbers arrow-prev"><i class="fa-solid fa-angles-right"></i></a></li>';
+            echo '<li><a class="page-links" href="' . wlv_get_review_dashboard_page_link($current_page + 1) . '" class="page-numbers arrow-prev"><i class="fa-solid fa-angles-right"></i></a></li>';
         } else {
             echo <<<HTML
              <li class="page-links"><i class="fa-solid fa-angles-right"></i></li>
@@ -181,6 +185,19 @@ function custom_comments_pagination($total_pages, $current_page)
         }
         echo '</ul>';
         echo '</div>';
+    }
+}
+
+
+function wlv_get_review_dashboard_page_link($page_number = 1)
+{
+    $url = site_url('dashboard/reviews');
+    if (isset($_GET) && count($_GET) > 0) {
+        $new_query_params = $_GET;
+        $new_query_params['cpage'] = $page_number;
+        return add_query_arg($new_query_params, $url);
+    } else {
+        return add_query_arg('cpage', $page_number, $url);
     }
 }
 
@@ -202,23 +219,22 @@ function wvl_review_reply_form($post_id, $parent_comment_id, $comment_id = '')
                         <i class="fa-solid fa-xmark"></i>
                     </button>
                 </div>
-                <div class="modal-content">
-                    <form method="post">
+                <form method="post">
+                    <div class="modal-content">
+                        <?php wp_nonce_field('wvl_review_reply_nonce', 'wvl_review_reply_nonce'); ?>
                         <input type="hidden" name="comment_id" value="<?php echo $comment_id; ?>">
-                        <input type="hidden" id="reply_post_id" name="post_id" value="<?php $post_id; ?>">
+                        <input type="hidden" id="venue_id" name="venue_id" value="<?php echo $post_id; ?>">
                         <input type="hidden" id="parent_comment_id" name="parent_id" value="<?php echo $parent_comment_id; ?>">
 
                         <div class="wvl-field">
-                            <textarea name="reply" placeholder="<?php _e('Your reply', 'wedding-venue-listings'); ?>"><?php
-                                                                                                                        echo $comment_text;
-                                                                                                                        ?></textarea>
+                            <textarea name="comment_content" placeholder="<?php _e('Your reply', 'wedding-venue-listings'); ?>"><?php echo $comment_text; ?></textarea>
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="wvl-btn-secondary cancel-btn"><?php _e('Cancel', 'wedding-venue-listings'); ?></button>
-                    <button type="button" class="wvl-btn-primary submit-btn" name="submit_review_reply"><?php _e('Submit', 'wedding-venue-listings'); ?></button>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="wvl-btn-secondary cancel-btn"><?php _e('Cancel', 'wedding-venue-listings'); ?></button>
+                        <button type="submit" class="wvl-btn-primary submit-btn" name="submit_review_reply"><?php _e('Submit', 'wedding-venue-listings'); ?></button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
