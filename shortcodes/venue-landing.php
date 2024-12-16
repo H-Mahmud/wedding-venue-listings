@@ -14,7 +14,7 @@ function wvl_venue_landing()
         <form method="get" action="<?php echo site_url('listing'); ?>" class="w-full">
             <div class="flex-col md:flex-row flex justify-between gap-3 mb-5">
                 <div class="w-full">
-                    <input class="!h-14 !bg-tertiary rounded-lg" type="text" name="location" id="location" placeholder="<?php _e('Location', 'wedding-venue-listings'); ?>">
+                    <input class="!h-14 !bg-tertiary rounded-lg w-full" type="text" name="location" id="location" placeholder="<?php _e('Location', 'wedding-venue-listings'); ?>">
                 </div>
 
                 <?php
@@ -27,7 +27,7 @@ function wvl_venue_landing()
                 ?>
 
                 <div class="w-full">
-                    <select class="!h-14 bg-tertiary !px-5 rounded-lg" name="category" id="category">
+                    <select class="!h-14 bg-tertiary !px-5 rounded-lg w-full" name="category" id="category">
                         <option value="all"><?php _e('Select Category'); ?></option>
                         <?php if (!empty($categories_by_parent[0])) :
                             foreach ($categories_by_parent[0] as $parent) :
@@ -39,15 +39,18 @@ function wvl_venue_landing()
                     </select>
                 </div>
                 <div class="w-full">
-                    <select class="!h-14 bg-tertiary !px-5 rounded-lg" name="subcategory" id="subcategory">
+                    <select class="!h-14 bg-tertiary !px-5 rounded-lg w-full" name="subcategory" id="subcategory">
                         <option value="all"><?php _e('Select Subcategory'); ?></option>
                     </select>
                 </div>
 
+                <?php /*
                 <label for="booking-date" class="flex relative items-center justify-center cursor-pointer rounded-lg !min-w-14 bg-tertiary !h-14 ring-1 ring-slate-300">
                     <i class="fa-solid fa-calendar-days text-xl text-primary"></i>
                     <input type="text" class="datetimepicker absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer" name="booking-date" readonly autocomplete="false" id="booking-date" placeholder="<?php _e('Date', 'wedding-venue-listings'); ?>">
                 </label>
+                */
+                ?>
             </div>
             <button class="wvl-btn-primary w-full !h-14 m-0"><?php _e('Search', 'wedding-venue-listings'); ?></button>
 
@@ -57,6 +60,7 @@ function wvl_venue_landing()
     </div>
     <script>
         jQuery(document).ready(function($) {
+            <?php /*
             $('.datetimepicker').datepicker({
                 timepicker: false,
                 language: 'en',
@@ -64,7 +68,7 @@ function wvl_venue_landing()
                 multipleDates: false,
                 minDate: new Date(new Date().setDate(new Date().getDate() + 1))
             });
-
+ */ ?>
             const category = $('#category');
             const subcategory = $('#subcategory');
 
@@ -78,6 +82,7 @@ function wvl_venue_landing()
                 }
 
             })
+
 
             function loadSubCategory(selectedCategory) {
                 $.ajax({
