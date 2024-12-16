@@ -6,6 +6,29 @@
             $(this).toggleClass('fa-angle-down');
             $(this).closest('.filter').find('.content').slideToggle();
         })
+
+
+        $('#categoryFilter input[name="category"]').on('change', function() {
+            $('#categoryFilter').submit();
+        });
+        $('#subcategoryFilter input[name="subcategory[]"]').on('change', function() {
+            const params = new URLSearchParams(window.location.search);
+            params.delete('subcategory[]');
+            $('input[name="subcategory[]"]:checked').each(function() {
+                params.append('subcategory[]', $(this).val());
+            });
+            const newUrl = `${window.location.pathname}?${params.toString()}`;
+            window.history.replaceState({}, '', newUrl);
+            window.location.href = newUrl;
+        });
+        const params = new URLSearchParams(window.location.search);
+        $('#subcategoryFilter input[name="subcategory[]"]').each(function() {
+            if (params.getAll('subcategory[]').includes($(this).val())) {
+                $(this).prop('checked', true);
+            }
+        });
+
+
     })
 </script>
 <form action="<?php echo site_url('listing'); ?>" class="mb-6">
