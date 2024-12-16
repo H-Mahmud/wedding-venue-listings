@@ -28,7 +28,7 @@ export default function handleServiceInfoForm($) {
         support_location: $supportLocation
     }
 
-    console.log(formData);
+    // console.log(formData);
 
     if (!$venueName || !$category || !$subCategory ||  !$supportLocation) {
         $profileFormError.html("All fields are required.");
