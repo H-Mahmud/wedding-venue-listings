@@ -99,3 +99,31 @@ function wvl_venue_review_count()
         number_format_i18n($comment_count['approved'])
     );
 }
+
+function wvl_count_reviews_without_reply($post_id)
+{
+    global $wpdb;
+
+    $post_id = intval($post_id);
+    $query = $wpdb->prepare(
+        "
+        SELECT COUNT(parent.comment_ID)
+        FROM $wpdb->comments AS parent
+        WHERE parent.comment_post_ID = %d
+        AND parent.comment_approved = 1
+        AND parent.comment_parent = 0
+        AND NOT EXISTS (
+            SELECT 1
+            FROM $wpdb->comments AS child
+            WHERE child.comment_parent = parent.comment_ID
+            AND child.comment_approved = 1
+        )
+        ",
+        $post_id
+    );
+
+    // Execute the query
+    $count = $wpdb->get_var($query);
+
+    return intval($count);
+}

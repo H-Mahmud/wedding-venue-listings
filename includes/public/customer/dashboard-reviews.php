@@ -21,6 +21,7 @@ class WVL_Dashboard_Reviews
     {
         add_action('wvl_dashboard', array($this, 'render_wvl_dashboard_menu'));
         add_action('init', array($this, 'reviews_reply_handle'));
+        add_action('wvl_menu_badge', array($this, 'add_review_count_badge'));
     }
 
 
@@ -102,6 +103,15 @@ class WVL_Dashboard_Reviews
             }
 
             wvl_add_notice(__('Reply submitted successfully.', 'wedding-venue-listings'), 'success', 'wvl_review_reply_form');
+        }
+    }
+
+
+    public function add_review_count_badge($slug)
+    {
+        if ($slug == 'reviews') {
+            $count = wvl_count_reviews_without_reply(wvl_get_venue_id());
+            echo '<span class="inline-block ml-2 bg-amber-100 text-amber-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">' . $count . '</span>';
         }
     }
 }
