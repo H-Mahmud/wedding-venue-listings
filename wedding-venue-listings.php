@@ -145,7 +145,8 @@ function wvl_enqueue_scripts()
         $data = [
             'ajax_url'      => admin_url('admin-ajax.php'),
             'ajax_nonce'    => wp_create_nonce('dashboard_nonce'),
-            'venue_status'  => $venue_status
+            'venue_status'  => $venue_status,
+            'WVL_AVAILABLE_GALLERY_UPLOAD' => wvl_get_gallery_upload_limit($venue_id)
         ];
 
         wp_localize_script('wvl-dashboard', 'WVL_DATA', $data);

@@ -44,6 +44,8 @@
             endif;
             ?>
         </div>
+        <div class="gallery-upload-notice mt-2"></div>
+
     </fieldset>
 
     <fieldset class="p-5 rounded-xl  border-gray-200">

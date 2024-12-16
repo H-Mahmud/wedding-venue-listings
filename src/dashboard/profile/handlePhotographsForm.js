@@ -52,11 +52,24 @@ function handleCoverPhotoUpload($) {
 
 
 function handleGalleryUpload($) {
-
     $('#upload_gallery').on('change', function () {
         var file = this.files;
         if (file && file.length > 0) {
+
+            if(!parseInt(WVL_DATA.WVL_AVAILABLE_GALLERY_UPLOAD)) {
+                $('.gallery-upload-notice').html('<p class="text-red-500">You have reached the maximum number of gallery images (5) allowed in your current package. Please consider upgrading to a higher package to upload more images.</p>');
+                return;
+            }
+
+            let uploadLimit = parseInt(WVL_DATA.WVL_AVAILABLE_GALLERY_UPLOAD);
             for (var i = 0; i < file.length; i++) {
+
+                if(!uploadLimit) {
+                    $('.gallery-upload-notice').html('<p class="text-red-500">You have reached the maximum number of gallery images 5 allowed in your current package. Please consider upgrading to a higher package to upload more images.</p>');
+                    break;
+                }
+
+                uploadLimit--;
 
                 var reader = new FileReader();
 
@@ -87,13 +100,13 @@ function handleGalleryImageUpload(file, $) {
         contentType: false,
         
         success: function (response) {
-            $('.cover-upload-notice').html('<p class="text-green-500">' + response.data.message + '</p>');
+            $('.gallery-upload-notice').html('<p class="text-green-500">' + response.data.message + '</p>');
         },
         error: function (response) {
             if (response.responseJSON) {
-                $('.cover-upload-notice').html('<p class="text-red-500">' + response.responseJSON.data.message + '</p>');
+                $('.gallery-upload-notice').html('<p class="text-red-500">' + response.responseJSON.data.message + '</p>');
             } else {
-                $('.cover-upload-notice').html('<p class="text-red-500">' + response.responseText + '</p>');
+                $('.gallery-upload-notice').html('<p class="text-red-500">' + response.responseText + '</p>');
             }
         },
         complete: function () {
