@@ -1,4 +1,4 @@
-import { hideProfileNextSpinner, showProfileNextSpinner } from "./utils";
+import { hideLoading, showLoading } from "./utils";
 
 export default function handleContactInfoForm($) {
     const $form = $('form#profileContactForm');
@@ -35,7 +35,7 @@ export default function handleContactInfoForm($) {
         social_links: socialLinks
     }
 
-    showProfileNextSpinner();
+    showLoading();
     return new Promise((resolve, reject) => {
         jQuery.ajax({
             url: WVL_DATA.ajax_url,
@@ -56,7 +56,7 @@ export default function handleContactInfoForm($) {
                 resolve(false);
             },
             complete: function (data) {
-                hideProfileNextSpinner();
+                hideLoading();
             }
         });
     });

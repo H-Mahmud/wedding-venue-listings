@@ -1,4 +1,4 @@
-import { hideProfileNextSpinner, showProfileNextSpinner } from "./utils";
+import { hideLoading, showLoading } from "./utils";
 
 export default function handlePersonalInfoForm($) {
     const $form = $('form#profileInfoForm');
@@ -17,7 +17,7 @@ export default function handlePersonalInfoForm($) {
         return false;
     }
 
-    showProfileNextSpinner();
+    showLoading();
     return new Promise((resolve, reject) => {
         $.ajax({
             url: WVL_DATA.ajax_url,
@@ -43,7 +43,7 @@ export default function handlePersonalInfoForm($) {
                 resolve(false);
             },
             complete: function (data) {
-                hideProfileNextSpinner();
+                hideLoading();
             }
         });
     });

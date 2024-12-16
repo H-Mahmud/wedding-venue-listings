@@ -1,4 +1,4 @@
-import { hideProfileNextSpinner, showProfileNextSpinner } from "./utils";
+import { hideLoading, showLoading } from "./utils";
 
 export default function handleServiceInfoForm($) {
     const $form = $('form#profileServiceForm');
@@ -32,7 +32,7 @@ export default function handleServiceInfoForm($) {
         return false;
     }
 
-    showProfileNextSpinner();
+    showLoading();
     return new Promise((resolve, reject) => {
         $.ajax({
             url: WVL_DATA.ajax_url,
@@ -54,7 +54,7 @@ export default function handleServiceInfoForm($) {
                 resolve(false);
             },
             complete: function (data) {
-                hideProfileNextSpinner();
+                hideLoading();
             }
         });
     });
