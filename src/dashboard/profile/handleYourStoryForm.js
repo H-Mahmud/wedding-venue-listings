@@ -4,10 +4,10 @@ export default function handleYourStoryForm($) {
     const $form = $('form#profileYourStoryForm');
     const $profileFormError = $('.profile-form-error')
 
-    if (!$form.get(0).checkValidity()) {
-        $form.get(0).reportValidity();
-        return false;
-    }
+    // if (!$form.get(0).checkValidity()) {
+    //     $form.get(0).reportValidity();
+    //     return false;
+    // }
 
     // const yourStory = $form.find('#yourStory').val();
     const yourStory = tinymce.get('yourStory').getContent();

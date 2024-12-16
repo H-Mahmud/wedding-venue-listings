@@ -1,4 +1,4 @@
-import { showLoading } from "./utils";
+import { showLoading, hideLoading } from "./utils";
 
 export default function handlePhotographsForm($) {
     handleCoverPhotoUpload($);
