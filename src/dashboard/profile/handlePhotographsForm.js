@@ -56,18 +56,18 @@ function handleGalleryUpload($) {
         var file = this.files;
         if (file && file.length > 0) {
 
-            if(!parseInt(WVL_DATA.WVL_AVAILABLE_GALLERY_UPLOAD)) {
-                $('.gallery-upload-notice').html('<p class="text-red-500">You have reached the maximum number of gallery images (5) allowed in your current package. Please consider upgrading to a higher package to upload more images.</p>');
-                return;
-            }
+            // if(!parseInt(WVL_DATA.WVL_AVAILABLE_GALLERY_UPLOAD)) {
+            //     $('.gallery-upload-notice').html('<p class="text-red-500">You have reached the maximum number of gallery images (5) allowed in your current package. Please consider upgrading to a higher package to upload more images.</p>');
+            //     return;
+            // }
 
             let uploadLimit = parseInt(WVL_DATA.WVL_AVAILABLE_GALLERY_UPLOAD);
             for (var i = 0; i < file.length; i++) {
 
-                if(!uploadLimit) {
-                    $('.gallery-upload-notice').html('<p class="text-red-500">You have reached the maximum number of gallery images 5 allowed in your current package. Please consider upgrading to a higher package to upload more images.</p>');
-                    break;
-                }
+                // if(!uploadLimit) {
+                //     $('.gallery-upload-notice').html('<p class="text-red-500">You have reached the maximum number of gallery images 5 allowed in your current package. Please consider upgrading to a higher package to upload more images.</p>');
+                //     break;
+                // }
 
                 uploadLimit--;
 

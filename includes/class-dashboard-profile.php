@@ -297,6 +297,10 @@ class WVL_Dashboard_Profile
             wp_send_json_error(['message' => __('You must be logged in to upload a Photo.', 'wedding-venue-listings')]);
         }
 
+        if (!wvl_get_gallery_upload_limit(wvl_get_venue_id())) {
+            wp_send_json_error(['message' => __('You have reached the maximum number of gallery images (5) allowed in your current package. Please consider upgrading to a higher package to upload more images.', 'wedding-venue-listings')]);
+        }
+
 
         if (!isset($_FILES['file']) || empty($_FILES['file']['tmp_name'])) {
             wp_send_json_error(['message' => __('No file uploaded.', 'wedding-venue-listings')]);
