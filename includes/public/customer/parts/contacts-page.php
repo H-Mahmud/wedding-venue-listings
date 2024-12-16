@@ -26,8 +26,14 @@ $total_pages = ceil($total_entries / $per_page);
         <table class="min-w-full bg-white">
             <thead>
                 <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                    <th class="py-3 px-6 text-left"><?php _e('First Name', 'wedding-venue-listings'); ?></th>
-                    <th class="py-3 px-6 text-left"><?php _e('Last Name', 'wedding-venue-listings'); ?></th>
+                    <?php if (wvl_get_venue_id()) { ?>
+                        <th class="py-3 px-6 text-left"><?php _e('First Name', 'wedding-venue-listings'); ?></th>
+                        <th class="py-3 px-6 text-left"><?php _e('Last Name', 'wedding-venue-listings'); ?></th>
+                    <?php
+                    } else { ?>
+                        <th class="py-3 px-6 text-left"><?php _e('Vendor', 'wedding-venue-listings'); ?></th>
+                    <?php } ?>
+
                     <th class="py-3 px-6 text-left"><?php _e('Phone Number', 'wedding-venue-listings'); ?></th>
                     <th class="py-3 px-6 text-left"><?php _e('Submitted Date', 'wedding-venue-listings'); ?></th>
                     <?php /*<th class="py-3 px-6 text-center"><?php _e('Status', 'wedding-venue-listings'); ?></th> */ ?>
@@ -40,8 +46,15 @@ $total_pages = ceil($total_entries / $per_page);
                 ?>
 
                     <tr class="border-b border-gray-200 hover:bg-gray-100 contact-item" id="contact-<?php esc_html_e($contact['id']); ?>">
-                        <td class="py-3 px-6 text-left"><?php esc_html_e($contact['first_name']); ?></td>
-                        <td class="py-3 px-6 text-left"><?php esc_html_e($contact['last_name']); ?></td>
+
+                        <?php if (wvl_get_venue_id()) { ?>
+                            <td class="py-3 px-6 text-left"><?php esc_html_e($contact['first_name']); ?></td>
+                            <td class="py-3 px-6 text-left"><?php esc_html_e($contact['last_name']); ?></td>
+                        <?php
+                        } else { ?>
+                            <td class="py-3 px-6 text-left"><a href="<?php echo get_the_permalink($contact['venue_id']); ?>"><?php echo get_the_title($contact['venue_id']); ?></a></td>
+                        <?php } ?>
+
                         <td class="py-3 px-6 text-left"><?php esc_html_e($contact['phone']); ?></td>
                         <td class="py-3 px-6 text-left"><?php esc_html_e($contact['submission_date']); ?></td>
 
@@ -95,17 +108,32 @@ function wvl_get_contact_data($page = 1)
     $per_page = 10;
     $offset = ($page - 1) * $per_page;
     $table_name = $wpdb->prefix . 'contact_form';
-    $venue_id = wvl_get_venue_id();
 
-    $results = $wpdb->get_results(
-        $wpdb->prepare(
-            "SELECT * FROM $table_name WHERE venue_id = %d ORDER BY submission_date DESC LIMIT %d, %d",
-            $venue_id,
-            $offset,
-            $per_page
-        ),
-        ARRAY_A
-    );
+    $venue_id = wvl_get_venue_id();
+    if ($venue_id) {
+        $results = $wpdb->get_results(
+            $wpdb->prepare(
+                "SELECT * FROM $table_name WHERE venue_id = %d ORDER BY submission_date DESC LIMIT %d, %d",
+                $venue_id,
+                $offset,
+                $per_page
+            ),
+            ARRAY_A
+        );
+    } else {
+        $current_user = get_current_user_id();
+        $results = $wpdb->get_results(
+            $wpdb->prepare(
+                "SELECT * FROM $table_name WHERE user_id = %d ORDER BY submission_date DESC LIMIT %d, %d",
+                $current_user,
+                $offset,
+                $per_page
+            ),
+            ARRAY_A
+        );
+    }
+
+
 
     return $results;
 }
