@@ -150,13 +150,50 @@
                 <select name="subcategory" class="wvl-tags" multiple id="subcategory"></select>
             </div>
         </div>
+
+        <div class="wvl-field">
+            <label for="support_location"><?php _e('Support Location', 'wedding-venue-listings'); ?></label>
+            <select name="support_location" class="wvl-tags" multiple id="support_location"></select>
+        </div>
     </fieldset>
 </form>
 
+<?php
+$taxonomy = 'support_location';
+$post_type = 'venue';
+$formatted_terms = [];
+$all_terms = get_terms([
+    'taxonomy' => $taxonomy,
+    'hide_empty' => false,
+]);
+
+if (!is_wp_error($all_terms)) {
+    foreach ($all_terms as $term) {
+        $formatted_terms[] = [
+            'label' => $term->name,
+            'value' => $term->slug,
+        ];
+    }
+}
+
+?>
 <script>
     const categoriesData = <?php echo $categories_json; ?>;
 
     jQuery(document).ready(function($) {
+
+        const locationChoicesList = <?php echo json_encode($formatted_terms); ?>;
+        new Choices("#support_location", {
+            removeItemButton: true,
+            maxItemCount: <?php echo wvl_get_support_location_limit(wvl_get_venue_id()); ?>,
+            choices: locationChoicesList,
+            searchResultLimit: 15,
+            searchEnabled: true,
+            maxItemText: (maxItemCount) => {
+                return `Only ${maxItemCount} Support location can be added with free plan`;
+            },
+        });
+
         const category = $('#category');
         const subcategory = $('#subcategory');
 

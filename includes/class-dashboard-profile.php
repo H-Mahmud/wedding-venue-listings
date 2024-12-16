@@ -154,6 +154,12 @@ class WVL_Dashboard_Profile
         }
         $sub_category = array_map('sanitize_text_field', $_POST['sub_category']);
 
+        // Support Location
+        if (!isset($_POST['support_location']) || !is_array($_POST['support_location'])) {
+            wp_send_json_error(['message' => 'Support Location is required.']);
+        }
+        $support_location = array_map('sanitize_text_field', $_POST['support_location']);
+
         // if (!isset($_POST['vendor_type']) || !is_array($_POST['vendor_type'])) {
         //     wp_send_json_error(['message' => 'Vendor type is required.']);
         // }
@@ -179,6 +185,11 @@ class WVL_Dashboard_Profile
 
             // wp_set_post_terms($venue_id, $vendor_type, 'vendor_type', false);
             // wp_set_post_terms($venue_id, $event_type, 'event_type', false);
+
+            // if (wvl_get_support_location_limit($venue_id) !== -1 && count($support_location) > 1) {
+            //     wp_send_json_success(['message' => 'You are not allowed to add more then 1 support location with free account.']);
+            // }
+            wp_set_post_terms($venue_id, $support_location, 'support_location', false);
 
             $categories = $sub_category;
             $categories[] = $category;

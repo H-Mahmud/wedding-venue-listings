@@ -1,5 +1,5 @@
 <?php
-function wvl_get_terms_limit($taxonomy)
+function wvl_get_terms_limit($venue_id)
 {
     if (wvl_current_plan() == 'free') {
         return 1;
@@ -24,4 +24,13 @@ function wvl_get_gallery_upload_limit($venue_id)
     }
 
     return $total_available_gallery_upload;
+}
+
+
+function wvl_get_support_location_limit($venue_id)
+{
+    if (wvl_current_plan() == 'free') {
+        return 1;
+    }
+    return -1;
 }
