@@ -159,6 +159,15 @@
 </form>
 
 <?php
+$selected_locations = get_the_terms($venue_id, 'support_location');
+$selected_location_slugs = [];
+if ($selected_locations) {
+    foreach ($selected_locations as $location) {
+        $selected_location_slugs[] = $location->slug;
+    }
+}
+
+
 $taxonomy = 'support_location';
 $post_type = 'venue';
 $formatted_terms = [];
@@ -169,10 +178,15 @@ $all_terms = get_terms([
 
 if (!is_wp_error($all_terms)) {
     foreach ($all_terms as $term) {
-        $formatted_terms[] = [
+        $location_term = [
             'label' => $term->name,
             'value' => $term->slug,
         ];
+
+        if (in_array($term->slug, $selected_location_slugs)) {
+            $location_term['selected'] = true;
+        }
+        $formatted_terms[] = $location_term;
     }
 }
 
