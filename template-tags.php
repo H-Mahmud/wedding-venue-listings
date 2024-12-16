@@ -157,3 +157,26 @@ function wvL_insert_contact_data($data)
         ]
     );
 }
+
+function wvl_get_contact_count()
+{
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'contact_form';
+    if ($venue_id = wvl_get_venue_id()) {
+        $count = $wpdb->get_var(
+            $wpdb->prepare(
+                "SELECT COUNT(*) FROM $table_name WHERE venue_id = %d",
+                $venue_id
+            )
+        );
+    } else {
+        $current_user_id = get_current_user_id();
+        $count = $wpdb->get_var(
+            $wpdb->prepare(
+                "SELECT COUNT(*) FROM $table_name WHERE user_id = %d",
+                $current_user_id
+            )
+        );
+    }
+    return intval($count);
+}

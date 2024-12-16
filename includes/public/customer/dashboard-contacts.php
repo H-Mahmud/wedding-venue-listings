@@ -44,7 +44,7 @@ class WVL_Dashboard_Contacts
         add_wvl_menu([
             'name'     => 'Contacts',
             'slug'     => 'contacts',
-            'capability' => 'manage_venue',
+            'capability' => 'manage_account',
             'icon'     => '<i class="fa-solid fa-address-card text-xl" style="color: #1f72b2;"></i>',
             'premium'  => false,
             'priority' => 30,
@@ -77,7 +77,7 @@ class WVL_Dashboard_Contacts
     public function add_new_contact_count_badge($slug)
     {
         if ($slug == 'contacts') {
-            $count = wvl_count_reviews_without_reply(wvl_get_venue_id());
+            $count = wvl_get_contact_count();
             echo '<span class="inline-block ml-2 bg-amber-100 text-amber-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">' . $count . '</span>';
         }
     }
