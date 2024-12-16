@@ -248,6 +248,7 @@
                 </div>
             </div>
         </main>
+        <?php do_action('wvl_related_venue', get_the_ID()); ?>
 
         <?php do_action('wvl_single_venue_after', get_the_ID()); ?>
 
