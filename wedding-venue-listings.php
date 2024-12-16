@@ -57,6 +57,10 @@ require_once WVL_PLUGIN_DIR . 'shortcodes/user-profile.php';
 
 require_once WVL_PLUGIN_DIR . 'analytics/class-venue-analytics.php';
 
+
+// Public user end
+require_once WVL_PLUGIN_DIR . 'includes/public/customer-contact-request.php';
+
 add_action('wvl_notice', function ($source) {
     if (isset($_SESSION['wvl_notice'])) {
         $notification = $_SESSION['wvl_notice'];
