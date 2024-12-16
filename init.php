@@ -45,6 +45,7 @@ function wvl_create_contact_database_table()
     $sql = "CREATE TABLE $table_name (
         id BIGINT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         user_id BIGINT(20) NOT NULL DEFAULT 0,
+        venue_id BIGINT(20) NOT NULL,
         first_name VARCHAR(255) NOT NULL DEFAULT '',
         last_name VARCHAR(255) NOT NULL DEFAULT '',
         email VARCHAR(255) NOT NULL DEFAULT '',
