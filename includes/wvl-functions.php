@@ -193,11 +193,6 @@ add_action('wvl_social_links', function () {
 });
 
 
-function wvl_get_terms_limit($taxonomy)
-{
-    return 2;
-}
-
 
 function add_verified_badge_to_venue_title($title, $post_id)
 {

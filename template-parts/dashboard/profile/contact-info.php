@@ -23,6 +23,11 @@
     <fieldset class="p-5 rounded-xl border-gray-200 mt-8">
         <legend class="mb-2 text-center"><?php _e('Other Information', 'wedding-venue-listings'); ?></legend>
         <?php
+        if (wvl_current_plan() === 'free') {
+        ?>
+            <p class="text-center text-yellow-700"><?php _e('Below contact information won\'t show with free account.', 'wedding-venue-listings'); ?></p>
+        <?php
+        }
         $social_accounts = [
             'website' => [
                 'label' => __('Website', 'wedding-venue-listings'),
