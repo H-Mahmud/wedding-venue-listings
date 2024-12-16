@@ -44,7 +44,8 @@ function wvl_venue_landing()
                     </select>
                 </div>
 
-                <?php /*
+                <?php
+                /*
                 <label for="booking-date" class="flex relative items-center justify-center cursor-pointer rounded-lg !min-w-14 bg-tertiary !h-14 ring-1 ring-slate-300">
                     <i class="fa-solid fa-calendar-days text-xl text-primary"></i>
                     <input type="text" class="datetimepicker absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer" name="booking-date" readonly autocomplete="false" id="booking-date" placeholder="<?php _e('Date', 'wedding-venue-listings'); ?>">
@@ -52,9 +53,9 @@ function wvl_venue_landing()
                 */
                 ?>
             </div>
-            <button class="wvl-btn-primary w-full !h-14 m-0"><?php _e('Search', 'wedding-venue-listings'); ?></button>
+            <button class="wvl-btn-primary w-full !h-14 m-0 mb-3"><?php _e('Search', 'wedding-venue-listings'); ?></button>
 
-            <p class="mt-6 text-center">Lorem ipsum dolor sit amet consectetur. Tortor ac sem diam convallis. <br> Mauris ullamcorper</p>
+            <p class="mt-5 text-center">Lorem ipsum dolor sit amet consectetur. Tortor ac sem diam convallis. <br> Mauris ullamcorper</p>
 
         </form>
     </div>
