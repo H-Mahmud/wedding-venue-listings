@@ -204,12 +204,18 @@ function add_verified_badge_to_venue_title($title, $post_id)
     if (is_admin() || get_post_type($post_id) !== 'venue' || wvl_current_plan() != 'ultimate') {
         return $title;
     }
-
-    $badge_markup = '<span class="verified-badge">
-                        <i class="fa-solid fa-certificate bg"></i>
-                        <i class="fa-solid fa-check mark"></i>
-                     </span>';
-
-    return $title . ' ' . $badge_markup;
+    return $title . wvl_get_verified_badge();
 }
 add_filter('the_title', 'add_verified_badge_to_venue_title', 10, 2);
+
+
+function wvl_get_verified_badge($size = 'medium')
+{
+    if (wvl_current_plan() != 'ultimate') return;
+
+
+    return '<span class="verified-badge ' . $size . '">
+    <i class="fa-solid fa-certificate bg "></i>
+    <i class="fa-solid fa-check mark"></i>
+ </span>';
+}
