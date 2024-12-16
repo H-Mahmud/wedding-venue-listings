@@ -95,10 +95,12 @@ function wvl_get_contact_data($page = 1)
     $per_page = 10;
     $offset = ($page - 1) * $per_page;
     $table_name = $wpdb->prefix . 'contact_form';
+    $venue_id = wvl_get_venue_id();
 
     $results = $wpdb->get_results(
         $wpdb->prepare(
-            "SELECT * FROM $table_name ORDER BY submission_date DESC LIMIT %d, %d",
+            "SELECT * FROM $table_name WHERE venue_id = %d ORDER BY submission_date DESC LIMIT %d, %d",
+            $venue_id,
             $offset,
             $per_page
         ),
