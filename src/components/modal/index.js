@@ -1,28 +1,47 @@
-import './style.css';
+// import './style.css';
+import './style.scss';
 
-jQuery(document).ready(function ($) {
-
-    $('[data-component-type="wlval-modal-trigger"]').on('click', function () {
-        var targetModal = $(this).data('target-modal');
-        $(targetModal).addClass('flex');
-        $(targetModal).removeClass('hidden');
-    });
-
-    // Close modal when close button is clicked
-    $('[data-component-type="wvl-modal"] .close-btn').click(function () {
-        var modal = $(this).closest('[data-component-type="wvl-modal"]');
-        modal.addClass('hidden');
-        modal.removeClass('flex');
-    });
-
-    // Close modal when clicking outside the modal content area
-    $(window).click(function (event) {
-        if ($(event.target).is('[data-component-type="wvl-modal"] .modal-content') || $(event.target).is('[data-component-type="wvl-modal"]')) {
-            $('[data-component-type="wvl-modal"]').each(function () {
-                $(this).addClass('hidden');
-                $(this).removeClass('flex');
-            });
+(function ($) {
+    $(document).ready(function () {
+      // Open Modal
+      function openModal(modal) {
+        $(modal).attr('aria-hidden', 'false').fadeIn();
+        $(modal).focus();
+      }
+  
+      // Close Modal
+      function closeModal(modal) {
+        $(modal).attr('aria-hidden', 'true').fadeOut();
+      }
+  
+      // Handle click on open modal buttons
+      $('.open-modal-btn').on('click', function (e) {
+        e.preventDefault();
+        const targetModal = $(this).data('target');
+        openModal(targetModal);
+      });
+  
+      // Handle close button and cancel button
+      $('.wvl-modal').on('click', '.close-btn, .cancel-btn', function () {
+        const modal = $(this).closest('.wvl-modal');
+        closeModal(modal);
+      });
+  
+      // Close modal when clicking outside modal-inner
+      $('.wvl-modal').on('click', function (e) {
+        if ($(e.target).is('.wvl-modal')) {
+          closeModal(this);
         }
+      });
+  
+      // Close modal with Escape key
+      $(document).on('keydown', function (e) {
+        if (e.key === 'Escape') {
+          $('.wvl-modal[aria-hidden="false"]').each(function () {
+            closeModal(this);
+          });
+        }
+      });
     });
-
-});
+  })(jQuery);
+  
