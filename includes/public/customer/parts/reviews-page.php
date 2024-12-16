@@ -49,22 +49,27 @@ if ($comments) {
                     <p>
                         <?php echo get_comment_text($comment); ?>
                     </p>
-                    <a class="text-blue-700 open-modal-btn" data-target="#modal-<?php echo $comment->comment_ID; ?>" href="#comment-<?php echo $comment->comment_ID; ?>" class="reply-btn"><?php _e('Reply', 'wedding-venue-listings'); ?></a>
+
+                    <?php
+                    $args_replies = array(
+                        'post_id' => $page_id,
+                        'status' => 'approve',
+                        'parent' => $comment->comment_ID,
+                    );
+                    $replies = get_comments($args_replies);
+
+                    if ($replies && $replies[0]) {
+                        wvl_review_reply_form($page_id, $comment->comment_ID, $replies[0]->comment_ID);
+                    } else {
+                        wvl_review_reply_form($page_id, $comment->comment_ID);
+                    ?>
+
+                        <a class="text-blue-700 open-modal-btn" data-target="#modal-<?php echo $comment->comment_ID; ?>" href="#comment-<?php echo $comment->comment_ID; ?>" class="reply-btn"><?php _e('Reply', 'wedding-venue-listings'); ?></a>
+                    <?php
+                    }
+                    ?>
                 </div>
                 <?php
-                $args_replies = array(
-                    'post_id' => $page_id,
-                    'status' => 'approve',
-                    'parent' => $comment->comment_ID,
-                );
-                $replies = get_comments($args_replies);
-
-                if ($replies && $replies[0]) {
-                    wvl_review_reply_form($page_id, $comment->comment_ID, $replies[0]->comment_ID);
-                } else {
-                    wvl_review_reply_form($page_id, $comment->comment_ID);
-                }
-
 
                 if ($replies) {
                     foreach ($replies as $reply) { ?>
