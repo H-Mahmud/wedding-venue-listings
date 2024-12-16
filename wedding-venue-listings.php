@@ -46,6 +46,7 @@ require_once WVL_PLUGIN_DIR . 'includes/class-dashboard-availability.php';
 require_once WVL_PLUGIN_DIR . 'includes/class-dashboard-analytics.php';
 require_once WVL_PLUGIN_DIR . 'includes/class-dashboard-account.php';
 require_once WVL_PLUGIN_DIR . 'includes/public/customer/dashboard-reviews.php';
+require_once WVL_PLUGIN_DIR . 'includes/public/customer/dashboard-contacts.php';
 require_once WVL_PLUGIN_DIR . 'includes/class-account-auth.php';
 require_once WVL_PLUGIN_DIR . 'includes/class-dashboard.php';
 require_once WVL_PLUGIN_DIR . 'includes/class-venue-admin.php';
