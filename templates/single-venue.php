@@ -27,7 +27,7 @@
                     <ul class="social">
                         <?php do_action('wvl_social_links'); ?>
                     </ul>
-                    <button class="wvl-btn-primary" id="contactFormOpen"><?php _e('Contact Us', 'wedding-venue-listings'); ?></button>
+                    <button class="wvl-btn-primary open-modal-btn" id="contactFormOpen" data-target="#modal-contact"><?php _e('Contact Us', 'wedding-venue-listings'); ?></button>
                 </div>
             </div>
 
@@ -249,70 +249,8 @@
             </div>
         </main>
 
+        <?php do_action('wvl_single_venue_after', get_the_ID()); ?>
 
-        <div id="contact-modal" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-            <div class="bg-black opacity-65 fixed inset-0 z-40"></div>
-            <div class="modal-content relative p-4 w-full max-w-lg max-h-ful z-50">
-                <div class="relative bg-white rounded-lg shadow">
-                    <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
-                        <h3 class="text-xl font-semibold text-gray-900">
-                            <span class="text-sm block font-normal"><?php the_title(); ?></span>
-                            <span class="text-lg block font-semibold"><?php _e('Message Vendor', 'wedding-venue-listings'); ?></span>
-                        </h3>
-                        <button type="button" class="close-contact-btn end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center " data-modal-hide="authentication-modal">
-                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                            </svg>
-                            <span class="sr-only">Close modal</span>
-                        </button>
-                    </div>
-                    <!-- Modal body -->
-                    <div class="p-4 md:p-5">
-                        <form class="space-y-4" action="#">
-                            <div class="wvl-field-row">
-                                <div class="wvl-field">
-                                    <label for="fist_name"><?php _e('Fist name', 'wedding-venue-listings'); ?></label>
-                                    <input type="text" name="fist_name" id="fist_name" class="" placeholder="John" required />
-                                </div>
-                                <div class="wvl-field">
-                                    <label for="last_name"><?php _e('Last Name', 'wedding-venue-listings'); ?></label>
-                                    <input type="text" name="last_name" id="last_name" class="" placeholder="Doe" required />
-                                </div>
-                            </div>
-
-                            <div class="wvl-field">
-                                <label for="email"><?php _e('Email', 'wedding-venue-listings'); ?></label>
-                                <input type="email" name="email" id="email" class="" placeholder="name@example.com" required />
-                            </div>
-
-                            <div class="wvl-field">
-                                <label for="phone"><?php _e('Phone', 'wedding-venue-listings'); ?></label>
-                                <input type="number" name="phone" id="phone" class="" placeholder="123-456-7890" required />
-                            </div>
-
-                            <div class="wvl-field">
-                                <label for="city"><?php _e('City', 'wedding-venue-listings'); ?></label>
-                                <input type="text" name="city" id="city" class="" placeholder="New York" required />
-                            </div>
-
-                            <div class="wvl-field">
-                                <label for="date"><?php _e('Date', 'wedding-venue-listings'); ?></label>
-                                <input type="text" name="date" id="date" class="" placeholder="New York" required />
-                            </div>
-
-                            <div class="wvl-field">
-                                <label for="message"><?php _e('Message', 'wedding-venue-listings'); ?></label>
-                                <textarea name="message" id="message"></textarea>
-                            </div>
-
-                            <div class="text-right">
-                                <button type="submit" class="wvl-btn-primary"><?php _e('Send', 'wedding-venue-listings'); ?></button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
         <script>
             jQuery(document).ready(function($) {
                 $('#contactFormOpen').on('click', function() {
