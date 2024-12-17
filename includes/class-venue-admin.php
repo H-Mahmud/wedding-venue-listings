@@ -28,6 +28,9 @@ class WVL_Venue_Admin
         add_action('init', array($this, 'create_location_taxonomy'), 0);
 
         add_action('admin_enqueue_scripts', array($this, 'admin_scripts'));
+
+        add_filter('manage_venue_posts_columns',  array($this, 'venue_custom_columns'));
+        add_action('manage_venue_posts_custom_column',   array($this, 'venue_custom_column_data'), 20, 2);
     }
 
     /**
@@ -189,6 +192,44 @@ class WVL_Venue_Admin
         if (is_admin()) {
             wp_enqueue_script('wvl-admin', WVL_PLUGIN_URL . '/assets/admin/wvl-admin.js', [], '1.0', true);
             wp_enqueue_style('wvl-admin', WVL_PLUGIN_URL . '/assets/admin/wvl-admin.css', [], '1.0');
+        }
+    }
+
+
+    /**
+     * Modifies the columns displayed in the 'venue' post type admin screen.
+     *
+     * Adds a new column named 'Vendor Accounts' after the 'Title' column.
+     *
+     * @param array $columns The existing columns.
+     * @return array The modified columns.
+     */
+    public function venue_custom_columns($columns)
+    {
+        $columns = array_slice($columns, 0, 2, true) +
+            ['vendor_account' => __('Vendor Accounts', 'wedding-venue-listings')] +
+            array_slice($columns, 2, null, true);
+        return $columns;
+    }
+
+    /**
+     * Outputs custom column data for the 'venue' post type.
+     *
+     * @param string $column  The name of the column to display.
+     * @param int    $post_id The ID of the current post.
+     */
+
+    public function venue_custom_column_data($column, $post_id)
+    {
+        $account_edit = admin_url('user-edit.php?user_id=' . get_the_author_meta('ID'));
+        $author_name = get_the_author_meta('display_name');
+
+        $vendor_account = '<a href="' . $account_edit . '">' . $author_name . '</a>';
+
+        switch ($column) {
+            case 'vendor_account':
+                echo  $vendor_account;
+                break;
         }
     }
 
