@@ -30,7 +30,7 @@
                     </div>
                     <div class="wvl-field">
                         <label for="date"><?php _e('Event Date', 'wedding-venue-listings'); ?></label>
-                        <input type='text' class="datetimepicker" name="date" id="date" autocomplete="off">
+                        <input type='text' readonly name="date" id="date" autocomplete="off">
                     </div>
                     <div class="wvl-field">
                         <label for="location"><?php _e('Event Location', 'wedding-venue-listings'); ?></label>

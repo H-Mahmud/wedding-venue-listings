@@ -98,7 +98,7 @@ class WVL_Dashboard_Availability
         $venue_id = wvl_get_venue_id();
 
         if (wvl_insert_booking_date($venue_id, date('Y-m-d', strtotime($date)), $title, $location)) {
-            wp_send_json(['title' => $title, 'location' => $location, 'date' => $date]);
+            wp_send_json(['title' => $title, 'location' => $location, 'date' => date('Y-m-d', strtotime($date))]);
         }
     }
 
