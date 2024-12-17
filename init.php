@@ -5,6 +5,7 @@ register_activation_hook(WVL_PLUGIN_FILE, 'wvl_plugin_activate');
 function wvl_plugin_activate()
 {
     wvl_create_venue_analytics_table();
+    wvl_create_venue_daily_analytics_table();
     wvl_create_contact_database_table();
 }
 
@@ -34,7 +35,39 @@ function wvl_create_venue_analytics_table()
     dbDelta($sql);
 }
 
+/**
+ * Creates the table for storing venue daily analytics
+ *
+ * This function creates the table if it does not already exist.
+ *
+ * @since 1.0.0
+ */
+function wvl_create_venue_daily_analytics_table()
+{
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'venue_daily_analytics';
+    $charset_collate = $wpdb->get_charset_collate();
 
+    $sql = "CREATE TABLE IF NOT EXISTS $table_name (
+            id BIGINT(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+            venue_id BIGINT(20) NOT NULL,
+            event_type VARCHAR(50) NOT NULL,
+            ip_address VARCHAR(50) DEFAULT NULL,
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+            INDEX (venue_id, event_type, created_at)
+        ) $charset_collate;";
+
+    require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+    dbDelta($sql);
+}
+
+/**
+ * Creates the table for storing contact form data
+ *
+ * This function creates the table if it does not already exist.
+ *
+ * @since 1.0.0
+ */
 function wvl_create_contact_database_table()
 {
     global $wpdb;
