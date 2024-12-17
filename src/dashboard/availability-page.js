@@ -58,17 +58,16 @@ jQuery(document).ready(function ($) {
     },
     eventContent: function (arg) {
       var event = arg.event;
-      var location = event.extendedProps.location
-        ? '<div style="color: black; font-size: 12px; font-weight: semibold; padding: 3px;">' +
-          event.extendedProps.location_name +
-          "</div>"
-        : "";
+      // var location = event.extendedProps.location
+      //   ? '<div style="color: black; font-size: 12px; font-weight: semibold; padding: 3px;">' +
+      //     event.extendedProps.location_name +
+      //     "</div>"
+      //   : "";
       return {
         html:
           '<div style="color: black; font-size: 16px; font-weight: semibold; padding: 3px;">' +
           event.title +
-          "</div>" +
-          location,
+          "</div>",
       };
     },
     eventClick: function (info) {

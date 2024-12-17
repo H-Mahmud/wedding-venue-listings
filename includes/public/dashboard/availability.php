@@ -123,6 +123,8 @@ class WVL_Dashboard_Availability
         $date = sanitize_text_field($_POST['date']);
         $venue_id = wvl_get_venue_id();
         wvl_delete_booked_date($venue_id, date('Y-m-d', strtotime($date)));
+
+        wp_redirect(site_url('dashboard/availability/'));
     }
 
     /**
