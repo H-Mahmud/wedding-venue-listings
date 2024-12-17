@@ -12,30 +12,6 @@
 </div>
 
 
-<div id="modal-view-event" data-component-type="wvl-modal" tabindex="-1" class="wvl-modal">
-    <div class="deem"></div>
-    <div class="modal-box">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="heading">
-                    <span><?php _e('Booking Details', 'wedding-venue-listings'); ?></span>
-                </h3>
-                <span class="close-btn">
-                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                    </svg>
-                    <span class="sr-only">Close modal</span>
-                </span>
-            </div>
-
-            <div class="p-4 md:p-5">
-
-            </div>
-        </div>
-    </div>
-</div>
-
-
 <div id="modal-add-booking" class="wvl-modal" tabindex="-1" aria-hidden="true" role="dialog">
     <div class="modal-box" role="document">
         <div class="modal-inner">

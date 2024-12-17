@@ -20,6 +20,8 @@ class WVL_Dashboard_Availability
     private final function __construct()
     {
         add_action('wvl_dashboard', array($this, 'render_wvl_dashboard_menu'));
+        add_action('wp_ajax_wvl_booked_dates', array($this, 'booked_dates_handle'));
+        add_action('wp_ajax_wvl_booked_dates', array($this, 'booked_dates_handle'));
     }
 
 
@@ -46,8 +48,6 @@ class WVL_Dashboard_Availability
         ]);
     }
 
-
-
     /**
      * The callback function for the Availability menu item in the Wedding Venue Listings dashboard menu.
      *
@@ -61,6 +61,19 @@ class WVL_Dashboard_Availability
         require_once WVL_PLUGIN_DIR . 'includes/public/dashboard/parts/availability-page.php';
     }
 
+    public function booked_dates_handle()
+    {
+        check_ajax_referer('dashboard_nonce', 'nonce');
+        if (!current_user_can('manage_venue')) return;
+
+        $start_date = sanitize_text_field($_GET['start_date']);
+        $end_date = sanitize_text_field($_GET['end_date']);
+        $venue_id = wvl_get_venue_id();
+
+        $booked_dates = wvl_get_booked_date($venue_id, $start_date, $end_date);
+        echo json_encode($booked_dates);
+        wp_die();
+    }
 
     /**
      * Gets the singleton instance of the class.

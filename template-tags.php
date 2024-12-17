@@ -216,3 +216,18 @@ function wvl_insert_booking_date($venue_id, $date, $location_name = '')
         ['%d', '%s', '%s']
     );
 }
+
+
+function wvl_get_booked_date($venue_id, $start_date, $end_date)
+{
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'venue_bookings';
+    return $wpdb->get_results(
+        $wpdb->prepare(
+            "SELECT location_name, booked_date as date FROM $table_name WHERE venue_id = %d AND booked_date BETWEEN %s AND %s",
+            $venue_id,
+            $start_date,
+            $end_date
+        )
+    );
+}

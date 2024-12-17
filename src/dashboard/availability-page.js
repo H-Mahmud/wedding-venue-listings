@@ -1,73 +1,77 @@
 jQuery(document).ready(function($){
-    
-        var calendarEl = document.getElementById('booking-calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'dayGridMonth',
+    var calendarEl = document.getElementById('booking-calendar');
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        themeSystem: 'standard',
+        businessHours: false,
+        editable: false,
+        headerToolbar: {
+            left: 'title',
+            right: 'prev,next today',
+            center: 'AddEventButton'
+            // right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+        },
 
-            themeSystem: 'standard',
-            businessHours: false,
-            editable: false,
-            headerToolbar: {
-                left: 'title',
-                right: 'prev,next today',
-                center: 'AddEventButton'
-                // right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-            },
+        customButtons: {
+            AddEventButton: {
+                text: 'Add Booking Event',
+                click: function() {
+                    jQuery('#modal-add-booking').attr('aria-hidden', 'false').fadeIn();
+                    jQuery('#modal-add-booking').focus();
 
-            customButtons: {
-                AddEventButton: {
-                    text: 'Add Booking Event',
-                    click: function() {
-                        jQuery('#modal-add-booking').attr('aria-hidden', 'false').fadeIn();
-                        jQuery('#modal-add-booking').focus();
-
-                    }
                 }
-            },
+            }
+        },
 
-            dateClick: function(info) {
-                var currentDate = new Date();
-                currentDate.setHours(0, 0, 0, 0);
+        dateClick: function(info) {
+            var currentDate = new Date();
+            currentDate.setHours(0, 0, 0, 0);
 
-                if (info.date > currentDate) {
-                    // jQuery('input[name="edate"]').val(new Date(info.date).toISOString().split('T')[0]);
-                    jQuery('#modal-view-event-add').modal();
-                } else {
-                    alert("You cannot select a past date or today.");
-                }
-            },
-            events: [{
-                    title: 'Barber',
-                    location: 'Lorem ipsum dolor sit amet',
-                    start: "2024-12-05T10:00:00",
-                    end: "2024-12-05T12:00:00",
+            if (info.date > currentDate) {
+                // jQuery('input[name="edate"]').val(new Date(info.date).toISOString().split('T')[0]);
+                jQuery('#modal-view-event-add').modal();
+            } else {
+                alert("You cannot select a past date or today.");
+            }
+        },
+
+        events: function (fetchInfo, successCallback, failureCallback) {
+            jQuery.ajax({
+                url:  WVL_DATA.ajax_url,
+                type: 'GET',
+                dataType: 'json',
+                data: {
+                    action: 'wvl_booked_dates',
+                    start_date: fetchInfo.startStr,
+                    end_date: fetchInfo.endStr,
+                    nonce: WVL_DATA.ajax_nonce
                 },
-                {
-                    title: 'Flight Paris',
-                    location: 'Lorem ipsum',
-                    start: "2024-12-15T10:00:00",
-                    end: "2024-12-15T12:00:00",
+                success: function (response) {
+                    if (Array.isArray(response)) {
+                        successCallback(response);
+                    } else {
+                        failureCallback();
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error('AJAX Error:', status, error);
+                    failureCallback();
                 }
-            ],
-            eventContent: function(arg) {
-                var event = arg.event;
-                var location = event.extendedProps.location ? '<div class="fc-location">' + event.extendedProps.location + '</div>' : '';
-                return {
-                    html: '<div class="fc-title text-black">' + event.title + '</div>' + location
-                };
-            },
-            eventClick: function(info) {
-                const date = new Date(info.event.start);
-
-                jQuery('#modal-view-event .event-title span').html(info.event.title);
-                jQuery('#modal-view-event .event-body span').html(info.event.location);
-                jQuery('#modal-view-event .event-date span').html(`${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`);
-
-                jQuery('#modal-view-event').addClass('flex');
-                jQuery('#modal-view-event').removeClass('hidden');
-            },
-        });
-        calendar.render();
+            });
+            
+        },
+        eventContent: function(arg) {
+            var event = arg.event;
+            var location = event.extendedProps.location_name ? '<div style="color: black; font-size: 12px; font-weight: semibold; padding: 3px;">' + event.extendedProps.location_name + '</div>' : '';
+            return {
+                html: '<div style="color: black; font-size: 16px; font-weight: semibold; padding: 3px;">Booked</div>' + location
+            };
+        },
+        eventClick: function(info) {
+            // const date = new Date(info.event.start);
+        },
+    });
+    calendar.render();
 
 
     jQuery(document).ready(function() {
