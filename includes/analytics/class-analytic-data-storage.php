@@ -44,4 +44,11 @@ class WVL_Analytic_Data_Storage
             'count' => $count
         ));
     }
+
+    public static function get_daily_data_count($venue_id, $event_type)
+    {
+        global $wpdb;
+        $table_name = $wpdb->prefix . 'venue_daily_analytics';
+        return $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM $table_name WHERE venue_id = %d AND event_type = %s", $venue_id, $event_type));
+    }
 }
