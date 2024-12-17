@@ -40,6 +40,7 @@ require_once WVL_PLUGIN_DIR . 'classes/class-analytic-data-storage.php';
 
 // Hooks
 require_once WVL_PLUGIN_DIR . 'includes/vendor-contact-redirect.php';
+require_once WVL_PLUGIN_DIR . 'includes/analytics-data-collections.php';
 
 require_once WVL_PLUGIN_DIR . 'includes/vendor-access-limit.php';
 require_once WVL_PLUGIN_DIR . 'classes/abstract-wvl-update-venue.php';
