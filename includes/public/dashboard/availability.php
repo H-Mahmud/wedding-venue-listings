@@ -58,7 +58,7 @@ class WVL_Dashboard_Availability
      */
     public function availability_page_cb()
     {
-        require_once WVL_PLUGIN_DIR . '/template-parts/dashboard/availability.php';
+        require_once WVL_PLUGIN_DIR . 'includes/public/dashboard/parts/availability-page.php';
     }
 
 

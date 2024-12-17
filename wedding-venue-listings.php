@@ -45,7 +45,11 @@ require_once WVL_PLUGIN_DIR . 'classes/class-wvl-venue.php';
 require_once WVL_PLUGIN_DIR . 'includes/class-dashboard-home.php';
 require_once WVL_PLUGIN_DIR . 'includes/class-dashboard-profile.php';
 // require_once WVL_PLUGIN_DIR . 'includes/class-dashboard-contact.php';
-require_once WVL_PLUGIN_DIR . 'includes/class-dashboard-availability.php';
+
+require_once WVL_PLUGIN_DIR . 'includes/public/dashboard/availability.php';
+
+
+
 require_once WVL_PLUGIN_DIR . 'includes/class-dashboard-analytics.php';
 require_once WVL_PLUGIN_DIR . 'includes/class-dashboard-account.php';
 require_once WVL_PLUGIN_DIR . 'includes/public/customer/dashboard-reviews.php';
