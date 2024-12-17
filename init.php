@@ -7,6 +7,7 @@ function wvl_plugin_activate()
     wvl_create_venue_analytics_table();
     wvl_create_venue_daily_analytics_table();
     wvl_create_contact_database_table();
+    wvl_create_venue_bookings_database_table();
 }
 
 /**
@@ -90,6 +91,26 @@ function wvl_create_contact_database_table()
         INDEX email_index (email),
         INDEX submission_date_index (submission_date)
     ) $charset_collate;";
+
+    require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+    dbDelta($sql);
+}
+
+
+function wvl_create_venue_bookings_database_table()
+{
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'venue_bookings';
+    $charset_collate = $wpdb->get_charset_collate();
+
+    $sql = "CREATE TABLE IF NOT EXISTS $table_name (
+    id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    venue_id BIGINT UNSIGNED NOT NULL,
+    location_name VARCHAR(255) NOT NULL,
+    booked_date DATE NOT NULL,
+    UNIQUE KEY venue_date (venue_id, booked_date),
+    INDEX (booked_date)
+) $charset_collate;";
 
     require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
     dbDelta($sql);
