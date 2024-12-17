@@ -65,7 +65,7 @@ jQuery(document).ready(function ($) {
       //   : "";
       return {
         html:
-          '<div style="color: black; font-size: 16px; font-weight: semibold; padding: 3px;">' +
+          '<div style="color: black; font-size: 16px; font-weight: semibold; padding: 6px;">' +
           event.title +
           "</div>",
       };
