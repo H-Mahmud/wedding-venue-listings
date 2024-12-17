@@ -24,8 +24,10 @@ function wvl_add_related_venue()
                 <h3 class="text-2xl font-semibold"><?php _e('Related Venue', 'wedding-venue-listings'); ?></h3>
                 <div class="related-items-wrapper">
                     <?php
+                    $collection_data = [];
                     while ($related_posts->have_posts()) {
-                        $related_posts->the_post(); ?>
+                        $related_posts->the_post();
+                        $collection_data[] = get_the_ID(); ?>
 
                         <div class="listing-item" data-id="<?php the_ID(); ?>">
                             <div class="thumbnail">
@@ -57,10 +59,11 @@ function wvl_add_related_venue()
                     ?>
                 </div>
             </div>
-
 <?php
             // Reset post data to avoid conflicts with the main query
             wp_reset_postdata();
+
+            WVL_Venue_Analytics::print_collection_data('data_1', $collection_data);
         }
     }
 }
