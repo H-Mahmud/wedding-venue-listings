@@ -1,14 +1,14 @@
 <?php
 defined('ABSPATH') || exit;
 /**
- * Venue Analytics class
+ * Venue WVL_Process_Analytics_Data class
  */
-class WVL_Venue_Analytics
+class WVL_Process_Analytics_Data
 {
     /**
      * The single instance of the class.
      * 
-     * @var WVL_Venue_Analytics
+     * @var WVL_Process_Analytics_Data
      * @access private
      */
     private static $_instance = null;
@@ -72,46 +72,6 @@ class WVL_Venue_Analytics
     }
 
     /**
-     * Inserts a daily analytics entry into the database.
-     *
-     * @param int $venue_id The post ID of the venue.
-     * @param string $event_type The type of event to log.
-     * @param string $ip_address The IP address of the user.
-     *
-     * @return void
-     */
-    public function insert_daily_analytics($venue_id, $event_type, $ip_address)
-    {
-        global $wpdb;
-        $table_name = $wpdb->prefix . 'venue_daily_analytics';
-        $wpdb->insert($table_name, array(
-            'venue_id' => $venue_id,
-            'event_type' => $event_type,
-            'ip_address' => $ip_address
-        ));
-    }
-
-    /**
-     * Inserts an analytics entry into the database
-     *
-     * @param int $venue_id The post ID of the venue
-     * @param string $event_type The type of event to log, one of impression, view, unique_view, contact_click, lead
-     * @param int $count The number of times the event has occurred
-     *
-     * @return void
-     */
-    public function insert_analytics($venue_id, $event_type, $count = 0)
-    {
-        global $wpdb;
-        $table_name = $wpdb->prefix . 'venue_analytics';
-        $wpdb->insert($table_name, array(
-            'venue_id' => $venue_id,
-            'event_type' => $event_type,
-            'count' => $count
-        ));
-    }
-
-    /**
      * Outputs JavaScript to append encoded data to a specific collection type.
      *
      * This function takes a type and data, encodes the data in base64 after
@@ -124,7 +84,7 @@ class WVL_Venue_Analytics
      *
      * @return void
      */
-    public static function print_collection_data($type, $data)
+    public static function print($type, $data)
     {
         if (!$data || count($data) == 0 || !is_array($data)) return;
 
@@ -147,7 +107,7 @@ class WVL_Venue_Analytics
     /**
      * Gets the singleton instance of the class.
      *
-     * @return WVL_Venue_Analytics The singleton instance.
+     * @return WVL_Process_Analytics_Data The singleton instance.
      */
     public static function get_instance()
     {
@@ -158,4 +118,4 @@ class WVL_Venue_Analytics
     }
 }
 
-WVL_Venue_Analytics::get_instance();
+WVL_Process_Analytics_Data::get_instance();

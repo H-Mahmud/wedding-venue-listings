@@ -61,7 +61,7 @@ require_once WVL_PLUGIN_DIR . 'shortcodes/user-profile.php';
 require_once WVL_PLUGIN_DIR . 'includes/analytics/class-analytic-data-storage.php';
 require_once WVL_PLUGIN_DIR . 'includes/analytics/vendor-contact-redirect.php';
 require_once WVL_PLUGIN_DIR . 'includes/analytics/analytics-data-collections.php';
-require_once WVL_PLUGIN_DIR . 'includes/analytics/class-venue-analytics.php';
+require_once WVL_PLUGIN_DIR . 'includes/analytics/process-analytics-data.php';
 
 
 

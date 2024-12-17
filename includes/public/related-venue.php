@@ -63,7 +63,7 @@ function wvl_add_related_venue()
             // Reset post data to avoid conflicts with the main query
             wp_reset_postdata();
 
-            WVL_Venue_Analytics::print_collection_data('data_1', $collection_data);
+            WVL_Process_Analytics_Data::print('data_1', $collection_data);
         }
     }
 }

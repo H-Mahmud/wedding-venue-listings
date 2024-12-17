@@ -36,7 +36,7 @@ get_header(); ?>
                 endif;
                 wp_reset_postdata();
 
-                WVL_Venue_Analytics::print_collection_data('data_1', $collection_data);
+                WVL_Process_Analytics_Data::print('data_1', $collection_data);
                 ?>
                 </div>
         </div>

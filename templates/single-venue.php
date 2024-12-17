@@ -3,7 +3,7 @@
     <?php
     while (have_posts()) {
         the_post();
-        WVL_Venue_Analytics::print_collection_data('data_2', [get_the_ID()]);
+        WVL_Process_Analytics_Data::print('data_2', [get_the_ID()]);
     ?>
         <div class="cover-photo">
             <?php the_post_thumbnail('full', array('class' => '')); ?>
