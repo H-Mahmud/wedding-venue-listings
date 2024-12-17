@@ -51,4 +51,18 @@ class WVL_Analytic_Data_Storage
         $table_name = $wpdb->prefix . 'venue_daily_analytics';
         return $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM $table_name WHERE venue_id = %d AND event_type = %s", $venue_id, $event_type));
     }
+
+    public static function get_daily_data_unique_count($venue_id, $event_type)
+    {
+        global $wpdb;
+        $table_name = $wpdb->prefix . 'venue_daily_analytics';
+        return $wpdb->get_var($wpdb->prepare("SELECT COUNT(DISTINCT ip_address) FROM $table_name WHERE venue_id = %d AND event_type = %s", $venue_id, $event_type));
+    }
+
+    public static function delete_daily_data($venue_id, $event_type)
+    {
+        global $wpdb;
+        $table_name = $wpdb->prefix . 'venue_daily_analytics';
+        $wpdb->delete($table_name, array('venue_id' => $venue_id, 'event_type' => $event_type));
+    }
 }
