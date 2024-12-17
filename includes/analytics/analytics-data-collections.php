@@ -18,8 +18,51 @@ class WVL_Analytical_Data_Collection
      */
     private final function __construct()
     {
+        add_action('wp_ajax_wvl_collections', array($this, 'collect_view_impression_data'));
+        add_action('wp_ajax_nopriv_wvl_collections', array($this, 'collect_view_impression_data'));
+
         add_action('wvl_vendor_contact_redirect_handle', array($this, 'collect_contact_redirect_data'));
     }
+
+    /**
+     * Handles the data collection from the front-end
+     *
+     * The function uses a WordPress AJAX action to receive the data collection
+     * from the front-end, and then it separates the data into two categories:
+     *   - DATA_1: Impression data, handled by handle_impression_data method
+     *   - DATA_2: View data, handled by handle_view_data method
+     *
+     * The function then returns a success message (1) and exits
+     *
+     * @return void
+     */
+    public function collect_view_impression_data()
+    {
+        check_ajax_referer('wvl_analytics_nonce', 'nonce');
+        if (!isset($_POST['data'])) return;
+
+        if (isset($_POST['data']['DATA_1'])) {
+            $data_1 = $_POST['data']['DATA_1'];
+            foreach ($data_1 as $venue_list) {
+                $venue_items = json_decode(base64_decode($venue_list));
+                foreach ($venue_items as $id) {
+                    WVL_Analytic_Data_Storage::insert_daily($id, 'impression', wvl_get_user_ip_address());
+                }
+            }
+        }
+
+        if (isset($_POST['data']['DATA_2'])) {
+            $data_1 = $_POST['data']['DATA_2'];
+            foreach ($data_1 as $venue_list) {
+                $venue_items = json_decode(base64_decode($venue_list));
+                foreach ($venue_items as $id) {
+                    WVL_Analytic_Data_Storage::insert_daily($id, 'view', wvl_get_user_ip_address());
+                }
+            }
+        }
+        die();
+    }
+
 
     /**
      * Collects contact click redirect data

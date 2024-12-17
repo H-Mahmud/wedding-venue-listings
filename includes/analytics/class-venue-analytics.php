@@ -24,10 +24,6 @@ class WVL_Venue_Analytics
 
         add_action('wp_head', array($this, 'start_data_collection'), 1);
         add_action('wp_footer', array($this, 'send_data_collection'));
-
-
-        add_action('wp_ajax_wvl_collections', array($this, 'data_collection'));
-        add_action('wp_ajax_nopriv_wvl_collections', array($this, 'data_collection'));
     }
 
     /**
@@ -73,78 +69,6 @@ class WVL_Venue_Analytics
             })
         </script>
         HTML;
-    }
-
-    /**
-     * Handles the data collection from the front-end
-     *
-     * The function uses a WordPress AJAX action to receive the data collection
-     * from the front-end, and then it separates the data into two categories:
-     *   - DATA_1: Impression data, handled by handle_impression_data method
-     *   - DATA_2: View data, handled by handle_view_data method
-     *
-     * The function then returns a success message (1) and exits
-     *
-     * @return void
-     */
-    public function data_collection()
-    {
-        check_ajax_referer('wvl_analytics_nonce', 'nonce');
-        if (!isset($_POST['data'])) return;
-
-        if (isset($_POST['data']['DATA_1'])) {
-            $this->handle_impression_data($_POST['data']['DATA_1']);
-        }
-
-        if (isset($_POST['data']['DATA_2'])) {
-            $this->handle_view_data($_POST['data']['DATA_2']);
-        }
-        echo 1;
-        die();
-    }
-
-    /**
-     * Handles the impression data from the front-end.
-     *
-     * The function takes an array of venue lists, each encoded as a base64 string
-     * containing a JSON object of post IDs. It then iterates over each venue list
-     * and inserts a daily analytics entry for each post ID in the list using the
-     * insert_daily_analytics method.
-     *
-     * @param array $data An array of base64 encoded JSON objects of post IDs.
-     *
-     * @return void
-     */
-    public function handle_impression_data($data)
-    {
-        foreach ($data as $venue_list) {
-            $venue_items = json_decode(base64_decode($venue_list));
-            foreach ($venue_items as $id) {
-                $this->insert_daily_analytics($id, 'impression', wvl_get_user_ip_address());
-            }
-        }
-    }
-
-    /**
-     * Handles the view data from the front-end.
-     *
-     * The function takes an array of venue lists, each encoded as a base64 string
-     * containing a JSON object of post IDs. It then iterates over each venue list
-     * and inserts a daily analytics entry for each post ID in the list using the
-     * insert_daily_analytics method.
-     *
-     * @param array $data An array of base64 encoded JSON objects of post IDs.
-     *
-     * @return void
-     */
-    public function handle_view_data($data)
-    {
-        foreach ($data as $venue_list) {
-            $venue_items = json_decode(base64_decode($venue_list));
-            foreach ($venue_items as $id) {
-                $this->insert_daily_analytics($id, 'view', wvl_get_user_ip_address());
-            }
-        }
     }
 
     /**
