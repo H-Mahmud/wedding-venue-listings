@@ -106,7 +106,8 @@ function wvl_create_venue_bookings_database_table()
     $sql = "CREATE TABLE IF NOT EXISTS $table_name (
     id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     venue_id BIGINT UNSIGNED NOT NULL,
-    location_name VARCHAR(255) NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    location VARCHAR(255) NOT NULL,
     booked_date DATE NOT NULL,
     UNIQUE KEY venue_date (venue_id, booked_date),
     INDEX (booked_date)
