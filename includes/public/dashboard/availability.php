@@ -24,6 +24,7 @@ class WVL_Dashboard_Availability
         add_action('wp_ajax_nopriv_booked_dates', array($this, 'booked_dates_handle'));
         add_action('wp_ajax_wvl_add_new_booking', array($this, 'add_new_booking_handle'));
         add_action('wp_ajax_nopriv_wvl_add_new_booking', array($this, 'add_new_booking_handle'));
+        add_action('init', array($this, 'booking_date_delete_handle'));
     }
 
 
@@ -87,6 +88,19 @@ class WVL_Dashboard_Availability
         wp_send_json($booked_dates);
     }
 
+    /**
+     * Handles the AJAX request to add a new booking date for a venue.
+     *
+     * This function is called when the venue owner adds a new booking date
+     * from the front-end. It sanitizes the input data, checks if the user
+     * has the capability to manage the venue, and then calls the
+     * `wvl_insert_booking_date` function to add the new booking date to the
+     * database. The function then encodes the new booking date as JSON and
+     * outputs it to the browser. The function then dies to prevent any
+     * further processing.
+     *
+     * @since 1.0
+     */
     public function add_new_booking_handle()
     {
         check_ajax_referer('dashboard_nonce', 'nonce');
@@ -100,6 +114,15 @@ class WVL_Dashboard_Availability
         if (wvl_insert_booking_date($venue_id, date('Y-m-d', strtotime($date)), $title, $location)) {
             wp_send_json(['title' => $title, 'location' => $location, 'date' => date('Y-m-d', strtotime($date))]);
         }
+    }
+
+    public function booking_date_delete_handle()
+    {
+        if (!current_user_can('manage_venue')) return;
+        if (!isset($_POST['wvl_booking_delete']) || !isset($_POST['date']) || empty($_POST['date'])) return;
+        $date = sanitize_text_field($_POST['date']);
+        $venue_id = wvl_get_venue_id();
+        wvl_delete_booked_date($venue_id, date('Y-m-d', strtotime($date)));
     }
 
     /**

@@ -243,3 +243,11 @@ function wvl_get_booked_date($venue_id, $start_date, $end_date)
         )
     );
 }
+
+
+function wvl_delete_booked_date($venue_id, $date)
+{
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'venue_bookings';
+    return $wpdb->delete($table_name, ['venue_id' => $venue_id, 'booked_date' => $date]);
+}

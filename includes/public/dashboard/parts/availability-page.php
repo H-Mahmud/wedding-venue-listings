@@ -16,7 +16,7 @@
     <div class="modal-box" role="document">
         <div class="modal-inner">
             <div class="modal-header">
-                <h3 class="modal-title"><?php _e('Contact Form', 'wedding-venue-listings'); ?></h3>
+                <h3 class="modal-title"><?php _e('Add New Booking', 'wedding-venue-listings'); ?></h3>
                 <button type="button" class="close-btn" aria-label="Close">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
@@ -40,7 +40,33 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="wvl-btn-secondary cancel-btn"><?php _e('Cancel', 'wedding-venue-listings'); ?></button>
-                    <button type="submit" class="wvl-btn-primary submit-btn" name="wvl_contact_submit"><?php _e('Submit', 'wedding-venue-listings'); ?></button>
+                    <button type="submit" class="wvl-btn-primary submit-btn"><?php _e('Submit', 'wedding-venue-listings'); ?></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div id="modal-show-booking-details" class="wvl-modal" tabindex="-1" aria-hidden="true" role="dialog">
+    <div class="modal-box" role="document">
+        <div class="modal-inner">
+            <div class="modal-header">
+                <h3 class="modal-title"><?php _e('Booking Details', 'wedding-venue-listings'); ?></h3>
+                <button type="button" class="close-btn" aria-label="Close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <form method="post">
+                <input type="hidden" name="date" id="date">
+                <div class="modal-content">
+                    <h3 class="title text-2xl font-semibold" id="booking-title"></h3>
+                    <p class="font-semibold text-gray-900">Date: <span class="text-gray-600 font-normal" id="booking-date"></span></p>
+                    <p class="font-semibold text-gray-900">Location: <span class="text-gray-600 font-normal" id="booking-location"></span></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="wvl-btn-secondary cancel-btn"><?php _e('Cancel', 'wedding-venue-listings'); ?></button>
+                    <button type="submit" class="wvl-btn-primary submit-btn" name="wvl_booking_delete"><?php _e('Delete', 'wedding-venue-listings'); ?></button>
                 </div>
             </form>
         </div>

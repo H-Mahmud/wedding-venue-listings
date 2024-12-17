@@ -73,6 +73,18 @@ jQuery(document).ready(function ($) {
     },
     eventClick: function (info) {
       // const date = new Date(info.event.start);
+      $("#modal-show-booking-details #booking-title").html(info.event.title);
+      $("#modal-show-booking-details #booking-location").html(
+        info.event.extendedProps.location,
+      );
+      $("#modal-show-booking-details #booking-date").html(
+        info.event.start.toLocaleDateString(),
+      );
+      $("#modal-show-booking-details #date").val(
+        info.event.start.toLocaleDateString(),
+      );
+
+      $("#modal-show-booking-details").attr("aria-hidden", "false").fadeIn();
     },
   });
   calendar.render();
