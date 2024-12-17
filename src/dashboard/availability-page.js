@@ -100,29 +100,22 @@ jQuery(document).ready(function ($) {
         "&nonce=" +
         WVL_DATA.ajax_nonce,
       success: function (response) {
-        var newEvent = {
-          location: response.location,
-          date: response.date,
-          title: response.title,
-        };
-        calendar.addEvent(newEvent);
-        jQuery("#modal-add-booking").fadeOut();
-        jQuery("#modal-add-booking form")[0].reset();
+        if (response.success) {
+          var newEvent = {
+            location: response.data.location,
+            date: response.data.date,
+            title: response.data.title,
+          };
+          calendar.addEvent(newEvent);
+          jQuery("#modal-add-booking").fadeOut();
+          jQuery("#modal-add-booking form")[0].reset();
+        } else {
+          alert(response.data.message);
+        }
       },
       error: function () {
         alert("Error while adding the event.");
       },
-    });
-  });
-
-  jQuery(document).ready(function () {
-    jQuery(".datetimepicker").datepicker({
-      timepicker: false,
-      language: "en",
-      range: false,
-      multipleDates: false,
-      multipleDatesSeparator: " - ",
-      minDate: new Date(new Date().setDate(new Date().getDate() + 1)),
     });
   });
 });

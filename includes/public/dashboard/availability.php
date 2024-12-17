@@ -111,8 +111,10 @@ class WVL_Dashboard_Availability
         $location = sanitize_text_field($_POST['location']) ?: '';
         $venue_id = wvl_get_venue_id();
 
+        if (wvl_is_booked_date($venue_id, date('Y-m-d', strtotime($date)))) return wp_send_json_error(['message' => 'Date already booked']);
+
         if (wvl_insert_booking_date($venue_id, date('Y-m-d', strtotime($date)), $title, $location)) {
-            wp_send_json(['title' => $title, 'location' => $location, 'date' => date('Y-m-d', strtotime($date))]);
+            wp_send_json_success(['title' => $title, 'location' => $location, 'date' => date('Y-m-d', strtotime($date))]);
         }
     }
 

@@ -251,3 +251,10 @@ function wvl_delete_booked_date($venue_id, $date)
     $table_name = $wpdb->prefix . 'venue_bookings';
     return $wpdb->delete($table_name, ['venue_id' => $venue_id, 'booked_date' => $date]);
 }
+
+function wvl_is_booked_date($venue_id, $date)
+{
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'venue_bookings';
+    return $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM $table_name WHERE venue_id = %d AND booked_date = %s", $venue_id, $date));
+}
