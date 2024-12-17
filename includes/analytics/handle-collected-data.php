@@ -53,6 +53,18 @@ class WVL_Handle_Collected_Data
         update_option('wvl_the_day_data_collected', $i);
     }
 
+    /**
+     * Collects impression data for a given venue.
+     *
+     * This function retrieves the daily count of impression data for the 
+     * specified venue ID, inserts the count into the analytics storage, 
+     * and then deletes the daily impression data.
+     *
+     * @param int $venue_id The ID of the venue for which to process impression data.
+     *
+     * @return void
+     */
+
     private function collect_impression($venue_id)
     {
         $count_impression = WVL_Analytic_Data_Storage::get_daily_data_count($venue_id, 'impression');
@@ -60,6 +72,17 @@ class WVL_Handle_Collected_Data
         WVL_Analytic_Data_Storage::delete_daily_data($venue_id, 'impression');
     }
 
+    /**
+     * Collects unique view data for a given venue.
+     *
+     * This function retrieves the daily count of unique view data for the 
+     * specified venue ID, inserts the count into the analytics storage, and
+     * returns true.
+     *
+     * @param int $venue_id The ID of the venue for which to process unique view data.
+     *
+     * @return bool Returns true if the data was collected successfully.
+     */
     private function collect_unique_view($venue_id)
     {
         $count_unique_view = WVL_Analytic_Data_Storage::get_daily_data_unique_count($venue_id, 'view');
@@ -67,6 +90,17 @@ class WVL_Handle_Collected_Data
         return true;
     }
 
+    /**
+     * Collects view data for a given venue.
+     *
+     * This function retrieves the daily count of view data for the 
+     * specified venue ID, inserts the count into the analytics storage, and
+     * then deletes the daily view data.
+     *
+     * @param int $venue_id The ID of the venue for which to process view data.
+     *
+     * @return bool Returns true if the data was collected successfully.
+     */
     private function collect_view($venue_id)
     {
         $count_view = WVL_Analytic_Data_Storage::get_daily_data_count($venue_id, 'view');
@@ -75,6 +109,17 @@ class WVL_Handle_Collected_Data
         return true;
     }
 
+    /**
+     * Collects contact click data for a given venue.
+     *
+     * This function retrieves the daily count of contact click data for the 
+     * specified venue ID, inserts the count into the analytics storage, and
+     * then deletes the daily contact click data.
+     *
+     * @param int $venue_id The ID of the venue for which to process contact click data.
+     *
+     * @return bool Returns true if the data was collected successfully.
+     */
     private function collect_contact_click($venue_id)
     {
         $count_contact_click = WVL_Analytic_Data_Storage::get_daily_data_count($venue_id, 'contact_click');
