@@ -24,15 +24,21 @@ class WVL_Analytical_Data_Collection
         add_action('wvl_vendor_contact_redirect_handle', array($this, 'collect_contact_redirect_data'));
     }
 
+
     /**
-     * Handles the data collection from the front-end
+     * Collects view and impression data from the front-end.
      *
-     * The function uses a WordPress AJAX action to receive the data collection
-     * from the front-end, and then it separates the data into two categories:
-     *   - DATA_1: Impression data, handled by handle_impression_data method
-     *   - DATA_2: View data, handled by handle_view_data method
-     *
-     * The function then returns a success message (1) and exits
+     * This function is triggered via an AJAX request and verifies the request
+     * using a nonce. It processes the incoming data to extract venue lists, 
+     * each encoded as a base64 string containing JSON objects of post IDs. 
+     * 
+     * For each post ID in the venue lists:
+     *   - 'DATA_1' category is treated as 'impression' data.
+     *   - 'DATA_2' category is treated as 'view' data.
+     * 
+     * The function inserts a daily analytics entry for each post ID using the
+     * WVL_Analytic_Data_Storage::insert_daily method, along with the user's 
+     * current IP address.
      *
      * @return void
      */
