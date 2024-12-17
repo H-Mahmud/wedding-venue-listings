@@ -41,12 +41,12 @@
                 'icon' => 'facebook-f',
                 'value' => ''
             ],
-            'twitter' => [
-                'label' => __('Twitter', 'wedding-venue-listings'),
-                'placeholder' => 'https://www.twitter.com/yourprofile',
-                'icon' => 'x-twitter',
-                'value' => ''
-            ],
+            // 'twitter' => [
+            //     'label' => __('Twitter', 'wedding-venue-listings'),
+            //     'placeholder' => 'https://www.twitter.com/yourprofile',
+            //     'icon' => 'x-twitter',
+            //     'value' => ''
+            // ],
             'instagram' => [
 
                 'label' => __('Instagram', 'wedding-venue-listings'),
@@ -54,12 +54,12 @@
                 'icon' => 'instagram',
                 'value' => ''
             ],
-            'linkedin' => [
-                'label' => __('LinkedIn', 'wedding-venue-listings'),
-                'placeholder' => 'https://www.linkedin.com/in/yourprofile',
-                'icon' => 'linkedin-in',
-                'value' => ''
-            ],
+            // 'linkedin' => [
+            //     'label' => __('LinkedIn', 'wedding-venue-listings'),
+            //     'placeholder' => 'https://www.linkedin.com/in/yourprofile',
+            //     'icon' => 'linkedin-in',
+            //     'value' => ''
+            // ],
             'youtube' => [
                 'label' => __('YouTube', 'wedding-venue-listings'),
                 'placeholder' => 'https://www.youtube.com/@yourprofile',
