@@ -1,11 +1,11 @@
 <?php
 defined('ABSPATH') || exit;
-class WVL_Analytical_Data_Collection
+class WVL_Vendor_Contact_Redirect
 {
     /**
      * The single instance of the class.
      * 
-     * @var WVL_Analytical_Data_Collection
+     * @var WVL_Vendor_Contact_Redirect
      * @access private
      */
     private static $_instance = null;
@@ -82,7 +82,7 @@ class WVL_Analytical_Data_Collection
     /**
      * Gets the singleton instance of the class.
      *
-     * @return WVL_Analytical_Data_Collection The singleton instance.
+     * @return WVL_Vendor_Contact_Redirect The singleton instance.
      */
     public static function get_instance()
     {
@@ -93,4 +93,4 @@ class WVL_Analytical_Data_Collection
     }
 }
 
-WVL_Analytical_Data_Collection::get_instance();
+WVL_Vendor_Contact_Redirect::get_instance();
