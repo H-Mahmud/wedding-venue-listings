@@ -1,2 +1,3 @@
 import './dashboard/profile';
-import './full-calendar';
+import './dashboard/availability-page';
+// import './full-calendar';
