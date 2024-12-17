@@ -2,7 +2,9 @@
 <div id="primary" class="single-venue">
     <?php
     while (have_posts()) {
-        the_post(); ?>
+        the_post();
+        WVL_Venue_Analytics::print_collection_data('data_2', [get_the_ID()]);
+    ?>
         <div class="cover-photo">
             <?php the_post_thumbnail('full', array('class' => '')); ?>
         </div>
