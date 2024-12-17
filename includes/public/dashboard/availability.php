@@ -84,7 +84,7 @@ class WVL_Dashboard_Availability
         $end_date = sanitize_text_field($_GET['end_date']);
         $venue_id = wvl_get_venue_id();
 
-        $booked_dates = wvl_get_booked_date($venue_id, $start_date, $end_date);
+        $booked_dates = wvl_get_booked_dates($venue_id, $start_date, $end_date);
         wp_send_json($booked_dates);
     }
 

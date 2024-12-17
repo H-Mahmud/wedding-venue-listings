@@ -230,7 +230,7 @@ function wvl_insert_booking_date($venue_id, $date, $title = '', $location = '')
 }
 
 
-function wvl_get_booked_date($venue_id, $start_date, $end_date)
+function wvl_get_booked_dates($venue_id, $start_date, $end_date)
 {
     global $wpdb;
     $table_name = $wpdb->prefix . 'venue_bookings';
