@@ -35,6 +35,9 @@ require_once WVL_PLUGIN_DIR . 'classes/class-subscription-manage.php';
 require_once WVL_PLUGIN_DIR . 'template-tags.php';
 require_once WVL_PLUGIN_DIR . 'includes/wvl-functions.php';
 
+// Classes
+require_once WVL_PLUGIN_DIR . 'classes/class-analytic-data-storage.php';
+
 // Hooks
 require_once WVL_PLUGIN_DIR . 'includes/vendor-contact-redirect.php';
 
