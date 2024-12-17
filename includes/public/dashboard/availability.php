@@ -61,6 +61,17 @@ class WVL_Dashboard_Availability
         require_once WVL_PLUGIN_DIR . 'includes/public/dashboard/parts/availability-page.php';
     }
 
+    /**
+     * Handles the AJAX request to get the booked dates for a venue.
+     *
+     * This function is called when the venue owner requests the booked dates
+     * for their venue from the front-end. It uses the `wvl_get_booked_date`
+     * function to get the booked dates and then encodes the array of booked
+     * dates as JSON and outputs it to the browser. The function then dies
+     * to prevent any further processing.
+     *
+     * @since 1.0
+     */
     public function booked_dates_handle()
     {
         check_ajax_referer('dashboard_nonce', 'nonce');
