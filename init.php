@@ -21,13 +21,12 @@ function wvl_create_venue_analytics_table()
     $table_name = $wpdb->prefix . 'venue_analytics';
     $charset_collate = $wpdb->get_charset_collate();
 
-    $sql = "CREATE TABLE $table_name (
-            id BIGINT(20) NOT NULL AUTO_INCREMENT,
+    $sql = "CREATE TABLE IF NOT EXISTS $table_name (
+            id BIGINT(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
             venue_id BIGINT(20) NOT NULL,
             event_type VARCHAR(50) NOT NULL,
             count BIGINT(20) DEFAULT NULL,
             created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-            PRIMARY KEY (id),
             INDEX (venue_id, event_type, created_at)
         ) $charset_collate;";
 
