@@ -18,6 +18,7 @@ get_header(); ?>
             }
 
             $query = new WP_Query($args);
+            $collection_data = [];
             if ($query->have_posts()):
             ?>
                 <p class="total-result"><span class="amount"><?php echo $query->found_posts; ?></span> <?php _e('Vendor found', 'wedding-venue-listings'); ?></p>
@@ -25,6 +26,7 @@ get_header(); ?>
                     <?php
                     while ($query->have_posts()) :
                         $query->the_post();
+                        $collection_data[] = get_the_ID();
                         load_template(WVL_PLUGIN_DIR . 'templates/parts/listing-item.php', false);
                     endwhile;
                 else:
@@ -33,6 +35,8 @@ get_header(); ?>
                 <?php
                 endif;
                 wp_reset_postdata();
+
+                WVL_Venue_Analytics::print_collection_data('data_1', $collection_data);
                 ?>
                 </div>
         </div>
