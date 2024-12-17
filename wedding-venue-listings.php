@@ -92,7 +92,25 @@ add_action('wvl_notice', function ($source) {
 add_action('wp_enqueue_scripts', 'wvl_enqueue_scripts', 20);
 function wvl_enqueue_scripts()
 {
+    if (defined('WVL_DEVELOPMENT') && WVL_DEVELOPMENT) {
+        // $dev_server_url = 'http://localhost:3000';
+        $dev_server_url = WVL_PLUGIN_URL . '/assets/dist';
+        wp_enqueue_style('wvl-style', $dev_server_url . '/style.min.css', array(), time());
+        wp_enqueue_script('wvl-main', $dev_server_url . '/main.bundle.js', array('jquery'), time(), true);
 
+        if (is_page('dashboard')) {
+            wp_enqueue_script('wvl-dashboard',  $dev_server_url . '/dashboard.bundle.js', array('jquery'), time(), true);
+        }
+    } else {
+        wp_enqueue_style('wvl-style', WVL_PLUGIN_URL . '/assets/dist/style.min.css', array(), '1.0');
+        wp_enqueue_script('wvl-main',  WVL_PLUGIN_URL . '/assets/dist/main.bundle.min.js', array('jquery'), time(), true);
+
+        if (is_page('dashboard')) {
+            wp_enqueue_script('wvl-dashboard', WVL_PLUGIN_URL . '/assets/dist/dashboard.bundle.min.js', array('jquery'), '1.0', true);
+        }
+    }
+
+    /** General script  */
     wp_enqueue_style('font-awesome-v6',  WVL_PLUGIN_URL . '/assets/lib/font-awesome/css/all.min.css', [], '6.7.1');
 
     wp_enqueue_script('air-datepicker', WVL_PLUGIN_URL . '/assets/lib/air-datepicker/datepicker.min.js');
@@ -101,32 +119,6 @@ function wvl_enqueue_scripts()
 
     wp_enqueue_script('lightgallery', WVL_PLUGIN_URL . '/assets/lib/lightgallery/js/lightgallery-all.min.js', array('jquery'), '1.10.0', true);
     wp_enqueue_style('lightgallery', WVL_PLUGIN_URL . '/assets/lib/lightgallery/css/lightgallery.min.css', array(), '1.10.0');
-
-
-
-
-    if (defined('WVL_DEVELOPMENT') && WVL_DEVELOPMENT) {
-        // $dev_server_url = 'http://localhost:3000';
-        $dev_server_url = WVL_PLUGIN_URL . '/assets/dist';
-
-        wp_enqueue_style('wvl-style', $dev_server_url . '/style.min.css', array(), time());
-
-        wp_enqueue_script('wvl-main', $dev_server_url . '/main.bundle.js', array('jquery'), time(), true);
-
-        if (is_page('dashboard')) {
-            wp_enqueue_script('wvl-dashboard',  $dev_server_url . '/dashboard.bundle.js', array('jquery'), time(), true);
-        }
-    } else {
-        wp_enqueue_style('wvl-style', WVL_PLUGIN_URL . '/assets/dist/style.min.css', array(), '1.0');
-
-        wp_enqueue_script('wvl-main',  WVL_PLUGIN_URL . '/assets/dist/main.bundle.min.js', array('jquery'), time(), true);
-
-        if (is_page('dashboard')) {
-            wp_enqueue_script('wvl-dashboard', WVL_PLUGIN_URL . '/assets/dist/dashboard.bundle.min.js', array('jquery'), '1.0', true);
-        }
-    }
-
-
 
     // Environment Independent scripts
     if (is_page('dashboard')) {
