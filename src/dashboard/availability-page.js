@@ -62,9 +62,9 @@ jQuery(document).ready(function($){
         },
         eventContent: function(arg) {
             var event = arg.event;
-            var location = event.extendedProps.location_name ? '<div style="color: black; font-size: 12px; font-weight: semibold; padding: 3px;">' + event.extendedProps.location_name + '</div>' : '';
+            var location = event.extendedProps.location ? '<div style="color: black; font-size: 12px; font-weight: semibold; padding: 3px;">' + event.extendedProps.location_name + '</div>' : '';
             return {
-                html: '<div style="color: black; font-size: 16px; font-weight: semibold; padding: 3px;">Booked</div>' + location
+                html: '<div style="color: black; font-size: 16px; font-weight: semibold; padding: 3px;">' + event.title + '</div>' + location
             };
         },
         eventClick: function(info) {
@@ -74,24 +74,45 @@ jQuery(document).ready(function($){
     calendar.render();
 
 
+  
+
+
+    
+    $('#modal-add-booking form').on('submit', function (e) {
+        e.preventDefault();
+
+        $.ajax({
+            url: WVL_DATA.ajax_url,
+            type: 'POST',
+            data: jQuery(this).serialize() + '&action=wvl_add_new_booking' + '&nonce=' + WVL_DATA.ajax_nonce,
+            success: function (response) {
+
+                    var newEvent = {
+                        location: response.location,
+                        date: response.date,
+                        title: response.title
+                    };
+                    
+                    calendar.addEvent(newEvent);
+                    alert('Event added successfully!');
+                    jQuery('#modal-add-booking').fadeOut();
+                    jQuery('#modal-add-booking form')[0].reset(); 
+                
+            },
+            error: function () {
+                alert('Error while adding the event.');
+            }
+        });
+    });
+
     jQuery(document).ready(function() {
         jQuery('.datetimepicker').datepicker({
             timepicker: false,
             language: 'en',
-            range: true,
-            multipleDates: true,
+            range: false,
+            multipleDates: false,
             multipleDatesSeparator: " - ",
             minDate: new Date(new Date().setDate(new Date().getDate() + 1))
         });
-        // jQuery("#add-event").submit(function () {
-        //     alert("Submitted");
-        //     var values = {};
-        //     $.each($('#add-event').serializeArray(), function (i, field) {
-        //         values[field.name] = field.value;
-        //     });
-        //     console.log(
-        //         values
-        //     );
-        // });
     });
 })

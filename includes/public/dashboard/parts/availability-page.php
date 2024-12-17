@@ -22,10 +22,7 @@
                 </button>
             </div>
             <form method="post">
-                <?php wp_nonce_field('wlv_contact_submission', 'wlv_contact_submission'); ?>
-                <input type="hidden" name="venue_id" value="<?php the_ID(); ?>">
                 <div class="modal-content">
-
 
                     <div class="wvl-field">
                         <label for="title"><?php _e('Event Title', 'wedding-venue-listings'); ?></label>

@@ -21,7 +21,9 @@ class WVL_Dashboard_Availability
     {
         add_action('wvl_dashboard', array($this, 'render_wvl_dashboard_menu'));
         add_action('wp_ajax_wvl_booked_dates', array($this, 'booked_dates_handle'));
-        add_action('wp_ajax_wvl_booked_dates', array($this, 'booked_dates_handle'));
+        add_action('wp_ajax_nopriv_booked_dates', array($this, 'booked_dates_handle'));
+        add_action('wp_ajax_wvl_add_new_booking', array($this, 'add_new_booking_handle'));
+        add_action('wp_ajax_nopriv_wvl_add_new_booking', array($this, 'add_new_booking_handle'));
     }
 
 
@@ -82,8 +84,22 @@ class WVL_Dashboard_Availability
         $venue_id = wvl_get_venue_id();
 
         $booked_dates = wvl_get_booked_date($venue_id, $start_date, $end_date);
-        echo json_encode($booked_dates);
-        wp_die();
+        wp_send_json($booked_dates);
+    }
+
+    public function add_new_booking_handle()
+    {
+        check_ajax_referer('dashboard_nonce', 'nonce');
+        if (!current_user_can('manage_venue')) return;
+
+        $title = sanitize_text_field($_POST['title']) ?: 'Untitled';
+        $date = sanitize_text_field($_POST['date']) ?: wp_send_json_error(['message' => 'Date not set']);
+        $location = sanitize_text_field($_POST['location']) ?: '';
+        $venue_id = wvl_get_venue_id();
+
+        if (wvl_insert_booking_date($venue_id, date('Y-m-d', strtotime($date)), $title, $location)) {
+            wp_send_json(['title' => $title, 'location' => $location, 'date' => $date]);
+        }
     }
 
     /**

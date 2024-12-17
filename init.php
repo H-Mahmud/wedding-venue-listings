@@ -109,7 +109,6 @@ function wvl_create_venue_bookings_database_table()
     title VARCHAR(255) NOT NULL,
     location VARCHAR(255) NOT NULL,
     booked_date DATE NOT NULL,
-    UNIQUE KEY venue_date (venue_id, booked_date),
     INDEX (booked_date)
 ) $charset_collate;";
 

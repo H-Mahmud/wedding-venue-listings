@@ -202,18 +202,30 @@ function wvl_get_user_ip_address()
 }
 
 
-function wvl_insert_booking_date($venue_id, $date, $location_name = '')
+
+/**
+ * Inserts a booking date for a given venue.
+ *
+ * @param int $venue_id The ID of the venue to book.
+ * @param string $date The date of the booking in the format 'Y-m-d'.
+ * @param string $title The title of the event.
+ * @param string $location The location of the event.
+ *
+ * @return bool Whether the booking date was inserted successfully.
+ */
+function wvl_insert_booking_date($venue_id, $date, $title = '', $location = '')
 {
     global $wpdb;
     $table_name = $wpdb->prefix . 'venue_bookings';
-    $wpdb->insert(
+    return $wpdb->insert(
         $table_name,
         [
             'venue_id'    => $venue_id,
             'booked_date' => $date,
-            'location_name' => $location_name,
+            'title'       => $title,
+            'location'    => $location,
         ],
-        ['%d', '%s', '%s']
+        ['%d', '%s', '%s', '%s']
     );
 }
 
@@ -224,7 +236,7 @@ function wvl_get_booked_date($venue_id, $start_date, $end_date)
     $table_name = $wpdb->prefix . 'venue_bookings';
     return $wpdb->get_results(
         $wpdb->prepare(
-            "SELECT location_name, booked_date as date FROM $table_name WHERE venue_id = %d AND booked_date BETWEEN %s AND %s",
+            "SELECT title, location, booked_date as date FROM $table_name WHERE venue_id = %d AND booked_date BETWEEN %s AND %s",
             $venue_id,
             $start_date,
             $end_date
