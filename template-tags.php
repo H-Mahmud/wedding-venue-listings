@@ -180,3 +180,23 @@ function wvl_get_contact_count()
     }
     return intval($count);
 }
+
+
+/**
+ * Retrieves the IP address of the current user.
+ *
+ * @return string The IP address of the current user.
+ */
+function wvl_get_user_ip_address()
+{
+    if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+        $ip = $_SERVER['HTTP_CLIENT_IP'];
+    } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+        $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        $ip = explode(',', $ip);
+        $ip = trim($ip[0]);
+    } else {
+        $ip = $_SERVER['REMOTE_ADDR'];
+    }
+    return $ip;
+}
