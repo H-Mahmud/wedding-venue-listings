@@ -36,11 +36,6 @@ require_once WVL_PLUGIN_DIR . 'template-tags.php';
 require_once WVL_PLUGIN_DIR . 'includes/wvl-functions.php';
 
 // Classes
-require_once WVL_PLUGIN_DIR . 'classes/class-analytic-data-storage.php';
-
-// Hooks
-require_once WVL_PLUGIN_DIR . 'includes/vendor-contact-redirect.php';
-require_once WVL_PLUGIN_DIR . 'includes/analytics-data-collections.php';
 
 require_once WVL_PLUGIN_DIR . 'includes/vendor-access-limit.php';
 require_once WVL_PLUGIN_DIR . 'classes/abstract-wvl-update-venue.php';
@@ -63,7 +58,11 @@ require_once WVL_PLUGIN_DIR . 'includes/class-listing.php';
 require_once WVL_PLUGIN_DIR . 'shortcodes/venue-landing.php';
 require_once WVL_PLUGIN_DIR . 'shortcodes/user-profile.php';
 
-require_once WVL_PLUGIN_DIR . 'analytics/class-venue-analytics.php';
+require_once WVL_PLUGIN_DIR . 'includes/analytics/class-analytic-data-storage.php';
+require_once WVL_PLUGIN_DIR . 'includes/analytics/vendor-contact-redirect.php';
+require_once WVL_PLUGIN_DIR . 'includes/analytics/analytics-data-collections.php';
+require_once WVL_PLUGIN_DIR . 'includes/analytics/class-venue-analytics.php';
+
 
 
 // Public user end
