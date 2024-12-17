@@ -200,3 +200,19 @@ function wvl_get_user_ip_address()
     }
     return $ip;
 }
+
+
+function wvl_insert_booking_date($venue_id, $date, $location_name = '')
+{
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'venue_bookings';
+    $wpdb->insert(
+        $table_name,
+        [
+            'venue_id'    => $venue_id,
+            'booked_date' => $date,
+            'location_name' => $location_name,
+        ],
+        ['%d', '%s', '%s']
+    );
+}
