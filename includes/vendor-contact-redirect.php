@@ -76,7 +76,7 @@ class WVL_Vendor_Contact_Redirect
      */
     public function modify_contact_links($link)
     {
-        return add_query_arg('link', $link, home_url('redirect/vendor-contact'));
+        return add_query_arg(['link' => $link, 'post_id' => get_the_ID()], home_url('redirect/vendor-contact'));
     }
 
     /**
