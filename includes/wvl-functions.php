@@ -182,9 +182,12 @@ add_action('wvl_social_links', function () {
         ];
     }
 
-    foreach ($social_fields as $key => $value) { ?>
+    foreach ($social_fields as $key => $value) {
+
+        $link = apply_filters('wvl_contact_link', $value['value'], $key);
+?>
         <li>
-            <a class="rounded-full w-11 h-11 flex justify-center items-center no-underline bg-[#F1F1F1]" href="<?php echo $value['value']; ?>" target="_blank">
+            <a class="rounded-full w-11 h-11 flex justify-center items-center no-underline bg-[#F1F1F1]" href="<?php echo $link; ?>" target="_blank">
                 <i class="<?php echo $value['icon']; ?>"></i>
             </a>
         </li>
