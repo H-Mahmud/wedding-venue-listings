@@ -37,6 +37,7 @@ class WVL_Handle_Collected_Data
 
         $each_data_process = 10;
         $data_processed = get_option('wvl_the_day_data_collected', 0);
+        $data_processed = 0;
         for ($i = $data_processed; $i < count($venue_ids); $i++) {
             $venue_id = $venue_ids[$i];
 
@@ -127,7 +128,37 @@ class WVL_Handle_Collected_Data
         WVL_Analytic_Data_Storage::delete_daily_data($venue_id, 'contact_click');
     }
 
-    private function collect_lead($venue_id) {}
+    /**
+     * Collects lead data for a given venue.
+     *
+     * This function retrieves the daily count of form submissions for the 
+     * specified venue ID from the contact form table, inserts the count 
+     * into the analytics storage as 'lead' data.
+     *
+     * @param int $venue_id The ID of the venue for which to process lead data.
+     *
+     * @return void
+     */
+    private function collect_lead($venue_id)
+    {
+
+        global $wpdb;
+        $table_name = $wpdb->prefix . 'contact_form';
+        $today_date = date('Y-m-d');
+
+        // count total form entries
+        $results = $wpdb->get_results(
+            $wpdb->prepare(
+                "SELECT COUNT(*) as total FROM $table_name WHERE venue_id = %d AND DATE(submission_date) = %s",
+                $venue_id,
+                $today_date
+            ),
+            ARRAY_A
+        );
+        $total = isset($results[0]['total']) ? $results[0]['total'] : 0;
+
+        WVL_Analytic_Data_Storage::insert($venue_id, 'lead', $total);
+    }
 
     /**
      * Gets the singleton instance of the class.
