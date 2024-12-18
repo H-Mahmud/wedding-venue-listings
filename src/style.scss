@@ -76,11 +76,11 @@
   }
 
   .analytics-summary {
-    @apply flex items-stretch justify-start;
+    @apply flex flex-wrap items-stretch justify-start md:flex-nowrap;
   }
 
   .analytics-summary .card {
-    @apply w-full max-w-sm p-4 sm:p-5;
+    @apply w-full max-w-[150px] p-4 sm:p-5 md:max-w-sm;
   }
 
   .analytics-summary .card span {
