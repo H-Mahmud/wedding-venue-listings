@@ -12,7 +12,7 @@
                 </div> -->
             <?php endif;  ?>
             <div class="video-gallery grid grid-cols-2 md:grid-cols-3 gap-4">
-                <label for="upload_gallery" data-target="#modal-add-video" class="open-modal-btn flex justify-center items-center flex-col gap-3 border border-gray-200 rounded-lg hover:border-dashed hover:border-blue-600 cursor-pointer">
+                <label for="upload_gallery" data-target="#modal-add-video" class="open-modal-btn py-8 flex justify-center items-center flex-col gap-3 border border-gray-200 rounded-lg hover:border-dashed hover:border-blue-600 cursor-pointer">
                     <i class="fa-regular fa-video  text-gray-600 text-4xl"></i>
                     <p class="text-center text-xl font-semibold">
                         <?php _e(' Add New Video', 'wedding-venue-listings'); ?>
@@ -23,19 +23,19 @@
                 $video_gallery = get_post_meta($venue_id, 'venue_videos', true);
                 if (!empty($video_gallery) && is_array($video_gallery)) {
 
-                    foreach ($video_gallery as $key => $video) {
+                    foreach ($video_gallery as $video) {
                         if ($video['platform'] == 'youtube') {
                 ?>
                             <a class="relative" href="https://www.youtube.com/watch?v=<?php echo $video['id']; ?>">
-                                <span class="remove-video inline-block cursor-pointer absolute bg-black opacity-60 hover:opacity-100 rounded-lg  m-2" data-video-id="<?php echo $key; ?>"><i class="fa-regular fa-trash-can text-2xl text-white p-3 inline-block"></i></span>
+                                <span data-key="<?php echo $video['key']; ?>" class="remove-gallery-video inline-block cursor-pointer absolute bg-black opacity-60 hover:opacity-100 rounded-lg  m-2"><i class="fa-regular fa-trash-can text-2xl text-white p-3 inline-block"></i></span>
 
                                 <img class="h-auto max-w-full rounded-lg" src="https://img.youtube.com/vi/<?php echo $video['id']; ?>/hqdefault.jpg" alt="YouTube Video" />
                             </a>
                         <?php
                         }
                         if ($video['platform'] == 'vimeo') { ?>
-                            <a class="relative" href="https://vimeo.com/<?php echo $video['id']; ?>" data-key="<?php echo $video['id']; ?>">
-                                <span class="remove-video inline-block cursor-pointer absolute bg-black opacity-60 hover:opacity-100 rounded-lg  m-2" data-attachment-id="<?php echo $key; ?>"><i class="fa-regular fa-trash-can text-2xl text-white p-3 inline-block"></i></span>
+                            <a class="relative" href="https://vimeo.com/<?php echo $video['id']; ?>">
+                                <span data-key="<?php echo $video['key']; ?>" class="remove-gallery-video inline-block cursor-pointer absolute bg-black opacity-60 hover:opacity-100 rounded-lg  m-2"><i class="fa-regular fa-trash-can text-2xl text-white p-3 inline-block"></i></span>
 
                                 <img class="h-auto max-w-full rounded-lg" src="https://vumbnail.com/<?php echo $video['id']; ?>.jpg" alt="Vimeo Video" />
                             </a>
@@ -81,90 +81,3 @@
         </div>
     </div>
 </div>
-<!-- HTML for the Form -->
-
-<?php
-/*
-        <script>
-            jQuery(document).ready(function($) {
-                // Add new item
-                $('#add-item').on('click', function() {
-                    const newItem = `
-      <div class="form-item">
-        <select name="video_type[]" class="video-type">
-          <option value="youtube">YouTube</option>
-          <option value="motion">Dailymotion</option>
-          <option value="vimeo">Vimeo</option>
-        </select>
-        <input type="text" name="video_url[]" class="video-url" placeholder="Enter video URL">
-        <button type="button" class="remove-item">-</button>
-      </div>`;
-                    $('#video-form').find('#add-item').before(newItem);
-                });
-
-                // Remove an item
-                $(document).on('click', '.remove-item', function() {
-                    $(this).closest('.form-item').remove();
-                });
-
-                // Handle form submission
-                $('#video-form').on('submit', function(e) {
-                    e.preventDefault();
-
-                    const formData = $(this).serialize();
-
-                    $.ajax({
-                        url: ajaxurl, // Provided by WordPress
-                        type: 'POST',
-                        data: {
-                            action: 'save_video_data',
-                            form_data: formData,
-                        },
-                        success: function(response) {
-                            alert('Data submitted successfully!');
-                        },
-                        error: function() {
-                            alert('An error occurred while submitting the data.');
-                        },
-                    });
-                });
-            });
-        </script>
-
-        <!-- PHP: Add this to your plugin or theme's functions.php -->
-        <?php
-        add_action('wp_ajax_save_video_data', 'save_video_data_callback');
-        add_action('wp_ajax_nopriv_save_video_data', 'save_video_data_callback');
-
-        function save_video_data_callback()
-        {
-            if (isset($_POST['form_data'])) {
-                parse_str($_POST['form_data'], $data);
-
-                // Process the data as needed, e.g., save it to the database
-                $video_data = $data['video_type'];
-                $video_urls = $data['video_url'];
-
-                foreach ($video_data as $key => $type) {
-                    $url = sanitize_text_field($video_urls[$key]);
-                    $type = sanitize_text_field($type);
-
-                    // Example: Insert into custom table (adjust table name and columns accordingly)
-                    global $wpdb;
-                    $wpdb->insert(
-                        $wpdb->prefix . 'videos',
-                        [
-                            'type' => $type,
-                            'url' => $url,
-                        ],
-                        ['%s', '%s']
-                    );
-                }
-
-                wp_send_json_success('Data saved successfully.');
-            } else {
-                wp_send_json_error('Invalid data.');
-            }
-        }
-            */
-?>

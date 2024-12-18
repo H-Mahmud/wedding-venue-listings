@@ -48,6 +48,9 @@ class WVL_Dashboard_Profile
         add_action('wp_ajax_wvl_add_new_video', array($this, 'add_new_video'));
         add_action('wp_ajax_nopriv_wvl_add_new_video', array($this, 'add_new_video'));
 
+        add_action('wp_ajax_wvl_remove_gallery_video', array($this, 'remove_gallery_video'));
+        add_action('wp_ajax_nopriv_wvl_remove_gallery_video', array($this, 'remove_gallery_video'));
+
         add_action('wp_ajax_wvl_submit_venue_profile', array($this, 'submit_venue_profile'));
         add_action('wp_ajax_nopriv_wvl_submit_venue_profile', array($this, 'submit_venue_profile'));
     }
@@ -239,7 +242,6 @@ class WVL_Dashboard_Profile
             wp_send_json_error(['message' => 'You must be logged in to update your profile.']);
         }
     }
-
 
 
     /**
@@ -451,7 +453,8 @@ class WVL_Dashboard_Profile
 
         $video_gallery[] = [
             'platform' => $platform,
-            'id' => $id
+            'id' => $id,
+            'key' => uniqid()
         ];
         update_post_meta($venue_id, 'venue_videos', $video_gallery);
 
@@ -462,6 +465,35 @@ class WVL_Dashboard_Profile
         ]);
     }
 
+
+    public function remove_gallery_video()
+    {
+        check_ajax_referer('dashboard_nonce', 'security');
+
+        if (!is_user_logged_in()) {
+            wp_send_json_error(['message' => __('You must be logged to delete a Photo.', 'wedding-venue-listings')]);
+        }
+
+        if (!isset($_POST['key']) || empty($_POST['key'])) {
+            wp_send_json_error(['message' => __('No video key provided.', 'wedding-venue-listings')]);
+        }
+
+        $key_id = $_POST['key'];
+        $parent_id = wvl_get_venue_id();
+        $video_gallery = get_post_meta($parent_id, 'venue_videos', true);
+
+        if (empty($video_gallery)) {
+            $video_gallery = [];
+        }
+        foreach ($video_gallery as $key => $video) {
+            if ($video['key'] == $key_id) {
+                unset($video_gallery[$key]);
+            }
+        }
+
+        update_post_meta($parent_id, 'venue_videos', $video_gallery);
+        wp_send_json_success(['message' => 'Video Removed successfully!']);
+    }
 
     public function submit_venue_profile()
     {
@@ -487,7 +519,6 @@ class WVL_Dashboard_Profile
 
         wp_send_json_success(['message' => __('Your application has been submitted.', 'wedding-venue-listings')]);
     }
-
 
 
     /**
