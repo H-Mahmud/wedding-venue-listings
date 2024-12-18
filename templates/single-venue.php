@@ -51,15 +51,33 @@
 
             <div class="wvl-content relative">
                 <div class="tabs">
-                    <div class="tab" data-target="#contact-info"><?php _e('Contact', 'wedding-venue-listings'); ?></div>
-                    <div class="tab" data-target="#overview"><?php _e('Overview', 'wedding-venue-listings'); ?></div>
-                    <div class="tab" data-target="#photos-gallery"><?php _e('Photos', 'wedding-venue-listings'); ?></div>
+                    <div class="tab" data-target="#contact-info">
+                        <i class="fa-solid fa-address-card icon"></i>
+                        <span class="label"><?php _e('Contact', 'wedding-venue-listings'); ?></span>
+                    </div>
+                    <div class="tab" data-target="#overview">
+                        <i class="fa-solid fa-circle-info icon"></i>
+                        <span class="label"><?php _e('Overview', 'wedding-venue-listings'); ?></span>
+                    </div>
+                    <div class="tab" data-target="#photos-gallery">
+                        <i class="fa-solid fa-images icon"></i>
+                        <span class="label"><?php _e('Photos', 'wedding-venue-listings'); ?></span>
+                    </div>
                     <?php if (wvl_current_plan($author_id) != 'free'): ?>
-                        <div class="tab" data-target="#videos-gallery"><?php _e('Videos', 'wedding-venue-listings'); ?></div>
+                        <div class="tab" data-target="#videos-gallery">
+                            <i class="fa-solid fa-video icon"></i>
+                            <span class="label"> <?php _e('Videos', 'wedding-venue-listings'); ?></span>
+                        </div>
                     <?php endif; ?>
-                    <div class="tab" data-target="#reviews"><?php _e('Reviews', 'wedding-venue-listings'); ?></div>
+                    <div class="tab" data-target="#reviews">
+                        <i class="fa-solid fa-star icon"></i>
+                        <span class="label"><?php _e('Reviews', 'wedding-venue-listings'); ?></span>
+                    </div>
                     <?php if (wvl_current_plan($author_id) == 'free'): ?>
-                        <div class="tab" data-target="#related-venue"><?php _e('Related', 'wedding-venue-listings'); ?></div>
+                        <div class="tab" data-target="#related-venue">
+                            <i class="fa-solid fa-circle-chevron-down icon"></i>
+                            <span class="label"><?php _e('Related', 'wedding-venue-listings'); ?></span>
+                        </div>
                     <?php endif; ?>
                 </div>
                 <div class="description section" id="overview">

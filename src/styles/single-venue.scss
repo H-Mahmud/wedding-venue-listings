@@ -51,7 +51,15 @@
         @apply flex items-end justify-between;
 
         .tab {
-          @apply block flex-1 cursor-pointer rounded-t-lg p-4 text-sm text-gray-500 ring-1 ring-gray-200;
+          @apply flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-t-lg p-4 text-sm text-gray-500 ring-1 ring-gray-200 md:text-lg;
+
+          .label {
+            @apply hidden md:inline-block;
+          }
+
+          .icon {
+            @apply text-xl;
+          }
 
           &.active {
             @apply bg-primary font-semibold text-white;
