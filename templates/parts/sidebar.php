@@ -79,10 +79,14 @@
             </div>
             <div class="content">
                 <?php
+                $selected_category = 0;
+                if (isset($_GET['category']) && !empty($_GET['category'])) {
+                    $selected_category = intval($_GET['category']);
+                }
                 $categories = get_categories(array('hide_empty' => false));
                 foreach ($categories as $category) {
                     if ($category->parent == 0) {
-                        $checked = isset($_GET['category']) && $_GET['category'] == $category->term_id ? 'checked="checked"' : '';
+                        $checked = $selected_category == $category->term_id ? 'checked="checked"' : '';
                         echo <<<HTML
                         <label class="name">
                             <input class="radio" type="radio" name="category" value="$category->term_id" $checked />
@@ -93,136 +97,77 @@
                 };
                 ?>
             </div>
+        </div>
 
 
-            <?php
-            if (isset($_GET['category']) && !empty($_GET['category']) && is_numeric($_GET['category'])):
-                $parent_id = $_GET['category'];
-                $args = [
-                    'parent'     => $parent_id,
-                    'hide_empty' => false,
-                    'taxonomy'   => 'category',
-                ];
-            ?>
-                <div class="filter subcategory" id="subcategoryFilter" method="get">
-                    <div class="header">
-                        <h3 class="title"><?php _e('Subcategory', 'wedding-venue-listings'); ?></h3>
-                        <i class="fa-solid fa-angle-up toggle-icon"></i>
-                    </div>
-                    <div class="content">
-                        <?php
-                        $subcategories = get_terms($args);
-                        $selected_subcategories = [];
-                        if (isset($_GET['subcategory']) && !empty($_GET['subcategory']) && is_array($_GET['subcategory'])) {
-                            $selected_subcategories = $_GET['subcategory'];
-                        }
-                        foreach ($subcategories as $subcategory) {
-                            $checked = in_array($subcategory->term_id, $selected_subcategories) ? 'checked="checked"' : '';
-                            echo <<<HTML
-                        <label class="name">
-                            <input class="checkbox" type="checkbox" name="subcategory[]" value="$subcategory->term_id" $checked />
-                            $subcategory->name
-                        </label>
-                    HTML;
-                        };
-                        ?>
-                    </div>
+        <div class="filter subcategory" id="subcategoryFilter" method="get">
+            <div class="header">
+                <h3 class="title"><?php _e('Subcategory', 'wedding-venue-listings'); ?></h3>
+                <i class="fa-solid fa-angle-up toggle-icon"></i>
+            </div>
+            <div class="content">
+            </div>
+        </div>
+
+        <!-- TODO: Refactor -->
+        <div class="filter wvl-field availability mb-4">
+            <div class="header">
+                <h3 class="title"><?php _e('Availability', 'wedding-venue-listings'); ?></h3>
+                <i class="fa-solid fa-angle-up toggle-icon"></i>
+            </div>
+
+            <div class="content wvl-calendar">
+                <div class="calendar-header">
+                    <button id="prev-month">&lt;</button>
+                    <span id="month-year"></span>
+                    <button id="next-month">&gt;</button>
                 </div>
-            <?php endif; ?>
-
-            <!-- TODO: Refactor -->
-            <div class="filter wvl-field availability mb-4">
-                <div class="header">
-                    <h3 class="title"><?php _e('Availability', 'wedding-venue-listings'); ?></h3>
-                    <i class="fa-solid fa-angle-up toggle-icon"></i>
-                </div>
-
-                <div class="content wvl-calendar">
-                    <div class="calendar-header">
-                        <button id="prev-month">&lt;</button>
-                        <span id="month-year"></span>
-                        <button id="next-month">&gt;</button>
+                <div class="calendar-body">
+                    <div class="calendar-days">
+                        <span>S</span>
+                        <span>M</span>
+                        <span>T</span>
+                        <span>W</span>
+                        <span>T</span>
+                        <span>F</span>
+                        <span>S</span>
                     </div>
-                    <div class="calendar-body">
-                        <div class="calendar-days">
-                            <span>S</span>
-                            <span>M</span>
-                            <span>T</span>
-                            <span>W</span>
-                            <span>T</span>
-                            <span>F</span>
-                            <span>S</span>
-                        </div>
-                        <div class="calendar-dates" id="calendar-dates">
-                        </div>
+                    <div class="calendar-dates" id="calendar-dates">
                     </div>
                 </div>
             </div>
         </div>
-
-        <button type="submit" class="wvl-btn-primary filter-btn"><?php _e('Filter', 'wedding-venue-listings'); ?></button>
     </div>
+    <button type="submit" class="wvl-btn-primary filter-btn"><?php _e('Filter', 'wedding-venue-listings'); ?></button>
 </form>
 
 <?php
-$categories = get_categories(array('hide_empty' => false));
 $categories_by_parent = [];
 foreach ($categories as $category) {
     $categories_by_parent[$category->parent][] = $category;
 }
 $categories_json = json_encode($categories_by_parent);
 
+$selected_subcategories = [];
+if (isset($_GET['subcategory']) && !empty($_GET['subcategory']) && is_array($_GET['subcategory'])) {
+    $selected_subcategories = array_map('intval', $_GET['subcategory']);
+}
 ?>
-<div class="wvl-field-row mt-3">
-    <div class="wvl-field">
-        <label for="category"><?php _e('Category', 'wedding-venue-listings'); ?></label>
-
-        <select name="category" id="category">
-            <option value="">Select a category</option>
-            <?php if (!empty($categories_by_parent[0])) :
-                foreach ($categories_by_parent[0] as $parent) :
-                    if (true) {
-                        echo <<<HTML
-                                    <option value="$parent->term_id" selected="selected">
-                                        $parent->name
-                                    </option>
-                                HTML;
-                    } else {
-                        echo <<<HTML
-                                    <option value="$parent->term_id">
-                                        $parent->name
-                                    </option>
-                                HTML;
-                    }
-
-                endforeach;
-            endif; ?>
-        </select>
-    </div>
-
-    <div class="wvl-field">
-        <label for="subcategory"><?php _e('Subcategory', 'wedding-venue-listings'); ?></label>
-        <select name="subcategory" class="wvl-tags" multiple id="subcategory"></select>
-    </div>
-</div>
-
-
 
 <script>
     const categoriesData = <?php echo $categories_json; ?>;
 
     jQuery(document).ready(function($) {
 
-        const category = $('#category');
-        const subcategory = $('#subcategory');
+        const category = $('#categoryFilter input[name="category"]');
+        const subcategory = $('#subcategoryFilter .content');
 
-        // Initialize subcategory options on page load
-        subcategoryOptions(<?php echo json_encode($category); ?>);
+        subcategoryOptions(<?php echo json_encode($selected_category); ?>);
 
         // Event listener for category change
         category.on('change', function() {
             const selectedCategory = this.value;
-
+            subcategory.empty();
             if (selectedCategory) {
                 subcategoryOptions(selectedCategory);
             }
@@ -231,15 +176,17 @@ $categories_json = json_encode($categories_by_parent);
         // Function to populate subcategories
         function subcategoryOptions(selectedCategory) {
             const subcategories = categoriesData[selectedCategory] || [];
-            const selectedSubcategory = <?php echo json_encode($subcategory); ?>;
+            const selectedSubcategory = <?php echo json_encode($selected_subcategories); ?>;
 
             for (let i = 0; i < subcategories.length; i++) {
                 const subcat = subcategories[i];
-                const option = $('<option></option>').val(subcat.term_id).text(subcat.name);
-                if (selectedSubcategory && selectedSubcategory === subcat.term_id) {
-                    option.attr('selected', 'selected');
+                const label = $('<label class="name">' + subcat.name + '</label>');
+                const input = $('<input class="checkbox" type="checkbox" name="subcategory[]" value="' + subcat.term_id + '" />');
+                if (selectedSubcategory && typeof selectedSubcategory === 'object' && selectedSubcategory.includes(subcat.term_id)) {
+                    input.attr('checked', 'checked');
                 }
-                subcategory.append(option);
+                label.prepend(input);
+                subcategory.append(label);
             }
 
         }
