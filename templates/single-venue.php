@@ -27,12 +27,12 @@
                         </div>
                     </div>
 
-                    <div class="support-location text-gray-500 mt-3">
+                    <div class="support-location text-gray-500 mt-3 flex flex-wrap gap-3">
                         <?php
                         $support_locations = get_the_terms(get_the_ID(), 'support_location');
                         if ($support_locations) {
                             foreach ($support_locations as $location) {
-                                echo '<span class="location-tag ring-1 ring-gray-300 p-2 rounded-md mr-3">';
+                                echo '<span class="location-tag ring-1 ring-gray-300 p-2 rounded-md">';
                                 echo '<i class="fa-regular fa-map"></i> ';
                                 echo esc_html($location->name);
                                 echo '</span>';
