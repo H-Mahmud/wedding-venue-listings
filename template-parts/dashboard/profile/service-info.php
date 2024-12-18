@@ -194,24 +194,24 @@ if (!is_wp_error($all_terms)) {
 <script>
     const categoriesData = <?php echo $categories_json; ?>;
 
-    jQuery(document).ready(function($) {
+    const locationChoicesList = <?php echo json_encode($formatted_terms); ?>;
+    const locationChoices = new Choices("#support_location", {
+        removeItemButton: true,
+        maxItemCount: <?php echo wvl_get_support_location_limit(wvl_get_venue_id()); ?>,
+        choices: locationChoicesList,
+        searchResultLimit: 15,
+        searchEnabled: true,
+        maxItemText: (maxItemCount) => {
+            return `Only ${maxItemCount} Support location can be added with free plan`;
+        },
+    });
 
-        const locationChoicesList = <?php echo json_encode($formatted_terms); ?>;
-        new Choices("#support_location", {
-            removeItemButton: true,
-            maxItemCount: <?php echo wvl_get_support_location_limit(wvl_get_venue_id()); ?>,
-            choices: locationChoicesList,
-            searchResultLimit: 15,
-            searchEnabled: true,
-            maxItemText: (maxItemCount) => {
-                return `Only ${maxItemCount} Support location can be added with free plan`;
-            },
-        });
+    var subCategoryChoices;
+
+    jQuery(document).ready(function($) {
 
         const category = $('#category');
         const subcategory = $('#subcategory');
-
-        let vendorChoices;
 
         // Initialize subcategory options on page load
         subcategoryOptions(<?php echo json_encode($category); ?>);
@@ -245,7 +245,7 @@ if (!is_wp_error($all_terms)) {
             subcategory.empty();
 
             // Reinitialize Choices with new subcategory options
-            vendorChoices = new Choices("#subcategory", {
+            subCategoryChoices = new Choices("#subcategory", {
                 removeItemButton: true,
                 maxItemCount: <?php echo wvl_get_terms_limit('subcategory'); ?>,
                 choices: choicesList,

@@ -13,8 +13,8 @@ export default function handleServiceInfoForm($) {
   // const $vendorType = $form.find('#vendor_type').val();
   // const $eventType = $form.find('#event_type').val();
   const $category = $form.find("#category").val();
-  const $subCategory = $form.find("#subcategory").val();
-  const $supportLocation = $form.find("#support_location").val();
+  const $subCategory = subCategoryChoices.getValue(true);
+  const $supportLocation = locationChoices.getValue(true);
 
   const formData = {
     action: "submit_profile_service_info",
@@ -26,8 +26,6 @@ export default function handleServiceInfoForm($) {
     sub_category: $subCategory,
     support_location: $supportLocation,
   };
-
-  console.log(formData);
 
   if (!$venueName || !$category || !$subCategory || !$supportLocation) {
     $profileFormError.html("All fields are required.");
