@@ -59,7 +59,7 @@ class WVL_Dashboard_Analytics
      */
     public function analytics_page_cb()
     {
-        require_once WVL_PLUGIN_DIR . '/template-parts/dashboard/analytics.php';
+        require_once WVL_PLUGIN_DIR . '/includes/public/dashboard/parts/analytics-page.php';
     }
 
 
