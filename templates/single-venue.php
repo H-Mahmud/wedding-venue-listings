@@ -24,6 +24,20 @@
                             <span class="count"> <?php wvl_venue_review_count(get_the_ID()); ?></span>
                         </div>
                     </div>
+
+                    <div class="support-location text-slate-700 mt-3">
+                        <?php
+                        $support_locations = get_the_terms(get_the_ID(), 'support_location');
+                        if ($support_locations) {
+                            foreach ($support_locations as $location) {
+                                echo '<span class="location-tag ring-1 ring-gray-300 p-2 rounded-md mr-3">';
+                                echo '<i class="fa-regular fa-map"></i> ';
+                                echo esc_html($location->name);
+                                echo '</span>';
+                            }
+                        }
+                        ?>
+                    </div>
                 </div>
                 <div class="links">
                     <ul class="social">
