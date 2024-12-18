@@ -40,7 +40,6 @@
                     <a href="#contact">Contact Info</a>
                     <a href="#photos">Photos</a>
                     <a href="#videos">Videos</a>
-                    <a href="#locations">Supported Locations</a>
                     <a href="#reviews">Reviews</a>
                 </div>
 
