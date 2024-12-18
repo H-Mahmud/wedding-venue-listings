@@ -25,7 +25,7 @@
                         </div>
                     </div>
 
-                    <div class="support-location text-slate-700 mt-3">
+                    <div class="support-location text-gray-500 mt-3">
                         <?php
                         $support_locations = get_the_terms(get_the_ID(), 'support_location');
                         if ($support_locations) {
