@@ -46,6 +46,27 @@ class WVL_Analytic_Data_Storage
     }
 
     /**
+     * Retrieves the total count of analytics entries for a given venue ID and event type between a given date range.
+     *
+     * @param int $venue_id The post ID of the venue
+     * @param string $event_type The type of event to log, one of impression, view, unique_view, contact_click, lead
+     * @param string $start_date The start date of the range in Y-m-d format
+     * @param string $end_date The end date of the range in Y-m-d format
+     *
+     * @return int The total count of analytics entries
+     */
+    public static function get_count_by($venue_id, $event_type, $start_date, $end_date)
+    {
+        global $wpdb;
+        $table_name = $wpdb->prefix . 'venue_analytics';
+        $result =  $wpdb->get_var($wpdb->prepare("SELECT SUM(count) FROM $table_name WHERE venue_id = %d AND event_type = %s AND created_at BETWEEN %s AND %s", $venue_id, $event_type, $start_date, $end_date));
+
+        return $result ? $result : 0;
+    }
+
+
+
+    /**
      * Retrieves the count of daily analytics entries for a given venue ID and event type
      *
      * @param int $venue_id The post ID of the venue
