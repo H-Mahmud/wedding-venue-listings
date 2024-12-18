@@ -3,6 +3,8 @@
     <?php
     while (have_posts()) {
         the_post();
+        $post = get_post(get_the_ID());
+        $author_id = $post->post_author;
         WVL_Process_Analytics_Data::print('data_2', [get_the_ID()]);
     ?>
         <div class="cover-photo">
@@ -229,7 +231,7 @@
                 </div>
 
 
-                <?php if (wvl_current_plan() != 'free'): ?>
+                <?php if (wvl_current_plan($author_id) != 'free'): ?>
                     <div class="wvl-gallery mt-3">
                         <div class="gallery-entry mb-3 mt-6 flex justify-between items-center">
                             <h3 class="text-2xl font-semibold"><?php _e('Videos', 'wedding-venue-listings'); ?></h3>
@@ -329,15 +331,15 @@
                     </div>
 
                     <?php
-                    do_action('wvl_review_form');
+                    do_action('wvl_review_form', get_the_ID(), $author_id);
                     do_action('wvl_notice', 'wvl_review_form');
                     custom_comments_display(get_the_ID()); ?>
                 </div>
             </div>
         </main>
-        <?php do_action('wvl_related_venue', get_the_ID()); ?>
+        <?php do_action('wvl_related_venue', get_the_ID(), $author_id); ?>
 
-        <?php do_action('wvl_single_venue_after', get_the_ID()); ?>
+        <?php do_action('wvl_single_venue_after', get_the_ID(), $author_id); ?>
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>

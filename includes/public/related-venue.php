@@ -1,15 +1,13 @@
 <?php
-add_action('wvl_related_venue', 'wvl_add_related_venue');
-function wvl_add_related_venue()
+add_action('wvl_related_venue', 'wvl_add_related_venue', 10, 2);
+function wvl_add_related_venue($post_id, $author_id)
 {
-    if (wvl_current_plan() !== 'free') return;
-    global $post;
-
-    $categories = wp_get_post_categories($post->ID);
+    if (wvl_current_plan($author_id) != 'free') return;
+    $categories = wp_get_post_categories($post_id);
     if (!empty($categories)) {
         $args = [
             'category__in'   => $categories,
-            'post__not_in'   => [$post->ID],
+            'post__not_in'   => [$post_id],
             'posts_per_page' => 6,
             'orderby'        => 'rand',
             'post_type'     => 'venue'
@@ -49,7 +47,7 @@ function wvl_add_related_venue()
                                         </span>
                                     </span>
                                 </div>
-                                <p class="description"><?php echo wvl_get_excerpt_content(get_the_ID()); ?></p>
+                                <p class="description"><?php echo wvl_get_excerpt_content(get_the_ID(), 80); ?></p>
                                 <div class="actions">
                                     <a class="wvl-btn-primary" href="<?php the_permalink(); ?>"><?php _e('Request a Pricing', 'wedding-venue-listings'); ?></a>
                                 </div>

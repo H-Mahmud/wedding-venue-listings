@@ -84,7 +84,7 @@
       }
 
       .thumbnail {
-        @apply h-[320px] w-full;
+        @apply min-h-[180px] w-full;
 
         img {
           @apply block h-full w-full rounded-md object-cover;
