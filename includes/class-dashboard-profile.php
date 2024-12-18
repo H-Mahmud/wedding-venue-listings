@@ -45,6 +45,9 @@ class WVL_Dashboard_Profile
         add_action('wp_ajax_wvl_remove_gallery_photo', array($this, 'remove_gallery_photo'));
         add_action('wp_ajax_nopriv_wvl_remove_gallery_photo', array($this, 'remove_gallery_photo'));
 
+        add_action('wp_ajax_wvl_add_new_video', array($this, 'add_new_video'));
+        add_action('wp_ajax_nopriv_wvl_add_new_video', array($this, 'add_new_video'));
+
         add_action('wp_ajax_wvl_submit_venue_profile', array($this, 'submit_venue_profile'));
         add_action('wp_ajax_nopriv_wvl_submit_venue_profile', array($this, 'submit_venue_profile'));
     }
@@ -399,6 +402,67 @@ class WVL_Dashboard_Profile
         wp_send_json_success(['message' => 'Image deleted successfully!']);
     }
 
+    public function add_new_video()
+    {
+        check_ajax_referer('dashboard_nonce', 'nonce');
+
+        if (!is_user_logged_in()) {
+            wp_send_json_error(['message' => __('You must be logged in to upload a Photo.', 'wedding-venue-listings')]);
+        }
+
+        // if (wvl_current_plan() == 'free') {
+        //     wp_send_json_error(['message' => __('Your not allowed to upload videos. Please consider upgrading to a paid plan to add unlimited videos.', 'wedding-venue-listings')]);
+        // }
+
+
+        if (!isset($_POST['video_url']) || empty($_POST['video_url'])) {
+            wp_send_json_error(['message' => __('No video URL provided.', 'wedding-venue-listings')]);
+        }
+
+        $video = wvl_extract_video_id($_POST['video_url']);
+
+        if (!$video || empty($video['platform']) || empty($video['video_id'])) {
+            wp_send_json_error(['message' => __('Invalid video URL.', 'wedding-venue-listings')]);
+        }
+
+        $platform = $video['platform'];
+        $id = $video['video_id'];
+
+        $venue_id = wvl_get_venue_id();
+
+        $video_gallery = get_post_meta($venue_id, 'venue_videos', true);
+
+        if (empty($video_gallery)) {
+            $video_gallery = [];
+        }
+
+        $image_url = '';
+        $video_url = '';
+        if ($platform == 'youtube') {
+            $image_url = 'https://img.youtube.com/vi/' . $id . '/hqdefault.jpg';
+            $video_url = 'https://www.youtube.com/watch?' . $id;
+        } elseif ($platform == 'vimeo') {
+            $image_url = 'https://vumbnail.com/' . $id . '.jpg';
+            $video_url = 'https://vimeo.com/' . $id;
+        } else {
+            wp_send_json_error(['message' => __('Invalid video URL.', 'wedding-venue-listings')]);
+        };
+
+
+        $video_gallery[] = [
+            'platform' => $platform,
+            'id' => $id
+        ];
+        update_post_meta($venue_id, 'venue_videos', $video_gallery);
+
+        wp_send_json_success([
+            'url' => $video_url,
+            'thumbnail' => $image_url,
+            'platform' => $platform
+        ]);
+    }
+
+
     public function submit_venue_profile()
     {
 
@@ -425,6 +489,7 @@ class WVL_Dashboard_Profile
     }
 
 
+
     /**
      * Gets the singleton instance of the class.
      *
@@ -439,3 +504,24 @@ class WVL_Dashboard_Profile
     }
 }
 WVL_Dashboard_Profile::get_instance();
+
+
+function wvl_extract_video_id($url)
+{
+    // YouTube URL regex
+    $youtubePattern = '/(?:https?:\/\/(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+|(?:v|e(?:mbed)?)\/|.*?[?&]v=)([a-zA-Z0-9_-]+)))/';
+    // Vimeo URL regex
+    $vimeoPattern = '/(?:https?:\/\/(?:www\.)?vimeo\.com\/(?:[^\d]+)?(\d+))/';
+
+    // Check if it's a YouTube URL
+    if (preg_match($youtubePattern, $url, $matches)) {
+        return ['platform' => 'youtube', 'video_id' => $matches[1]];
+    }
+    // Check if it's a Vimeo URL
+    elseif (preg_match($vimeoPattern, $url, $matches)) {
+        return ['platform' => 'vimeo', 'video_id' => $matches[1]];
+    }
+
+    // If no match found, return false
+    return false;
+}
