@@ -3,7 +3,7 @@ export default class StepIndicator {
    * @param el CSS selector of the step indicator element
    */
   constructor(el, handleNext = async () => {}, currentStep = 0) {
-    this.steps = 6;
+    this.steps = 7;
     this._step = currentStep;
     this.$el = jQuery(el);
     this.handleNext = handleNext;
