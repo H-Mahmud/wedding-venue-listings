@@ -27,10 +27,17 @@ get_header(); ?>
                 // $booking_dates = array_map('sanitize_text_field', $_GET['booking_date']);
                 $booking_dates[] = sanitize_text_field($_GET['booking-date']);
             }
+
+            $search_query = '';
+            if (isset($_GET['search']) && !empty($_GET['search'])) {
+                $search_query = sanitize_text_field($_GET['search']);
+            }
+
             $args = [
                 'dates' => $booking_dates,
                 'category_ids' => $subcategories,
                 'taxonomy_terms' => [],
+                'search' => $search_query,
                 'order_by_mime_type' => true,
                 'paged' => 1,
                 'posts_per_page' => 10,

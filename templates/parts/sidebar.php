@@ -33,7 +33,7 @@
 </script>
 <form action="<?php echo site_url('listing'); ?>" class="mb-6">
     <div class="search-container">
-        <input class="search-input" type="text" name="s-vendor" placeholder="<?php _e('Search for a vendor', 'wedding-venue-listings'); ?>" value="<?php echo get_query_var('s-vendor'); ?>">
+        <input class="search-input" type="text" name="search" placeholder="<?php _e('Search for a vendor', 'wedding-venue-listings'); ?>" value="<?php echo get_query_var('search'); ?>">
         <button type="submit" class="search-btn"><i class="fa-solid fa-magnifying-glass icon"></i></button>
     </div>
 </form>

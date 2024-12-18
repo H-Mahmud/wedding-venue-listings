@@ -276,6 +276,7 @@ class WVL_Venue_Query
             'order_by_mime_type' => false,
             'paged' => 1,
             'posts_per_page' => 10,
+            'search' => '',
         ];
         $this->args = wp_parse_args($args, $default_args);
         $this->query();
@@ -291,6 +292,13 @@ class WVL_Venue_Query
         $join_taxonomy = '';
         $where_conditions = ["p.post_type = %s", "p.post_status = 'publish'"];
         $query_params = [$post_type];
+
+        if (!empty($this->args['search'])) {
+            $search_term = '%' . $wpdb->esc_like($this->args['search']) . '%';
+            $where_conditions[] = "(p.post_title LIKE %s OR p.post_content LIKE %s)";
+            $query_params[] = $search_term;
+            $query_params[] = $search_term;
+        }
 
         // Handle dates
         if (!empty($this->args['dates'])) {
