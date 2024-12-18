@@ -4,7 +4,7 @@
     </div>
     <div class="content">
         <h2 class="title">
-            <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+            <a href="<?php echo the_permalink(get_the_ID()); ?>"><?php the_title(); ?></a>
         </h2>
         <p class="location">
             <i class="fa-solid fa-location-dot icon"></i>
@@ -20,7 +20,7 @@
             </span>
         </div>
         <div class="actions">
-            <a class="wvl-btn-primary" href="<?php the_permalink(); ?>"><?php _e('Request a Pricing', 'wedding-venue-listings'); ?></a>
+            <a class="wvl-btn-primary" href="<?php the_permalink(get_the_ID()); ?>"><?php _e('Request a Pricing', 'wedding-venue-listings'); ?></a>
         </div>
     </div>
 </div>
