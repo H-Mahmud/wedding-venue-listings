@@ -288,10 +288,13 @@
                             if (is_user_logged_in()) :
                                 $user_id = get_current_user_id();
                                 $user_comments = get_comments([
-                                    'user_id' => $user_id,
-                                    'post_id' => get_the_ID(),
-                                    // 'status'  => 'approve', // Only approved comments
-                                ]);
+                                    'user_id'    => $user_id,
+                                    'post_id'    => get_the_ID(),
+                                    'number'     => 1,
+                                    'parent'  => 0,
+                                    'orderby'    => 'comment_ID',
+                                    'order'      => 'DESC',
+                                ]);;
 
                                 if (!empty($user_comments)) {
                                     $review_text = __('Edit Your Review', 'wedding-venue-listings');
@@ -299,7 +302,7 @@
                                     $review_text = __('Write a Review', 'wedding-venue-listings');
                                 }
                             ?>
-                                <span class="wvl-btn" data-component-type="wlval-modal-trigger" data-target-modal="#review-modal">
+                                <span class="wvl-btn open-modal-btn" data-target="#modal-review-form">
                                     <?php echo $review_text ?>
                                 </span>
                             <?php else: ?>
