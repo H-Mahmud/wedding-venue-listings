@@ -34,7 +34,7 @@ jQuery(document).ready(function ($) {
       return await handleContactInfoForm($);
     } else if (step === 4) {
       return await handleYourStoryForm($);
-    } else if (step === 5) {
+    } else if (step === 6) {
       return await handleSubmitForm($);
     }
 
