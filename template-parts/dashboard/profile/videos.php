@@ -3,18 +3,10 @@
         <legend class="mb-2 text-center"><?php _e('Videos', 'wedding-venue-listings'); ?></legend>
 
         <div id="video-form" class="relative">
-            <?php if (wvl_current_plan() == 'free'): ?>
-
-                <!-- <div class=" absolute inset-0 flex items-center justify-center z-500">
-                    <h1 class="text-orange-600 font-semibold text-3xl p-4 backdrop-blur-sm"><?php _e('Upgrade to unlock this feature', 'wedding-venue-listings'); ?></h1>
-                </div>
-                <div class=" deemed absolute inset-0 flex items-center justify-center bg-black opacity-30 rounded-lg">
-                </div> -->
-            <?php endif;  ?>
             <div class="video-gallery grid grid-cols-2 md:grid-cols-3 gap-4">
                 <label for="upload_gallery" data-target="#modal-add-video" class="open-modal-btn py-8 flex justify-center items-center flex-col gap-3 border border-gray-200 rounded-lg hover:border-dashed hover:border-blue-600 cursor-pointer">
-                    <i class="fa-regular fa-video  text-gray-600 text-4xl"></i>
-                    <p class="text-center text-xl font-semibold">
+                    <i class="fa-solid fa-video  text-gray-600 text-4xl"></i>
+                    <p class="text-center text-xl font-semibold text-gray-600">
                         <?php _e(' Add New Video', 'wedding-venue-listings'); ?>
                     </p>
                     <input type="file" name="upload_gallery" id="upload_gallery" class="hidden" multiple accept="image/*">
