@@ -49,7 +49,7 @@
                 </div>
 
                 <div class="wvl-gallery">
-                    <div class="entry mb-3 mt-6 flex justify-between items-center">
+                    <div class="gallery-entry mb-3 mt-6 flex justify-between items-center">
                         <h3 class="text-2xl font-semibold">Recent Events Gallery</h3>
                         <!-- <a id="view-all-btn" class="wvl-btn">
                             View All
@@ -215,6 +215,69 @@
                     </script>
                 </div>
 
+
+                <?php if (wvl_current_plan() != 'free'): ?>
+                    <div class="wvl-gallery mt-3">
+                        <div class="gallery-entry mb-3 mt-6 flex justify-between items-center">
+                            <h3 class="text-2xl font-semibold"><?php _e('Videos', 'wedding-venue-listings'); ?></h3>
+                        </div>
+
+                        <div id="video-gallery" class="video-gallery grid grid-cols-2 md:grid-cols-4 gap-4">
+
+                            <?php
+                            $video_gallery = get_post_meta(get_the_ID(), 'venue_videos', true);
+                            if (!empty($video_gallery) && is_array($video_gallery)) :
+                                foreach ($video_gallery as $video) :
+                                    if ($video['platform'] == 'youtube') {
+                                        $video_url = 'https://www.youtube.com/watch?v=' . $video['id'];
+                                        $image_url = 'https://img.youtube.com/vi/' . $video['id'] . '/hqdefault.jpg';
+                                    }
+                                    if ($video['platform'] == 'vimeo') {
+                                        $video_url = 'https://vimeo.com/' . $video['id'];
+                                        $image_url = 'https://vumbnail.com/' . $video['id'] . '.jpg';
+                                    }
+                            ?>
+
+                                    <?php /*
+                                <a href="<?php echo $video_url; ?>" class="lightgallery-item">
+                                    <img src="<?php echo $image_url; ?>" alt="<?php echo $video['platform']; ?>" />
+                                </a>
+                                */ ?>
+                                    <a href="<?php echo $video_url; ?>" data-fancybox="gallery" data-caption="<?php echo $video['platform']; ?>">
+                                        <img src="<?php echo $image_url; ?>" alt="<?php echo $video['platform']; ?>" />
+                                    </a>
+
+                            <?php
+                                endforeach;
+                            endif;
+                            ?>
+                        </div>
+
+                        <script>
+                            jQuery(document).ready(function($) {
+
+                                // const lightGalleryInstance = $('#video-gallery').lightGallery({
+                                //     download: false
+                                // });
+                                $("[data-fancybox]").fancybox({
+                                    // Options
+                                    buttons: ["zoom", "share", "close"], // Add buttons to the UI
+                                    youtube: {
+                                        controls: 1, // Show YouTube controls
+                                        showinfo: 0, // Hide YouTube video information
+                                    },
+                                    vimeo: {
+                                        color: "f00", // Change Vimeo player color to red
+                                    },
+                                    transitionEffect: "slide", // Smooth slide transition
+                                    loop: true, // Enable looping through gallery items
+                                });
+                            });
+                        </script>
+
+                    </div>
+                <?php endif; ?>
+
                 <div class="wvl-reviews mt-20">
                     <div class="mb-3">
 
@@ -254,6 +317,8 @@
 
         <?php do_action('wvl_single_venue_after', get_the_ID()); ?>
 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
         <script>
             jQuery(document).ready(function($) {
                 $('#contactFormOpen').on('click', function() {
