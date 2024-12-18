@@ -4,13 +4,29 @@
 
         <div id="video-form" class="relative">
             <div class="video-gallery grid grid-cols-2 md:grid-cols-3 gap-4">
-                <label for="upload_gallery" data-target="#modal-add-video" class="open-modal-btn py-8 flex justify-center items-center flex-col gap-3 border border-gray-200 rounded-lg hover:border-dashed hover:border-blue-600 cursor-pointer">
-                    <i class="fa-solid fa-video  text-gray-600 text-4xl"></i>
-                    <p class="text-center text-xl font-semibold text-gray-600">
-                        <?php _e(' Add New Video', 'wedding-venue-listings'); ?>
-                    </p>
-                    <input type="file" name="upload_gallery" id="upload_gallery" class="hidden" multiple accept="image/*">
-                </label>
+                <?php if (wvl_current_plan() == 'free'): ?>
+                    <label onclick="alert('<?php _e('Upgrade your plan to add videos', 'wedding-venue-listings'); ?>')" class=" py-8 flex justify-center items-center flex-col gap-3 border border-gray-200 rounded-lg hover:border-dashed hover:border-blue-600 cursor-pointer">
+                        <i class="fa-solid fa-video  text-gray-600 text-4xl"></i>
+                        <p class="text-center text-xl font-semibold text-gray-600">
+                            <?php _e(' Add New Video', 'wedding-venue-listings'); ?>
+                        </p>
+                        <div class="text-center">
+                            <span class="inline-block ml-2 bg-amber-100 text-amber-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded"><?php _e('Premium', 'wedding-venue-listings'); ?></span>
+                        </div>
+                    </label>
+                <?php else: ?>
+                    <label for="upload_gallery" data-target="#modal-add-video" class="open-modal-btn py-8 flex justify-center items-center flex-col gap-3 border border-gray-200 rounded-lg hover:border-dashed hover:border-blue-600 cursor-pointer">
+                        <i class="fa-solid fa-video  text-gray-600 text-4xl"></i>
+                        <p class="text-center text-xl font-semibold text-gray-600">
+                            <?php _e(' Add New Video', 'wedding-venue-listings'); ?>
+                        </p>
+                        <div class="text-center">
+                            <span class="inline-block ml-2 bg-amber-100 text-amber-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded"><?php _e('Premium', 'wedding-venue-listings'); ?></span>
+                        </div>
+                        <input type="file" name="upload_gallery" id="upload_gallery" class="hidden" multiple accept="image/*">
+                    </label>
+                <?php endif;  ?>
+
                 <?php
                 $video_gallery = get_post_meta($venue_id, 'venue_videos', true);
                 if (!empty($video_gallery) && is_array($video_gallery)) {
