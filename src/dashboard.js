@@ -1,3 +1,2 @@
-import './dashboard/profile';
-import './dashboard/availability-page';
-// import './full-calendar';
+import "./dashboard/profile";
+import "./dashboard/availability-page";

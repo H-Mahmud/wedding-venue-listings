@@ -1,5 +1,6 @@
 jQuery(document).ready(function ($) {
   var calendarEl = document.getElementById("booking-calendar");
+  if (!calendarEl) return;
   var calendar = new FullCalendar.Calendar(calendarEl, {
     initialView: "dayGridMonth",
     themeSystem: "standard",
