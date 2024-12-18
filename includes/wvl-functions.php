@@ -117,6 +117,8 @@ function wvl_get_venue_location($venue_id)
 
 
 add_action('wvl_social_links', function () {
+    $post = get_post();
+    if (wvl_current_plan($post->post_author) == 'free') return;
 
     $social_accounts = [
         'website' => [
