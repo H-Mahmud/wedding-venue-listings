@@ -258,3 +258,125 @@ function wvl_is_booked_date($venue_id, $date)
     $table_name = $wpdb->prefix . 'venue_bookings';
     return $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM $table_name WHERE venue_id = %d AND booked_date = %s", $venue_id, $date));
 }
+
+
+class WVL_Venue_Query
+{
+    private $args;
+    private $results;
+    private $current_post = -1;
+    private $total_count;
+
+    public function __construct($args = [])
+    {
+        $default_args = [
+            'dates' => [],
+            'category_ids' => [],
+            'taxonomy_terms' => [],
+            'order_by_mime_type' => false,
+            'paged' => 1,
+            'posts_per_page' => 10,
+        ];
+        $this->args = wp_parse_args($args, $default_args);
+        $this->query();
+    }
+
+    private function query()
+    {
+        global $wpdb;
+
+        $table_name = $wpdb->prefix . 'venue_bookings';
+        $post_type = 'venue';
+
+        $join_taxonomy = '';
+        $where_conditions = ["p.post_type = %s", "p.post_status = 'publish'"];
+        $query_params = [$post_type];
+
+        // Handle dates
+        if (!empty($this->args['dates'])) {
+            $sanitized_dates = array_map('sanitize_text_field', $this->args['dates']);
+            $date_placeholders = "'" . implode("','", $sanitized_dates) . "'";
+            $where_conditions[] = "p.ID NOT IN (
+                SELECT venue_id
+                FROM {$table_name}
+                WHERE booked_date IN ($date_placeholders)
+            )";
+        }
+
+        // Handle categories
+        if (!empty($this->args['category_ids'])) {
+            $sanitized_category_ids = array_map('intval', $this->args['category_ids']);
+            $category_placeholders = implode(',', $sanitized_category_ids);
+            $join_taxonomy .= "
+                INNER JOIN {$wpdb->term_relationships} tr1 ON p.ID = tr1.object_id
+                INNER JOIN {$wpdb->term_taxonomy} tt1 ON tr1.term_taxonomy_id = tt1.term_taxonomy_id";
+            $where_conditions[] = "tt1.taxonomy = 'category' AND tt1.term_id IN ($category_placeholders)";
+        }
+
+        // Handle custom taxonomy
+        if (!empty($this->args['taxonomy_terms'])) {
+            $sanitized_taxonomy_terms = array_map('sanitize_text_field', $this->args['taxonomy_terms']);
+            $taxonomy_placeholders = "'" . implode("','", $sanitized_taxonomy_terms) . "'";
+            $join_taxonomy .= "
+                INNER JOIN {$wpdb->term_relationships} tr2 ON p.ID = tr2.object_id
+                INNER JOIN {$wpdb->term_taxonomy} tt2 ON tr2.term_taxonomy_id = tt2.term_taxonomy_id";
+            $where_conditions[] = "tt2.taxonomy = 'support_location' AND tt2.term_id IN ($taxonomy_placeholders)";
+        }
+
+        // Build ORDER BY clause
+        $order_by_clause = $this->args['order_by_mime_type'] ? "ORDER BY p.post_mime_type ASC" : "ORDER BY p.post_date DESC";
+
+        // Combine WHERE conditions
+        $where_clause = implode(' AND ', $where_conditions);
+
+        // Pagination
+        $offset = ($this->args['paged'] - 1) * $this->args['posts_per_page'];
+        $limit_clause = "LIMIT %d OFFSET %d";
+
+        // Query for total count
+        $count_query = "
+            SELECT COUNT(DISTINCT p.ID)
+            FROM {$wpdb->posts} p
+            $join_taxonomy
+            WHERE $where_clause
+        ";
+        $this->total_count = $wpdb->get_var($wpdb->prepare($count_query, $query_params));
+
+        // Main query
+        $query = "
+            SELECT DISTINCT p.ID, p.post_title, p.post_mime_type
+            FROM {$wpdb->posts} p
+            $join_taxonomy
+            WHERE $where_clause
+            $order_by_clause
+            $limit_clause
+        ";
+
+        $query_params[] = intval($this->args['posts_per_page']);
+        $query_params[] = intval($offset);
+        $prepared_query = $wpdb->prepare($query, ...$query_params); // Unpack $query_params
+        $this->results = $wpdb->get_results($prepared_query);
+    }
+
+
+    public function have_posts()
+    {
+        return $this->current_post + 1 < count($this->results);
+    }
+
+    public function the_post()
+    {
+        $this->current_post++;
+        return $this->results[$this->current_post] ?? null;
+    }
+
+    public function get_total_count()
+    {
+        return $this->total_count;
+    }
+
+    public function rewind_posts()
+    {
+        $this->current_post = -1;
+    }
+}
