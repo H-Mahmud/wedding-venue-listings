@@ -199,7 +199,8 @@ add_action('wvl_social_links', function () {
 
 function add_verified_badge_to_venue_title($title, $post_id)
 {
-    if (is_admin() || get_post_type($post_id) !== 'venue' || wvl_current_plan() != 'ultimate') {
+    $get_author_id = get_post_field('post_author', $post_id);
+    if (is_admin() || get_post_type($post_id) !== 'venue' || wvl_current_plan($get_author_id) != 'ultimate') {
         return $title;
     }
     return $title . wvl_get_verified_badge();
