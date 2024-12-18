@@ -9,28 +9,28 @@
             <input type="date" id="endDate" name="endDate" max="">
         </div>
 
-        <button type="submit" class="wvl-btn flex-nowrap h-10 px-6 !py-2">Filter</button>
+        <button type="submit" class="wvl-btn-primary">Filter</button>
     </div>
 </form>
 
 <div class="analytics-summary mt">
-    <div class="card impression bg-purple-700">
-        <span>Impressions</span>
+    <div class="card impression bg-[#4BC0C0]">
+        <span><?php _e('Impressions', 'wedding-venue-listings'); ?></span>
         <h3>944</h3>
     </div>
-    <div class="card profile-view bg-cyan-700">
-        <span>Profile View</span>
+    <div class="card profile-view bg-[#FF6384]">
+        <span><?php _e('Profile Views', 'wedding-venue-listings'); ?></span>
         <h3>33.6k</h3>
     </div>
-    <div class="card profile-view-unique bg-pink-700">
-        <span>Profile View (Unique)</span>
+    <div class="card profile-view-unique bg-[#36A2EB]">
+        <span><?php _e('Unique Profile Views', 'wedding-venue-listings'); ?></span>
         <h3>23.6k</h3>
     </div>
-    <div class="card contact-view bg-lime-700">
-        <span>Contact Info Views</span>
+    <div class="card contact-view bg-[#efb526]">
+        <span><?php _e('Contact Clicks', 'wedding-venue-listings'); ?></span>
         <h3>1.6k</h3>
     </div>
-    <div class="card lead bg-rose-700">
+    <div class="card lead bg-[#9966FF]">
         <span>Leads</span>
         <h3>1.3k</h3>
     </div>
@@ -88,31 +88,31 @@ $chartData = generateDummyData($startDate, $endDate);
                 datasets: [{
                         label: 'Impressions',
                         data: chartData.impressions,
-                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderColor: '#4BC0C0',
                         fill: false
                     },
                     {
                         label: 'Profile View',
                         data: chartData.profileViews,
-                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderColor: '#FF6384',
                         fill: false
                     },
                     {
                         label: 'Unique Profile View',
                         data: chartData.uniqueProfileViews,
-                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderColor: '#36A2EB',
                         fill: false
                     },
                     {
-                        label: 'Contact Info Click',
+                        label: 'Contact Click',
                         data: chartData.contactInfoClicks,
-                        borderColor: 'rgba(255, 206, 86, 1)',
+                        borderColor: '#efb526',
                         fill: false
                     },
                     {
                         label: 'Leads',
                         data: chartData.leads,
-                        borderColor: 'rgba(153, 102, 255, 1)',
+                        borderColor: '#9966FF',
                         fill: false
                     }
                 ]
