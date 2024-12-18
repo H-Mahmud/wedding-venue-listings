@@ -151,7 +151,7 @@
             </div>
         </div>
 
-        <div class="wvl-field">
+        <div class="wvl-field w-1/2">
             <label for="support_location"><?php _e('Support Location', 'wedding-venue-listings'); ?></label>
             <select name="support_location" class="wvl-tags" multiple id="support_location"></select>
         </div>
