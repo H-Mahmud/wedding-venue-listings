@@ -10,8 +10,6 @@ import "./styles/forms.css";
 import "./styles/listing-page.scss";
 import "./styles/single-venue.scss";
 
-// import './styles/listing-archive.scss';
-
 jQuery(document).ready(function ($) {
   const tabs = $(".tabs");
   if (tabs.length === 0) {
