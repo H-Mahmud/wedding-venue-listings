@@ -42,6 +42,9 @@ class WVL_Dashboard_Profile
         add_action('wp_ajax_wvl_upload_gallery_photo', array($this, 'upload_gallery_photo'));
         add_action('wp_ajax_nopriv_wvl_upload_gallery_photo', array($this, 'upload_gallery_photo'));
 
+        add_action('wp_ajax_wvl_remove_gallery_photo', array($this, 'remove_gallery_photo'));
+        add_action('wp_ajax_nopriv_wvl_remove_gallery_photo', array($this, 'remove_gallery_photo'));
+
         add_action('wp_ajax_wvl_submit_venue_profile', array($this, 'submit_venue_profile'));
         add_action('wp_ajax_nopriv_wvl_submit_venue_profile', array($this, 'submit_venue_profile'));
     }
@@ -357,6 +360,45 @@ class WVL_Dashboard_Profile
         wp_send_json_success(['message' => 'Image uploaded successfully!']);
     }
 
+    public function remove_gallery_photo()
+    {
+        check_ajax_referer('dashboard_nonce', 'security');
+
+        if (!is_user_logged_in()) {
+            wp_send_json_error(['message' => __('You must be logged to delete a Photo.', 'wedding-venue-listings')]);
+        }
+
+        if (!isset($_POST['attachment_id']) || empty($_POST['attachment_id'])) {
+            wp_send_json_error(['message' => __('No attachment ID provided.', 'wedding-venue-listings')]);
+        }
+
+        $attachment_id = $_POST['attachment_id'];
+        $parent_id = wvl_get_venue_id();
+
+        $attachment = get_post($attachment_id);
+        if (!$attachment || $attachment->post_parent !== $parent_id) {
+            wp_send_json_error(['message' => __('Invalid attachment ID.', 'wedding-venue-listings')]);
+        }
+
+        $delete = wp_delete_attachment($attachment_id, true);
+
+        if (is_wp_error($delete)) {
+            wp_send_json_error(['message' => __('Failed to delete the attachment.', 'wedding-venue-listings')]);
+        }
+
+        $post_gallery = get_post_meta($parent_id, 'venue_gallery', true);
+
+        if (empty($post_gallery)) {
+            $post_gallery = [];
+        }
+
+        $post_gallery = array_diff($post_gallery, [$attachment_id]);
+
+        update_post_meta($parent_id, 'venue_gallery', $post_gallery);
+
+        wp_send_json_success(['message' => 'Image deleted successfully!']);
+    }
+
     public function submit_venue_profile()
     {
 
@@ -381,6 +423,7 @@ class WVL_Dashboard_Profile
 
         wp_send_json_success(['message' => __('Your application has been submitted.', 'wedding-venue-listings')]);
     }
+
 
     /**
      * Gets the singleton instance of the class.

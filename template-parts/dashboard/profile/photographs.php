@@ -36,7 +36,8 @@
             if ($gallery) :
                 foreach ($gallery as $image) :
             ?>
-                    <div>
+                    <div class="relative gallery-image">
+                        <span class="remove-gallery-image inline-block cursor-pointer absolute bg-black opacity-60 hover:opacity-100 rounded-lg  m-2" data-attachment-id="<?php echo $image; ?>"><i class="fa-regular fa-trash-can text-2xl text-white p-3 inline-block"></i></span>
                         <?php echo wp_get_attachment_image($image, 'medium', false, ['class' => 'h-auto max-w-full rounded-lg']); ?>
                     </div>
             <?php
