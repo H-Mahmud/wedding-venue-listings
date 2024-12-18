@@ -1,6 +1,6 @@
 <?php
 get_header(); ?>
-<div id="primary" class="listing-archive">
+<div id="primary" class="listing-archive mt-4">
     <main id="main" class="site-container" role="main">
         <div class="wvl-sidebar">
             <?php load_template(WVL_PLUGIN_DIR . 'templates/parts/sidebar.php'); ?>
@@ -22,6 +22,7 @@ get_header(); ?>
                 $locations = array_map('intval', $_GET['location']);
             }
 
+
             $booking_dates = [];
             if (isset($_GET['booking-date']) && !empty($_GET['booking-date'])) {
                 // $booking_dates = array_map('sanitize_text_field', $_GET['booking_date']);
@@ -36,7 +37,7 @@ get_header(); ?>
             $args = [
                 'dates' => $booking_dates,
                 'category_ids' => $subcategories,
-                'taxonomy_terms' => [],
+                'taxonomy_terms' => $locations,
                 'search' => $search_query,
                 'order_by_mime_type' => true,
                 'paged' => 1,
