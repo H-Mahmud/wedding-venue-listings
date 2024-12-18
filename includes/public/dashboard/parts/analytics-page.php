@@ -1,60 +1,70 @@
-<form id="filterForm" method="post">
-    <div class="flex max-w-md gap-2 items-center">
-        <div class="wvl-field">
-            <label for="startDate">Start Date:</label>
-            <input type="date" id="startDate" name="startDate" max="">
+<div class="analytics-page relative">
+    <?php if (wvl_current_plan() == 'free'): ?>
+        <div class="deemed absolute inset-0 flex items-center justify-center bg-white/50 backdrop-blur-sm"></div>
+    <?php endif; ?>
+    <form id="filterForm" method="post">
+        <div class="flex max-w-md gap-2 items-center">
+            <div class="wvl-field">
+                <label for="startDate">Start Date:</label>
+                <input type="date" id="startDate" name="startDate" max="">
+            </div>
+            <div class="wvl-field">
+                <label for="endDate">End Date:</label>
+                <input type="date" id="endDate" name="endDate" max="">
+            </div>
+
+            <button type="submit" class="wvl-btn-primary">Filter</button>
         </div>
-        <div class="wvl-field">
-            <label for="endDate">End Date:</label>
-            <input type="date" id="endDate" name="endDate" max="">
+    </form>
+
+
+    <?php
+
+    $defaultStartDate = (new DateTime())->modify('-15 days')->format('Y-m-d');
+    $defaultEndDate = (new DateTime())->format('Y-m-d');
+
+    $startDate = $_POST['startDate'] ?? $defaultStartDate;
+    $endDate = $_POST['endDate'] ?? $defaultEndDate;
+    // Default value
+    $impression_count = 500;
+    $profile_view_count = 100;
+    $unique_view_count = 50;
+    $contact_click_count = 30;
+    $lead_count = 25;
+    if (wvl_current_plan() != 'free'):
+        $impression_count = WVL_Analytic_Data_Storage::get_count_by(wvl_get_venue_id(), 'impression', $startDate, $endDate);
+        $profile_view_count = WVL_Analytic_Data_Storage::get_count_by(wvl_get_venue_id(), 'view', $startDate, $endDate);
+        $unique_view_count = WVL_Analytic_Data_Storage::get_count_by(wvl_get_venue_id(), 'unique_view', $startDate, $endDate);
+        $contact_click_count = WVL_Analytic_Data_Storage::get_count_by(wvl_get_venue_id(), 'contact_click', $startDate, $endDate);
+        $lead_count = WVL_Analytic_Data_Storage::get_count_by(wvl_get_venue_id(), 'lead', $startDate, $endDate);
+    endif;
+    ?>
+
+    <div class="analytics-summary mt">
+        <div class="card impression bg-[#4BC0C0]">
+            <span><?php _e('Impressions', 'wedding-venue-listings'); ?></span>
+            <h3><?php echo number_format_i18n($impression_count); ?></h3>
         </div>
-
-        <button type="submit" class="wvl-btn-primary">Filter</button>
+        <div class="card profile-view bg-[#FF6384]">
+            <span><?php _e('Views', 'wedding-venue-listings'); ?></span>
+            <h3><?php echo number_format_i18n($profile_view_count); ?></h3>
+        </div>
+        <div class="card profile-view-unique bg-[#36A2EB]">
+            <span><?php _e('Unique Views', 'wedding-venue-listings'); ?></span>
+            <h3><?php echo number_format_i18n($unique_view_count); ?></h3>
+        </div>
+        <div class="card contact-view bg-[#efb526]">
+            <span><?php _e('Contact Clicks', 'wedding-venue-listings'); ?></span>
+            <h3><?php echo number_format_i18n($contact_click_count); ?></h3>
+        </div>
+        <div class="card lead bg-[#9966FF]">
+            <span><?php _e('Leads', 'wedding-venue-listings'); ?></span>
+            <h3><?php echo number_format_i18n($lead_count); ?></h3>
+        </div>
     </div>
-</form>
 
-
-<?php
-
-$defaultStartDate = (new DateTime())->modify('-15 days')->format('Y-m-d');
-$defaultEndDate = (new DateTime())->format('Y-m-d');
-
-$startDate = $_POST['startDate'] ?? $defaultStartDate;
-$endDate = $_POST['endDate'] ?? $defaultEndDate;
-$impression_count = WVL_Analytic_Data_Storage::get_count_by(wvl_get_venue_id(), 'impression', $startDate, $endDate);
-$profile_view_count = WVL_Analytic_Data_Storage::get_count_by(wvl_get_venue_id(), 'view', $startDate, $endDate);
-$unique_view_count = WVL_Analytic_Data_Storage::get_count_by(wvl_get_venue_id(), 'unique_view', $startDate, $endDate);
-$contact_click_count = WVL_Analytic_Data_Storage::get_count_by(wvl_get_venue_id(), 'contact_click', $startDate, $endDate);
-$lead_count = WVL_Analytic_Data_Storage::get_count_by(wvl_get_venue_id(), 'lead', $startDate, $endDate);
-?>
-
-<div class="analytics-summary mt">
-    <div class="card impression bg-[#4BC0C0]">
-        <span><?php _e('Impressions', 'wedding-venue-listings'); ?></span>
-        <h3><?php echo number_format_i18n($impression_count); ?></h3>
-    </div>
-    <div class="card profile-view bg-[#FF6384]">
-        <span><?php _e('Views', 'wedding-venue-listings'); ?></span>
-        <h3><?php echo number_format_i18n($profile_view_count); ?></h3>
-    </div>
-    <div class="card profile-view-unique bg-[#36A2EB]">
-        <span><?php _e('Unique Views', 'wedding-venue-listings'); ?></span>
-        <h3><?php echo number_format_i18n($unique_view_count); ?></h3>
-    </div>
-    <div class="card contact-view bg-[#efb526]">
-        <span><?php _e('Contact Clicks', 'wedding-venue-listings'); ?></span>
-        <h3><?php echo number_format_i18n($contact_click_count); ?></h3>
-    </div>
-    <div class="card lead bg-[#9966FF]">
-        <span><?php _e('Leads', 'wedding-venue-listings'); ?></span>
-        <h3><?php echo number_format_i18n($lead_count); ?></h3>
-    </div>
+    <canvas id="myChart" width="400" height="200" class="mt-8"></canvas>
 </div>
-
-
-
-<canvas id="myChart" width="400" height="200" class="mt-8"></canvas>
-
 <?php
 function generateDummyData($startDate, $endDate)
 {
