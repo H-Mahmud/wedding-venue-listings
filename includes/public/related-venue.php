@@ -18,7 +18,7 @@ function wvl_add_related_venue($post_id, $author_id)
         if ($related_posts->have_posts()) {
 
 ?>
-            <div class="site-container related-venue mt-6">
+            <div class="site-container related-venue mt-6 section" id="related-venue">
                 <h3 class="text-2xl font-semibold"><?php _e('Related Venue', 'wedding-venue-listings'); ?></h3>
                 <div class="related-items-wrapper">
                     <?php

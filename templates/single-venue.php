@@ -1,5 +1,5 @@
 <?php get_header(); ?>
-<div id="primary" class="single-venue">
+<div id="primary" class="single-venue relative">
     <?php
     while (have_posts()) {
         the_post();
@@ -10,11 +10,11 @@
         <div class="cover-photo">
             <?php the_post_thumbnail('full', array('class' => '')); ?>
         </div>
-        <main id="main" class="site-container" role="main">
+        <main id="main" class="site-container relative" role="main">
             <div class="header">
                 <div class="entry-header">
                     <?php the_title('<h1 class="title text-4xl font-bold">', '</h1>'); ?>
-                    <div class="meta">
+                    <div class="meta section" id="contact-info">
                         <div class="address">
                             <i class="fa-solid fa-location-dot icon"></i>
                             <?php echo wvl_get_venue_address(get_the_ID()); ?>
@@ -49,21 +49,24 @@
                 </div>
             </div>
 
-            <div class="wvl-content">
-
-                <div class="nav-tabs">
-                    <a class="active" href="#overview">Overview</a>
-                    <a href="#contact">Contact Info</a>
-                    <a href="#photos">Photos</a>
-                    <a href="#videos">Videos</a>
-                    <a href="#reviews">Reviews</a>
+            <div class="wvl-content relative">
+                <div class="tabs">
+                    <div class="tab" data-target="#contact-info"><?php _e('Contact', 'wedding-venue-listings'); ?></div>
+                    <div class="tab" data-target="#overview"><?php _e('Overview', 'wedding-venue-listings'); ?></div>
+                    <div class="tab" data-target="#photos-gallery"><?php _e('Photos', 'wedding-venue-listings'); ?></div>
+                    <?php if (wvl_current_plan($author_id) != 'free'): ?>
+                        <div class="tab" data-target="#videos-gallery"><?php _e('Videos', 'wedding-venue-listings'); ?></div>
+                    <?php endif; ?>
+                    <div class="tab" data-target="#reviews"><?php _e('Reviews', 'wedding-venue-listings'); ?></div>
+                    <?php if (wvl_current_plan($author_id) == 'free'): ?>
+                        <div class="tab" data-target="#related-venue"><?php _e('Related', 'wedding-venue-listings'); ?></div>
+                    <?php endif; ?>
                 </div>
-
-                <div class="description">
+                <div class="description section" id="overview">
                     <?php the_content(); ?>
                 </div>
 
-                <div class="wvl-gallery">
+                <div class="wvl-gallery section" id="photos-gallery">
                     <div class="gallery-entry mb-3 mt-6 flex justify-between items-center">
                         <h3 class="text-2xl font-semibold">Recent Events Gallery</h3>
                         <!-- <a id="view-all-btn" class="wvl-btn">
@@ -232,7 +235,7 @@
 
 
                 <?php if (wvl_current_plan($author_id) != 'free'): ?>
-                    <div class="wvl-gallery mt-3">
+                    <div class="wvl-gallery mt-3 section" id="videos-gallery">
                         <div class="gallery-entry mb-3 mt-6 flex justify-between items-center">
                             <h3 class="text-2xl font-semibold"><?php _e('Videos', 'wedding-venue-listings'); ?></h3>
                         </div>
@@ -293,7 +296,7 @@
                     </div>
                 <?php endif; ?>
 
-                <div class="wvl-reviews mt-20">
+                <div class="wvl-reviews mt-20 section" id="reviews">
                     <div class="mb-3">
 
                         <div class=" mb-3 mt-6 flex justify-between items-center">
@@ -367,4 +370,5 @@
     }; ?>
 
 </div>
+
 <?php get_footer(); ?>

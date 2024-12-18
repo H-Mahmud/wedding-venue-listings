@@ -47,16 +47,26 @@
     .wvl-content {
       @apply mt-8 rounded-lg px-4 py-2 ring-1 ring-gray-200;
 
-      .nav-tabs {
+      .tabs {
         @apply flex items-end justify-between;
 
-        a {
-          @apply block flex-1 rounded-t-lg p-4 text-gray-500 ring-1 ring-gray-200;
+        .tab {
+          @apply block flex-1 cursor-pointer rounded-t-lg p-4 text-sm text-gray-500 ring-1 ring-gray-200;
 
           &.active {
             @apply bg-primary font-semibold text-white;
           }
         }
+      }
+
+      .sticky {
+        @apply z-30 w-full border-b-2 border-gray-300 bg-white drop-shadow-sm;
+        position: fixed;
+        top: 2px;
+        left: 0;
+        right: 0;
+        width: inherit;
+        margin: 0 auto;
       }
 
       .description {
