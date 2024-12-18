@@ -53,11 +53,12 @@ class WVL_Customer_Contact_Request
 
     public function contact_submit()
     {
-        if (!is_user_logged_in()) return;
         if (!isset($_POST['wlv_contact_submission']) || !isset($_POST['wlv_contact_submission'])) return;
         if (!wp_verify_nonce($_POST['wlv_contact_submission'], 'wlv_contact_submission')) return;
 
         if (!isset($_POST['venue_id']) || empty($_POST['venue_id'])) wp_die('Invalid request vendor not found.');
+
+        $user_id = is_user_logged_in() ? get_current_user_id() : 0;
 
         $first_name = isset($_POST['first_name']) ? sanitize_text_field($_POST['first_name']) : '';
         $last_name = isset($_POST['last_name']) ? sanitize_text_field($_POST['last_name']) : '';
@@ -66,7 +67,6 @@ class WVL_Customer_Contact_Request
         $city = isset($_POST['city']) ? sanitize_text_field($_POST['city']) : '';
         $date = isset($_POST['date']) ? sanitize_text_field($_POST['date']) : '';
         $message = isset($_POST['message']) ? sanitize_textarea_field($_POST['message']) : '';
-        $user_id = get_current_user_id();
         $vendor_id = $_POST['venue_id'];
 
         $data = [
@@ -81,10 +81,13 @@ class WVL_Customer_Contact_Request
             'date' => $date
         ];
 
-        $insert_contact = wvL_insert_contact_data($data);
-        if (!is_wp_error($insert_contact)) {
-            wp_redirect(site_url('/dashboard/contacts?#contact-' . $insert_contact));
+        wvL_insert_contact_data($data);
+        if ($user_id != 0) {
+            wp_redirect(site_url('/dashboard/contacts'));
+        } else {
+            wp_redirect(get_the_permalink($vendor_id));
         }
+        exit;
     }
 }
 
