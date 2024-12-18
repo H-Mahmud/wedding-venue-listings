@@ -4,11 +4,6 @@
     <div class="pricing-tables gap-3">
         <div class="pricing-card">
             <h5 class="heading"><?php _e('Free', 'wedding-venue-listings'); ?></h5>
-            <div class="price">
-                <span class="text-3xl font-semibold">$</span>
-                <span class="text-5xl font-extrabold tracking-tight">0</span>
-                <span class="ms-1 text-xl font-normal text-gray-500 ">/month</span>
-            </div>
 
             <ul role="list" class="list">
                 <li class="item">
@@ -28,16 +23,15 @@
                     <span class="text">Up to 5 photos & 1 Video</span>
                 </li>
             </ul>
-            <button type="button" class="wvl-btn w-full cursor-not-allowed"><?php _e('Current Plan', 'wedding-venue-listings'); ?></button>
+            <?php if (wvl_current_plan() == 'free'): ?>
+                <div class="bg-white hover:bg-white !border text-center py-3 rounded-md w-full  text-gray-500 cursor-not-allowed"><?php _e('Current Plan', 'wedding-venue-listings'); ?></div>
+            <?php else: ?>
+                <a href="<?php echo site_url('subscription-plan'); ?>" class="wvl-btn-primary w-full"><?php _e('Learn More', 'wedding-venue-listings'); ?></a>
+            <?php endif; ?>
         </div>
 
         <div class="pricing-card">
             <h5 class="heading"><?php _e('Pro', 'wedding-venue-listings'); ?></h5>
-            <div class="price">
-                <span class="text-3xl font-semibold">$</span>
-                <span class="text-5xl font-extrabold tracking-tight">49.99</span>
-                <span class="ms-1 text-xl font-normal text-gray-500 ">/month</span>
-            </div>
 
             <ul role="list" class="list">
                 <li class="item">
@@ -76,16 +70,21 @@
                 </li>
                 */ ?>
             </ul>
-            <a href="<?php echo site_url('subscription-plan'); ?>" class="wvl-btn-primary w-full"><?php _e('Learn More', 'wedding-venue-listings'); ?></a>
+            <?php if (wvl_current_plan() == 'pro'): ?>
+                <div class="bg-white hover:bg-white !border text-center py-3 rounded-md w-full  text-gray-500 cursor-not-allowed"><?php _e('Current Plan', 'wedding-venue-listings'); ?></div>
+            <?php else: ?>
+                <a href="<?php echo site_url('subscription-plan'); ?>" class="wvl-btn-primary w-full"><?php _e('Learn More', 'wedding-venue-listings'); ?></a>
+            <?php endif; ?>
         </div>
 
         <div class="pricing-card">
             <h5 class="heading"><?php _e('Ultimate', 'wedding-venue-listings'); ?></h5>
+            <?php /*
             <div class="price">
                 <span class="text-3xl font-semibold">$</span>
                 <span class="text-5xl font-extrabold tracking-tight">49</span>
                 <span class="ms-1 text-xl font-normal text-gray-500 ">/month</span>
-            </div>
+            </div> */ ?>
             <ul role="list" class="list">
                 <li class="item">
                     <i class="fa-solid fa-circle-check icon"></i>
@@ -138,7 +137,11 @@
                 </li>
                 */ ?>
             </ul>
-            <a href="<?php echo site_url('subscription-plan'); ?>" class="wvl-btn-primary w-full"><?php _e('Learn More', 'wedding-venue-listings'); ?></a>
+            <?php if (wvl_current_plan() == 'ultimate'): ?>
+                <div class="bg-white hover:bg-white !border text-center py-3 rounded-md w-full  text-gray-500 cursor-not-allowed"><?php _e('Current Plan', 'wedding-venue-listings'); ?></div>
+            <?php else: ?>
+                <a href="<?php echo site_url('subscription-plan'); ?>" class="wvl-btn-primary w-full"><?php _e('Learn More', 'wedding-venue-listings'); ?></a>
+            <?php endif; ?>
         </div>
     </div>
 </form>
