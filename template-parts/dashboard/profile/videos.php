@@ -26,14 +26,17 @@
                     foreach ($video_gallery as $key => $video) {
                         if ($video['platform'] == 'youtube') {
                 ?>
-
                             <a class="relative" href="https://www.youtube.com/watch?v=<?php echo $video['id']; ?>">
+                                <span class="remove-video inline-block cursor-pointer absolute bg-black opacity-60 hover:opacity-100 rounded-lg  m-2" data-video-id="<?php echo $key; ?>"><i class="fa-regular fa-trash-can text-2xl text-white p-3 inline-block"></i></span>
+
                                 <img class="h-auto max-w-full rounded-lg" src="https://img.youtube.com/vi/<?php echo $video['id']; ?>/hqdefault.jpg" alt="YouTube Video" />
                             </a>
                         <?php
                         }
                         if ($video['platform'] == 'vimeo') { ?>
                             <a class="relative" href="https://vimeo.com/<?php echo $video['id']; ?>" data-key="<?php echo $video['id']; ?>">
+                                <span class="remove-video inline-block cursor-pointer absolute bg-black opacity-60 hover:opacity-100 rounded-lg  m-2" data-attachment-id="<?php echo $key; ?>"><i class="fa-regular fa-trash-can text-2xl text-white p-3 inline-block"></i></span>
+
                                 <img class="h-auto max-w-full rounded-lg" src="https://vumbnail.com/<?php echo $video['id']; ?>.jpg" alt="Vimeo Video" />
                             </a>
                 <?php
@@ -78,44 +81,6 @@
         </div>
     </div>
 </div>
-
-<script>
-    jQuery(document).ready(function($) {
-        $("#modal-add-video form").on("submit", function(e) {
-            e.preventDefault();
-
-            $.ajax({
-                url: WVL_DATA.ajax_url,
-                type: "POST",
-                data: jQuery(this).serialize() +
-                    "&action=wvl_add_new_video" +
-                    "&nonce=" +
-                    WVL_DATA.ajax_nonce,
-                success: function(response) {
-                    if (response.success) {
-
-                        $video = `<a class="relative" href="${response.data.url}" data-fancybox="gallery" data-caption="${response.data.platform} Video">
-                    <img class="h-auto max-w-full rounded-lg" src="${response.data.thumbnail}" alt="${response.data.platform} Video" />
-                </a>`;
-
-                        $(".video-gallery").append($video);
-
-
-                        $("#modal-add-video").fadeOut();
-                        $("#modal-add-video form")[0].reset();
-                    } else {
-                        alert(response.data.message);
-                    }
-                },
-                error: function() {
-                    alert("Error while adding the event.");
-                },
-            });
-        });
-    })
-</script>
-
-
 <!-- HTML for the Form -->
 
 <?php

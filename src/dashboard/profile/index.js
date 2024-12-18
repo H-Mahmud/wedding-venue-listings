@@ -4,6 +4,7 @@ import handlePersonalInfoForm from "./handlePersonalInfoForm";
 import handlePhotographsForm from "./handlePhotographsForm";
 import handleServiceInfoForm from "./handleServiceInfoForm";
 import handleSubmitForm from "./handleSubmitForm";
+import handleVideoForm from "./handleVideoForm";
 import handleYourStoryForm from "./handleYourStoryForm";
 import StepIndicator from "./stepIndicator";
 
@@ -20,6 +21,7 @@ jQuery(document).ready(function ($) {
   }
 
   handlePhotographsForm($);
+  handleVideoForm($);
 
   async function handleNext(step) {
     if (step === 0) {
