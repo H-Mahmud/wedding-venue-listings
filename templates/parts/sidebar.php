@@ -109,34 +109,18 @@
             </div>
         </div>
 
-        <!-- TODO: Refactor -->
         <div class="filter wvl-field availability mb-4">
             <div class="header">
                 <h3 class="title"><?php _e('Availability', 'wedding-venue-listings'); ?></h3>
                 <i class="fa-solid fa-angle-up toggle-icon"></i>
             </div>
-
-            <div class="content wvl-calendar">
-                <div class="calendar-header">
-                    <button id="prev-month">&lt;</button>
-                    <span id="month-year"></span>
-                    <button id="next-month">&gt;</button>
-                </div>
-                <div class="calendar-body">
-                    <div class="calendar-days">
-                        <span>S</span>
-                        <span>M</span>
-                        <span>T</span>
-                        <span>W</span>
-                        <span>T</span>
-                        <span>F</span>
-                        <span>S</span>
-                    </div>
-                    <div class="calendar-dates" id="calendar-dates">
-                    </div>
-                </div>
+            <div class="content mt-6">
+                <input class="!hidden" type="text" max="<?php echo date('Y-m-d', strtotime('+30 days')) ?>" id="selected-dates" name="booking-date" value="<?php echo $_GET['booking-date']; ?>" readonly />
+                <div class="wvl-calendar" id="booking-calendar"></div>
             </div>
         </div>
+
+
     </div>
     <button type="submit" class="wvl-btn-primary filter-btn"><?php _e('Filter', 'wedding-venue-listings'); ?></button>
 </form>

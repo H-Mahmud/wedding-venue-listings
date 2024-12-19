@@ -1,0 +1,38 @@
+.wvl-calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+  font-size: 14px;
+
+  .calendar-header {
+    grid-column: span 7;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
+  .calendar-day,
+  .calendar-date {
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+    color: #06070a;
+  }
+
+  .calendar-date.selected {
+    background-color: #06070a;
+    color: #fff;
+    border-radius: 20px;
+  }
+
+  .calendar-date.disabled {
+    color: #ccc;
+    pointer-events: none;
+  }
+  .arrow {
+    cursor: pointer;
+    display: inline-block;
+    font-size: 18px;
+  }
+}
