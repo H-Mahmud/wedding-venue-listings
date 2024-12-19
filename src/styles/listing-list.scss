@@ -1,0 +1,69 @@
+.wvl-listing-list {
+  @apply my-5 flex flex-wrap gap-4;
+
+  .listing-item {
+    @apply mb-8 block w-full overflow-hidden rounded-lg border border-gray-300 bg-white shadow-md xl:text-red-50;
+
+    @media (min-width: 768px) {
+      width: calc((100% - 32px) / 2);
+    }
+
+    @media (min-width: 1024px) {
+      width: calc((100% - 48px) / 3);
+    }
+
+    @media (min-width: 1280px) {
+      width: calc((100% - 74px) / 4);
+    }
+
+    .thumbnail {
+      @apply min-h-[180px] w-full;
+
+      img {
+        @apply block h-full w-full rounded-md object-cover;
+      }
+    }
+
+    .content {
+      @apply flex-1 p-4;
+
+      .title {
+        a {
+          @apply text-2xl font-semibold;
+        }
+      }
+
+      .location {
+        @apply my-1 text-sm text-secondary;
+
+        .icon {
+          @apply text-primary;
+        }
+      }
+
+      .description {
+        @apply mb-1 text-sm text-secondary;
+      }
+
+      .meta {
+        @apply mt-1 flex gap-4;
+
+        .reviews {
+          @apply inline-flex items-center;
+
+          star-rating {
+            --font-size: 18px;
+          }
+
+          .count {
+            @apply text-sm text-secondary;
+          }
+        }
+      }
+
+      .actions {
+        @apply mt-0;
+      }
+    }
+  }
+}

@@ -61,6 +61,7 @@ require_once WVL_PLUGIN_DIR . 'includes/class-venue-review.php';
 require_once WVL_PLUGIN_DIR . 'includes/class-listing.php';
 require_once WVL_PLUGIN_DIR . 'shortcodes/venue-landing.php';
 require_once WVL_PLUGIN_DIR . 'shortcodes/user-profile.php';
+require_once WVL_PLUGIN_DIR . 'shortcodes/listing.php';
 
 require_once WVL_PLUGIN_DIR . 'includes/analytics/class-analytic-data-storage.php';
 require_once WVL_PLUGIN_DIR . 'includes/analytics/vendor-contact-redirect.php';

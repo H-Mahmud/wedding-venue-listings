@@ -9,6 +9,7 @@ import "./dashboard/dashboard-style.scss";
 import "./styles/forms.css";
 import "./styles/listing-page.scss";
 import "./styles/single-venue.scss";
+import "./styles/listing-list.scss";
 
 jQuery(document).ready(function ($) {
   const tabs = $(".tabs");
