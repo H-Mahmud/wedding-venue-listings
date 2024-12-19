@@ -4,7 +4,7 @@
 
 
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-    <?php if (!current_user_can('vendor')) : ?>
+    <?php if (current_user_can('manage_venue')) : ?>
         <div class="bg-white rounded-lg shadow p-4">
             <h2 class="text-lg font-bold text-gray-700 mb-2"><?php _e('Account Manage', 'wedding-venue-listings'); ?></h2>
             <div class="flex items-center justify-between">
