@@ -205,6 +205,7 @@ function add_verified_badge_to_venue_title($title, $post_id)
     if (is_admin() || get_post_type($post_id) !== 'venue' || wvl_current_plan($get_author_id) != 'ultimate') {
         return $title;
     }
+
     return $title . wvl_get_verified_badge();
 }
 add_filter('the_title', 'add_verified_badge_to_venue_title', 10, 2);
@@ -212,8 +213,6 @@ add_filter('the_title', 'add_verified_badge_to_venue_title', 10, 2);
 
 function wvl_get_verified_badge($size = 'medium')
 {
-    if (wvl_current_plan() != 'ultimate') return;
-
 
     return '<span class="verified-badge ' . $size . '">
     <i class="fa-solid fa-certificate bg "></i>
