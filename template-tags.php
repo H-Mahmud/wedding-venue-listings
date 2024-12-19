@@ -388,3 +388,59 @@ class WVL_Venue_Query
         $this->current_post = -1;
     }
 }
+
+function wvl_pagination($url_cb, $total_pages, $current_page)
+{
+    if ($total_pages > 1) {
+        echo '<div class="text-center mb-8 wvl-comments-pagination">';
+        echo '<ul class="inline-flex -space-x-px text-sm">';
+
+        if ($current_page > 1) {
+            echo '<li><a  class="page-links" href="' . $url_cb($current_page - 1) . '" class="page-numbers arrow-prev"><i class="fa-solid fa-angles-left"></i></a></li>';
+        } else {
+            echo <<<HTML
+                <li class="page-links"><i class="fa-solid fa-angles-left"></i></li>
+                HTML;
+        }
+
+        if ($current_page > 3) {
+            echo '<li><a class="page-links page-numbers" href="' . $url_cb(1) . '"> ' . number_format_i18n(1) . '</a></li>';
+            echo '<li class="page-dots">...</li>';
+        }
+
+        for ($i = max(1, $current_page - 1); $i <= min($current_page + 1, $total_pages); $i++) {
+            if ($i === $current_page) {
+                echo '<li><span class="page-links current">' . number_format_i18n($i) . '</span></li>';
+            } else {
+                echo '<li><a class="page-links" href="' . $url_cb($i) . '">' . number_format_i18n($i) . '</a></li>';
+            }
+        }
+
+        if ($current_page < $total_pages - 2) {
+            echo '<li class="page-dots">...</li>';
+            echo '<li><a class="page-links" href="' . $url_cb($total_pages) . '">' . number_format_i18n($total_pages) . '</a></li>';
+        }
+
+        if ($current_page < $total_pages) {
+            echo '<li><a class="page-links" href="' . $url_cb($current_page + 1) . '" class="page-numbers arrow-prev"><i class="fa-solid fa-angles-right"></i></a></li>';
+        } else {
+            echo <<<HTML
+                <li class="page-links"><i class="fa-solid fa-angles-right"></i></li>
+                HTML;
+        }
+        echo '</ul>';
+        echo '</div>';
+    }
+}
+
+
+function wlv_get_page_link($url, $page_number = 1, $param = 'page')
+{
+    if (isset($_GET) && count($_GET) > 0) {
+        $new_query_params = $_GET;
+        $new_query_params[$param] = $page_number;
+        return add_query_arg($new_query_params, $url);
+    } else {
+        return add_query_arg($param, $page_number, $url);
+    }
+}

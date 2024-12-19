@@ -115,7 +115,7 @@
                 <i class="fa-solid fa-angle-up toggle-icon"></i>
             </div>
             <div class="content mt-6">
-                <input class="!hidden" type="text" max="<?php echo date('Y-m-d', strtotime('+30 days')) ?>" id="selected-dates" name="booking-date" value="<?php echo $_GET['booking-date']; ?>" readonly />
+                <input class="!hidden" type="text" id="selected-dates" name="booking-date" value="<?php echo get_query_var('booking-date'); ?>" readonly />
                 <div class="wvl-calendar" id="booking-calendar"></div>
             </div>
         </div>

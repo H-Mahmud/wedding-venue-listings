@@ -7,11 +7,6 @@ get_header(); ?>
         </div>
         <div class="listing-content w-full">
             <?php
-            $args = array(
-                'post_type' => 'venue',
-                'posts_per_page' => -1,
-            );
-
             $subcategories = [];
             if (isset($_GET['subcategory']) && !empty($_GET['subcategory']) && is_array($_GET['subcategory'])) {
                 $subcategories = array_map('intval', $_GET['subcategory']);
@@ -34,14 +29,21 @@ get_header(); ?>
                 $search_query = sanitize_text_field($_GET['search']);
             }
 
+            $current_page = 1;
+            if (isset($_GET['lpage']) && !empty($_GET['lpage'])) {
+                $current_page = intval($_GET['lpage']);
+            }
+
+            $per_page = 10;
+
             $args = [
                 'dates' => $booking_dates,
                 'category_ids' => $subcategories,
                 'taxonomy_terms' => $locations,
                 'search' => $search_query,
                 'order_by_mime_type' => true,
-                'paged' => 1,
-                'posts_per_page' => 10,
+                'paged' =>  $current_page,
+                'posts_per_page' => $per_page,
             ];
 
             $venue_query = new WVL_Venue_Query($args);
@@ -59,6 +61,19 @@ get_header(); ?>
 
                     WVL_Process_Analytics_Data::print('data_1', $collection_data);
 
+                    wvl_pagination(
+                        function ($page_number) {
+                            $query = [];
+                            $url = site_url('listing');
+                            if (isset($_GET) && count($_GET) > 0) {
+                                $query = $_GET;
+                            }
+                            $query['lpage'] = $page_number;
+                            return add_query_arg($query, $url);
+                        },
+                        $venue_query->get_total_count() / $per_page,
+                        $current_page
+                    );
                     ?>
                 </div>
             <?php else:  ?>
