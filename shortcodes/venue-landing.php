@@ -14,7 +14,23 @@ function wvl_venue_landing()
         <form method="get" action="<?php echo site_url('listing'); ?>" class="w-full">
             <div class="flex-col md:flex-row flex justify-between gap-3 mb-5">
                 <div class="w-full">
-                    <input class="!h-14 !bg-tertiary rounded-lg w-full" type="text" name="location" id="location" placeholder="<?php _e('Location', 'wedding-venue-listings'); ?>">
+                    <?php
+                    $support_locations = get_terms(array(
+                        'taxonomy' => 'support_location',
+                        'hide_empty' => true,
+                    ));
+
+                    if (!empty($support_locations)) {
+                        echo '<select class="!h-14 bg-tertiary !px-5 rounded-lg w-full" name="location[]" id="location">';
+                        echo '<option value="all">' . __('Select Location', 'wedding-venue-listings') . '</option>';
+                        foreach ($support_locations as $location) {
+                            echo <<<HTML
+                                <option value="$location->term_id">$location->name</option>
+                            HTML;
+                        }
+                        echo '</select>';
+                    }
+                    ?>
                 </div>
 
                 <?php
@@ -39,7 +55,7 @@ function wvl_venue_landing()
                     </select>
                 </div>
                 <div class="w-full">
-                    <select class="!h-14 bg-tertiary !px-5 rounded-lg w-full" name="subcategory" id="subcategory">
+                    <select class="!h-14 bg-tertiary !px-5 rounded-lg w-full" name="subcategory[]" id="subcategory">
                         <option value="all"><?php _e('Select Subcategory'); ?></option>
                     </select>
                 </div>
