@@ -21,7 +21,7 @@ function wvl_listings_user_profile()
             </a>
         <?php else: ?>
             <div class="flex justify-end items-center gap-1">
-                <a href="<?php echo site_url('login'); ?>" class="wvl-btn !px-6">
+                <a href="<?php echo site_url('login'); ?>" class="wvl-btn hover:bg-white !px-6">
                     <?php _e('Login', 'wedding-venue-listings'); ?>
                 </a>
                 <a href="<?php echo site_url('register'); ?>" class="wvl-btn-primary !px-6">
