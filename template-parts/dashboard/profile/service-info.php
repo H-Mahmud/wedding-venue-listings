@@ -229,9 +229,9 @@ if (!is_wp_error($all_terms)) {
         category.on('change', function() {
             const selectedCategory = this.value;
 
-            if (vendorChoices) {
-                vendorChoices.destroy(); // Destroy previous Choices instance
-                subcategory.empty(); // Clear the subcategory select element
+            if (subCategoryChoices) {
+                subCategoryChoices.destroy();
+                subcategory.empty();
             }
 
             if (selectedCategory) {
