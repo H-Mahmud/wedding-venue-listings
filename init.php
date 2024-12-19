@@ -115,3 +115,12 @@ function wvl_create_venue_bookings_database_table()
     require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
     dbDelta($sql);
 }
+
+
+function wvl_cleanup_cron()
+{
+    wp_clear_scheduled_hook('wvl_collection_data_processing_event');
+    delete_option('wvl_collection_status');
+    delete_option('wvl_collected_data_index');
+}
+register_deactivation_hook(WVL_PLUGIN_FILE, 'wvl_cleanup_cron');

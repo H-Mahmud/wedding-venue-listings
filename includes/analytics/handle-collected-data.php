@@ -22,12 +22,47 @@ class WVL_Handle_Collected_Data
      */
     private final function __construct()
     {
+        add_filter('cron_schedules', array($this, 'cron_intervals'));
+        add_action('wp', array($this, 'cron_schedule'));
+        add_action('wvl_collection_data_processing_event', array($this, 'process_data_cron'));
+    }
+
+    public function cron_intervals($schedules)
+    {
+        $schedules['every_minute'] = array(
+            'interval' => 60, // 60 seconds
+            'display'  => esc_html__('Every Minute'),
+        );
+        return $schedules;
+    }
+
+    public function cron_schedule()
+    {
+        if (! wp_next_scheduled('wvl_collection_data_processing_event')) {
+            wp_schedule_event(time(), 'every_minute', 'wvl_collection_data_processing_event');
+        }
+    }
+
+
+    public function process_data_cron()
+    {
+        $collection_status = get_option('wvl_collection_status');
+        if (!$collection_status) {
+            $collection_status = [
+                'status' => '',
+                'date' => time()
+            ];
+        }
+
+        if ($collection_status['status'] == 'done' && date('Y-m-d', $collection_status['date']) == date('Y-m-d', time())) {
+            wp_clear_scheduled_hook('wvl_collection_data_processing_event');
+            return;
+        }
         $this->store_the_day_collected_data();
     }
 
     public function store_the_day_collected_data()
     {
-        if (!isset($_GET['store'])) return;
         $venue_ids = get_posts([
             'post_type' => 'venue',
             'post_status' => 'publish',
@@ -35,9 +70,9 @@ class WVL_Handle_Collected_Data
             'fields' => 'ids'
         ]);
 
-        $each_data_process = 10;
-        $data_processed = get_option('wvl_the_day_data_collected', 0);
-        $data_processed = 0;
+        $each_data_process = 2;
+        $data_processed = intval(get_option('wvl_collected_data_index', 0));
+
         for ($i = $data_processed; $i < count($venue_ids); $i++) {
             $venue_id = $venue_ids[$i];
 
@@ -51,7 +86,16 @@ class WVL_Handle_Collected_Data
             --$each_data_process;
             if ($each_data_process == 0)  break;
         }
-        update_option('wvl_the_day_data_collected', $i);
+        update_option('wvl_collected_data_index', $i);
+
+        if ($i >= count($venue_ids)) {
+            update_option('wvl_collection_status', [
+                'status' => 'done',
+                'date' => time()
+            ]);
+
+            update_option('wvl_collected_data_index', 0);
+        }
     }
 
     /**
