@@ -2,8 +2,44 @@
 get_header(); ?>
 <div id="primary" class="listing-archive mt-4">
     <main id="main" class="site-container" role="main">
-        <div class="wvl-sidebar">
-            <?php load_template(WVL_PLUGIN_DIR . 'templates/parts/sidebar.php'); ?>
+        <script>
+            jQuery(document).ready(function($) {
+                $("#openSidebarBtn").click(function() {
+                    // $("#mobileSidebar").css("width", "100%");
+                    $("#mobileSidebar").css("transform", "translateX(0%)");
+                    console.log('cliced')
+                });
+
+                // Close the sidebar
+                $("#closeSidebarBtn").click(function() {
+                    // $("#mobileSidebar").css("width", "0");
+                    $("#mobileSidebar").css("transform", "translateX(-100%)");
+                });
+            });
+        </script>
+        <style>
+            @media (max-width: 767px) {
+                #mobileSidebar {
+                    height: 100%;
+                    /* width: 0; */
+                    transform: translateX(-100%);
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    z-index: 99;
+                    background-color: #FFF;
+                    overflow-y: auto;
+                    transition: 0.5s;
+                    padding-top: 60px;
+                    padding-left: 12px;
+                    padding-right: 12px;
+                }
+            }
+        </style>
+
+        <div class="wvl-sidebar  " id="mobileSidebar">
+            <p class="text-right md:hidden block"> <i id="closeSidebarBtn" class="close inline-block p-2 cursor-pointer text-2xl fa-solid fa-times"></i></p>
+            <?php load_template(WVL_PLUGIN_DIR . 'templates/parts/sidebar.php', false); ?>
         </div>
         <div class="listing-content w-full">
             <?php
@@ -47,8 +83,14 @@ get_header(); ?>
             ];
 
             $venue_query = new WVL_Venue_Query($args);
-            if ($venue_query->have_posts()) : ?>
+            ?>
+            <div class="listing-entry flex justify-between items-center">
                 <p class="total-result"><span class="amount"><?php echo $venue_query->get_total_count(); ?></span> <?php _e('Vendor found', 'wedding-venue-listings'); ?></p>
+                <span id="openSidebarBtn" class="listing-filter  md:hidden block border px-3 py-2 rounded-md text-sm text-gray-900"><?php _e('Filter', 'wedding-venue-listings'); ?></span>
+            </div>
+
+            <?php
+            if ($venue_query->have_posts()) : ?>
                 <div class="wvl-list">
                     <?php
                     $collection_data = [];
