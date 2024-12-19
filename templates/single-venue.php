@@ -344,7 +344,7 @@
                             <?php else: ?>
                                 <a href="<?php echo site_url('/login'); ?>">
                                     <span class="wvl-btn">
-                                        <?php _e('Login to Write a Review', 'wedding-venue-listings') ?>
+                                        <?php _e('Login', 'wedding-venue-listings') ?>
                                     </span>
                                 </a>
                             <?php endif; ?>
