@@ -5,6 +5,7 @@ function wvl_listing_shortcode($atts)
     $atts = shortcode_atts(array(
         'ids' => [],
         'categories' => [],
+        'featured' => false,
         'count' => 10
     ), $atts);
 
@@ -66,6 +67,7 @@ function wvl_get_listing($array = array())
     $defaults = array(
         'ids' => [],
         'categories' => [],
+        'featured' => false,
         'count' => 10
     );
 
@@ -77,6 +79,11 @@ function wvl_get_listing($array = array())
         'posts_per_page' => $args['count'],
         'post__in' => $args['ids'],
     );
+
+    if ($args['featured']) {
+        $query_args['orderby'] = 'post_mime_type';
+        $query_args['order'] = 'DESC';
+    }
 
     $query = new WP_Query($query_args);
 
