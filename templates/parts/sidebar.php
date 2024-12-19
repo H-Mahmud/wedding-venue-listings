@@ -115,12 +115,10 @@
                 <i class="fa-solid fa-angle-up toggle-icon"></i>
             </div>
             <div class="content mt-6">
-                <input class="!hidden" type="text" id="selected-dates" name="booking-date" value="<?php echo get_query_var('booking-date'); ?>" readonly />
+                <input class="!hidden" type="text" id="selected-dates" name="booking-date" value="<?php echo isset($_GET['booking-date']) ? $_GET['booking-date'] : ''; ?>" placeholder="<?php _e('Select a date', 'wedding-venue-listings'); ?>" readonly />
                 <div class="wvl-calendar" id="booking-calendar"></div>
             </div>
         </div>
-
-
     </div>
     <button type="submit" class="wvl-btn-primary filter-btn"><?php _e('Filter', 'wedding-venue-listings'); ?></button>
 </form>
