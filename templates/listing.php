@@ -25,8 +25,8 @@ get_header(); ?>
 
             $booking_dates = [];
             if (isset($_GET['booking-date']) && !empty($_GET['booking-date'])) {
-                // $booking_dates = array_map('sanitize_text_field', $_GET['booking_date']);
-                $booking_dates[] = sanitize_text_field($_GET['booking-date']);
+                $dates = sanitize_text_field($_GET['booking-date']);
+                $booking_dates = explode(',', $dates);
             }
 
             $search_query = '';
