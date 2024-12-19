@@ -65,10 +65,7 @@ jQuery(document).ready(function ($) {
       //     "</div>"
       //   : "";
       return {
-        html:
-          '<div style="color: black; font-size: 16px; font-weight: semibold; padding: 6px;">' +
-          event.title +
-          "</div>",
+        html: '<div style="color: black; font-size: 16px; font-weight: semibold; padding: 6px;">Booked</div>',
       };
     },
     eventClick: function (info) {

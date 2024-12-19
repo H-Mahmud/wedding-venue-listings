@@ -34,7 +34,23 @@
                     </div>
                     <div class="wvl-field">
                         <label for="location"><?php _e('Event Location', 'wedding-venue-listings'); ?></label>
-                        <textarea class="form-control" name="location" id="location"></textarea>
+                        <?php
+                        $support_locations = get_terms(array(
+                            'taxonomy' => 'support_location',
+                            'hide_empty' => true,
+                        ));
+
+                        if (!empty($support_locations)) {
+                            echo '<select class="form-control" name="location" id="location">';
+                            echo '<option value="all">' . __('Select Location', 'wedding-venue-listings') . '</option>';
+                            foreach ($support_locations as $location) {
+                                echo <<<HTML
+                                <option value="$location->name">$location->name</option>
+                            HTML;
+                            }
+                            echo '</select>';
+                        }
+                        ?>
                     </div>
 
                 </div>
