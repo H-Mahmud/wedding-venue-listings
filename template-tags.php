@@ -332,7 +332,7 @@ class WVL_Venue_Query
         }
 
         // Build ORDER BY clause
-        $order_by_clause = $this->args['order_by_mime_type'] ? "ORDER BY p.post_mime_type ASC" : "ORDER BY p.post_date DESC";
+        $order_by_clause = $this->args['order_by_mime_type'] ? "ORDER BY p.post_mime_type DESC" : "ORDER BY p.post_date DESC";
 
         // Combine WHERE conditions
         $where_clause = implode(' AND ', $where_conditions);
