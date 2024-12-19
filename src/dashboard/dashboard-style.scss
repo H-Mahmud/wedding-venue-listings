@@ -22,3 +22,11 @@
     @apply font-semibold;
   }
 }
+.wvl-profile-steps .choices {
+  margin-bottom: 0;
+}
+.wvl-profile-steps .choices__inner {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}

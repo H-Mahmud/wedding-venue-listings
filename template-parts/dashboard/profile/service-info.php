@@ -148,12 +148,21 @@
             <div class="wvl-field">
                 <label for="subcategory"><?php _e('Subcategory', 'wedding-venue-listings'); ?></label>
                 <select name="subcategory" class="wvl-tags" multiple id="subcategory"></select>
+                <?php if (wvl_current_plan() == 'free') { ?>
+
+                    <p class="text-orange-600 mt-0"><?php _e('Upgrade your plan to add unlimited categories', 'wedding-venue-listings'); ?></p>
+                <?php
+
+                } ?>
             </div>
         </div>
 
         <div class="wvl-field w-1/2">
             <label for="support_location"><?php _e('Support Location', 'wedding-venue-listings'); ?></label>
             <select name="support_location" class="wvl-tags" multiple id="support_location"></select>
+            <?php if (wvl_current_plan()  == 'free') { ?>
+                <p class="text-orange-600 mt-0"><?php _e('Upgrade your plan to add unlimited Support location', 'wedding-venue-listings'); ?></p>
+            <?php } ?>
         </div>
     </fieldset>
 </form>
