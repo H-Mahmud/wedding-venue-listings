@@ -98,7 +98,10 @@ jQuery(document).ready(function ($) {
 
 document.addEventListener("DOMContentLoaded", function () {
   const calendar = document.getElementById("booking-calendar");
+  if (!calendar) return;
   const selectedDatesInput = document.getElementById("selected-dates");
+  if (!selectedDatesInput) return;
+
   const today = new Date();
   let currentYear = today.getFullYear();
   let currentMonth = today.getMonth();
