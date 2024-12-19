@@ -1,16 +1,25 @@
 <div class="analytics-page relative">
     <?php if (wvl_current_plan() == 'free'): ?>
         <div class="deemed absolute inset-0 flex items-center justify-center bg-white/50 backdrop-blur-sm"></div>
-    <?php endif; ?>
+    <?php endif;
+
+
+    $venue_id = wvl_get_venue_id();
+    $defaultStartDate = (new DateTime())->modify('-15 days')->format('Y-m-d');
+    $defaultEndDate = (new DateTime())->format('Y-m-d');
+
+    $startDate = $_POST['startDate'] ?? $defaultStartDate;
+    $endDate = $_POST['endDate'] ?? $defaultEndDate;
+    ?>
     <form id="filterForm" method="post">
         <div class="flex max-w-md gap-2 items-center">
             <div class="wvl-field">
                 <label for="startDate">Start Date:</label>
-                <input type="date" id="startDate" name="startDate" max="">
+                <input type="date" id="startDate" name="startDate" value="<?php echo $startDate; ?>">
             </div>
-            <div class="wvl-field">
+            <div class=" wvl-field">
                 <label for="endDate">End Date:</label>
-                <input type="date" id="endDate" name="endDate" max="">
+                <input type="date" id="endDate" name="endDate" value="<?php echo $endDate; ?>">
             </div>
 
             <button type="submit" class="wvl-btn-primary">Filter</button>
@@ -19,25 +28,50 @@
 
 
     <?php
-
-    $defaultStartDate = (new DateTime())->modify('-15 days')->format('Y-m-d');
-    $defaultEndDate = (new DateTime())->format('Y-m-d');
-
-    $startDate = $_POST['startDate'] ?? $defaultStartDate;
-    $endDate = $_POST['endDate'] ?? $defaultEndDate;
     // Default value
     $impression_count = 500;
     $profile_view_count = 100;
     $unique_view_count = 50;
     $contact_click_count = 30;
     $lead_count = 25;
-    if (wvl_current_plan() != 'free'):
+    $chartData = [];
+    if (wvl_current_plan() != 'free') {
         $impression_count = WVL_Analytic_Data_Storage::get_count_by(wvl_get_venue_id(), 'impression', $startDate, $endDate);
         $profile_view_count = WVL_Analytic_Data_Storage::get_count_by(wvl_get_venue_id(), 'view', $startDate, $endDate);
         $unique_view_count = WVL_Analytic_Data_Storage::get_count_by(wvl_get_venue_id(), 'unique_view', $startDate, $endDate);
         $contact_click_count = WVL_Analytic_Data_Storage::get_count_by(wvl_get_venue_id(), 'contact_click', $startDate, $endDate);
         $lead_count = WVL_Analytic_Data_Storage::get_count_by(wvl_get_venue_id(), 'lead', $startDate, $endDate);
-    endif;
+
+        $data = [
+            'labels' => [],
+            'impressions' => [],
+            'profileViews' => [],
+            'uniqueProfileViews' => [],
+            'contactInfoClicks' => [],
+            'leads' => []
+        ];
+
+        $period = new DatePeriod(
+            new DateTime($startDate),
+            new DateInterval('P1D'),
+            (new DateTime($endDate))->modify('+1 day')
+        );
+
+
+        foreach ($period as $date) {
+            $current_date = $date->format('Y-m-d');
+            $data['labels'][] = $current_date;
+            $data['impressions'][] = wvl_get_collection($venue_id, 'impression', $current_date);
+            $data['profileViews'][] = wvl_get_collection($venue_id, 'view', $current_date);
+            $data['uniqueProfileViews'][] = wvl_get_collection($venue_id, 'unique_view', $current_date);
+            $data['contactInfoClicks'][] =  wvl_get_collection($venue_id, 'contact_click', $current_date);
+            $data['leads'][] =  wvl_get_collection($venue_id, 'lead', $current_date);
+        }
+
+        $chartData = $data;
+    } else {
+        $chartData = generateDummyData($startDate, $endDate);
+    }
     ?>
 
     <div class="analytics-summary mt">
@@ -66,6 +100,7 @@
     <canvas id="myChart" width="400" height="200" class="mt-8"></canvas>
 </div>
 <?php
+
 function generateDummyData($startDate, $endDate)
 {
     $period = new DatePeriod(
@@ -96,7 +131,11 @@ function generateDummyData($startDate, $endDate)
 }
 
 
-$chartData = generateDummyData($startDate, $endDate);
+function wvl_get_collection($venue_id, $event_type, $date)
+{
+    return WVL_Analytic_Data_Storage::get_data_by_date($venue_id, $event_type, $date);
+}
+
 ?>
 
 <script>

@@ -64,6 +64,21 @@ class WVL_Analytic_Data_Storage
         return $result ? $result : 0;
     }
 
+    public static function get_data_by_date($venue_id, $event_type, $date)
+    {
+        global $wpdb;
+        $table_name = $wpdb->prefix . 'venue_analytics';
+
+        $result =  $wpdb->get_var($wpdb->prepare(
+            "SELECT count
+             FROM $table_name
+             WHERE venue_id = %d AND event_type = %s AND DATE(created_at) = %s ",
+            $venue_id,
+            $event_type,
+            $date
+        ));
+        return $result ? $result : 0;
+    }
 
 
     /**
@@ -80,6 +95,7 @@ class WVL_Analytic_Data_Storage
         $table_name = $wpdb->prefix . 'venue_daily_analytics';
         return $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM $table_name WHERE venue_id = %d AND event_type = %s", $venue_id, $event_type));
     }
+
 
     /**
      * Retrieves the count of unique daily analytics entries for a given venue ID and event type.
