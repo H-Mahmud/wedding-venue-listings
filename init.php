@@ -120,6 +120,7 @@ function wvl_create_venue_bookings_database_table()
 function wvl_cleanup_cron()
 {
     wp_clear_scheduled_hook('wvl_collection_data_processing_event');
+    wp_clear_scheduled_hook('wvl_vendor_status_daily_event');
     delete_option('wvl_collection_status');
     delete_option('wvl_collected_data_index');
 }

@@ -19,13 +19,51 @@ class WVL_Subscription_Manage
      * @access private
      * @final
      */
-    private final function __construct() {}
-
-    public function currentPlan()
+    private final function __construct()
     {
-        $user_id = get_current_user_id();
+        add_action('wp', array($this,  'daily_cron_schedule'));
+        add_action('wvl_vendor_status_daily_event', array($this, 'check_vendor_status'));
     }
 
+
+    public function daily_cron_schedule()
+    {
+        if (! wp_next_scheduled('wvl_vendor_status_daily_event')) {
+            wp_schedule_event(time(), 'daily', 'wvl_vendor_status_daily_event');
+        }
+    }
+
+
+    public function check_vendor_status()
+    {
+
+        $venue_ids = get_posts([
+            'post_type' => 'venue',
+            'numberposts' => -1,
+            'fields' => 'ids'
+        ]);
+        foreach ($venue_ids as $venue_id) {
+            $author_id = get_post_field('post_author', $venue_id);
+            $current_plan = wvl_current_plan($author_id);
+            switch ($current_plan) {
+                case 'free':
+                    $mime_type = 0;
+                    break;
+                case 'pro':
+                    $mime_type = 1;
+                    break;
+                case 'ultimate':
+                    $mime_type = 2;
+                    break;
+                default:
+                    $mime_type = 3;
+            }
+            wp_update_post(array(
+                'ID' => $venue_id,
+                'post_mime_type' => $mime_type
+            ));
+        }
+    }
 
     /**
      * Gets the singleton instance of the class.
