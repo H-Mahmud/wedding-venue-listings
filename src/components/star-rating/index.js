@@ -22,10 +22,10 @@ class StarRating extends HTMLElement {
         const style = `
         <style>
           :host {
-            --full-star-color: #FFD43B;  /* Default full star color */
-            --half-star-color: #FFD43B;  /* Default half star color */
+            --full-star-color: #FAAD14;  /* Default full star color */
+            --half-star-color: #FAAD14;  /* Default half star color */
             --empty-star-color: #c9c9c9; /* Default empty star color */
-            --font-size: 2rem; /* Default font size */
+            --font-size: 14px; /* Default font size */
           }
   
           .star-rating {
@@ -33,7 +33,7 @@ class StarRating extends HTMLElement {
             cursor: ${this.editable ? "pointer" : "default"};
           }
           .star {
-            font-size: 2rem;
+            font-size: 14px;
             transition: color 0.2s ease-in-out;
             cursor: inherit;
           }
