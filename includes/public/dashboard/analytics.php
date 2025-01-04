@@ -39,7 +39,7 @@ class WVL_Dashboard_Analytics
             'name'     => 'Analytics',
             'slug'     => 'analytics',
             'capability' => 'manage_venue',
-            'icon'     => '<i class="fa-solid fa-chart-simple text-xl" style="color: #1f72b2;"></i>',
+            'icon'     => '<i class="fa-solid fa-chart-simple text-xl" style="color: #916E37;"></i>',
             'premium'  => true,
             'priority' => 60,
             'callback' => array($this, 'analytics_page_cb'),

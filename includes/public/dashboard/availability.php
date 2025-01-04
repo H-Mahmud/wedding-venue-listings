@@ -44,7 +44,7 @@ class WVL_Dashboard_Availability
             'name'     => __('Availability', 'wedding-venue-listings'),
             'slug'     => 'availability',
             'capability' => 'manage_venue',
-            'icon'     => '<i class="fa-solid fa-calendar-days text-xl" style="color: #1f72b2;"></i>',
+            'icon'     => '<i class="fa-solid fa-calendar-days text-xl" style="color: #916E37;"></i>',
             'premium'  => false,
             'priority' => 50,
             'callback' => array($this, 'availability_page_cb'),

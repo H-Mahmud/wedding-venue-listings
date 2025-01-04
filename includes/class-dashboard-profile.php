@@ -69,7 +69,7 @@ class WVL_Dashboard_Profile
             'name'     => __('Venue Profile', 'wedding-venue-listings'),
             'slug'     => 'venue-profile',
             'capability' => 'manage_venue',
-            'icon'     => '<i class="fa-solid fa-user text-xl" style="color: #1f72b2;"></i>',
+            'icon'     => '<i class="fa-solid fa-user text-xl" style="color: #916E37;"></i>',
             'priority' => 20,
             'callback' => array($this, 'profile_page_cb'),
         ]);

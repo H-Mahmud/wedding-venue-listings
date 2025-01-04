@@ -46,7 +46,7 @@ class WVL_Dashboard_Reviews
             'name'     => 'Reviews',
             'slug'     => 'reviews',
             'capability' => 'manage_venue',
-            'icon'     => '<i class="fa-solid fa-star-half-stroke text-xl" style="color: #1f72b2;"></i>',
+            'icon'     => '<i class="fa-solid fa-star-half-stroke text-xl" style="color: #916E37;"></i>',
             'premium'  => false,
             'priority' => 30,
             'callback' => array($this, 'reviews_page_cb'),

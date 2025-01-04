@@ -30,7 +30,7 @@ class WVL_Dashboard_Home
             'name'     => 'Dashboard',
             'slug'     => 'home',
             'capability' => 'manage_venue',
-            'icon'     => '<i class="fa-solid fa-house text-xl" style="color: #1f72b2;"></i>',
+            'icon'     => '<i class="fa-solid fa-house text-xl" style="color: #916E37;"></i>',
             'premium'  => false,
             'priority' => 10,
             'callback' => array($this, 'dashboard_home_page_cb'),

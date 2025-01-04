@@ -45,7 +45,7 @@ class WVL_Dashboard_Contacts
             'name'     => 'Contacts',
             'slug'     => 'contacts',
             'capability' => 'manage_account',
-            'icon'     => '<i class="fa-solid fa-address-card text-xl" style="color: #1f72b2;"></i>',
+            'icon'     => '<i class="fa-solid fa-address-card text-xl" style="color: #916E37;"></i>',
             'premium'  => false,
             'priority' => 30,
             'callback' => array($this, 'contacts_page_cb'),

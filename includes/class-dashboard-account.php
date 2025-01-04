@@ -53,7 +53,7 @@ class WVL_Dashboard_Account
             'name'     => 'Account',
             'slug'     => 'account',
             'capability' => 'manage_account',
-            'icon'     => '<i class="fa-solid fa-circle-info text-xl" style="color: #1f72b2;"></i>',
+            'icon'     => '<i class="fa-solid fa-circle-info text-xl" style="color: #916E37;"></i>',
             'priority' => 80,
             'callback' => array($this, 'account_page_cb'),
         ]);
