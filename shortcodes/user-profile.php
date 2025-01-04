@@ -20,12 +20,12 @@ function wvl_listings_user_profile_shortcode()
 
             </a>
         <?php else: ?>
-            <div class="flex justify-end items-center gap-1">
+            <div class="user_login-btn justify-end items-center gap-1">
                 <i class="fa-regular fa-user"></i>
                 <a href="<?php echo site_url('register'); ?>" class="btn-register">
                     <?php _e('Register', 'wedding-venue-listings'); ?>
                 </a>
-                <?php _e( ' / ', 'wedding-venue-listings' ); ?>
+                <?php _e(' / ', 'wedding-venue-listings'); ?>
                 <a href="<?php echo site_url('login'); ?>" class="btn-login">
                     <?php _e('Login', 'wedding-venue-listings'); ?>
                 </a>
@@ -33,12 +33,29 @@ function wvl_listings_user_profile_shortcode()
         <?php endif; ?>
     </div>
     <style>
-        .user-profile, 
+        .user-profile,
         .user-profile a {
             color: #fff;
             font-size: 16px;
             font-weight: 600;
             line-height: 24px;
+        }
+
+        .user_login-btn {
+            display: inline-flex;
+            border: 1px solid #B7B7B7;
+            border-radius: 5px;
+            padding: 12px;
+        }
+
+        @media screen and (max-width: 600px) {
+            .user_login-btn a {
+                font-size: 12px;
+            }
+
+            .user_login-btn {
+                padding: 4px;
+            }
         }
     </style>
 <?php
