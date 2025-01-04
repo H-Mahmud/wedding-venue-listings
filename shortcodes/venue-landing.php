@@ -1,18 +1,20 @@
 <?php
 defined('ABSPATH') || exit;
-add_shortcode('wvl-landing', 'wvl_venue_landing');
-function wvl_venue_landing()
+add_shortcode('wvl-landing', 'wvl_venue_landing_shortcode');
+function wvl_venue_landing_shortcode()
 {
     ob_start();
 ?>
-    <div class="flex flex-col items-center justify-center !p-4 !py-6 sm:!px-28 sm:!py-32 mx-auto lg:py-0 bg-white rounded-3xl">
-        <h2 class="flex items-center mb-6 text-4xl sm:!text-6xl text-center !font-bold text-primary">
-            <?php _e('Weddings With Koumparos', 'wedding-venue-listings'); ?>
-        </h2>
-        <p class="text-center"><?php _e('Lorem ipsum dolor sit amet consectetur. Tortor ac sem diam convallis. Mauris ullamcorper', 'wedding-venue-listings'); ?></p>
+    <div class="flex flex-col items-center justify-center !p-4 !py-4 sm:!px-6 sm:!py-6 mx-auto lg:py-0 bg-white rounded-xl">
+        <!-- <h2 class="flex items-center mb-6 text-4xl sm:!text-6xl text-center !font-bold text-primary"> -->
+        <?php //_e('Weddings With Koumparos', 'wedding-venue-listings'); 
+        ?>
+        <!-- </h2> -->
+        <!-- <p class="text-center"><?php //_e('Lorem ipsum dolor sit amet consectetur. Tortor ac sem diam convallis. Mauris ullamcorper', 'wedding-venue-listings'); 
+                                    ?></p> -->
 
         <form method="get" action="<?php echo site_url('listing'); ?>" class="w-full">
-            <div class="flex-col md:flex-row flex justify-between gap-3 mb-5">
+            <div class="flex-col md:flex-row flex justify-between gap-3">
                 <div class="w-full">
                     <?php
                     $support_locations = get_terms(array(
@@ -21,7 +23,7 @@ function wvl_venue_landing()
                     ));
 
                     if (!empty($support_locations)) {
-                        echo '<select class="!h-14 bg-tertiary !px-5 rounded-lg w-full" name="location[]" id="location">';
+                        echo '<select class="!h-14 bg-tertiary !px-5 rounded-md w-full" name="location[]" id="location">';
                         echo '<option value="all">' . __('Select Location', 'wedding-venue-listings') . '</option>';
                         foreach ($support_locations as $location) {
                             echo <<<HTML
@@ -43,7 +45,7 @@ function wvl_venue_landing()
                 ?>
 
                 <div class="w-full">
-                    <select class="!h-14 bg-tertiary !px-5 rounded-lg w-full" name="category" id="category">
+                    <select class="!h-14 bg-tertiary !px-5 rounded-md w-full" name="category" id="category">
                         <option value="all"><?php _e('Select Category'); ?></option>
                         <?php if (!empty($categories_by_parent[0])) :
                             foreach ($categories_by_parent[0] as $parent) :
@@ -55,7 +57,7 @@ function wvl_venue_landing()
                     </select>
                 </div>
                 <div class="w-full">
-                    <select class="!h-14 bg-tertiary !px-5 rounded-lg w-full" name="subcategory[]" id="subcategory">
+                    <select class="!h-14 bg-tertiary !px-5 rounded-md w-full" name="subcategory[]" id="subcategory">
                         <option value="all"><?php _e('Select Subcategory'); ?></option>
                     </select>
                 </div>
@@ -68,10 +70,10 @@ function wvl_venue_landing()
                 </label>
                 */
                 ?>
+                <button class="wvl-btn-primary w-full !h-14 m-0" style="background: #916E37;"><?php _e('Search', 'wedding-venue-listings'); ?></button>
             </div>
-            <button class="wvl-btn-primary w-full !h-14 m-0 mb-3"><?php _e('Search', 'wedding-venue-listings'); ?></button>
 
-            <p class="mt-5 text-center">Lorem ipsum dolor sit amet consectetur. Tortor ac sem diam convallis. <br> Mauris ullamcorper</p>
+            <!-- <p class="mt-5 text-center">Lorem ipsum dolor sit amet consectetur. Tortor ac sem diam convallis. <br> Mauris ullamcorper</p> -->
 
         </form>
     </div>
