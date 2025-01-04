@@ -21,7 +21,7 @@
     </fieldset>
 
     <fieldset class="p-5 rounded-xl border-gray-200 mt-8 relative">
-        <?php if (wvl_current_plan() == 'free'): ?>
+        <?php if (wvl_current_plan() == 0): ?>
 
             <div class=" absolute inset-0 flex items-center justify-center z-500">
                 <h1 class="text-orange-600 font-semibold text-3xl p-4 backdrop-blur-sm"><?php _e('Upgrade to unlock this feature', 'wedding-venue-listings'); ?></h1>

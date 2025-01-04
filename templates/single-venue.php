@@ -63,7 +63,7 @@
                         <i class="fa-solid fa-images icon"></i>
                         <span class="label"><?php _e('Photos', 'wedding-venue-listings'); ?></span>
                     </div>
-                    <?php if (wvl_current_plan($author_id) != 'free'): ?>
+                    <?php if (wvl_current_plan($author_id) != 0): ?>
                         <div class="tab" data-target="#videos-gallery">
                             <i class="fa-solid fa-video icon"></i>
                             <span class="label"> <?php _e('Videos', 'wedding-venue-listings'); ?></span>
@@ -73,7 +73,7 @@
                         <i class="fa-solid fa-star icon"></i>
                         <span class="label"><?php _e('Reviews', 'wedding-venue-listings'); ?></span>
                     </div>
-                    <?php if (wvl_current_plan($author_id) == 'free'): ?>
+                    <?php if (wvl_current_plan($author_id) == 0): ?>
                         <div class="tab" data-target="#related-venue">
                             <i class="fa-solid fa-circle-chevron-down icon"></i>
                             <span class="label"><?php _e('Related', 'wedding-venue-listings'); ?></span>
@@ -252,7 +252,7 @@
                 </div>
 
 
-                <?php if (wvl_current_plan($author_id) != 'free'): ?>
+                <?php if (wvl_current_plan($author_id) != 0): ?>
                     <div class="wvl-gallery mt-3 section" id="videos-gallery">
                         <div class="gallery-entry mb-3 mt-6 flex justify-between items-center">
                             <h3 class="text-2xl font-semibold"><?php _e('Videos', 'wedding-venue-listings'); ?></h3>

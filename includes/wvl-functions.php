@@ -118,7 +118,7 @@ function wvl_get_venue_location($venue_id)
 
 add_action('wvl_social_links', function () {
     $post = get_post();
-    if (wvl_current_plan($post->post_author) == 'free') return;
+    if (wvl_current_plan($post->post_author) == 0) return;
 
     $social_accounts = [
         'website' => [
@@ -202,7 +202,7 @@ add_action('wvl_social_links', function () {
 function add_verified_badge_to_venue_title($title, $post_id)
 {
     $get_author_id = get_post_field('post_author', $post_id);
-    if (is_admin() || get_post_type($post_id) !== 'venue' || wvl_current_plan($get_author_id) != 'ultimate') {
+    if (is_admin() || get_post_type($post_id) !== 'venue' || wvl_current_plan($get_author_id) != 2) {
         return $title;
     }
 

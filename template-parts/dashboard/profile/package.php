@@ -23,7 +23,7 @@
                     <span class="text">Up to 5 photos & 1 Video</span>
                 </li>
             </ul>
-            <?php if (wvl_current_plan() == 'free'): ?>
+            <?php if (wvl_current_plan() == 0): ?>
                 <div class="bg-white hover:bg-white !border text-center py-3 rounded-md w-full  text-gray-500 cursor-not-allowed"><?php _e('Current Plan', 'wedding-venue-listings'); ?></div>
             <?php else: ?>
                 <a href="<?php echo site_url('subscription-plan'); ?>" class="wvl-btn-primary w-full"><?php _e('Learn More', 'wedding-venue-listings'); ?></a>
@@ -70,7 +70,7 @@
                 </li>
                 */ ?>
             </ul>
-            <?php if (wvl_current_plan() == 'pro'): ?>
+            <?php if (wvl_current_plan() == 1): ?>
                 <div class="bg-white hover:bg-white !border text-center py-3 rounded-md w-full  text-gray-500 cursor-not-allowed"><?php _e('Current Plan', 'wedding-venue-listings'); ?></div>
             <?php else: ?>
                 <a href="<?php echo site_url('subscription-plan'); ?>" class="wvl-btn-primary w-full"><?php _e('Learn More', 'wedding-venue-listings'); ?></a>
@@ -137,7 +137,7 @@
                 </li>
                 */ ?>
             </ul>
-            <?php if (wvl_current_plan() == 'ultimate'): ?>
+            <?php if (wvl_current_plan() == 2): ?>
                 <div class="bg-white hover:bg-white !border text-center py-3 rounded-md w-full  text-gray-500 cursor-not-allowed"><?php _e('Current Plan', 'wedding-venue-listings'); ?></div>
             <?php else: ?>
                 <a href="<?php echo site_url('subscription-plan'); ?>" class="wvl-btn-primary w-full"><?php _e('Learn More', 'wedding-venue-listings'); ?></a>

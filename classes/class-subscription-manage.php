@@ -45,19 +45,7 @@ class WVL_Subscription_Manage
         foreach ($venue_ids as $venue_id) {
             $author_id = get_post_field('post_author', $venue_id);
             $current_plan = wvl_current_plan($author_id);
-            switch ($current_plan) {
-                case 'free':
-                    $mime_type = 0;
-                    break;
-                case 'pro':
-                    $mime_type = 1;
-                    break;
-                case 'ultimate':
-                    $mime_type = 2;
-                    break;
-                default:
-                    $mime_type = 3;
-            }
+            $mime_type = $current_plan;
             wp_update_post(array(
                 'ID' => $venue_id,
                 'post_mime_type' => $mime_type
@@ -93,23 +81,23 @@ WVL_Subscription_Manage::get_instance();
 
 function wvl_current_plan($user_id = 0)
 {
-    if (!method_exists('\Indeed\Ihc\UserSubscriptions', 'getAllForUser'))  return 'free';
+    if (!method_exists('\Indeed\Ihc\UserSubscriptions', 'getAllForUser'))  return 0;
 
     if (!$user_id) $user_id = get_current_user_id();
 
     $active_subscriptions = \Indeed\Ihc\UserSubscriptions::getAllForUser($user_id);
-    if (!is_array($active_subscriptions) || count($active_subscriptions) == 0)  return 'free';
+    if (!is_array($active_subscriptions) || count($active_subscriptions) == 0)  return 0;
 
-    $slug = 'free';
+    $slug = 0;
 
     foreach ($active_subscriptions as $subscription) {
 
         if ($subscription['status'] != 1)  continue;
 
-        if ($subscription['level_slug'] == 'ultimate') {
-            $slug = $subscription['level_slug'];
-        } elseif ($subscription['level_slug'] == 'pro' && $slug !== 'ultimate') {
-            $slug = $subscription['level_slug'];
+        if ($subscription['level_slug'] == 'pro' || $subscription['level_slug'] == 'proyear') {
+            $slug = 2;
+        } elseif (($subscription['level_slug'] == 'standard' || $slug == 'standardyear') && ($subscription['level_slug'] != 'pro' || $subscription['level_slug'] != 'proyear')) {
+            $slug = 1;
         }
     }
 

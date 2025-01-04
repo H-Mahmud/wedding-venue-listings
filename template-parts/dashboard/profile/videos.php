@@ -4,7 +4,7 @@
 
         <div id="video-form" class="relative">
             <div class="video-gallery grid grid-cols-2 md:grid-cols-3 gap-4">
-                <?php if (wvl_current_plan() == 'free'): ?>
+                <?php if (wvl_current_plan() == 0): ?>
                     <label onclick="alert('<?php _e('Upgrade your plan to add videos', 'wedding-venue-listings'); ?>')" class=" py-8 flex justify-center items-center flex-col gap-3 border border-gray-200 rounded-lg hover:border-dashed hover:border-blue-600 cursor-pointer">
                         <i class="fa-solid fa-video  text-gray-600 text-4xl"></i>
                         <p class="text-center text-xl font-semibold text-gray-600">

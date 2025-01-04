@@ -1,5 +1,5 @@
 <div class="analytics-page relative">
-    <?php if (wvl_current_plan() == 'free'): ?>
+    <?php if (wvl_current_plan() == 0): ?>
         <div class="deemed absolute inset-0 flex items-center justify-center bg-white/50 backdrop-blur-sm"></div>
     <?php endif;
 
@@ -35,7 +35,7 @@
     $contact_click_count = 30;
     $lead_count = 25;
     $chartData = [];
-    if (wvl_current_plan() != 'free') {
+    if (wvl_current_plan() != 0) {
         $impression_count = WVL_Analytic_Data_Storage::get_count_by(wvl_get_venue_id(), 'impression', $startDate, $endDate);
         $profile_view_count = WVL_Analytic_Data_Storage::get_count_by(wvl_get_venue_id(), 'view', $startDate, $endDate);
         $unique_view_count = WVL_Analytic_Data_Storage::get_count_by(wvl_get_venue_id(), 'unique_view', $startDate, $endDate);

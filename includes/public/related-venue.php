@@ -2,7 +2,7 @@
 add_action('wvl_related_venue', 'wvl_add_related_venue', 10, 2);
 function wvl_add_related_venue($post_id, $author_id)
 {
-    if (wvl_current_plan($author_id) != 'free') return;
+    if (wvl_current_plan($author_id) != 0) return;
     $categories = wp_get_post_categories($post_id);
     if (!empty($categories)) {
         $args = [

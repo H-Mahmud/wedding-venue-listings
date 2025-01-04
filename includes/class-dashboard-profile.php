@@ -412,7 +412,7 @@ class WVL_Dashboard_Profile
             wp_send_json_error(['message' => __('You must be logged in to upload a Photo.', 'wedding-venue-listings')]);
         }
 
-        if (wvl_current_plan() == 'free') {
+        if (wvl_current_plan() == 0) {
             wp_send_json_error(['message' => __('Your not allowed to upload videos. Please consider upgrading to a paid plan to add unlimited videos.', 'wedding-venue-listings')]);
         }
 
