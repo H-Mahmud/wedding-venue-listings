@@ -22,6 +22,7 @@ function wvl_listing_shortcode($atts)
                     <div class="thumbnail">
                         <?php the_post_thumbnail('full', array('class' => 'thumbnail-image')); ?>
                     </div>
+					
                     <div class="content">
                         <h2 class="title">
                             <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
@@ -30,6 +31,7 @@ function wvl_listing_shortcode($atts)
                             <i class="fa-solid fa-location-dot icon"></i>
                             <?php echo wvl_get_venue_address(get_the_ID()); ?>
                         </p>
+                        <p class="description"><?php echo wvl_get_excerpt_content(get_the_ID(), 80); ?></p>
                         <div class="meta">
                             <span class="reviews">
                                 <star-rating min="0" max="5" value="<?php echo wvl_get_venue_average_rating(get_the_ID()); ?>"></star-rating>
@@ -38,9 +40,8 @@ function wvl_listing_shortcode($atts)
                                 </span>
                             </span>
                         </div>
-                        <p class="description"><?php echo wvl_get_excerpt_content(get_the_ID(), 80); ?></p>
                         <div class="actions">
-                            <a class="wvl-btn-primary" href="<?php the_permalink(); ?>"><?php _e('Request a Pricing', 'wedding-venue-listings'); ?></a>
+                            <a class="wvl-btn-primary" href="<?php the_permalink(); ?>"><?php _e('Request Pricing', 'wedding-venue-listings'); ?></a>
                         </div>
                     </div>
                 </div>
