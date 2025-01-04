@@ -330,7 +330,7 @@ class WVL_Account_Auth
                 wp_set_current_user($user_id);
                 wp_set_auth_cookie($user_id);
 
-                wp_redirect(home_url());
+                wp_redirect(site_url('dashboard/venue-profile'));
                 exit;
             }
         }
