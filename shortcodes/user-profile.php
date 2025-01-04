@@ -1,8 +1,8 @@
 <?php
 defined('ABSPATH') || exit;
 
-add_shortcode('wvl-user-profile', 'wvl_listings_user_profile');
-function wvl_listings_user_profile()
+add_shortcode('wvl-user-profile', 'wvl_listings_user_profile_shortcode');
+function wvl_listings_user_profile_shortcode()
 {
     ob_start(); ?>
     <div class="user-profile">
@@ -21,15 +21,26 @@ function wvl_listings_user_profile()
             </a>
         <?php else: ?>
             <div class="flex justify-end items-center gap-1">
-                <a href="<?php echo site_url('login'); ?>" class="wvl-btn hover:bg-white !px-6">
-                    <?php _e('Login', 'wedding-venue-listings'); ?>
-                </a>
-                <a href="<?php echo site_url('register'); ?>" class="wvl-btn-primary !px-6">
+                <i class="fa-regular fa-user"></i>
+                <a href="<?php echo site_url('register'); ?>" class="btn-register">
                     <?php _e('Register', 'wedding-venue-listings'); ?>
+                </a>
+                <?php _e( ' / ', 'wedding-venue-listings' ); ?>
+                <a href="<?php echo site_url('login'); ?>" class="btn-login">
+                    <?php _e('Login', 'wedding-venue-listings'); ?>
                 </a>
             </div>
         <?php endif; ?>
     </div>
+    <style>
+        .user-profile, 
+        .user-profile a {
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 24px;
+        }
+    </style>
 <?php
     return ob_get_clean();
 }
