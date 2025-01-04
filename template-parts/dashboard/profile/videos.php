@@ -1,4 +1,4 @@
-<form class="mt-14 profile-step-forms" id="profileVideosForm" data-step="6">
+<form class="mt-14 profile-step-forms" id="profileVideosForm" data-step="5">
     <fieldset class="p-5 rounded-xl border-gray-200">
         <legend class="mb-2 text-center"><?php _e('Videos', 'wedding-venue-listings'); ?></legend>
 

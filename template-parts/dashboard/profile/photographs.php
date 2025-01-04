@@ -1,4 +1,4 @@
-<form class="mt-14 profile-step-forms" id="profilePhotographsForm" data-step="5">
+<form class="mt-14 profile-step-forms" id="profilePhotographsForm" data-step="4">
     <fieldset class="p-5 rounded-xl mb-8 border-gray-200">
         <legend class="mb-2 text-center"><?php _e('Cover Photo', 'wedding-venue-listings'); ?></legend>
         <?php

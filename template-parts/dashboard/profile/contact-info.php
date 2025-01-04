@@ -1,4 +1,4 @@
-<form class="mt-14 profile-step-forms" id="profileContactForm" data-step="3">
+<form class="mt-14 profile-step-forms" id="profileContactForm" data-step="2">
     <fieldset class="p-5 rounded-xl border-gray-200">
         <legend class="mb-2 text-center"><?php _e('Contact Information', 'wedding-venue-listings'); ?></legend>
 

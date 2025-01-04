@@ -7,47 +7,47 @@ $venue = get_post($venue_id);
     <div class="steps">
         <div class="steps__step" data-step="0">
             <div class="steps__step-number">1</div>
-            <div class="steps__step-name"><?php _e('Package', 'wedding-venue-listings'); ?></div>
+            <div class="steps__step-name"><?php _e('Personal Info', 'wedding-venue-listings'); ?></div>
         </div>
         <div class="steps__connector"></div>
         <div class="steps__step" data-step="1">
             <div class="steps__step-number">2</div>
-            <div class="steps__step-name"><?php _e('Personal Info', 'wedding-venue-listings'); ?></div>
+            <div class="steps__step-name"><?php _e('Service Info', 'wedding-venue-listings'); ?></div>
         </div>
         <div class="steps__connector"></div>
         <div class="steps__step" data-step="2">
             <div class="steps__step-number">3</div>
-            <div class="steps__step-name"><?php _e('Service Info', 'wedding-venue-listings'); ?></div>
+            <div class="steps__step-name"><?php _e('Contact Info', 'wedding-venue-listings'); ?></div>
         </div>
         <div class="steps__connector"></div>
         <div class="steps__step" data-step="3">
             <div class="steps__step-number">4</div>
-            <div class="steps__step-name"><?php _e('Contact Info', 'wedding-venue-listings'); ?></div>
+            <div class="steps__step-name"><?php _e('Your Story', 'wedding-venue-listings'); ?></div>
         </div>
         <div class="steps__connector"></div>
         <div class="steps__step" data-step="4">
             <div class="steps__step-number">5</div>
-            <div class="steps__step-name"><?php _e('Your Story', 'wedding-venue-listings'); ?></div>
+            <div class="steps__step-name"> <?php _e('Gallery', 'wedding-venue-listings'); ?></div>
         </div>
         <div class="steps__connector"></div>
         <div class="steps__step" data-step="5">
             <div class="steps__step-number">6</div>
-            <div class="steps__step-name"> <?php _e('Gallery', 'wedding-venue-listings'); ?></div>
+            <div class="steps__step-name"> <?php _e('Videos', 'wedding-venue-listings'); ?></div>
         </div>
         <div class="steps__connector"></div>
         <div class="steps__step" data-step="6">
             <div class="steps__step-number">7</div>
-            <div class="steps__step-name"> <?php _e('Videos', 'wedding-venue-listings'); ?></div>
+            <div class="steps__step-name"><?php _e('Package', 'wedding-venue-listings'); ?></div>
         </div>
     </div>
 
-    <?php include_once WVL_PLUGIN_DIR . 'template-parts/dashboard/profile/package.php'; ?>
     <?php include_once WVL_PLUGIN_DIR . 'template-parts/dashboard/profile/personal-info.php'; ?>
     <?php include_once WVL_PLUGIN_DIR . 'template-parts/dashboard/profile/service-info.php'; ?>
     <?php include_once WVL_PLUGIN_DIR . 'template-parts/dashboard/profile/contact-info.php'; ?>
     <?php include_once WVL_PLUGIN_DIR . 'template-parts/dashboard/profile/your-story.php'; ?>
     <?php include_once WVL_PLUGIN_DIR . 'template-parts/dashboard/profile/photographs.php'; ?>
     <?php include_once WVL_PLUGIN_DIR . 'template-parts/dashboard/profile/videos.php'; ?>
+    <?php include_once WVL_PLUGIN_DIR . 'template-parts/dashboard/profile/package.php'; ?>
 
     <p class="text-red-700 profile-form-error pt-3"></p>
     <p class="text-green-700 profile-form-success pt-3"></p>

@@ -1,4 +1,4 @@
-<form class=" mt-14 profile-step-forms active" id="packageInfoForm" data-step="0">
+<form class=" mt-14 profile-step-forms active" id="packageInfoForm" data-step="6">
     <h3 class="mb-2 font-semibold text-2xl text-center"><?php _e('Our Packages', 'wedding-venue-listings'); ?></h3>
 
     <div class="pricing-tables gap-3">
