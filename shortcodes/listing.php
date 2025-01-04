@@ -85,7 +85,7 @@ function wvl_get_listing($array = array())
 
     if ($args['featured']) {
         $query_args['orderby'] = 'post_mime_type';
-        $query_args['order'] = 'DESC';
+        $query_args['order'] = 'ASC';
     }
 
     $query = new WP_Query($query_args);
