@@ -22,7 +22,7 @@ function wvl_listing_shortcode($atts)
                     <div class="thumbnail">
                         <?php the_post_thumbnail('full', array('class' => 'thumbnail-image')); ?>
                     </div>
-					
+
                     <div class="content">
                         <h2 class="title">
                             <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
@@ -48,7 +48,9 @@ function wvl_listing_shortcode($atts)
 
         <?php
             }
-        } ?>
+        }
+        wp_reset_postdata();
+        ?>
     </div>
 
 <?php
