@@ -6,8 +6,8 @@
  * Version:           1.0
  * Requires at least: 6.6
  * Requires PHP:      7.2
- * Author:            Mahmudul Hasan
- * Author URI:        https://imahmud.com/
+ * Author:            Web Muzahid
+ * Author URI:        https://webmuzahid.com/
  * License:           GPL v2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       wedding-venue-listings
@@ -22,7 +22,7 @@ defined('WVL_PLUGIN_URL') || define('WVL_PLUGIN_URL', plugin_dir_url(__FILE__));
 
 require_once WVL_PLUGIN_DIR . 'init.php';
 
-defined('WVL_DEVELOPMENT') || define('WVL_DEVELOPMENT', true);
+defined('WVL_DEVELOPMENT') || define('WVL_DEVELOPMENT', false);
 
 add_action('init', function () {
     if (session_status() === PHP_SESSION_NONE) {
@@ -157,6 +157,7 @@ function wvl_enqueue_scripts()
     }
 
 
+    wp_enqueue_style('wvl-updated-style', WVL_PLUGIN_URL . '/assets/css/wvl-updated-style.css');
 
     // wp_enqueue_style('nepali-date-picker', WVL_PLUGIN_URL . '/assets/css/nepali-date-picker.css');
     // wp_enqueue_style('wvl-style', WVL_PLUGIN_URL . '/assets/css/wvl-style.css');
