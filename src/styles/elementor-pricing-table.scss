@@ -1,0 +1,41 @@
+@media screen and (max-width: 768px) {
+  .pricing-slider {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .pricing-slider .slides {
+    display: flex;
+    justify-content: flex-start;
+    transition: transform 0.5s ease-in-out;
+    width: 300%;
+  }
+
+  .pricing-slider .slide {
+    //   width: 100%;
+    width: 100vw;
+    margin-left: 12px;
+    margin-right: 12px;
+    width: calc(100vw - 66px);
+  }
+
+  .pricing-slider .bullets {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }
+
+  .pricing-slider .bullet {
+    width: 12px;
+    height: 12px;
+    margin: 0 5px;
+    background: #ccc;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  .bullet.active {
+    background: #916e37;
+  }
+}

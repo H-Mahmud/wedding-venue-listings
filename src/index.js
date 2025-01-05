@@ -2,6 +2,7 @@
 import "./components/calendar";
 import "./components/star-rating";
 import "./components/modal";
+import "./styles/elementor-pricing-table";
 
 // Styles
 import "./style.scss";
