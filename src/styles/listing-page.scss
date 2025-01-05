@@ -73,6 +73,7 @@
 
         .thumbnail {
           @apply block h-full w-full rounded-md object-cover;
+          aspect-ratio: 3 / 2;
         }
       }
 
