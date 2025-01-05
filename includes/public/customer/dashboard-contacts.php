@@ -44,7 +44,7 @@ class WVL_Dashboard_Contacts
         add_wvl_menu([
             'name'     => 'Contacts',
             'slug'     => 'contacts',
-            'capability' => 'manage_account',
+            'capability' => 'manage_venue',
             'icon'     => '<i class="fa-solid fa-address-card text-xl" style="color: #916E37;"></i>',
             'premium'  => false,
             'priority' => 30,
