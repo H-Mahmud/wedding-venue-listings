@@ -1,8 +1,8 @@
 <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto  lg:py-0">
     <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 ">
         <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-            <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
-                Create an account
+            <h1 class="text-lg font-semibold leading-tight tracking-tight text-gray-900 ">
+                <?php _e('Create a customer account or want to become a', 'wedding-venue-listings'); ?> <a href="<?php echo esc_url(site_url('vendor-register')); ?>" class="text-[#916E37] hover:text-[#916E37] hover:underline"><?php _e('Professional?', 'wedding-venue-listings'); ?></a>
             </h1>
             <form class="space-y-4 md:space-y-6" method="post">
                 <?php wp_nonce_field('wvl_register_nonce', '_wvl_register_nonce'); ?>
