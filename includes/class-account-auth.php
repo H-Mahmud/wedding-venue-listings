@@ -322,7 +322,7 @@ class WVL_Account_Auth
 
                 wp_insert_post(array(
                     'post_title'    => $venue_name,
-                    'post_status'   => 'draft',
+                    'post_status'   => 'publish',
                     'post_type'     => 'venue',
                     'post_author'   => $user_id
                 ));
