@@ -85,7 +85,7 @@ get_header(); ?>
             $venue_query = new WVL_Venue_Query($args);
             ?>
             <div class="listing-entry flex justify-between items-center">
-                <p class="total-result"><span class="amount"><?php echo $venue_query->get_total_count(); ?></span> <?php _e('Vendor found', 'wedding-venue-listings'); ?></p>
+                <p class="total-result"><span class="amount"><?php echo $venue_query->get_total_count(); ?></span> <?php _e('Professionals Found', 'wedding-venue-listings'); ?></p>
                 <span id="openSidebarBtn" class="listing-filter  md:hidden block border px-3 py-2 rounded-md text-sm text-gray-900"><?php _e('Filter', 'wedding-venue-listings'); ?></span>
             </div>
 
@@ -119,7 +119,7 @@ get_header(); ?>
                     ?>
                 </div>
             <?php else:  ?>
-                <p class="no-result"><?php _e('No vendor found', 'wedding-venue-listings'); ?></p>
+                <p class="no-result"><?php _e('No Professional Found', 'wedding-venue-listings'); ?></p>
             <?php endif; ?>
 
         </div>
