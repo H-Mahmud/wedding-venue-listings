@@ -150,7 +150,7 @@
                 <select name="subcategory" class="wvl-tags" multiple id="subcategory"></select>
                 <?php if (wvl_current_plan() == 0) { ?>
 
-                    <p class="text-orange-600 mt-0"><?php _e('Upgrade your plan to add unlimited categories', 'wedding-venue-listings'); ?></p>
+                    <p class="text-orange-600 mt-0"><?php _e('Upgrade your plan to add unlimited subcategories', 'wedding-venue-listings'); ?></p>
                 <?php
 
                 } ?>
@@ -161,7 +161,7 @@
             <label for="support_location"><?php _e('Support Location', 'wedding-venue-listings'); ?></label>
             <select name="support_location" class="wvl-tags" multiple id="support_location"></select>
             <?php if (wvl_current_plan()  == 0) { ?>
-                <p class="text-orange-600 mt-0"><?php _e('Upgrade your plan to add unlimited Support location', 'wedding-venue-listings'); ?></p>
+                <p class="text-orange-600 mt-0"><?php _e('Upgrade your plan to add unlimited Supported locations', 'wedding-venue-listings'); ?></p>
             <?php } ?>
         </div>
     </fieldset>
@@ -211,7 +211,7 @@ if (!is_wp_error($all_terms)) {
         searchResultLimit: 15,
         searchEnabled: true,
         maxItemText: (maxItemCount) => {
-            return `Only ${maxItemCount} Support location can be added with free plan`;
+            return `Only ${maxItemCount} Supported location can be added in the free plan`;
         },
     });
 
@@ -261,7 +261,7 @@ if (!is_wp_error($all_terms)) {
                 searchResultLimit: 10,
                 searchEnabled: true,
                 maxItemText: (maxItemCount) => {
-                    return `Only ${maxItemCount} vendor types can be added with free plan`;
+                    return `Only ${maxItemCount} subcategory can be added in the free plan`;
                 },
             });
         }
