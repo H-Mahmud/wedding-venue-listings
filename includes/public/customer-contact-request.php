@@ -82,11 +82,7 @@ class WVL_Customer_Contact_Request
         ];
 
         wvL_insert_contact_data($data);
-        if ($user_id != 0) {
-            wp_redirect(site_url('/dashboard/contacts'));
-        } else {
-            wp_redirect(get_the_permalink($vendor_id));
-        }
+        wp_redirect(get_the_permalink($vendor_id));
         exit;
     }
 }
