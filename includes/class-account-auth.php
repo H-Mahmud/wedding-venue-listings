@@ -36,6 +36,8 @@ class WVL_Account_Auth
         add_action('init', array($this, 'user_password_forgot'));
         add_action('init', array($this, 'user_password_reset'), 10);
         add_action('init', array($this, 'user_logout'), 10);
+        add_action('init', array($this, 'wvl_after_registered_vendor_with_social'));
+
 
         add_shortcode('wvl-login', array($this, 'login_form_shortcode'));
         add_shortcode('wvl-register', array($this, 'register_form_shortcode'));
@@ -482,6 +484,40 @@ class WVL_Account_Auth
             wp_redirect(home_url());
             exit;
         }
+    }
+
+
+    /**
+     * Handles the registration of a vendor via social login.
+     *
+     * This function checks for valid social vendor registration parameters
+     * and ensures the user is logged in. It assigns the vendor role to the
+     * current user and creates a new venue post for the user. After these
+     * actions, it redirects the user to the venue profile dashboard.
+     *
+     * @return void
+     */
+
+    public function wvl_after_registered_vendor_with_social()
+    {
+        if (!isset($_GET['social_vendor_register']) || $_GET['social_vendor_register'] != 'yes') return;
+
+        if (!is_user_logged_in()) return;
+
+        $user_id = get_current_user_id();
+        $u = new WP_User($user_id);
+        $u->set_role('vendor');
+
+        wp_insert_post(array(
+            'post_title'    => 'Untitled Venue',
+            'post_status'   => 'publish',
+            'post_type'     => 'venue',
+            'post_author'   => $user_id
+        ));
+
+
+        wp_redirect(site_url('dashboard/venue-profile'));
+        exit;
     }
 
     /**

@@ -34,6 +34,11 @@
                 <p class="text-sm font-light text-gray-500">
                     <?php _e('Already have an account?', 'wedding-venue-listings'); ?> <a href="<?php echo site_url('login'); ?>" class="font-medium text-primary-600 hover:underline dark:text-primary-500"><?php _e('Login here', 'wedding-venue-listings'); ?></a>
                 </p>
+
+                <?php
+                $vendor_social_register = add_query_arg('social_vendor_register', 'yes', home_url());
+                echo do_shortcode('[TheChamp-Login title="Register with your Social Account" redirect_url="' . $vendor_social_register . '"]'); ?>
+
             </form>
         </div>
     </div>

@@ -37,6 +37,9 @@
                 <p class="text-sm font-light text-gray-500 ">
                     <?php _e('Don’t have an account yet?', 'wedding-venue-listings'); ?> <a href="<?php echo site_url('register'); ?>" class="font-medium text-primary-600 hover:underline"><?php _e('Sign up', 'wedding-venue-listings'); ?></a>
                 </p>
+
+                <?php echo do_shortcode('[TheChamp-Login title="Login with your Social Account"]'); ?>
+
             </form>
         </div>
     </div>
