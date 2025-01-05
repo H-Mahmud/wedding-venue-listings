@@ -19,9 +19,11 @@ function wvl_listing_shortcode($atts)
                 $query->the_post(); ?>
 
                 <div class="listing-item" data-id="<?php the_ID(); ?>">
-                    <div class="thumbnail">
-                        <?php the_post_thumbnail('full', array('class' => 'thumbnail-image')); ?>
-                    </div>
+                    <a href="<?php the_permalink(); ?>">
+                        <div class="thumbnail">
+                            <?php the_post_thumbnail('full', array('class' => 'thumbnail-image')); ?>
+                        </div>
+                    </a>
 
                     <div class="content">
                         <h2 class="title">

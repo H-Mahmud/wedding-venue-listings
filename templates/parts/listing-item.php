@@ -1,7 +1,9 @@
 <div class="listing-item" data-id="<?php the_ID(); ?>">
-    <div class="thumbnail">
-        <?php the_post_thumbnail('full', array('class' => 'thumbnail-image')); ?>
-    </div>
+    <a href="<?php echo the_permalink(get_the_ID()); ?>">
+        <div class="thumbnail">
+            <?php the_post_thumbnail('full', array('class' => 'thumbnail-image')); ?>
+        </div>
+    </a>
     <div class="content">
         <h2 class="title">
             <a href="<?php echo the_permalink(get_the_ID()); ?>"><?php the_title(); ?></a>
