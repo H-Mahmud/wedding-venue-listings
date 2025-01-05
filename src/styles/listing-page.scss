@@ -70,10 +70,10 @@
 
       .thumbnail {
         @apply h-full w-full xl:max-w-80;
+        aspect-ratio: 3 / 2;
 
-        .thumbnail {
-          @apply block h-full w-full rounded-md object-cover;
-          aspect-ratio: 3 / 2;
+        img {
+          @apply block !h-full !w-full rounded-md object-cover;
         }
       }
 

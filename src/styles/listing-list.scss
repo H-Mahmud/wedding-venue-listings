@@ -19,10 +19,10 @@
 
     .thumbnail {
       @apply min-h-[180px] w-full;
+      aspect-ratio: 3 / 2;
 
       img {
         @apply block h-full w-full rounded-md object-cover;
-        aspect-ratio: 3 / 2;
       }
     }
 

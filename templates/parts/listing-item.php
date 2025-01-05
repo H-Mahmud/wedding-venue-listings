@@ -12,7 +12,7 @@
             <i class="fa-solid fa-location-dot icon"></i>
             <?php echo wvl_get_venue_address(get_the_ID()); ?>
         </p>
-        <p class="description"><?php echo wvl_get_excerpt_content(get_the_ID()); ?></p>
+        <p class="description"><?php echo wvl_get_excerpt_content(get_the_ID(), 130); ?></p>
         <div class="meta">
             <span class="reviews">
                 <star-rating min="0" max="5" value="<?php echo wvl_get_venue_average_rating(get_the_ID()); ?>"></star-rating>
