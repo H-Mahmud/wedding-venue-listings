@@ -4,11 +4,11 @@
 
 @layer components {
   .wvl-btn-primary {
-    @apply mb-2 me-2 mt-4 inline-block rounded-md bg-[#916E37] px-5 py-3 text-center text-sm font-bold text-white hover:text-gray-100 focus:z-10 focus:ring-1 focus:ring-blue-300;
+    @apply mb-2 me-2 mt-4 inline-block rounded-md bg-[#916E37] px-5 py-3 text-center text-sm font-bold text-white hover:bg-[#775b2d] hover:text-gray-100 focus:z-10 focus:bg-[#916E37] focus:ring-1 focus:ring-blue-300 active:bg-[#916E37];
   }
 
   .wvl-btn-secondary {
-    @apply mb-2 me-2 mt-4 inline-block rounded-md bg-white px-5 py-3 text-center text-sm font-bold text-primary ring-1 !ring-primary hover:bg-white hover:text-primary hover:ring-1;
+    @apply mb-2 me-2 mt-4 inline-block rounded-md bg-white px-5 py-3 text-center text-sm font-bold text-[#916E37] ring-1 !ring-[#916E37] hover:bg-white hover:text-[#916E37] hover:ring-1;
   }
 
   .wvl-btn {
