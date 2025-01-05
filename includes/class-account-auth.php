@@ -508,13 +508,14 @@ class WVL_Account_Auth
         $u = new WP_User($user_id);
         $u->set_role('vendor');
 
-        wp_insert_post(array(
-            'post_title'    => 'Untitled Venue',
-            'post_status'   => 'publish',
-            'post_type'     => 'venue',
-            'post_author'   => $user_id
-        ));
-
+        if (!wvl_get_venue_id($user_id)) {
+            wp_insert_post(array(
+                'post_title'    => 'Untitled Venue',
+                'post_status'   => 'publish',
+                'post_type'     => 'venue',
+                'post_author'   => $user_id
+            ));
+        }
 
         wp_redirect(site_url('dashboard/venue-profile'));
         exit;
