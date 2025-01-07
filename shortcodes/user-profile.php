@@ -48,6 +48,16 @@ function wvl_listings_user_profile_shortcode()
             padding: 12px;
         }
 
+        .mobile-logo {
+            flex: 1;
+        }
+
+        .mobile-profile {
+            flex: 1;
+            text-align: right;
+        }
+
+
         @media screen and (max-width: 600px) {
             .user_login-btn a {
                 font-size: 12px;
@@ -55,6 +65,11 @@ function wvl_listings_user_profile_shortcode()
 
             .user_login-btn {
                 padding: 4px;
+            }
+
+            .mobile-hamburger {
+                flex: 0 0 auto;
+                margin-right: 8px;
             }
         }
     </style>
