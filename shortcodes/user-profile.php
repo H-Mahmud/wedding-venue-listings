@@ -7,7 +7,7 @@ function wvl_listings_user_profile_shortcode()
     ob_start(); ?>
     <div class="user-profile">
         <?php if (is_user_logged_in()): ?>
-            <a href="<?php echo site_url('dashboard'); ?>" class="wvl-user-profile-avatar block h-12 w-12">
+            <a href="<?php echo site_url('dashboard'); ?>" class="wvl-user-profile-avatar inline-block h-12 w-12">
                 <?php
                 $user_id = get_current_user_id();
                 $local_avatar = get_user_meta($user_id, 'simple_local_avatar', true);
