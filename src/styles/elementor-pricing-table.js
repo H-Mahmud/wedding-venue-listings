@@ -1,69 +1,45 @@
 import "./elementor-pricing-table.scss";
 
 jQuery(document).ready(function ($) {
+  if (window.innerWidth > 768) return;
+
   const $slider = $(".pricing-slider");
-  const $slides = $(".pricing-slider .slides");
-  const $bullets = $(".pricing-slider .bullet");
-  let isDragging = false;
-  let startX = 0;
-  let currentTranslate = 0;
-  let prevTranslate = 0;
+  const $slides = $slider.find(".slides");
+  const $bullets = $slider.find(".bullets");
+  // const $slide = $slider.find('.slide');
+  //   const totalSlides = $slide.length;
+  const totalSlides = 3;
+
   let currentIndex = 0;
 
-  function setSliderPosition(translateX) {
-    $slides.css("transform", `translateX(${translateX}px)`);
+  const $bullet = $bullets.find(".bullet");
+
+  function updateSlider(index) {
+    const offset = -index * 100;
+    $slides.css("transform", `translateX(${offset}%)`);
+    $bullet.removeClass("active");
+    $bullet.eq(index).addClass("active");
   }
 
-  function goToSlide(index) {
-    currentIndex = index;
-    const offset = -index * $slider.width();
-    setSliderPosition(offset);
-    prevTranslate = offset;
-    $bullets.removeClass("active");
-    $bullets.eq(index).addClass("active");
-  }
+  // Bullet click event
+  $bullet.on("click", function () {
+    currentIndex = $(this).data("index");
+    updateSlider(currentIndex);
+  });
 
+  // Swipe functionality
+  let startX;
   $slider.on("mousedown touchstart", function (e) {
-    isDragging = true;
-    startX =
-      e.type === "mousedown" ? e.pageX : e.originalEvent.touches[0].pageX;
-    $slides.css("transition", "none"); // Disable smooth transition during drag
+    startX = e.pageX || e.originalEvent.touches[0].pageX;
   });
 
-  $(document).on("mousemove touchmove", function (e) {
-    if (!isDragging) return;
-
-    const currentX =
-      e.type === "mousemove" ? e.pageX : e.originalEvent.touches[0].pageX;
-    const deltaX = currentX - startX;
-    currentTranslate = prevTranslate + deltaX;
-    setSliderPosition(currentTranslate);
-  });
-
-  $(document).on("mouseup touchend", function () {
-    if (!isDragging) return;
-
-    isDragging = false;
-    $slides.css("transition", "transform 0.5s ease-in-out"); // Re-enable smooth transition
-
-    // Determine the slide based on drag distance
-    const slideWidth = $slider.width();
-    const draggedPercentage = currentTranslate / slideWidth;
-    const newIndex = Math.round(-draggedPercentage);
-
-    // Prevent out-of-bound indices
-    if (newIndex < 0) {
-      goToSlide(0);
-    } else if (newIndex >= $bullets.length) {
-      goToSlide($bullets.length - 1);
-    } else {
-      goToSlide(newIndex);
+  $slider.on("mouseup touchend", function (e) {
+    const endX = e.pageX || e.originalEvent.changedTouches[0].pageX;
+    if (startX > endX + 50 && currentIndex < totalSlides - 1) {
+      currentIndex++;
+    } else if (startX < endX - 50 && currentIndex > 0) {
+      currentIndex--;
     }
-  });
-
-  // Optional: Allow manual bullet navigation
-  $(".bullet").on("click", function () {
-    const index = $(this).data("index");
-    goToSlide(index);
+    updateSlider(currentIndex);
   });
 });
