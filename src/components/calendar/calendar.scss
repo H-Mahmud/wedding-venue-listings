@@ -13,14 +13,11 @@
 
   .calendar-day,
   .calendar-date {
-    padding: 10px;
+    @apply cursor-pointer select-none p-4 text-center text-[#06070a];
+
     @media screen and (max-width: 768px) {
-      padding: 4px;
+      @apply p-2;
     }
-    text-align: center;
-    cursor: pointer;
-    user-select: none;
-    color: #06070a;
   }
 
   .calendar-date.selected {
