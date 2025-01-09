@@ -362,8 +362,7 @@
 
         <?php do_action('wvl_single_venue_after', get_the_ID(), $author_id); ?>
 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
         <script>
             jQuery(document).ready(function($) {
                 $('#contactFormOpen').on('click', function() {

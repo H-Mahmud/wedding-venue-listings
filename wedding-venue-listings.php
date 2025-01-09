@@ -141,6 +141,11 @@ function wvl_enqueue_scripts()
     wp_enqueue_script('lightgallery', WVL_PLUGIN_URL . '/assets/lib/lightgallery/js/lightgallery-all.min.js', array('jquery'), '1.10.0', true);
     wp_enqueue_style('lightgallery', WVL_PLUGIN_URL . '/assets/lib/lightgallery/css/lightgallery.min.css', array(), '1.10.0');
 
+    // fancybox
+    wp_enqueue_script('fancybox', WVL_PLUGIN_URL . '/assets/lib/fancybox/jquery.fancybox.min.js', array('jquery'), '3.5.7', true);
+    wp_enqueue_style('fancybox', WVL_PLUGIN_URL . '/assets/lib/fancybox/jquery.fancybox.min.css', array(), '3.5.7');
+
+
     // Admin Dashboard Third Party libraries
     if (is_page('dashboard')) {
         // Choices
