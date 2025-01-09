@@ -62,7 +62,7 @@
     }
 
     .total-result {
-      @apply mb-2 mt-8 text-xl font-semibold text-primary md:mb-8 md:mt-3;
+      @apply mb-2 mt-8 text-sm font-semibold text-primary md:mb-8 md:mt-3 md:text-xl;
     }
 
     .listing-item {

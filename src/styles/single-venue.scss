@@ -62,7 +62,7 @@
           }
 
           &.active {
-            @apply bg-primary font-semibold text-white;
+            @apply bg-[#916E37] font-semibold text-white;
           }
         }
       }
@@ -122,7 +122,7 @@
           @apply py-2 text-sm text-secondary;
 
           .icon {
-            @apply text-primary;
+            @apply text-[#916E37];
           }
         }
 
