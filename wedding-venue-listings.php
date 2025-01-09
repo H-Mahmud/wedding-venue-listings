@@ -22,7 +22,7 @@ defined('WVL_PLUGIN_URL') || define('WVL_PLUGIN_URL', plugin_dir_url(__FILE__));
 
 require_once WVL_PLUGIN_DIR . 'init.php';
 
-defined('WVL_DEVELOPMENT') || define('WVL_DEVELOPMENT', false);
+defined('WVL_DEVELOPMENT') || define('WVL_DEVELOPMENT', true);
 
 add_action('init', function () {
     if (session_status() === PHP_SESSION_NONE) {
@@ -107,14 +107,16 @@ function wvl_enqueue_scripts()
     if (defined('WVL_DEVELOPMENT') && WVL_DEVELOPMENT) {
         // $dev_server_url = 'http://localhost:3000';
         $dev_server_url = WVL_PLUGIN_URL . '/assets/dist';
-        wp_enqueue_style('wvl-style', $dev_server_url . '/style.min.css', array(), time());
+        wp_enqueue_style('wvl-main', $dev_server_url . '/main.min.css', array(), time());
         wp_enqueue_script('wvl-main', $dev_server_url . '/main.bundle.js', array('jquery'), time(), true);
 
         if (is_page('dashboard')) {
+            wp_enqueue_style('wvl-dashboard', $dev_server_url . '/dashboard.min.css', array(), time());
             wp_enqueue_script('wvl-dashboard',  $dev_server_url . '/dashboard.bundle.js', array('jquery'), time(), true);
         }
     } else {
-        wp_enqueue_style('wvl-style', WVL_PLUGIN_URL . '/assets/dist/style.min.css', array(), '1.0');
+        wp_enqueue_style('wvl-main', WVL_PLUGIN_URL . '/assets/dist/main.min.css', array(), '1.0');
+        wp_enqueue_style('wvl-dashboard', WVL_PLUGIN_URL . '/assets/dist/dashboard.min.css', array(), '1.0');
         wp_enqueue_script('wvl-main',  WVL_PLUGIN_URL . '/assets/dist/main.bundle.min.js', array('jquery'), '1.0', true);
 
         if (is_page('dashboard')) {
@@ -122,28 +124,39 @@ function wvl_enqueue_scripts()
         }
     }
 
-    /** General script  */
+    /**
+     * Third Party libraries
+     */
+    // Font Awesome v6
     wp_enqueue_style('font-awesome-v6',  WVL_PLUGIN_URL . '/assets/lib/font-awesome/css/all.min.css', [], '6.7.1');
 
+    // Air Datepicker
     wp_enqueue_script('air-datepicker', WVL_PLUGIN_URL . '/assets/lib/air-datepicker/datepicker.min.js');
     wp_enqueue_script('air-datepicker-en', WVL_PLUGIN_URL . '/assets/lib/air-datepicker/i18n/datepicker.en.min.js');
     wp_enqueue_style('air-datepicker',  WVL_PLUGIN_URL . '/assets/lib/air-datepicker/datepicker.min.css');
 
+    // Lightgallery
     wp_enqueue_script('lightgallery', WVL_PLUGIN_URL . '/assets/lib/lightgallery/js/lightgallery-all.min.js', array('jquery'), '1.10.0', true);
     wp_enqueue_style('lightgallery', WVL_PLUGIN_URL . '/assets/lib/lightgallery/css/lightgallery.min.css', array(), '1.10.0');
 
-    // Environment Independent scripts
+    // Admin Dashboard Third Party libraries
     if (is_page('dashboard')) {
+        // Choices
         wp_enqueue_script('choices.js', WVL_PLUGIN_URL . '/assets/lib/choices.js/js/choices.min.js', array('jquery'), null, false);
         wp_enqueue_style('choices.js', WVL_PLUGIN_URL . '/assets/lib/choices.js/css/choices.min.css');
+
+        // Full Calendar
         wp_enqueue_script('fullcalendar', WVL_PLUGIN_URL . '/assets/lib/fullcalendar/index.global.min.js', [], '6.1.15', true);
 
+        // Chart
         wp_enqueue_script('chart.js',  WVL_PLUGIN_URL . '/assets/lib/chart/chart.umd.js', [], '4.4.7', true);
 
+        // TinyMCE
         wp_enqueue_script('tinymce');
         wp_enqueue_script('wp-tinymce');
 
 
+        // Localize Admin Script
         $venue_id = wvl_get_venue_id();
         $venue_status = get_post_status($venue_id);
         $data = [
@@ -158,18 +171,4 @@ function wvl_enqueue_scripts()
 
 
     wp_enqueue_style('wvl-updated-style', WVL_PLUGIN_URL . '/assets/css/wvl-updated-style.css');
-
-    // wp_enqueue_style('nepali-date-picker', WVL_PLUGIN_URL . '/assets/css/nepali-date-picker.css');
-    // wp_enqueue_style('wvl-style', WVL_PLUGIN_URL . '/assets/css/wvl-style.css');
-
-    // wp_enqueue_script('chart-js', WVL_PLUGIN_URL . '/assets/js/chart.js', array(), null, true);
-    // wp_enqueue_script('nepali-date-picker', WVL_PLUGIN_URL . '/assets/js/nepali-date-picker.js', ['jquery'], false, true);
-    // wp_enqueue_script('wvl-main', WVL_PLUGIN_URL . '/assets/js/wvl-main.js', array('jquery'), '1.0', true);
-
-
-
-
-    // wp_localize_script('wvl-main', 'WVL_MAIN', [
-    //     'ajax_url' => admin_url('admin-ajax.php'),
-    // ]);
 }
