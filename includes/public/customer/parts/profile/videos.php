@@ -5,9 +5,9 @@
         <div id="video-form" class="relative">
             <div class="video-gallery grid grid-cols-2 md:grid-cols-3 gap-4">
                 <?php if (wvl_current_plan() == 0): ?>
-                    <label onclick="alert('<?php _e('Upgrade your plan to add videos', 'wedding-venue-listings'); ?>')" class=" py-8 flex justify-center items-center flex-col gap-3 border border-gray-200 rounded-lg hover:border-dashed hover:border-blue-600 cursor-pointer">
-                        <i class="fa-solid fa-video  text-gray-600 text-4xl"></i>
-                        <p class="text-center text-xl font-semibold text-gray-600">
+                    <label onclick="alert('<?php _e('Upgrade your plan to add videos', 'wedding-venue-listings'); ?>')" class=" p-3 sm:py-8 flex justify-center items-center flex-col gap-3 border border-gray-200 rounded-lg hover:border-dashed hover:border-blue-600 cursor-pointer">
+                        <i class="fa-solid fa-video  text-gray-600 text-2xl sm:text-4xl"></i>
+                        <p class="text-center text-xs sm:text-xl font-semibold text-gray-600">
                             <?php _e(' Add New Video', 'wedding-venue-listings'); ?>
                         </p>
                         <div class="text-center">
