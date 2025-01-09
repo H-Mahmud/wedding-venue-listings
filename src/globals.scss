@@ -137,3 +137,64 @@
 }
 
 @import "./styles/full-calendar.css";
+
+/**
+Updated style
+*/
+.wvl-listing-list .listing-item .content .title a {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 26.4px;
+}
+
+.wvl-listing-list .listing-item .thumbnail img {
+  border-radius: 0.375rem 0.375rem 0 0;
+}
+.wvl-listing-list .listing-item .content .location {
+  font-size: 12px;
+  line-height: 21px;
+}
+.wvl-listing-list .listing-item .content .location .icon {
+  color: rgb(132 132 132 / var(--tw-text-opacity, 1));
+  font-size: 13.5px;
+  margin-right: 2px;
+}
+.verified-badge .bg {
+  font-size: 21.5px;
+  line-height: 22px;
+}
+.verified-badge .mark {
+  font-size: 10px;
+}
+.wvl-listing-list .listing-item .content .description {
+  margin-block: 12px;
+}
+.wvl-listing-list .listing-item .content .actions .wvl-btn-primary {
+  width: 100%;
+  border-radius: 4px;
+}
+
+.wvl-listing-list .listing-item .content .meta .star {
+  color: red !important;
+  font-size: 13.5px !important;
+}
+.wvl-listing-list .listing-item .thumbnail {
+  position: relative;
+}
+.wvl-listing-list .listing-item .thumbnail::before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0) 60%,
+    rgba(0, 0, 0, 0.8) 99%,
+    #000000 100%
+  );
+}
+@media (min-width: 1280px) {
+  .wvl-listing-list .listing-item {
+    width: calc(33.33333% - 16px);
+  }
+}
