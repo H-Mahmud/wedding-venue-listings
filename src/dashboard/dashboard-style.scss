@@ -1,4 +1,14 @@
-@import "./profile/style.css";
+@tailwind base;
+@tailwind utilities;
+@tailwind components;
+
+.wvl-fieldset {
+  @apply border-none md:rounded-xl md:border-solid md:border-gray-200 md:p-5;
+
+  legend {
+    @apply mb-2;
+  }
+}
 
 .mce-branding {
   display: none !important;
@@ -31,3 +41,5 @@
   justify-content: flex-start;
   align-items: flex-start;
 }
+
+@import "./profile/style.css";

@@ -2,8 +2,8 @@
 
 <form class="mb-14" method="post">
     <?php wp_nonce_field('update_account', '_update_account'); ?>
-    <fieldset class="p-5 rounded-xl border-gray-200">
-        <legend class="mb-2"><?php _e('Account Information', 'wedding-venue-listings'); ?></legend>
+    <fieldset class="wvl-fieldset">
+        <legend><?php _e('Account Information', 'wedding-venue-listings'); ?></legend>
 
 
         <label for="user_avatar" class="cursor-pointer h-28 w-28 mb-2 inline-block relative group text-center">
@@ -82,7 +82,7 @@
 
 <form method="post">
     <?php wp_nonce_field('change_password', '_change_password'); ?>
-    <fieldset class="p-5 rounded-xl border-gray-200">
+    <fieldset class="wvl-fieldset">
         <legend><?php _e('Change Your Account Password', 'wedding-venue-listings'); ?></legend>
 
         <div class="wvl-field-row">

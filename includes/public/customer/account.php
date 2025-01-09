@@ -69,7 +69,7 @@ class WVL_Dashboard_Account
      */
     public function account_page_cb()
     {
-        require_once WVL_PLUGIN_DIR . '/template-parts/dashboard/account.php';
+        require_once WVL_PLUGIN_DIR . '/includes/public/customer/parts/account-page.php';
     }
 
     /**

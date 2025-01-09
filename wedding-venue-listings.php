@@ -51,9 +51,11 @@ require_once WVL_PLUGIN_DIR . 'includes/public/dashboard/analytics.php';
 
 
 
-require_once WVL_PLUGIN_DIR . 'includes/class-dashboard-account.php';
+// require_once WVL_PLUGIN_DIR . 'includes/class-dashboard-account.php';
+require_once WVL_PLUGIN_DIR . 'includes/public/customer/account.php';
 require_once WVL_PLUGIN_DIR . 'includes/public/customer/dashboard-reviews.php';
 require_once WVL_PLUGIN_DIR . 'includes/public/customer/dashboard-contacts.php';
+
 require_once WVL_PLUGIN_DIR . 'includes/class-account-auth.php';
 require_once WVL_PLUGIN_DIR . 'includes/class-dashboard.php';
 require_once WVL_PLUGIN_DIR . 'includes/class-venue-admin.php';
@@ -168,7 +170,4 @@ function wvl_enqueue_scripts()
 
         wp_localize_script('wvl-dashboard', 'WVL_DATA', $data);
     }
-
-
-    wp_enqueue_style('wvl-updated-style', WVL_PLUGIN_URL . '/assets/css/wvl-updated-style.css');
 }
