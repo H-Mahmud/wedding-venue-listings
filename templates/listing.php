@@ -30,7 +30,7 @@ get_header(); ?>
                     background-color: #FFF;
                     overflow-y: auto;
                     transition: 0.5s;
-                    padding-top: 60px;
+                    padding-top: 20px;
                     padding-left: 12px;
                     padding-right: 12px;
                 }

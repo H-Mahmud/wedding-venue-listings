@@ -13,11 +13,7 @@
 
   .calendar-day,
   .calendar-date {
-    @apply cursor-pointer select-none p-4 text-center text-[#06070a];
-
-    @media screen and (max-width: 768px) {
-      @apply p-2;
-    }
+    @apply cursor-pointer select-none p-1 text-center text-[#06070a];
   }
 
   .calendar-date.selected {
