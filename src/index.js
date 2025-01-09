@@ -5,7 +5,7 @@ import "./components/modal";
 import "./styles/elementor-pricing-table";
 
 // Styles
-import "./style.scss";
+import "./globals.scss";
 import "./dashboard/dashboard-style.scss";
 import "./styles/forms.css";
 import "./styles/listing-page.scss";
