@@ -1,5 +1,5 @@
 .wvl-modal {
-  @apply fixed left-0 right-0 top-0 z-50 hidden h-screen w-full items-center justify-center bg-[#00000080];
+  @apply fixed inset-0 left-0 right-0 top-0 z-50 hidden h-full w-full items-center justify-center overflow-y-auto bg-[#00000080] px-12 pt-20 transition-opacity duration-500;
 
   &.wvl-modal[aria-hidden="false"] {
     @apply flex; /* Show modal when aria-hidden is false */

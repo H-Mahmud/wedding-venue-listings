@@ -22,7 +22,7 @@ if (!empty($user_comments)) {
 ?>
 <div id="modal-review-form" class="wvl-modal" tabindex="-1" aria-hidden="true" role="dialog">
     <div class="modal-box" role="document">
-        <div class="modal-inner min-w-[420px]">
+        <div class="modal-inner md:min-w-[420px]">
             <div class="modal-header">
                 <h3 class="modal-title">
                     <?php
