@@ -6,7 +6,6 @@ import "./styles/elementor-pricing-table";
 
 // Styles
 import "./globals.scss";
-import "./dashboard/dashboard-style.scss";
 import "./styles/forms.css";
 import "./styles/listing-page.scss";
 import "./styles/single-venue.scss";
