@@ -28,14 +28,14 @@ $total_pages = ceil($total_entries / $per_page);
                 <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                     <?php if (wvl_get_venue_id()) { ?>
                         <th class="py-3 px-6 text-left"><?php _e('First Name', 'wedding-venue-listings'); ?></th>
-                        <th class="py-3 px-6 text-left"><?php _e('Last Name', 'wedding-venue-listings'); ?></th>
+                        <th class="py-3 px-6 text-left hidden sm:table-cell"><?php _e('Last Name', 'wedding-venue-listings'); ?></th>
                     <?php
                     } else { ?>
-                        <th class="py-3 px-6 text-left"><?php _e('Vendor', 'wedding-venue-listings'); ?></th>
+                        <th class="py-3 px-6 text-left  hidden sm:table-cell"><?php _e('Vendor', 'wedding-venue-listings'); ?></th>
                     <?php } ?>
 
-                    <th class="py-3 px-6 text-left"><?php _e('Phone Number', 'wedding-venue-listings'); ?></th>
-                    <th class="py-3 px-6 text-left"><?php _e('Submitted Date', 'wedding-venue-listings'); ?></th>
+                    <th class="py-3 px-6 text-left hidden sm:table-cell"><?php _e('Phone Number', 'wedding-venue-listings'); ?></th>
+                    <th class="py-3 px-6 text-left hidden sm:table-cell"><?php _e('Submitted Date', 'wedding-venue-listings'); ?></th>
                     <?php /*<th class="py-3 px-6 text-center"><?php _e('Status', 'wedding-venue-listings'); ?></th> */ ?>
                     <th class="py-3 px-6 text-center">Expand</th>
                 </tr>
@@ -45,24 +45,24 @@ $total_pages = ceil($total_entries / $per_page);
                 foreach ($contacts as $contact) {
                 ?>
 
-                    <tr class="border-b border-gray-200 hover:bg-gray-100 contact-item" id="contact-<?php esc_html_e($contact['id']); ?>">
+                    <tr class="expand-row border-b border-gray-200 hover:bg-gray-100 contact-item" id="contact-<?php esc_html_e($contact['id']); ?>" data-target="message-<?php esc_html_e($contact['id']); ?>">
 
                         <?php if (wvl_get_venue_id()) { ?>
                             <td class="py-3 px-6 text-left"><?php esc_html_e($contact['first_name']); ?></td>
-                            <td class="py-3 px-6 text-left"><?php esc_html_e($contact['last_name']); ?></td>
+                            <td class="py-3 px-6 text-left hidden sm:table-cell"><?php esc_html_e($contact['last_name']); ?></td>
                         <?php
                         } else { ?>
-                            <td class="py-3 px-6 text-left"><a href="<?php echo get_the_permalink($contact['venue_id']); ?>"><?php echo get_the_title($contact['venue_id']); ?></a></td>
+                            <td class="py-3 px-6 text-left hidden sm:table-cell"><a href="<?php echo get_the_permalink($contact['venue_id']); ?>"><?php echo get_the_title($contact['venue_id']); ?></a></td>
                         <?php } ?>
 
-                        <td class="py-3 px-6 text-left"><?php esc_html_e($contact['phone']); ?></td>
-                        <td class="py-3 px-6 text-left"><?php esc_html_e($contact['submission_date']); ?></td>
+                        <td class="py-3 px-6 text-left hidden sm:table-cell"><?php esc_html_e($contact['phone']); ?></td>
+                        <td class="py-3 px-6 text-left hidden sm:table-cell"><?php esc_html_e($contact['submission_date']); ?></td>
 
                         <?php /* <td class="py-3 px-6 text-center">
                             <span class="bg-green-200 text-green-600 py-1 px-3 rounded-full text-xs">Read</span>
                         </td> */ ?>
                         <td class="py-3 px-6 text-center">
-                            <button class="expand-row" data-target="message-<?php esc_html_e($contact['id']); ?>">
+                            <button>
                                 <i class="fas fa-chevron-down arrow-icon"></i>
                             </button>
                         </td>
