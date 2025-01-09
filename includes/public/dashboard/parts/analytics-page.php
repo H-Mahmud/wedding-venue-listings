@@ -73,6 +73,21 @@
         $chartData = generateDummyData($startDate, $endDate);
     }
     ?>
+    <style>
+        @media screen and (max-width: 768px) {
+            .wvl-dashboard .content {
+                display: flex;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                height: 100vh;
+                white-space: nowrap;
+            }
+
+            .wvl-dashboard .analytics-summary {
+                min-width: 600px;
+            }
+        }
+    </style>
 
     <div class="analytics-summary mt">
         <div class="card impression bg-[#4BC0C0]">
