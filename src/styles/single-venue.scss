@@ -4,6 +4,21 @@
   .cover-photo {
     @apply max-h-[520px] w-full overflow-hidden md:min-h-80;
 
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      background: linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0) 60%,
+        rgba(0, 0, 0, 0.8) 99%,
+        #000000 100%
+      );
+    }
+
     img {
       @apply block h-auto w-full object-cover;
     }
