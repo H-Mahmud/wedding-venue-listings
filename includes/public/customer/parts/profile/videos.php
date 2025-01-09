@@ -7,7 +7,7 @@
                 <?php if (wvl_current_plan() == 0): ?>
                     <label onclick="alert('<?php _e('Upgrade your plan to add videos', 'wedding-venue-listings'); ?>')" class=" p-3 sm:py-8 flex justify-center items-center flex-col gap-3 border border-gray-200 rounded-lg hover:border-dashed hover:border-blue-600 cursor-pointer">
                         <i class="fa-solid fa-video  text-gray-600 text-2xl sm:text-4xl"></i>
-                        <p class="text-center text-xs sm:text-xl font-semibold text-gray-600">
+                        <p class="text-center text-xs sm:text-xl sm:font-semibold text-gray-600">
                             <?php _e(' Add New Video', 'wedding-venue-listings'); ?>
                         </p>
                         <div class="text-center">
@@ -16,8 +16,8 @@
                     </label>
                 <?php else: ?>
                     <label for="upload_gallery" data-target="#modal-add-video" class="open-modal-btn py-8 flex justify-center items-center flex-col gap-3 border border-gray-200 rounded-lg hover:border-dashed hover:border-blue-600 cursor-pointer">
-                        <i class="fa-solid fa-video  text-gray-600 text-4xl"></i>
-                        <p class="text-center text-xl font-semibold text-gray-600">
+                        <i class="fa-solid fa-video  text-gray-600 text-2xl sm:text-4xl"></i>
+                        <p class="text-center text-xs sm:text-xl sm:font-semibold text-gray-600">
                             <?php _e(' Add New Video', 'wedding-venue-listings'); ?>
                         </p>
                         <div class="text-center">
@@ -35,7 +35,7 @@
                         if ($video['platform'] == 'youtube') {
                 ?>
                             <a class="relative" href="https://www.youtube.com/watch?v=<?php echo $video['id']; ?>">
-                                <span data-key="<?php echo $video['key']; ?>" class="remove-gallery-video inline-block cursor-pointer absolute bg-black opacity-60 hover:opacity-100 rounded-lg  m-2"><i class="fa-regular fa-trash-can text-2xl text-white p-3 inline-block"></i></span>
+                                <span data-key="<?php echo $video['key']; ?>" class="remove-gallery-video inline-block cursor-pointer absolute bg-[#916E37] opacity-60 hover:opacity-100 rounded-lg  m-2"><i class="fa-regular fa-trash-can text-sm sm:text-2xl text-white p-1 sm:p-3 inline-block"></i></span>
 
                                 <img class="h-auto max-w-full rounded-lg" src="https://img.youtube.com/vi/<?php echo $video['id']; ?>/hqdefault.jpg" alt="YouTube Video" />
                             </a>
@@ -43,7 +43,7 @@
                         }
                         if ($video['platform'] == 'vimeo') { ?>
                             <a class="relative" href="https://vimeo.com/<?php echo $video['id']; ?>">
-                                <span data-key="<?php echo $video['key']; ?>" class="remove-gallery-video inline-block cursor-pointer absolute bg-black opacity-60 hover:opacity-100 rounded-lg  m-2"><i class="fa-regular fa-trash-can text-2xl text-white p-3 inline-block"></i></span>
+                                <span data-key="<?php echo $video['key']; ?>" class="remove-gallery-video inline-block cursor-pointer absolute bg-[#916E37] opacity-60 hover:opacity-100 rounded-lg  m-2"><i class="fa-regular fa-trash-can text-sm sm:text-2xl text-white p-1 sm:p-3 inline-block"></i></span>
 
                                 <img class="h-auto max-w-full rounded-lg" src="https://vumbnail.com/<?php echo $video['id']; ?>.jpg" alt="Vimeo Video" />
                             </a>
