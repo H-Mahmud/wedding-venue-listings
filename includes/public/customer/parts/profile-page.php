@@ -41,13 +41,13 @@ $venue = get_post($venue_id);
         </div>
     </div>
 
-    <?php include_once WVL_PLUGIN_DIR . 'template-parts/dashboard/profile/personal-info.php'; ?>
-    <?php include_once WVL_PLUGIN_DIR . 'template-parts/dashboard/profile/service-info.php'; ?>
-    <?php include_once WVL_PLUGIN_DIR . 'template-parts/dashboard/profile/contact-info.php'; ?>
-    <?php include_once WVL_PLUGIN_DIR . 'template-parts/dashboard/profile/your-story.php'; ?>
-    <?php include_once WVL_PLUGIN_DIR . 'template-parts/dashboard/profile/photographs.php'; ?>
-    <?php include_once WVL_PLUGIN_DIR . 'template-parts/dashboard/profile/videos.php'; ?>
-    <?php include_once WVL_PLUGIN_DIR . 'template-parts/dashboard/profile/package.php'; ?>
+    <?php include_once WVL_PLUGIN_DIR . 'includes/public/customer/parts/profile/personal-info.php'; ?>
+    <?php include_once WVL_PLUGIN_DIR . 'includes/public/customer/parts/profile/service-info.php'; ?>
+    <?php include_once WVL_PLUGIN_DIR . 'includes/public/customer/parts/profile/contact-info.php'; ?>
+    <?php include_once WVL_PLUGIN_DIR . 'includes/public/customer/parts/profile/your-story.php'; ?>
+    <?php include_once WVL_PLUGIN_DIR . 'includes/public/customer/parts/profile/photographs.php'; ?>
+    <?php include_once WVL_PLUGIN_DIR . 'includes/public/customer/parts/profile/videos.php'; ?>
+    <?php include_once WVL_PLUGIN_DIR . 'includes/public/customer/parts/profile/package.php'; ?>
 
     <p class="text-red-700 profile-form-error pt-3"></p>
     <p class="text-green-700 profile-form-success pt-3"></p>

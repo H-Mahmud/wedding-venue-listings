@@ -43,7 +43,6 @@ require_once WVL_PLUGIN_DIR . 'classes/abstract-wvl-get-venue.php';
 require_once WVL_PLUGIN_DIR . 'classes/class-wvl-venue.php';
 
 require_once WVL_PLUGIN_DIR . 'includes/class-dashboard-home.php';
-require_once WVL_PLUGIN_DIR . 'includes/class-dashboard-profile.php';
 // require_once WVL_PLUGIN_DIR . 'includes/class-dashboard-contact.php';
 
 require_once WVL_PLUGIN_DIR . 'includes/public/dashboard/availability.php';
@@ -55,6 +54,7 @@ require_once WVL_PLUGIN_DIR . 'includes/public/dashboard/analytics.php';
 require_once WVL_PLUGIN_DIR . 'includes/public/customer/account.php';
 require_once WVL_PLUGIN_DIR . 'includes/public/customer/dashboard-reviews.php';
 require_once WVL_PLUGIN_DIR . 'includes/public/customer/dashboard-contacts.php';
+require_once WVL_PLUGIN_DIR . 'includes/public/customer/profile.php';
 
 require_once WVL_PLUGIN_DIR . 'includes/class-account-auth.php';
 require_once WVL_PLUGIN_DIR . 'includes/class-dashboard.php';

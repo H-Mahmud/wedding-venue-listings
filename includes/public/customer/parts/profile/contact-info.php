@@ -1,6 +1,6 @@
 <form class="mt-14 profile-step-forms" id="profileContactForm" data-step="2">
-    <fieldset class="p-5 rounded-xl border-gray-200">
-        <legend class="mb-2 text-center"><?php _e('Contact Information', 'wedding-venue-listings'); ?></legend>
+    <fieldset class="wvl-fieldset">
+        <legend class="text-center"><?php _e('Contact Information', 'wedding-venue-listings'); ?></legend>
 
         <div class="wvl-field-row">
             <div class="wvl-field">
@@ -20,7 +20,7 @@
         </div>
     </fieldset>
 
-    <fieldset class="p-5 rounded-xl border-gray-200 mt-8 relative">
+    <fieldset class="wvl-fieldset mt-8 relative">
         <?php if (wvl_current_plan() == 0): ?>
 
             <div class=" absolute inset-0 flex items-center justify-center z-500">
@@ -29,7 +29,7 @@
             <div class=" deemed absolute inset-0 flex items-center justify-center bg-black opacity-30 rounded-lg">
             </div>
         <?php endif; ?>
-        <legend class=" mb-2 text-center"><?php _e('Other Information', 'wedding-venue-listings'); ?></legend>
+        <legend class="text-center"><?php _e('Other Information', 'wedding-venue-listings'); ?></legend>
         <?php
         $social_accounts = [
             'website' => [

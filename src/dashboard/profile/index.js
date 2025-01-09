@@ -25,19 +25,21 @@ jQuery(document).ready(function ($) {
 
   async function handleNext(step) {
     if (step === 0) {
-      return await handlePackageForm($);
-    } else if (step === 1) {
       return await handlePersonalInfoForm($);
-    } else if (step === 2) {
+    } else if (step === 1) {
       return await handleServiceInfoForm($);
-    } else if (step === 3) {
+    } else if (step === 2) {
       return await handleContactInfoForm($);
-    } else if (step === 4) {
+    } else if (step === 3) {
       return await handleYourStoryForm($);
+    } else if (step === 4) {
+      return true;
     } else if (step === 5) {
       return true;
     } else if (step === 6) {
       return await handleSubmitForm($);
+
+      // handlePackageForm($);
     }
 
     return false;

@@ -1,101 +1,10 @@
 <form class="mt-14 profile-step-forms" id="profileServiceForm" data-step="1">
-    <fieldset class="p-5 rounded-xl border-gray-200">
-        <legend class="mb-2 text-center"><?php _e('Service Information', 'wedding-venue-listings'); ?></legend>
+    <fieldset class="wvl-fieldset">
+        <legend class="text-center"><?php _e('Service Information', 'wedding-venue-listings'); ?></legend>
         <div class="wvl-field">
             <label for="venue_name"><?php _e('Venue Name', 'wedding-venue-listings'); ?></label>
             <input type="text" name="venue_name" value="<?php echo $venue->post_title; ?>" id="venue_name" required>
         </div>
-
-        <?php
-        /*
-        <div class="wvl-field-row mt-3 wvl-tags">
-            <div class="wvl-field">
-                <label for="vendor_type"> <?php _e('Vendor Types', 'wedding-venue-listings'); ?></label>
-                <select name="vendor_type" id="vendor_type" multiple></select>
-            </div>
-
-            <div class="wvl-field">
-                <label for="event_type"> <?php _e('Event Types', 'wedding-venue-listings'); ?></label>
-                <select name="event_type" id="event_type" multiple></select>
-            </div>
-
-            <?php
-
-            // Get current venue selected vendor_types
-            $selected_vendor_types = get_the_terms($venue_id, 'vendor_type');
-            $selected_vendor_slugs = [];
-            if ($selected_vendor_types) {
-                foreach ($selected_vendor_types as $vendor_type) {
-                    $selected_vendor_slugs[] = $vendor_type->slug;
-                }
-            }
-            // Get all vendor and event types
-            $vendor_types_object = get_terms(array(
-                'taxonomy' => 'vendor_type',
-                'hide_empty' => false,
-            ));
-
-            $vendor_types = [];
-            foreach ($vendor_types_object as $vendor_type) {
-                $term = ['value' => $vendor_type->slug, 'label' => $vendor_type->name];
-                if (in_array($vendor_type->slug, $selected_vendor_slugs)) {
-                    $term['selected'] = true;
-                }
-                $vendor_types[] = $term;
-            };
-
-            // Get current venue selected event_types
-            $selected_event_types = get_the_terms($venue_id, 'event_type');
-            $selected_event_slugs = [];
-            if ($selected_event_types) {
-                foreach ($selected_event_types as $event_type) {
-                    $selected_event_slugs[] = $event_type->slug;
-                }
-            }
-
-            // Get all vendor and event types
-            $event_types_object = get_terms(array(
-                'taxonomy' => 'event_type',
-                'hide_empty' => false,
-            ));
-
-            $event_types = [];
-            foreach ($event_types_object as $event_type) {
-                $term = ['value' => $event_type->slug, 'label' => $event_type->name];
-                if (in_array($event_type->slug, $selected_event_slugs)) {
-                    $term['selected'] = true;
-                }
-                $event_types[] = $term;
-            };
-            ?>
-            <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                    const vendorChoices = new Choices("#vendor_type", {
-                        removeItemButton: true,
-                        maxItemCount: <?php echo wvl_get_terms_limit('vendor_type'); ?>,
-                        choices: <?php echo json_encode($vendor_types); ?>,
-                        searchResultLimit: 10,
-                        searchEnabled: true,
-                        maxItemText: (maxItemCount) => {
-                            return `Only ${maxItemCount} vendor types can be added with free plan`;
-                        },
-                    });
-                    const eventChoices = new Choices("#event_type", {
-                        removeItemButton: true,
-                        maxItemCount: <?php echo wvl_get_terms_limit('vendor_type'); ?>,
-                        choices: <?php echo json_encode($event_types); ?>,
-                        searchResultLimit: 10,
-                        searchEnabled: true,
-                        maxItemText: (maxItemCount) => {
-                            return `Only ${maxItemCount} Event types can be added with free plan`;
-                        },
-                    });
-                });
-            </script>
-        </div>
-        */
-        ?>
-
         <?php
         $categories = get_categories(array('hide_empty' => false));
         $categories_by_parent = [];
@@ -157,7 +66,7 @@
             </div>
         </div>
 
-        <div class="wvl-field w-1/2">
+        <div class="wvl-field md:w-1/2">
             <label for="support_location"><?php _e('Support Location', 'wedding-venue-listings'); ?></label>
             <select name="support_location" class="wvl-tags" multiple id="support_location"></select>
             <?php if (wvl_current_plan()  == 0) { ?>
