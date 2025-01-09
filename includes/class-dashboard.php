@@ -131,7 +131,7 @@ class WVL_Dashboard
                     </li>
                 </ul>
             </div>
-            <div class="content w-full md:w-9/12 p-2 lg:p-8 bg-white md:rounded-xl">
+            <div class="content w-full md:w-9/12 py-8 p-2 lg:p-8 bg-white md:rounded-xl">
                 <?php
                 $subpage = get_query_var('subpage');
                 $matched = false;

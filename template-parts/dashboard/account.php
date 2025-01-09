@@ -1,6 +1,6 @@
 <?php $wvl_user_id = get_current_user_id(); ?>
 
-<form class=" mb-14" method="post">
+<form class="mb-14" method="post">
     <?php wp_nonce_field('update_account', '_update_account'); ?>
     <fieldset class="p-5 rounded-xl border-gray-200">
         <legend class="mb-2"><?php _e('Account Information', 'wedding-venue-listings'); ?></legend>
