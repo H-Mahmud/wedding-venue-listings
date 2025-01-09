@@ -58,7 +58,7 @@
 
 <div id="modal-add-video" class="wvl-modal" tabindex="-1" aria-hidden="true" role="dialog">
     <div class="modal-box" role="document">
-        <div class="modal-inner min-w-[520px]">
+        <div class="modal-inner md:min-w-[520px]">
             <div class="modal-header">
                 <h3 class="modal-title"><?php _e('Add New Video', 'wedding-venue-listings'); ?></h3>
                 <button type="button" class="close-btn" aria-label="Close">
