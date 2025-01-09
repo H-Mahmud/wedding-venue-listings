@@ -1,7 +1,7 @@
 <?php get_header(); ?>
 
 <div id="primary" class="wvl-dashboard bg-gray-200">
-    <main id="main" class="site-main site-container" role="main">
+    <main id="main" class="site-main site-container p-0 md:px-6" role="main">
         <?php do_action('wvl_dashboard') ?>
     </main>
 

@@ -101,7 +101,7 @@ class WVL_Dashboard
         }
 ?>
         <div class="wvl-dashboard py-6 md:flex gap-4">
-            <div class="sidebar bg-white w-full md:w-3/12 p-8 rounded-xl h-fit ">
+            <div class="sidebar bg-white w-full md:w-3/12 p-2 lg:p-8 md:rounded-xl h-fit mb-4 md:mb-0">
                 <ul>
                     <?php foreach ($wvl_menus as $menu) :
                         if (!current_user_can($menu['capability'])) continue;
@@ -131,7 +131,7 @@ class WVL_Dashboard
                     </li>
                 </ul>
             </div>
-            <div class="content w-full md:w-9/12 p-8 bg-white rounded-xl">
+            <div class="content w-full md:w-9/12 p-2 lg:p-8 bg-white md:rounded-xl">
                 <?php
                 $subpage = get_query_var('subpage');
                 $matched = false;
