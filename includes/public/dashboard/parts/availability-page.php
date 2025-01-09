@@ -1,6 +1,6 @@
-<div class=" mb-14">
-    <fieldset class="p-5 rounded-xl border-gray-200">
-        <legend class="mb-2"><?php _e('Booking Availability', 'wedding-venue-listings'); ?></legend>
+<div class="mb-14">
+    <fieldset class="wvl-fieldset">
+        <legend><?php _e('Booking Availability', 'wedding-venue-listings'); ?></legend>
 
         <div class="card">
             <div class="card-body p-0">
@@ -10,7 +10,6 @@
 
     </fieldset>
 </div>
-
 
 <div id="modal-add-booking" class="wvl-modal" tabindex="-1" aria-hidden="true" role="dialog">
     <div class="modal-box" role="document">

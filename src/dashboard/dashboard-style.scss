@@ -1,3 +1,4 @@
+// Components
 .wvl-fieldset {
   @apply border-none md:rounded-xl md:border-solid md:border-gray-200 md:p-5;
 
@@ -6,6 +7,35 @@
   }
 }
 
+/**
+ * Dashboard Availability Page
+ */
+@media screen and (max-width: 480px) {
+  #booking-calendar {
+    .fc-toolbar-title {
+      font-size: 16px;
+    }
+    .fc-toolbar-chunk button {
+      padding: 0;
+    }
+
+    .fc-day .fc-col-header-cell-cushion {
+      color: transparent;
+      position: relative;
+    }
+
+    .fc-day .fc-col-header-cell-cushion::first-letter {
+      color: black; /* Shows only the first character */
+      position: relative;
+      z-index: 1; /* Ensures the first letter is on top */
+    }
+  }
+
+  #booking-calendar * {
+    font-size: 12px;
+    font-weight: normal;
+  }
+}
 .mce-branding {
   display: none !important;
 }
