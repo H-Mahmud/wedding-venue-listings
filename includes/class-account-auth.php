@@ -324,7 +324,7 @@ class WVL_Account_Auth
 
                 wp_insert_post(array(
                     'post_title'    => $venue_name,
-                    'post_status'   => 'publish',
+                    'post_status'   => 'draft',
                     'post_type'     => 'venue',
                     'post_author'   => $user_id
                 ));
@@ -511,7 +511,7 @@ class WVL_Account_Auth
         if (!wvl_get_venue_id($user_id)) {
             wp_insert_post(array(
                 'post_title'    => 'Untitled Venue',
-                'post_status'   => 'publish',
+                'post_status'   => 'draft',
                 'post_type'     => 'venue',
                 'post_author'   => $user_id
             ));

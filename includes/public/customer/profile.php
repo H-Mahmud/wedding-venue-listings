@@ -88,7 +88,7 @@ class WVL_Dashboard_Profile
         if (!wvl_get_venue_id()) {
             wp_insert_post(array(
                 'post_title'    => 'Untitled Venue',
-                'post_status'   => 'publish',
+                'post_status'   => 'draft',
                 'post_type'     => 'venue',
                 'post_author'   => get_current_user_id()
             ));
@@ -513,7 +513,7 @@ class WVL_Dashboard_Profile
         if ($venue_status !== 'publish') {
             wp_update_post([
                 'ID' => $venue_id,
-                'post_status' => 'pending'
+                'post_status' => 'publish'
             ]);
         }
 
