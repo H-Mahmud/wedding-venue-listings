@@ -130,6 +130,7 @@
         .title {
           a {
             @apply text-2xl font-semibold;
+            @apply line-clamp-2 h-[2.8rem] overflow-hidden text-ellipsis leading-5;
           }
         }
 
@@ -143,6 +144,7 @@
 
         .description {
           @apply mt-1 text-sm text-secondary;
+          @apply line-clamp-2 h-[2.8rem] overflow-hidden text-ellipsis leading-5;
         }
 
         .meta {
