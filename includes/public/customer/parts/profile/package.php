@@ -1,6 +1,18 @@
 <form class=" mt-14 profile-step-forms active" id="packageInfoForm" data-step="6">
-    <h3 class="mb-2 font-semibold text-2xl text-center"><?php _e('Our Packages', 'wedding-venue-listings'); ?></h3>
+    <style>
+        @media screen and (min-width: 1024px) {
+            .pricing-slider .e-con-inner {
+                zoom: 73%;
+            }
+        }
 
+        @media screen and (max-width: 1024px) and (min-width: 768px) {
+            .pricing-slider .e-con-inner {
+                zoom: 70%
+            }
+
+        }
+    </style>
     <?php
     echo do_shortcode('[elementor-template id="490"]');
 
